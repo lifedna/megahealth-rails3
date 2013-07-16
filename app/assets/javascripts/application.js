@@ -16,6 +16,7 @@
 //= require jquery_nested_form
 //= require reveal
 //= require bootstrap
+//= require jquery-plugins
 //= require_tree .
 
 

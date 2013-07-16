@@ -1,60 +1,65 @@
 = widget_div do
-  %ul.nav.add-widgets
-    %li.widget
+  .col.size1of4
+    .room-box{:style => "display: inline-block;"}
       = render_widget :section_setting, :display, :section => @section
       %br
-      = link_to '删除房间', [@section.community, @section], :confirm => 'Are you sure?', :method => :delete  
-    %li.widget
-      %h4 公告栏
-      %p 贴通知的地方，甚至是通缉令
-      = link_to '添加', url_for_event(:new_widget, :category => "Bulletin", :id => @section.id), :remote => true
-    %li.widget
-      %h4 论坛
-      %p 方便别人在这里坐而论道
-      = link_to '添加', url_for_event(:new_widget, :category => "Forum", :id => @section.id), :remote => true
-    %li.widget
-      %h4 投票
-      %p 从超级女声到总统选举都爱用它
-      = link_to '添加', url_for_event(:new_widget, :category => "Poll_Set", :id => @section.id), :remote => true
-    %liwidget
-      %h4 问答
-      %p 问和答都在这里
-      = link_to '添加', url_for_event(:new_widget, :category => "Qa", :id => @section.id), :remote => true  
-    %li.widget
-      %h4 专栏
-      %p 发表专栏内容的地方
-      = link_to '添加', url_for_event(:new_widget, :category => "Column", :id => @section.id), :remote => true   
-    %li.widget
-      %h4 视频
-      %p 把别处的视频网址贴过来就能播放
-      = link_to '添加', url_for_event(:new_widget, :category => "Video_List", :id => @section.id), :remote => true    
+      = link_to '删除房间', [@section.community, @section], :confirm => 'Are you sure?', :method => :delete 
+  .col.size3of4    
+    .widgets-box{:style => "padding-right:10px;"}
+      %ul.bxslider
+        %li
+          .col.size1of3
+            %h4 公告栏
+            %p 贴通知的地方，甚至是通缉令
+            = link_to '添加', url_for_event(:new_widget, :category => "Bulletin", :id => @section.id), :remote => true
+          .col.size1of3
+            %h4 论坛
+            %p 方便别人在这里坐而论道
+            = link_to '添加', url_for_event(:new_widget, :category => "Forum", :id => @section.id), :remote => true
+          .col.size1of3
+            %h4 专栏
+            %p 发表专栏内容的地方
+            = link_to '添加', url_for_event(:new_widget, :category => "Column", :id => @section.id), :remote => true
+        %li
+          .col.size1of3    
+            %h4 论坛
+            %p 方便别人在这里坐而论道
+            = link_to '添加', url_for_event(:new_widget, :category => "Forum", :id => @section.id), :remote => true
+          .col.size1of3 
+            %h4 投票
+            %p 从超级女声到总统选举都爱用它
+            = link_to '添加', url_for_event(:new_widget, :category => "Poll_Set", :id => @section.id), :remote => true
+          .col.size1of3 
+            %h4 视频
+            %p 把别处的视频网址贴过来就能播放
+            = link_to '添加', url_for_event(:new_widget, :category => "Video_List", :id => @section.id), :remote => true
 
-  / .add-widgets
-  /   .widget
+  / %ul.nav.add-widgets
+  /   %li.widget
   /     = render_widget :section_setting, :display, :section => @section
-  /   .widget
+  /     %br
   /     = link_to '删除房间', [@section.community, @section], :confirm => 'Are you sure?', :method => :delete  
-  /   .widget
+  /   %li.widget
   /     %h4 公告栏
   /     %p 贴通知的地方，甚至是通缉令
   /     = link_to '添加', url_for_event(:new_widget, :category => "Bulletin", :id => @section.id), :remote => true
-  /   .widget
+  /   %li.widget
   /     %h4 论坛
   /     %p 方便别人在这里坐而论道
   /     = link_to '添加', url_for_event(:new_widget, :category => "Forum", :id => @section.id), :remote => true
-  /   .widget
+  /   %li.widget
   /     %h4 投票
   /     %p 从超级女声到总统选举都爱用它
   /     = link_to '添加', url_for_event(:new_widget, :category => "Poll_Set", :id => @section.id), :remote => true
-  /   .widget
+  /   %liwidget
   /     %h4 问答
   /     %p 问和答都在这里
   /     = link_to '添加', url_for_event(:new_widget, :category => "Qa", :id => @section.id), :remote => true  
-  /   .widget
+  /   %li.widget
   /     %h4 专栏
   /     %p 发表专栏内容的地方
   /     = link_to '添加', url_for_event(:new_widget, :category => "Column", :id => @section.id), :remote => true   
-  /   .widget
+  /   %li.widget
   /     %h4 视频
   /     %p 把别处的视频网址贴过来就能播放
-  /     = link_to '添加', url_for_event(:new_widget, :category => "Video_List", :id => @section.id), :remote => true    
+  /     = link_to '添加', url_for_event(:new_widget, :category => "Video_List", :id => @section.id), :remote => true     
