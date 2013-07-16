@@ -1,0 +1,15 @@
+%h3 在#{@video_list.name}中发布新视频
+%p 请输入视频的网站源地址，目前支持土豆、优酷、酷6、新浪视频、搜狐视频等多家视频网站
+= form_for @video, :url => {:action => "create"}  do |f|
+  %p
+    = f.label "标题"
+    = f.text_field :title
+  %p
+    = f.label "网页地址"
+    = f.text_field :url
+  %p
+    = f.hidden_field :community_id, :value => @video_list.community.id
+  %p
+    = f.hidden_field :video_list_id, :value => @video_list.id    
+  %p  
+    = f.submit "更新"

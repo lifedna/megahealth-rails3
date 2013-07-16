@@ -1,0 +1,2 @@
+module Phrs::TreatmentsHelper
+end

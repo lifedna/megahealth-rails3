@@ -1,0 +1,28 @@
+%h1 病症
+%p
+%table
+  %tbody
+    %tr
+      %th 名称
+      %th 程度
+      %th 开始时间
+      %th 结束时间
+    - @symptoms.each do |s|
+      %tr.data-row{'data-id' => s.id, 'phr-id' => s.phr.id, 'data-event-url' => url_for_event(:show, :source => :symptom)}
+        %td #{s.name}
+        %td 
+        %td
+        %td
+
+= render_widget :symptom, :display, :instance => @symptoms.first
+
+
+:javascript
+  $(document).ready(function() {
+    $('tbody tr.data-row:first').addClass('hilite');
+    $('tr').click(function () {
+      $(this).siblings('tr').removeClass('hilite');
+      $(this).toggleClass('hilite');
+      $.ajax({url: $(this).attr("data-event-url") + "&id=" + $(this).attr("data-id") + "&phr_id=" + $(this).attr("phr-id")})
+    });
+  }); 

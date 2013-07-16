@@ -1,0 +1,11 @@
+@font-face {
+    font-family: 'FontAwesome';
+    src: url('fontawesome-webfont.eot'); /* IE9 Compat Modes */
+    src: url('fontawesome-webfont.eot?#iefix') format('embedded-opentype'),  /* IE6-IE8 */
+         url('fontawesome-webfont.woff') format('woff'), /* Modern Browsers */
+         url('fontawesome-webfont.ttf') format('truetype'), /* Safari, Android, iOS */
+         url('fontawesome-webfont.svgz#FontAwesomeRegular') format('svg'), /* Legacy iOS */
+         url('fontawesome-webfont.svg#FontAwesomeRegular') format('svg'); /* Legacy iOS */
+    font-weight: normal;
+    font-style: normal;
+}

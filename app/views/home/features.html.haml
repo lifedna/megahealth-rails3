@@ -1,0 +1,301 @@
+/ %h3 Features
+/ %ul.nav
+/   %li{:class => "#{params[:category].nil?? 'current' : nil }"} 
+/     = link_to '所有', features_path
+/   %li{:class => "#{params[:category] == '健康知识'? 'current' : nil }"} 
+/     = link_to '健康知识', features_path(:category => '健康知识')
+/   %li{:class => "#{params[:category] == '就医指南'? 'current' : nil }"} 
+/     = link_to '就医指南', features_path(:category => '就医指南')
+/   %li{:class => "#{params[:category] == '治疗交流'? 'current' : nil }"}  
+/     = link_to '治疗交流', features_path(:category => '治疗交流')
+/   %li{:class => "#{params[:category] == '护理园地'? 'current' : nil }"} 
+/     = link_to '护理园地', features_path(:category => '护理园地') 
+/   %li{:class => "#{params[:category] == '用药常识'? 'current' : nil }"}  
+/     = link_to '用药常识', features_path(:category => '用药常识')          
+
+/ %h4 
+/   精选内容
+/   %small 
+/     %a.link-setting{:href => "#"} 设置
+/ .features-setting
+/   = form_for @feature_filter, :url => feature_filter_url do |f|
+/     %p 显示与您和家人健康相关的内容
+/     %p 
+/       %small 相关疾病
+/     - @feature_filter.conditions.each do |k, v|
+/       = f.fields_for :conditions do |c|
+/         = c.check_box k, checked: (v == "1" ? "checked" : "")
+/         %small
+/           = c.label k
+/     %p 
+/       %small 相关病症
+/     - @feature_filter.symptoms.each do |k, v|
+/       = f.fields_for :symptoms do |c|
+/         = c.check_box k, checked: (v == "1" ? "checked" : "") 
+/         %small
+/           = c.label k     
+/     %p    
+/       = f.submit '保存'
+
+/ %ul
+/ - @items.each do |item|
+/   %li
+/     - if item.class.to_s.underscore == 'blog'
+/       = link_to item.title, blog_url(item)
+/     - else
+/       = link_to item.title, self.send("show_community_#{item.class.to_s.underscore}_url", item.community, item)
+/     %br
+/     %small #{time_ago_in_words(item.created_at).capitalize}前 #{item.category}
+/     %br
+/     %small
+/       - if item.liked?(current_user)
+/         %a{:href => "#"} 取消收藏
+/       - else  
+/         %a{:href => "#"} 收藏
+
+- @features = "active"
+/ Page
+.site-center.center-page
+  .page-head.text-center
+    .category-bar.middot
+      %ul
+        %li{:class => "#{params[:category].nil?? 'current' : nil }"} 
+          = link_to '所有', features_path
+        %li{:class => "#{params[:category] == '健康知识'? 'current' : nil }"} 
+          = link_to '健康知识', features_path(:category => '健康知识')
+        %li{:class => "#{params[:category] == '就医指南'? 'current' : nil }"}
+          = link_to '就医指南', features_path(:category => '就医指南')
+        %li{:class => "#{params[:category] == '治疗交流'? 'current' : nil }"}
+          = link_to '治疗交流', features_path(:category => '治疗交流')   
+        %li{:class => "#{params[:category] == '护理园地'? 'current' : nil }"}
+          = link_to '护理园地', features_path(:category => '护理园地')
+        %li{:class => "#{params[:category] == '用药常识'? 'current' : nil }"}
+          = link_to '用药常识', features_path(:category => '用药常识')  
+
+  .page-content
+    .col.size2of3
+      .padding-r20
+        .title.margin-b30
+          %h2.float-left 精选内容
+          %a.settings.float-right 
+            %span.icon.icon-cog &nbsp;精选设置 
+          .col.slidediv
+            .settings-block
+              = form_for @feature_filter, :url => feature_filter_url do |f|
+                %h4 显示与您和家人健康相关的内容，还希望进一步筛选？
+                .section
+                  .section-header.color-orange 疾病
+                  - @feature_filter.conditions.each do |k, v|
+                    = f.fields_for :conditions do |c|
+                      = c.check_box k, checked: (v == "1" ? "checked" : ""), :class =>"checkbox"
+                      = c.label k
+      
+                .section      
+                  .section-header.color-orange 病症
+                  - @feature_filter.symptoms.each do |k, v|
+                    = f.fields_for :symptoms do |c|
+                      = c.check_box k, checked: (v == "1" ? "checked" : ""), :class =>"checkbox"
+                      = c.label k   
+                .section      
+                  .section-header.color-orange 关心主题        
+   
+                .col
+                  .cell.slidediv-ft
+                    %a.settings.float-right 收起
+                    %span.float-right &nbsp;&nbsp;
+                    = f.submit '保存', :class => "button float-right"
+        .feeds
+          - @items.each do |item|
+            .feed.margin-b20
+              .col.sizefit.margin-r20
+                .button{:style => "background:#fae9da;color:#ca6445;border:none;"} #{item.category}
+              .col.sizefill.border-bottom.padding-b20 
+                %h4 
+                  - if item.class.to_s.underscore == 'blog'
+                    = link_to item.title, blog_url(item)
+                  - else
+                    = link_to item.title, self.send("show_community_#{item.class.to_s.underscore}_url", item.community, item)
+
+                %p{:style => "color: #999;"} 
+                  / #{item.user.name}
+                  %span #{time_ago_in_words(item.created_at).capitalize}前      
+                %p #{item.body} 
+                .source 
+                  病友日志
+                  %span.middot &middot;
+                  浏览15次
+                  %span.middot &middot;
+                  有用10人
+
+          
+          %h5.text-center
+            %a 显示更多
+
+    .col.size1of3
+      .padding-l10
+        .section.how-it-works
+          %a{"data-reveal-id" => "how-it-works"}
+            .action
+              .col.sizefit
+                %span.icon.icon-cogs{:style => "font-size:36px;margin-right:10px"}
+              .col.sizefill
+                %h4 如何参与大健康网
+                %p 查看 →  
+        .reveal-modal.xlarge#how-it-works
+          %h2
+            如何参与大健康
+            %sup{:style => "font-size:13px;top:-0.8em;"} MegaHealth
+          %p.margin-b20
+            记录健康、参与健康、保持健康，我为人人、人人为我
+          .col.size1of3
+            .margin-r20
+              %a.blueBox
+                %h3 填写您的健康资料
+                %p 大健康将精确推送与您身体健康相关的内容，您还可以进一步设置推送您关心的内容。
+                / %img{:src => "images/whiteArrow.png"}
+          .col.size1of3
+            .margin-r20
+              %a.blueBox
+                %h3 加入您感兴趣的社群
+                %p 连接医生、专家和病友，与他们互动。大健康会把您的社群动态推送给您，您还可以进一步设置您关心的动态。
+                / %img{:src => "images/whiteArrow.png"}
+          .col.size1of3
+            .margin-r20
+              %a.blueBox
+                %h3 评价/收藏内容
+                %p 您也可以依据您的经验对社群产生的内容是否有效进行评价，以供他人参考，同时收藏你认为有价值的内容。
+                / %img{:src => "images/whiteArrow.png"}            
+          %a.close-reveal-modal &#215;
+              
+        .section.margin-b20
+          %form.community-search{:style => "width: 100%;"}
+            %input{:type => "search", :width => "100%", :placeholder => "搜索"}
+        .section
+          .header
+            %h5 充实您的个人资料  
+          .body
+            .col.sizefit.float-right
+              完整度25%
+            .col.sizefill.margin-r10
+              .profile-progress
+                .progress-container
+                  .progress-bar{:style => "width: 25%;"}   
+        .section
+          .header
+            %h5 最热社群
+          .body
+            %ul.nav.recommendation
+              %li
+                .col.sizefit.float-right
+                  %img{:src =>"#{asset_path 'doctors/12033.jpg'}"}
+                .col.sizefill.margin-r10 
+                  %dl
+                    %dt 孙菁 
+                    %dd
+                      %p 中山大学附属第三医院
+                      %p 皮肤科
+              %li
+                .col.sizefit.float-right
+                  %img{:src =>"#{asset_path 'g11942-1.jpg'}"}
+                .col.sizefill.margin-r10 
+                  %dl
+                    %dt 牙齿装修工程 
+                    %dd
+                      %p 72977 个人        
+              %li
+                .col.sizefit.float-right
+                  %img{:src =>"#{asset_path 'doctors/10720.jpg'}"}
+                .col.sizefill.margin-r10
+                  %dl
+                    %dt 孙菁 
+                    %dd
+                      %p 中山大学附属第三医院
+                      %p 皮肤科 
+              %li
+                .col.sizefit.float-right
+                  %img{:src =>"#{asset_path 'g38167-1.jpg'}"}
+                .col.sizefill.margin-r10 
+                  %dl
+                    %dt 广义素食者 
+                    %dd
+                      %p 8234 个人         
+              %li
+                .col.sizefit.float-right
+                  %img{:src =>"#{asset_path 'doctors/12033.jpg'}"}
+                .col.sizefill.margin-r10 
+                  %dl
+                    %dt 孙菁 
+                    %dd
+                      %p 中山大学附属第三医院
+                      %p 皮肤科   
+        .section
+          .header
+            %h5 热点主题
+          .body{:style => "font-size:85%;"}
+            .col
+              .tags
+                %ul.cloud.nav
+                  %li.tag1 
+                    %a 厌食
+                  %li.tag2 
+                    %a 肥胖
+                  %li.tag3 
+                    %a 厌食
+                  %li.tag2 
+                    %a 颈椎
+                  %li.tag4 
+                    %a 厌食
+                  %li.tag1 
+                    %a 肥胖
+                  %li.tag1 
+                    %a 厌食
+                  %li.tag5 
+                    %a 牙齿
+                  %li.tag2 
+                    %a 厌食
+                  %li.tag1 
+                    %a 肥胖
+                  %li.tag3 
+                    %a 厌食
+                  %li.tag4 
+                    %a 牙齿
+                  %li.tag1 
+                    %a 养生
+                  %li.tag5 
+                    %a 肥胖
+                  %li.tag1 
+                    %a 厌食
+                  %li.tag2 
+                    %a 视力
+                  %li.tag4 
+                    %a 厌食
+                  %li.tag1 
+                    %a 颈椎
+                  %li.tag1 
+                    %a 厌食
+                  %li.tag5 
+                    %a 肥胖
+                  %li.tag2 
+                    %a 颈椎
+                  %li.tag1 
+                    %a 肥胖
+                  %li.tag3 
+                    %a 厌食
+                  %li.tag4 
+                    %a 视力
+                  %li.tag1 
+                    %a 厌食
+                  %li.tag5 
+                    %a 颈椎
+                  %li.tag1 
+                    %a 厌食
+                  %li.tag2 
+                    %a 肥胖
+
+/ :javascript
+//   $(document).ready(function(){
+//    $('.features-setting').hide();
+//       $('.link-setting').click(function() {
+//         $('.features-setting').slideToggle();
+//     });
+//   });        

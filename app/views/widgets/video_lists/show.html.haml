@@ -1,0 +1,14 @@
+%h1 #{@community.name}
+%p #{@community.brief}
+
+%p
+  = render :partial => "shared/sections_menu", :locals => {:sections => @sections, :current_section => @current_section}
+
+%p
+  #{link_to ">#{@current_section.name}", community_section_url(@community, @current_section)}
+
+%h3 #{@video_list.name}
+%div{:id => dom_id(@poll_set), :style => "min-height:100px; width:500px; background:#f4f4ec; padding:20px;"}
+  %ul
+    - @video_list.videos.each do |v|
+      %li #{v.title}

@@ -1,0 +1,13 @@
+%h1 #{@community.name}
+%p #{@community.brief}
+
+%p
+  = render :partial => "shared/sections_menu", :locals => {:sections => @sections, :current_section => @current_section}
+
+%p
+  #{link_to ">#{@poll.poll_set.name}", show_community_poll_set_url(@poll.community, @poll.poll_set)}
+
+%h3 #{@poll.name}
+%small #{@poll.created_at}
+
+

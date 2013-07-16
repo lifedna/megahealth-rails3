@@ -1,0 +1,56 @@
+/ %li{:id => dom_id(@qa)}
+%li{:id => "widget_#{@qa.id}"}
+  .introduction.panel.margin-b30
+    .body
+      .cell.handle
+        .section-title.float-left #{@qa.name}
+        .widget-actions.float-right
+          - if can? :update, @qa.community
+            %a.widget-setting-link{:href => "#", :id => "#{@qa.id}-settings"} 设置
+            = link_to '删除', url_for_event(:delete_widget, :id => @qa.section.id, :widget_id => @qa.id), :confirm => 'Are you sure?', :method => 'delete', :remote => true
+        
+        .widget-setting{"data-id" => "#{@qa.id}"}
+          = form_for @qa, :url => community_qa_url(@qa.community, @qa)  do |f|
+            %p
+              = f.text_field :name
+            %p  
+              = f.submit "保存"
+    .body          
+      .col.sizefill
+        .cell.qa
+          %div{:id => dom_id(@qa)}
+            - if (can? :update, @qa.community) || (can? :participate, @qa.community) 
+              = form_tag new_community_qa_question_path(@qa.community, @qa), :method => :get do
+                = text_field_tag :title, '', :size => 60, :style => "margin-left: 30px;"
+                = submit_tag "提问"    
+          .questions-list.margin-t20
+            - @qa.questions.each do |q|
+              .question.border-top
+                .col.sizefit
+                  .cell.pipes.margin-r20
+                    %ul.stat.nav
+                      %li 
+                        %a.vote
+                          16
+                          %span 热度
+                      %li 
+                        %a.anwser
+                          9
+                          %span 回答
+                      %li 
+                        %a.view
+                          6
+                          %span 浏览
+                .col.sizefill
+                  .cell
+                    .col
+                      .title
+                        %h4 
+                          %a #{link_to q.title, show_community_question_url(q.community, q)}
+                    .col.sizefit.float-right
+                      .question-started
+                        #{time_ago_in_words(q.created_at).capitalize}前 &middot; #{q.user.name}
+                    .col.sizefill  
+                      .label.background-blue{:style => "font-size: 80%;"} 护理          
+      
+        

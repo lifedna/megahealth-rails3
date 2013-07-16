@@ -1,0 +1,29 @@
+%li{:id => "widget_#{@column.id}"}
+  .introduction.panel.margin-b30
+    .body
+      .cell.handle
+        .section-title.float-left #{@column.name} 
+        .widget-actions.float-right
+          - if can? :update, @column.community            
+            = link_to '添加文章', new_community_column_article_path(@column.community, @column)
+            %a.widget-setting-link{:href => "#", :id => "#{@column.id}-settings"} 设置
+            = link_to '删除', url_for_event(:delete_widget, :id => @column.section.id, :widget_id => @column.id), :confirm => 'Are you sure?', :method => 'delete', :remote => true
+
+        .widget-setting{"data-id" => "#{@column.id}"}
+          = form_for @column, :url => community_column_url(@column.community, @column)  do |f| 
+            %p
+              = f.text_field :name 
+            %p
+              = f.submit "保存"     
+    .body
+      .col.sizefill
+        .cell.column
+          - @column.articles.each do |article|
+            .article.margin-b10
+              %h4 #{link_to article.title, show_community_article_path(article.community, article)}
+              .col
+                %small #{article.created_at.strftime("%Y-%m-%d %H:%M:%S")}
+              .col
+                %p #{truncate article.body, length: 200, omission: '.....'}
+   
+

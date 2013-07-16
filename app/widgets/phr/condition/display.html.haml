@@ -1,0 +1,19 @@
+= widget_div do
+  %h2
+    #{@condition.name}
+  %h4 相似病人
+  - present @condition, ConditionPresenter do |condition_presenter|  
+    %p
+    #{condition_presenter.text}
+
+  %h4 相关内容
+  %ul
+  - @condition.relevant_items.each do |item|
+    %li
+      - if item.class.to_s.underscore == 'blog'
+        = link_to item.title, blog_url(item)
+      - else
+        = link_to item.title, self.send("show_community_#{item.class.to_s.underscore}_url", item.community, item)
+      %br
+      %small #{time_ago_in_words(item.created_at).capitalize}前 #{item.category}  
+

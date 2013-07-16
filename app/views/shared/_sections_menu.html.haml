@@ -1,0 +1,4 @@
+%ul.nav
+  - sections.each do |s|
+    %li{'data-id' => s.id, :class => "#{s == @current_section? 'current_section' : nil }"}
+      #{link_to s.name, [s.community, s]} 

@@ -1,6 +1,10 @@
+# coding: utf-8
 class User
   include Mongoid::Document
   include Mongoid::Timestamps
+  include Mongoid::Commenter
+  include Streama::Actor
+  include Mongoid::Liker
 
   # Include default devise modules. Others available are:
   # :token_authenticatable, :confirmable,
@@ -47,4 +51,51 @@ class User
   field :name, :type => String
   validates_presence_of :name
   attr_accessible :name, :email, :password, :password_confirmation, :remember_me, :created_at, :updated_at
+
+  has_and_belongs_to_many :communities
+  has_many :blogs
+  has_many :phrs
+  has_many :questions
+  has_many :answers
+  has_many :topics
+  has_one :feature_filter
+
+  # Callbacks
+  after_create :create_initial_phr, :create_initial_filter
+
+  # features filter
+  def conditions_keywords
+    self.phrs.distinct('conditions.name')
+  end
+
+  def symptoms_keywords
+    self.phrs.distinct('symptoms.name')
+  end
+  
+  def treatments_keywords
+    self.phrs.distinct('treatments.name')
+  end
+
+
+  def followers
+    User.excludes(:id => self.id).all
+  end
+
+  private
+    def create_initial_phr
+      self.phrs.build(:name => self.name, :relationship => '自己').tap do |phr|
+        phr.user = self
+        phr.save
+      end
+    end
+
+  def create_initial_filter
+    self.build_feature_filter.tap do |i|
+      i.conditions = Hash.new
+      i.symptoms = Hash.new
+      i.treatments = Hash.new
+      i.user = self
+      i.save
+    end
+  end    
 end

@@ -1,0 +1,10 @@
+%h1 添加新的健康记录
+= form_for @phr do |f|
+  %p
+    = f.label "姓名"
+    = f.text_field :name
+  %p
+    = f.label "年龄"
+    = f.text_field :age
+  %p
+    = f.submit "添加"

@@ -1,0 +1,2 @@
+module Phrs::SymptomsHelper
+end

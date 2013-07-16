@@ -1,0 +1,8 @@
+.section-list.gradient
+  %ul
+    - @sections.each do |s|
+      %li{'data-id' => s.id, :class => "#{s == @current_section? 'active' : nil }"}
+        #{link_to s.name, [s.community, s]} 
+    - if can? :update, @community
+      %li
+        = link_to '设置', admin_community_path(@community)

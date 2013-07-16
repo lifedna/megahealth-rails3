@@ -1,0 +1,39 @@
+/ %li{:id => dom_id(@forum)}
+%li{:id => "widget_#{@forum.id}"}
+  .introduction.panel.margin-b30
+    .body
+      .cell.handle
+        .section-title.float-left #{@forum.name} 
+        .widget-actions.float-right
+          - if (can? :update, @forum.community) || (can? :participate, @forum.community)
+            = link_to '发言', new_community_forum_topic_path(@forum.community, @forum)
+          - if can? :update, @forum.community
+            %a.widget-setting-link{:href => "#", :id => "#{@forum.id}-settings"} 设置
+            = link_to '删除', url_for_event(:delete_widget, :id => @forum.section.id, :widget_id => @forum.id), :confirm => 'Are you sure?', :method => 'delete', :remote => true            
+
+        .widget-setting{"data-id" => "#{@forum.id}"}
+          = form_for @forum, :url => community_forum_url(@forum.community, @forum) do |f|
+            %p
+              = f.text_field :name
+            %p  
+              = f.submit "保存"     
+    .body
+      .col.sizefill
+        .cell.forum
+          %table.horizontal-border
+            %tbody
+              %tr
+                %th.size3of8 话题
+                %th.size2of8 作者
+                %th.size1of8 回应
+                %th.size2of8 更新时间
+              - @forum.topics.each do |t|
+                %tr 
+                  %td #{link_to t.title, show_community_topic_url(t.community, t)}
+                  %td #{t.user.name}
+                  %td #{t.posts_count}
+                  %td #{t.created_at.strftime("%Y-%m-%d %H:%M:%S")}
+
+ 
+
+        

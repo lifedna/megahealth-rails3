@@ -1,0 +1,22 @@
+= widget_div do
+  = render({:state => :list}, @widgets)  
+
+  :javascript
+    $(document).ready(function(){
+
+      $('.widget-actions').hide();
+      $('.widget-setting').hide();
+
+      $('.widget-setting-link').click(function() {
+        $(this).parents('.widget-actions').next().toggle();
+      });
+
+      $('.panel').hover(function() {
+        $(this).find('.widget-actions:hidden').toggle();     
+      },function(){
+        if( $(this).find('.widget-setting').is(':hidden') ) {
+          $(this).find('.widget-actions').toggle();
+        }
+      });
+
+    });

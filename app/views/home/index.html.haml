@@ -1,4 +1,39 @@
-%h3 Home
-- @users.each do |user|
-  %p
-    User: #{link_to user.name, user}
+/ Page
+.site-center
+  .center-page.text-center    
+    %h2{:style =>"font-size:200%"} 公众的健康网络，个性化的健康平台
+
+    %a.join-now-links.button-xlarge.button-primary-action
+      立即加入 - 大健康
+      %sup MegaHealth  
+
+.top-section
+  .center-page
+    .site-center
+      .col.size1of2
+        %h2{:style => "color:#333;"} 连接医生、专家、病友
+        %h3 加入社群连接医生、健康专家、病友，建立你自己的健康网络。帮助彼此理解、应付、管理与健康医疗相关的问题，提高健康自我管理，积极预防保健，以及选择更明智的治疗康复手段。
+      .col.size1of2
+        %img{:src => "#{asset_path 'megahealth2.png'}", :style => "margin-top: -40px;"}  
+.middle-section
+  .center-page
+    .site-center
+      .col.size1of2
+        %img{:src => "#{asset_path 'megahealth1.png'}", :style => "margin-bottom: -40px;"}
+      .col.size1of2  
+        .col
+          %h2.float-right{:style => "color:#333;"} 记录您和家人的健康档案
+        .col
+          %h3.float-right 在线记录存储个人的健康信息，跟踪所有的细节，如疾病、病症、治疗。一个母亲可以管理记录每一个她的孩子或一个儿子可能有他父亲的纪录，以帮助父亲处理医疗的问题。
+.bottom-section
+  .center-page
+    .site-center
+      .col.size1of2
+        %h2{:style => "color:#333;"} 共建可信赖的健康平台
+        %h3 作出明智的健康护理决定是今天面临的最大挑战之一，我们鼓励医生、专家、病友彼此分享真实的经验与知识，积极评价信息的价值，为彼此沉淀值得信赖的健康信息。人人为我，我为人人。
+      .col.size1of2
+        %img{:src => "#{asset_path 'megahealth3.png'}", :style => "margin-top: -30px;"}  
+.site-center
+  .center-page.text-center
+    %h1
+      我们的使命在于整合健康信息，供大众使用，使人人受益

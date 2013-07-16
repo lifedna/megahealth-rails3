@@ -1,0 +1,5 @@
+= widget_div do
+  = form_for @section, :url => url_for_event(:submit, :id => @section.id), :remote => true do |f|
+    / = f.error_messages
+    = f.text_field :name
+    = f.submit "更名"  

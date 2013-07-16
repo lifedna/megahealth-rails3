@@ -1,0 +1,11 @@
+= widget_div do
+  %h3 Communities
+  %ul
+    - @communities.each do |c|
+      %li
+        #{link_to c.name, c}  
+        - if user_signed_in?
+          - if !c.users.empty? && c.users.include?(current_user)
+            #{link_to('退出', leave_community_path(c))} 
+          - else
+            #{link_to('加入', join_community_path(c))}   

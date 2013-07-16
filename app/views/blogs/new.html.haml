@@ -1,0 +1,26 @@
+%h3 新加日记
+= simple_form_for @blog do |f|
+  / = f.error_messages
+  %p
+    = f.input :category, label:'类别:', collection: ['健康知识', '就医指南', '治疗交流', '护理园地', '用药常识']
+  %p
+    = f.label '题目:'  
+  %p
+    = f.text_field :title
+  %p
+    = f.label '正文:'  
+  %p
+    = f.text_area :body, :size => "60x12"
+  %p
+    = f.label '主题:'  
+    = f.hint '主题之间以空格分隔'
+  %p
+    = f.text_field :tags  
+  %p
+    = f.label '设置可见:' 
+    = f.collection_radio_buttons :public, [[true, '对所有人可见'] ,[false, '仅对自己可见']], :first, :last  
+  %p
+    = f.label '权限设置:' 
+    = f.input :locked, label:'不允许回应', as: :boolean
+  %p   
+    = f.submit "发表"  

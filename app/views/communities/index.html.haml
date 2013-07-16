@@ -1,0 +1,206 @@
+- @communities = "active"
+
+/Page
+.site-center.center-page
+  .section.your-communities
+    .title.margin-b20
+      %h2 你的社群
+    .my-community-list
+      - @my_communities.each do |c|
+        .my-community
+          .col.sizefit
+            %a{:href => "#{community_path(c)}", :style => "margin-right:10px;"}
+              %img{:src => "#{asset_path 'doctors/126708301394155.jpg'}"}
+          .col.sizefill
+            %b #{c.name}
+            %p{:style => "color:#777; font-size:80%;"} 
+              儿科 主任医师
+              %br
+              4231 个成员 
+            .last-update
+              更新于上午11:15
+       
+            
+  .reveal-doctors-wrapper
+    %a 显示全部(23)
+
+
+  .search-communities.text-center.margin-b20{:style => "background: #f0f6f3; padding: 10px 20px 0 20px;"}
+    %h2 探索社群
+    %form.explore-search-big
+      .outer
+        .inner
+          %input{:type => "text", :id => "q", :autocomplete => "off", :maxlength => "100"}
+          %input{:type => "submit", :id =>"explore-search-submit", :style => "font-size: 16px;" }
+
+  .section.organization
+    .title.margin-b20
+      %h2.float-left
+        %span.icon.icon-user-md
+        医生社群
+      %a.float-right{:href => "category"}
+        更多
+        %span.icon.icon-double-angle-right.no-margin
+    .community-tiles   
+      .community-tile.margin-b30
+        .col.size1of3
+          .white-content-container.margin-r20 
+            .col.sizefit
+              .cell
+                %a
+                  %img{:src => "#{asset_path 'doctors/doc-f.png'}"} 
+            .col.sizefill
+              .cell
+                %h4 
+                  %a{:href => "chenjianqiu"} 肖丽明
+                %p 
+                  4231 个成员 在此聚集
+                  %br
+                  主任医师 副教授
+                .info
+                  %p
+                    名老中医继承人，中西医结合治疗内科常见病：如高血压病、糖尿病、冠心病等，尤其擅长治疗各种肿瘤、包括...
+
+        .col.size1of3
+          .white-content-container.margin-r20 
+            .col.sizefit
+              .cell
+                %a{:href => "drliwenhui"}
+                  %img{:src => "#{asset_path 'doctors/126708301394155.jpg'}"} 
+            .col.sizefill
+              .cell
+                %h4 
+                  %a{:href => "drliwenhui"} 陈剑秋 
+                %p 
+                  4231 个成员 在此聚集
+                  %br
+                  主任医师 教授
+                .info
+                  %p
+                    糖尿病、风湿病、乳腺病的诊治，尤其以中西医结合治疗糖尿病慢性并发症，（糖尿病周围神经病变，糖尿病肾...
+        .col.size1of3 
+          .white-content-container.margin-r20 
+            .col.sizefit
+              .cell
+                %a
+                  %img{:src => "#{asset_path 'doctors/126708808845261.jpg'}"} 
+            .col.sizefill
+              .cell
+                %h4 
+                  %a 梁晓华 
+                %p 
+                  4231 个成员 在此聚集
+                  %br
+                  主任医师 教授
+                .info
+                  %p
+                    各类肿瘤性疾病（肺癌、食道癌、胃肠道癌、肝癌、乳腺癌，淋巴瘤和血管肿瘤）的化疗，生物免疫治疗。...
+                            
+  .section.trending
+    .title.margin-b20
+      %h2.float-left
+        %span.icon.icon-leaf
+        健康社群
+      %a.float-right{:href => "category"}
+        更多
+        %span.icon.icon-double-angle-right.no-margin
+    .community-titles
+      .community-tile.margin-b30
+        .col.size1of3
+          .white-content-container.margin-r20 
+            .col.sizefit
+              .cell
+                %a
+                  %img{:src => "#{asset_path 'g204116-2.jpg'}"} 
+            .col.sizefill
+              .cell
+                %h4 
+                  %a 美容护肤 养生保健
+                %p 4231 个成员 在此聚集
+                .info
+                  %p
+                    美容护肤 养生保健，内调外养 健康美容，中医美容保健，祛斑，除痘，美白，保湿，抗皱，眼袋，黑眼圈，减肥 丰胸，延缓衰老，...
+
+        .col.size1of3
+          .white-content-container.margin-r20 
+            .col.sizefit
+              .cell
+                %a{:href => "healthcare"} 
+                  %img{:src => "#{asset_path 'g11942-1.jpg'}"} 
+            .col.sizefill
+              .cell
+                %h4 
+                  %a{:href => "healthcare"} 牙齿装修工程
+                %p 72977 个成员 在此聚集
+                .info
+                  %p
+                    装修你的牙齿:D -------------华丽分割线------------- 您知道吗，90%的淘宝店铺都可以通过五七折拿到最高可达50%的返...
+        .col.size1of3 
+          .white-content-container.margin-r20 
+            .col.sizefit
+              .cell
+                %a
+                  %img{:src => "#{asset_path 'g93611-2.jpg'}"} 
+            .col.sizefill
+              .cell
+                %h4 
+                  %a 拒！绝！妇！科！病！
+                %p 82547 个成员 在此聚集
+                .info
+                  %p
+                    ▇ ▇ ▇ ▇ ▇ ▇ 申请入组必须要发毒誓：我发广告或者是骗子就死全家！生女儿为娼，生儿子断鸡鸡！▇ ▇ ▇ ▇ 不发毒誓的，一律...
+      
+
+  .section.staff-picks
+    .title.margin-b20
+      %h2.float-left
+        %span.icon.icon-link
+        病友社群
+      %a.float-right{:href => "category"} 
+        更多
+        %span.icon.icon-double-angle-right.no-margin 
+    .community-tiles
+      .community-tile.margin-b30
+        .col.size1of3
+          .white-content-container.margin-r20 
+            .col.sizefit
+              .cell
+                %a
+                  %img{:src => "#{asset_path 'bingyouhui/thumbnail_1338879504.png'}"} 
+            .col.sizefill
+              .cell
+                %h4 
+                  %a 白血病病友会
+                %p 4231 个成员 在此聚集
+                .info
+                  %p
+                    享受跑步的乐趣 running Beijing　 北京马拉松 　http://www.beijing-marathon.com/ Shanghai　　 上海马拉松 　...
+
+        .col.size1of3
+          .white-content-container.margin-r20 
+            .col.sizefit
+              .cell
+                %a
+                  %img{:src => "#{asset_path 'bingyouhui/thumbnail_1343633149.png'}"} 
+            .col.sizefill
+              .cell
+                %h4 
+                  %a 糖尿病病友会
+                %p 72977 个成员 在此聚集
+                .info
+                  %p
+                    Fixed Gear (也被称为Pista、Track Bike、场地车、死齿仔、或固定齿轮脚踏车)近年迅速窜起成为街头流行圈中一热门话题,许多服....
+        .col.size1of3 
+          .white-content-container.margin-r20 
+            .col.sizefit
+              .cell
+                %a{:href => "cancer"}
+                  %img{:src => "#{asset_path 'bingyouhui/thumbnail_1354514697.jpg'}"} 
+            .col.sizefill
+              .cell
+                %h4 
+                  %a{:href => "cancer"} 中国癌症病友会
+                %p 82547 个成员 在此聚集
+                .info
+                  %p
+                    ▇ ▇ ▇ ▇ ▇ ▇ 申请入组必须要发毒誓：我发广告或者是骗子就死全家！生女儿为娼，生儿子断鸡鸡！▇ ▇ ▇ ▇ 不发毒誓的，一律...

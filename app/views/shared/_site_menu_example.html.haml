@@ -1,0 +1,53 @@
+.site-header.background-white.site-header-border
+  .site-center
+    .col.sizefit
+      .cell
+        %a.logo{:href => "/"}
+    .col.sizefit.float-right
+      - if user_signed_in?
+        .col.sizefit.border-right                
+          .cell.float-left
+            %a{:href => "/communities/new"}
+              .button.gradient
+                %b 创建社群  
+        .col.sizefit          
+          .site-menu         
+            %ul.nav
+              %li
+                %a{:href => "#"} 
+                  %span.icon.icon-bell 
+              %li.user-nav
+                %a{:href => "javascript:;"} 
+                  %span.icon.icon-user
+                  %span.icon.icon-caret-down
+                .user-nav-popup  
+                  .arrow_box_top
+                    %h6 #{current_user.name}  
+                    .popup-content
+                      %ul.left.dropdown
+                        %li   
+                          %a{:href => "/settings/account"} 帐户
+                        %li
+                          %a{:href => "/settings/profile"} 设置
+                        %li 
+                          = link_to '退出', destroy_user_session_path, :method=>'delete'   
+      - else
+        .site-menu
+          %ul.nav
+            %li
+              = link_to '登录', new_user_session_path 
+            %li
+              = link_to '注册', new_user_registration_path     
+    - if user_signed_in?              
+      .col.sizefill.site-menu  
+        .col.sizefill.mobile-sizefill
+          %ul.nav
+            %li{:class => "#{@update}"}
+              %a.border-left{:href => "/update"} 动态
+            %li{:class => "#{@features}"}
+              %a{:href => "/features"} 精选   
+            %li{:class => "#{@communities}"}
+              %a{:href => "/communities"} 社群
+            %li{:class => "#{@healthrecord}"}
+              #{link_to '我的健康', mine_url}    
+             

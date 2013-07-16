@@ -1,0 +1,35 @@
+= widget_div do
+  .section-list.gradient
+    %ul
+      - @sections.each do |s|
+        %li{'data-id' => s.id, :class => "#{s == @current_section? 'active' : nil }"}
+          %a{:href => "#{community_section_url(@community, s)}"}
+            #{s.name}
+            - if (can? :update, @community) && s == @current_section
+              %span.icon.icon-16.icon-pencil.background-grey
+      - if can? :update, @community
+        %li{:class => "#{@parent_controller.parent_controller.action_name == 'admin'? 'active' : nil }"} 
+          = link_to '设置', admin_community_path(@community)
+          / %a{:href => "#{admin_community_path(@community)}"}
+          /   设置
+          /   - if @parent_controller.parent_controller.action_name == 'admin'
+          /     %span.icon.icon-16.icon-cog.background-grey
+
+
+  :javascript
+    $(document).ready(function(){
+      $("#add_widgets").hide();
+
+      $('.icon-pencil').hover(function() {
+        $(this).toggleClass('background-grey');
+        $(this).toggleClass('background-black');     
+      },function(){
+        $(this).toggleClass('background-grey');
+        $(this).toggleClass('background-black');
+      });
+
+      $('.icon-pencil').click(function(e) {
+        e.preventDefault();
+        $("#add_widgets").slideToggle();
+      });
+    });

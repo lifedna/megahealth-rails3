@@ -1,0 +1,2 @@
+module Widgets::VideosHelper
+end

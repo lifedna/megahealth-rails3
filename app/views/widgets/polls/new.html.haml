@@ -1,0 +1,52 @@
+- @community = Community.find params[:community_id]
+- @sections = @community.sections
+- @current_section = @poll_set.section
+/ Page
+.site-center
+  .header-info{:style => "background:#398fd1; color:#fff"}
+    .col.sizefit.padding-l30.padding-r30
+      .doc-image.margin-t20
+        .p240-box
+          %a{:href => "#"}
+            %img{:src => "#{asset_path 'doctors/126708301394155.jpg'}" }
+
+    .col.sizefill
+      .doc-community-info.margin-t20
+        %h3 #{@community.name} 
+ 
+        %p 
+          四川成都华西医院 儿科 主任医师 副教授
+        
+      .doc-expertise.padding-r20
+        %p
+          #{@community.brief}
+      .col       
+        .col.size1of2
+          .doc-share.margin-t20
+            %p 如果觉得对你的家人、朋友有帮助，分享给TA吧
+        .col.sizefill
+          .button.background-green.large-button.center 
+            %span 加入
+
+  .margin-t20
+    = render :partial => "shared/section_list", :locals => {:sections => @sections, :current_section => @current_section}
+
+  .col.size2of3.margin-t20
+    .float-right
+      #{link_to "> #{@poll_set.name}", show_community_poll_set_url(@community, @poll_set)}
+    .col  
+      %h2 发布一个新投票
+      = nested_form_for @poll, :url => {:action => "create"} do |f|
+        %p
+          = f.label "投票主题："
+          = f.text_field :name
+        %p
+          = f.hidden_field :poll_set_id, :value => @poll_set.id  
+        %p
+          = f.hidden_field :community_id, :value => @poll_set.community.id  
+        %p
+          = f.fields_for :options do |option|
+            = option.label "选项"
+            = option.text_field :name  
+        %p  
+          = f.submit "发布"
