@@ -17,6 +17,7 @@
 //= require reveal
 //= require bootstrap
 //= require jquery-plugins
+//= require redactor-rails
 //= require_tree .
 
 

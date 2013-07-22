@@ -1,0 +1,27 @@
+- items.each do |item|
+  .feed.margin-b20
+    .col.sizefit.margin-r20
+      .button{:style => "background:#fae9da;color:#ca6445;border:none;"} #{item.category}
+    .col.sizefill.border-bottom.padding-b20 
+      %h4 
+        - if item.class.to_s.underscore == 'blog'
+          = link_to item.title, blog_url(item)
+        - else
+          = link_to item.title, self.send("show_community_#{item.class.to_s.underscore}_url", item.community, item)
+
+      %p{:style => "color: #999;"} 
+        / #{item.user.name}
+        %span #{time_ago_in_words(item.created_at).capitalize}前      
+      %p #{item.body} 
+      - unless item.tags.nil?
+        .tags
+          %ul.nav.blocks
+            - item.tags.each do |tag|
+              %li
+                %a #{tag}
+      .source 
+        病友日志
+        %span.middot &middot;
+        浏览15次
+        %span.middot &middot;
+        有用10人

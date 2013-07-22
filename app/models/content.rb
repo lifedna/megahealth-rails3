@@ -8,6 +8,8 @@ class Content
   include Mongoid::Likeable
   include Mongoid::Search
 
+  paginates_per 5
+
   taggable
 
   field :title, type: String
@@ -23,5 +25,7 @@ class Content
   accepts_nested_attributes_for :comments, :reject_if => lambda { |a| a[:body].blank? }, :allow_destroy => true
 
   belongs_to :user
+
+  default_scope desc(:created_at)
 
 end  

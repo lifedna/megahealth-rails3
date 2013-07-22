@@ -67,15 +67,15 @@ class ActivityPresenter < BasePresenter
   def icon
     case activity.verb
     when :new_article
-      out = "<span class='icon icon-file color-grey no-margin' style='font-size: 26px;'></span>"
+      out = "<span class='icon icon-file color-grey no-margin' style='font-size: 24px;'></span>"
     when :new_question
-      out = "<span class='icon icon-question-sign color-grey no-margin' style='font-size: 26px;'></span>" 
+      out = "<span class='icon icon-question-sign color-grey no-margin' style='font-size: 24px;'></span>" 
     when :new_topic
-      out = "<span class='icon icon-comment color-grey no-margin' style='font-size: 26px;'></span>" 
+      out = "<span class='icon icon-comment-alt color-grey no-margin' style='font-size: 24px;'></span>" 
     when :new_comment
-      out = "<span class='icon icon-comments color-grey no-margin' style='font-size: 26px;'></span>" 
+      out = "<span class='icon icon-comments color-grey no-margin' style='font-size: 24px;'></span>" 
     when :join
-      out = "<span class='icon icon-user color-grey no-margin' style='font-size: 26px;'></span>" 
+      out = "<span class='icon icon-user color-grey no-margin' style='font-size: 24px;'></span>" 
     else
       out = ""
     end 

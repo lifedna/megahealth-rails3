@@ -45,7 +45,7 @@ class Activity
     target_object :community
   end  
 
-  scope :update_by_user, where({'target_object.id' => '51e37648f9dffb5e4c000013', 'target_object.type' => 'Community'})
+  default_scope desc(:created_at)
     
   def the_actor
     actor["type"].to_s.constantize.find_by(id: actor["id"])
@@ -66,6 +66,6 @@ class Activity
       hash = {"id"=>c.id, "type"=>"Community"}    
       hash_array.push(hash)
     end
-    Activity.in(target_object: hash_array).desc(:created_at)
+    Activity.in(target_object: hash_array)
   end
 end

@@ -3,6 +3,7 @@ class HomeController < ApplicationController
 
   has_widgets do |root|    
     root << widget(:update_list) 
+    root << widget(:content_list)
   end
 
   def index
@@ -14,21 +15,21 @@ class HomeController < ApplicationController
   
   def features   
     @feature_filter = current_user.feature_filter
-    @keywords = current_user.feature_filter.merged_keywords
+    # @keywords = current_user.feature_filter.merged_keywords
 
-    if params[:category]
-      if @keywords.nil? or @keywords.empty?
-        @items = Content.where(category: params[:category])
-      else
-        @items = Content.where(category: params[:category]).full_text_search(@keywords)
-      end  
-    else
-      if @keywords.nil? or @keywords.empty?
-        @items = Content.all
-      else
-        @items = Content.all.full_text_search(@keywords)
-      end 
-    end   
+    # if params[:category]
+    #   if @keywords.nil? or @keywords.empty?
+    #     @items = Content.where(category: params[:category])
+    #   else
+    #     @items = Content.where(category: params[:category]).full_text_search(@keywords)
+    #   end  
+    # else
+    #   if @keywords.nil? or @keywords.empty?
+    #     @items = Content.all
+    #   else
+    #     @items = Content.all.full_text_search(@keywords)
+    #   end 
+    # end   
   end
 
   def mine

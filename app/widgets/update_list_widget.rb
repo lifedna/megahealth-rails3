@@ -6,7 +6,7 @@ class UpdateListWidget < AuthorizableWidget
   helper_method :present
 
   has_widgets do
-    self << widget("update_list/load_more", :load_more)
+    self << widget("update_list/load_more", :load_more_activities)
   end
 
   def display

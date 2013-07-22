@@ -1,11 +1,23 @@
 require 'genghis'
 
 MegahealthRails3::Application.routes.draw do
+  # different uploaded versions
+  match '/uploads/grid/user/avatar/:id/:filename' => 'gridfs#thumb_avatar', constraints: { filename: /thumb.*/ }
+  # route configuration for the uploaded image
+  match '/uploads/grid/user/avatar/:id/:filename' => 'gridfs#avatar'
+
+  # different uploaded versions
+  match '/uploads/grid/redactor_rails/picture/data/:id/:filename' => 'gridfs#thumb_redactor_pitcure', constraints: { filename: /thumb.*/ }
+  # route configuration for the uploaded image
+  match '/uploads/grid/redactor_rails/picture/data/:id/:filename' => 'gridfs#redactor_pitcure'
+
+  mount RedactorRails::Engine => '/redactor_rails'
+
   match '/update' => 'home#update', :as => :update
   match '/features' => 'home#features', :as => :features
   match '/mine' => 'home#mine', :as => :mine
 
-   scope 'communities' do
+  scope 'communities' do
     match '/:community_id/columns/:id' => 'widgets/columns#show', :as => :show_community_column, :via => :get
     match '/:community_id/articles/:id' => 'widgets/articles#show', :as => :show_community_article, :via => :get
     match '/:community_id/articles/:id/comment' => 'widgets/articles#comment', :as => :comment_community_article, :via => :get  

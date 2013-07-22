@@ -33,6 +33,9 @@ class User
   field :current_sign_in_ip, :type => String
   field :last_sign_in_ip,    :type => String
 
+  # carrierwave
+  field :avatar, type: String
+
   ## Confirmable
   # field :confirmation_token,   :type => String
   # field :confirmed_at,         :type => Time
@@ -59,6 +62,8 @@ class User
   has_many :answers
   has_many :topics
   has_one :feature_filter
+
+  mount_uploader :avatar, AvatarUploader
 
   # Callbacks
   after_create :create_initial_phr, :create_initial_filter
