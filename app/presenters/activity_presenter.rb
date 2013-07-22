@@ -1,5 +1,7 @@
 # coding: utf-8
 class ActivityPresenter < BasePresenter
+  include ActionView::Helpers
+
   presents :activity
 
   def metadata(*args)
@@ -41,7 +43,7 @@ class ActivityPresenter < BasePresenter
       out = %(#{raw link_to(activity.the_actor.name, activity.the_actor)} 评论了帖子 #{raw link_to(activity.the_object.commentable.title, show_community_topic_path(activity.the_object.commentable.community, activity.the_object.commentable))})
     when :join
       out = %(#{raw link_to(activity.the_actor.name, activity.the_actor)} 加入了社群 #{raw link_to(activity.the_object.name, activity.the_object)})   
-  	else
+    else
       out = ""
   	end	
   	return raw out
@@ -61,4 +63,23 @@ class ActivityPresenter < BasePresenter
       return false
     end  
   end  
+
+  def icon
+    case activity.verb
+    when :new_article
+      out = "<span class='icon icon-file color-grey no-margin' style='font-size: 26px;'></span>"
+    when :new_question
+      out = "<span class='icon icon-question-sign color-grey no-margin' style='font-size: 26px;'></span>" 
+    when :new_topic
+      out = "<span class='icon icon-comment color-grey no-margin' style='font-size: 26px;'></span>" 
+    when :new_comment
+      out = "<span class='icon icon-comments color-grey no-margin' style='font-size: 26px;'></span>" 
+    when :join
+      out = "<span class='icon icon-user color-grey no-margin' style='font-size: 26px;'></span>" 
+    else
+      out = ""
+    end 
+
+    return raw out
+  end
 end  

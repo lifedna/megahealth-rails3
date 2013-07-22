@@ -37,4 +37,19 @@ class Community
   def leave_time(user)
     Activity.where(verb: :leave, actor: {"id" => user.id, "type"=>"User"}, object: {"id" => self.id, "type"=>"Community"}).last.created_at
   end
+
+  def all_update
+    hash = {"id"=>self.id, "type"=>"Community"}
+    hash_array = []
+    hash_array.push(hash)
+    Activity.all_in(target_object: hash_array)
+  end
+
+  # def all_update
+  #   hash = {"id"=>"51e37648f9dffb5e4c000013", "type"=>"Community"}
+  #   hash_array = []
+  #   hash_array.push(hash)
+  #   # Acitvity.where(:target_object.in => hash_array)
+  #   Activity.in(target_object: hash_array)
+  # end
 end

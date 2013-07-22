@@ -1,3 +1,5 @@
+require 'genghis'
+
 MegahealthRails3::Application.routes.draw do
   match '/update' => 'home#update', :as => :update
   match '/features' => 'home#features', :as => :features
@@ -71,4 +73,6 @@ MegahealthRails3::Application.routes.draw do
     get "/users/sign_out" => "devise/sessions#destroy", :as => :destroy_user_session
   end
   resources :users
+
+  mount Genghis::Server.new, :at => '/genghis'
 end

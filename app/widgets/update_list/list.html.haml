@@ -1,0 +1,15 @@
+- @activities.each do |activity|
+  .support-group-feed.margin-b20.border-bottom
+    - present activity, ActivityPresenter do |activity_presenter|
+      .col.sizefit
+        / %span.icon.icon-file-alt.color-grey.no-margin{:style => "font-size: 26px;"}
+        #{activity_presenter.icon}
+      .col.sizefill
+        .margin-l20
+          .col.color-grey     
+            #{activity_presenter.metadata}
+          .col
+            %p #{activity_presenter.text }
+          - if activity_presenter.content?  
+            .col
+              %p #{truncate activity.the_object.body, length: 140, omission: '.....'} 

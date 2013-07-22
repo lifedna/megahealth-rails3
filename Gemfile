@@ -14,19 +14,48 @@ gem 'devise'
 gem 'figaro'
 gem 'haml-rails'
 gem 'mongoid'
-gem 'streama'
-gem 'mongoid_socializer_actions'
-gem 'mongoid_taggable_with_context'
-gem 'apotomo', '~> 1.2.3'
+gem 'bson_ext'
 gem 'simple_form'
 gem 'nested_form'
-gem 'cancan'
+
+# The single-file MongoDB admin app
+gem 'genghisapp'
+
+# mongoid activity stream
+gem 'streama'
+
+# mongoid comment, like, and share
+gem 'mongoid_socializer_actions'
+
+# mongoid tagging
+gem 'mongoid_taggable_with_context'
+
+# mongoid simple full-text search
 gem 'mongoid_search'
-# gem 'streamio-ffmpeg'
+
+# AJAX widget framework
+gem 'apotomo', '~> 1.2.3'
+
+# authorization
+gem 'cancan'
+
+# embeded video thumbnails and videos
 gem 'nokogiri'
 gem 'getvideo', :git => 'git://github.com/yeeli/getvideo.git'
-# gem 'impressionist', '~> 1.4.4'
 
+# file upload with carrierwave and GridFS
+gem 'mini_magick'
+gem 'carrierwave'
+gem 'carrierwave-mongoid', :require => "carrierwave/mongoid"
+
+# pagination
+gem 'kaminari'
+
+# HTML editor
+gem 'redactor-rails'
+
+# Auto incrementing fields for mongoid documents
+gem 'mongoid-autoinc'
 
 group :development do
   gem 'better_errors'

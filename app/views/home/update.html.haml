@@ -1,17 +1,5 @@
-/ %h3 My Communities Update
-/ - @activities.each do |activity|
-/   .activity-feed
-/     - present activity, ActivityPresenter do |activity_presenter|
-/       .metadata
-/         %p
-/           #{activity_presenter.metadata}
-/         %p
-/           #{activity_presenter.text } 
-/         - if activity_presenter.content?
-/           .content
-/             #{activity.the_object.body}
-
 - @update = "active"
+
 / Page
 .site-center.center-page
   .page-head.text-center
@@ -49,23 +37,25 @@
 
       .section
         .support-group-feeds
-          - @activities.each do |activity|
-            .support-group-feed.margin-b20.border-bottom
-              - present activity, ActivityPresenter do |activity_presenter|
-                .col.sizefit
-                  %span.icon.icon-file-alt.color-grey.no-margin{:style => "font-size: 26px;"}
-                .col.sizefill
-                  .margin-l20
-                    .col.color-grey     
-                      #{activity_presenter.metadata}
-                    .col
-                      %p #{activity_presenter.text }
-                    - if activity_presenter.content?  
-                      .col
-                        %p #{truncate activity.the_object.body, length: 140, omission: '.....'} 
+          = render_widget :update_list
+          / - @activities.each do |activity|
+          /   .support-group-feed.margin-b20.border-bottom
+          /     - present activity, ActivityPresenter do |activity_presenter|
+          /       .col.sizefit
+          /         / %span.icon.icon-file-alt.color-grey.no-margin{:style => "font-size: 26px;"}
+          /         #{activity_presenter.icon}
+          /       .col.sizefill
+          /         .margin-l20
+          /           .col.color-grey     
+          /             #{activity_presenter.metadata}
+          /           .col
+          /             %p #{activity_presenter.text }
+          /           - if activity_presenter.content?  
+          /             .col
+          /               %p #{truncate activity.the_object.body, length: 140, omission: '.....'} 
                  
-          %h5.text-center
-            %a 显示更多         
+          / %h5.text-center
+          /   %a 显示更多         
 
        
     .col.sizefill.padding-l10
@@ -115,94 +105,104 @@
                 .progress-bar{:style => "width: 25%;"}   
       .section
         .header
-          %h5 推荐医生社群
+          %h5 发现医生社群
         .body
           %ul.nav.recommendation
-            %li
-              .col.sizefit.float-right
-                %img{:src => "#{asset_path 'doctors/12033.jpg'}"}
-              .col.sizefill.margin-r10 
-                %dl
-                  %dt 孙菁 
-                  %dd
-                    %p 中山大学附属第三医院
-                    %p 皮肤科
-            %li
-              .col.sizefit.float-right
-                %img{:src => "#{asset_path 'doctors/12033.jpg'}"}
-              .col.sizefill.margin-r10
-                %dl
-                  %dt 孙菁 
-                  %dd
-                    %p 中山大学附属第三医院
-                    %p 皮肤科 
-            %li
-              .col.sizefit.float-right
-                %img{:src => "#{asset_path 'doctors/12033.jpg'}"}
-              .col.sizefill.margin-r10 
-                %dl
-                  %dt 孙菁 
-                  %dd
-                    %p 中山大学附属第三医院
-                    %p 皮肤科   
-      .section
-        .header
-          %h5 推荐健康社群
-        .body
-          %ul.nav.recommendation
-            %li
-              .col.sizefit.float-right
-                %img{:src => "#{asset_path 'g11942-1.jpg'}"}
-              .col.sizefill.margin-r10 
-                %dl
-                  %dt 牙齿装修工程 
-                  %dd
-                    %p 72977 个人
-            %li
-              .col.sizefit.float-right
-                %img{:src => "#{asset_path 'g48758-6.jpg'}"}
-              .col.sizefill.margin-r10 
-                %dl
-                  %dt 养生苑
-                  %dd
-                    %p 82531 个人
-            %li
-              .col.sizefit.float-right
-                %img{:src => "#{asset_path 'g38167-1.jpg'}"}
-              .col.sizefill.margin-r10 
-                %dl
-                  %dt 广义素食者 
-                  %dd
-                    %p 8234 个人               
-      .section
-        .header
-          %h5 推荐病友社群
-        .body
-          %ul.nav.recommendation
-            %li
-              .col.sizefit.float-right
-                %img{:src => "#{asset_path 'bingyouhui/thumbnail_1338879504.png'}"}
-              .col.sizefill.margin-r10 
-                %dl
-                  %dt 白血病病友会 
-                  %dd
-                    %p 41982 个人
-            %li
-              .col.sizefit.float-right
-                %img{:src => "#{asset_path 'bingyouhui/thumbnail_1343633149.png'}"}
-              .col.sizefill.margin-r10 
-                %dl
-                  %dt 糖尿病病友会
-                  %dd
-                    %p 42625 个人
-            %li
-              .col.sizefit.float-right
-                %img{:src => "#{asset_path 'bingyouhui/thumbnail_1363835417.png'}"}
-              .col.sizefill.margin-r10 
-                %dl
-                  %dt 中国自闭症联盟 
-                  %dd
-                    %p 10924 个人
+            - Community.all.each do |c|
+              %li
+                .col.sizefit.float-right
+                  %img{:src => "#{asset_path 'doctors/12033.jpg'}"}  
+                .col.sizefill.margin-r10 
+                  %dl
+                    %dt #{link_to c.name, community_path(c)}
+                    %dd
+                      %p 中山大学附属第三医院
+                      %p 皮肤科    
+            / %li
+            /   .col.sizefit.float-right
+            /     %img{:src => "#{asset_path 'doctors/12033.jpg'}"}
+            /   .col.sizefill.margin-r10 
+            /     %dl
+            /       %dt 孙菁 
+            /       %dd
+            /         %p 中山大学附属第三医院
+            /         %p 皮肤科
+            / %li
+            /   .col.sizefit.float-right
+            /     %img{:src => "#{asset_path 'doctors/12033.jpg'}"}
+            /   .col.sizefill.margin-r10
+            /     %dl
+            /       %dt 孙菁 
+            /       %dd
+            /         %p 中山大学附属第三医院
+            /         %p 皮肤科 
+            / %li
+            /   .col.sizefit.float-right
+            /     %img{:src => "#{asset_path 'doctors/12033.jpg'}"}
+            /   .col.sizefill.margin-r10 
+            /     %dl
+            /       %dt 孙菁 
+            /       %dd
+            /         %p 中山大学附属第三医院
+            /         %p 皮肤科   
+      / .section
+      /   .header
+      /     %h5 发现健康社群
+      /   .body
+      /     %ul.nav.recommendation
+      /       %li
+      /         .col.sizefit.float-right
+      /           %img{:src => "#{asset_path 'g11942-1.jpg'}"}
+      /         .col.sizefill.margin-r10 
+      /           %dl
+      /             %dt 牙齿装修工程 
+      /             %dd
+      /               %p 72977 个人
+      /       %li
+      /         .col.sizefit.float-right
+      /           %img{:src => "#{asset_path 'g48758-6.jpg'}"}
+      /         .col.sizefill.margin-r10 
+      /           %dl
+      /             %dt 养生苑
+      /             %dd
+      /               %p 82531 个人
+      /       %li
+      /         .col.sizefit.float-right
+      /           %img{:src => "#{asset_path 'g38167-1.jpg'}"}
+      /         .col.sizefill.margin-r10 
+      /           %dl
+      /             %dt 广义素食者 
+      /             %dd
+      /               %p 8234 个人               
+      / .section
+      /   .header
+      /     %h5 发现病友社群
+      /   .body
+      /     %ul.nav.recommendation
+      /       %li
+      /         .col.sizefit.float-right
+      /           %img{:src => "#{asset_path 'bingyouhui/thumbnail_1338879504.png'}"}
+      /         .col.sizefill.margin-r10 
+      /           %dl
+      /             %dt 白血病病友会 
+      /             %dd
+      /               %p 41982 个人
+      /       %li
+      /         .col.sizefit.float-right
+      /           %img{:src => "#{asset_path 'bingyouhui/thumbnail_1343633149.png'}"}
+      /         .col.sizefill.margin-r10 
+      /           %dl
+      /             %dt 糖尿病病友会
+      /             %dd
+      /               %p 42625 个人
+      /       %li
+      /         .col.sizefit.float-right
+      /           %img{:src => "#{asset_path 'bingyouhui/thumbnail_1363835417.png'}"}
+      /         .col.sizefill.margin-r10 
+      /           %dl
+      /             %dt 中国自闭症联盟 
+      /             %dd
+      /               %p 10924 个人
 
 
 

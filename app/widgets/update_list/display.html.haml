@@ -1,0 +1,5 @@
+= widget_div do
+  = render({:state => :list}, @activities)
+
+- unless @activities.last_page?  
+  = render_widget :load_more, :display, :page_num => @activities.current_page + 1
