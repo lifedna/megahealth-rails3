@@ -33,8 +33,12 @@ class User
   field :current_sign_in_ip, :type => String
   field :last_sign_in_ip,    :type => String
 
-  # carrierwave
+
   field :avatar, type: String
+  field :age, type: Integer
+  field :resident, type: String
+  field :zipcode, type: Integer
+  field :gender, type: Boolean
 
   ## Confirmable
   # field :confirmation_token,   :type => String
@@ -53,7 +57,7 @@ class User
   index({ email: 1 }, { unique: true, background: true })
   field :name, :type => String
   validates_presence_of :name
-  attr_accessible :name, :email, :password, :password_confirmation, :remember_me, :created_at, :updated_at
+  attr_accessible :name, :email, :avatar,:age, :resident, :zipcode, :gender, :current_password, :password, :password_confirmation, :remember_me, :created_at, :updated_at
 
   has_and_belongs_to_many :communities
   has_many :blogs

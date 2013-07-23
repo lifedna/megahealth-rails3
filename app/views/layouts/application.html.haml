@@ -12,7 +12,8 @@
     #container.container
       %header
         = render 'layouts/navigation'
-        = render 'layouts/messages'
+        .site-center
+          = render 'layouts/messages'
       #main{:role => "main"}
         = yield
       %footer

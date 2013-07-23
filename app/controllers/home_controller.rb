@@ -42,4 +42,10 @@ class HomeController < ApplicationController
     @symptom = @phr.symptoms.build
     @treatment = @phr.treatments.build
   end	
+
+  def profile
+  end
+
+  def account
+  end
 end

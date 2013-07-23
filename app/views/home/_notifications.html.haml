@@ -1,0 +1,31 @@
+%h2 Email 提醒
+%hr
+%b 一般提醒
+.col
+  %p 如有下列情况，请向我发送邮件：
+.col
+  %input{:type => "checkbox", :class =>"checkbox"}
+  %label 有人回复了我的问题    
+.col
+  %input{:type => "checkbox", :class =>"checkbox"}
+  %label 有人评论了我的日志
+.col
+  %input{:type => "checkbox", :class =>"checkbox"}
+  %label 有人回复了我的社群讨论   
+.col
+  %input{:type => "checkbox", :class =>"checkbox"}
+  %label 有人回复了我的评论
+.cell  
+%b 总结
+.col
+  %p 请向我发送社群动态的总结邮件：
+.col
+  %input{:type => "checkbox", :class =>"checkbox"}
+  %label 每天    
+.col
+  %input{:type => "checkbox", :class =>"checkbox"} 
+  %label 每周   
+  
+
+.col
+  .button.background-orange.margin-t20 更新

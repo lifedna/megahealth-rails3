@@ -1,0 +1,61 @@
+%h2 个人资料
+%hr
+= form_for current_user, :html => { :multipart => true } do |f|
+  / = devise_error_messages!
+  .margin-b20    
+    .col.size1of2
+      .col
+        %label
+          %b 姓名
+      .col
+        = f.text_field :name   
+    .col.size1of2    
+      .col
+        %label
+          %b 年龄
+      .col
+        = f.text_field :age    
+
+  .margin-b20
+    .col.size1of2
+      .col
+        %label
+          %b 常居城市
+      .col
+        = f.text_field :resident 
+    .col.size1of2  
+      .col
+        %label
+          %b 邮政编码
+      .col
+        = f.text_field :zipcode 
+
+  .margin-b20
+    .col
+      %label
+        %b 电子邮箱
+    .col
+      = f.text_field :email        
+        
+  / .margin-b20
+  /   .col
+  /     %label
+  /       %b 性别
+  /   .col
+  /     %input.radio{:name => "gender", :id => "male", :type => "radio"}/
+  /     %label{:for => "male"} 男 
+  /     %input.radio{:name => "gender", :id => "female", :type => "radio"}/
+  /     %label{:for => "female"} 女
+
+  .margin-b20
+    .col
+      %label
+        %b 个人头像
+      %p 图片最大不得超过2MB(.jpg, .jpeg, .png, .gif) 
+    .col
+      = image_tag current_user.avatar_url(:thumb)   
+    .col
+      = f.file_field :avatar      
+
+  .col
+    = f.submit '更新', :class => "button background-orange"    

@@ -1,0 +1,29 @@
+/ Page
+.site-center.center-page
+  %h2 帐户设置
+  .center-content
+    .cell.tab-block.left-nav
+      .tabs.size1of4
+        %ul.left.nav
+          %li.active
+            %a{:href => "#tabcontent1"} 个人资料
+          %li
+            %a{:href => "#tabcontent2"}  提醒
+          %li
+            %a{:href => "#tabcontent3"}  隐私
+          %li
+            %a{:href => "#tabcontent4"}  密码
+      .tab-content.sizefill  
+        .cell#tabcontent1{:style => "min-height: 600px;"}
+          .cell
+            = render :partial => "settings"
+        .cell.hidden-tab#tabcontent2{:style => "min-height: 600px;"}
+          .cell
+            = render :partial => "notifications"
+        .cell.hidden-tab#tabcontent3{:style => "min-height: 600px;"}
+          .cell
+            = render :partial => "privacy"
+        .cell.hidden-tab#tabcontent4{:style => "min-height: 600px;"}   
+          .cell
+            = render :partial => "password"     
+

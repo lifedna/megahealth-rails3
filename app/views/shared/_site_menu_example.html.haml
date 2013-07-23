@@ -25,10 +25,10 @@
                     %h6 #{current_user.name}  
                     .popup-content
                       %ul.left.dropdown
-                        %li   
-                          %a{:href => "/settings/account"} 帐户
                         %li
-                          %a{:href => "/settings/profile"} 设置
+                          %a{:href => "/profile"} 关于我  
+                        %li
+                          %a{:href => "/account"} 帐号设置
                         %li 
                           = link_to '退出', destroy_user_session_path, :method=>'delete'   
       - else

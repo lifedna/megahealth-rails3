@@ -16,6 +16,8 @@ MegahealthRails3::Application.routes.draw do
   match '/update' => 'home#update', :as => :update
   match '/features' => 'home#features', :as => :features
   match '/mine' => 'home#mine', :as => :mine
+  match '/profile' => 'home#profile', :as => :profile
+  match '/account' => 'home#account', :as => :account
 
   scope 'communities' do
     match '/:community_id/columns/:id' => 'widgets/columns#show', :as => :show_community_column, :via => :get
@@ -84,7 +86,9 @@ MegahealthRails3::Application.routes.draw do
   devise_for :users do
     get "/users/sign_out" => "devise/sessions#destroy", :as => :destroy_user_session
   end
-  resources :users
+  resources :users do
+    post 'update_password', :on => :member, :as => :upadte_password
+  end
 
   mount Genghis::Server.new, :at => '/genghis'
 end
