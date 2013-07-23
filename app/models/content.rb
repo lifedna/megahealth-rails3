@@ -4,7 +4,8 @@ class Content
   include Mongoid::Timestamps	
   include Mongoid::Commentable
   include Mongoid::TaggableWithContext
-  include Mongoid::TaggableWithContext::AggregationStrategy::MapReduce
+  # include Mongoid::TaggableWithContext::AggregationStrategy::MapReduce
+  include Mongoid::TaggableWithContext::AggregationStrategy::RealTime
   include Mongoid::Likeable
   include Mongoid::Search
 

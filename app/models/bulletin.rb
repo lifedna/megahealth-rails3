@@ -1,8 +1,5 @@
 # encoding: UTF-8
 class Bulletin < Widget
-  include Mongoid::Document	
-  include Mongoid::Timestamps
-
   field :body, type: String
 
   def default_values

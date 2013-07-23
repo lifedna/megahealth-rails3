@@ -24,4 +24,9 @@
             %ul
               - poll.options.each do |option|
                 %li #{option.name} 
- 
+                
+  :javascript
+    $(document).ready(function(){
+      var poll_set = $("#widget_#{@poll_set.id}");
+      setWidget(poll_set);
+    }); 

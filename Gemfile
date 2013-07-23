@@ -55,7 +55,10 @@ gem 'kaminari'
 gem 'redactor-rails'
 
 # Auto incrementing fields for mongoid documents
-gem 'mongoid-autoinc'
+# gem 'mongoid-autoinc'
+
+# social share feature
+gem 'social-share-button'
 
 group :development do
   gem 'better_errors'

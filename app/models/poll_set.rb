@@ -1,7 +1,5 @@
 # encoding: UTF-8
 class PollSet < Widget
-  include Mongoid::Document
-
   field :display_counts, type: Integer
 
   has_many :polls, dependent: :delete do

@@ -52,5 +52,9 @@
                         #{time_ago_in_words(q.created_at).capitalize}前 &middot; #{q.user.name}
                     .col.sizefill  
                       .label.background-blue{:style => "font-size: 80%;"} 护理          
-      
-        
+  
+  :javascript
+    $(document).ready(function(){
+      var qa = $("#widget_#{@qa.id}");
+      setWidget(qa);
+    });

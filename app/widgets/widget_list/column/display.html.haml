@@ -27,3 +27,8 @@
                 %p #{truncate article.body, length: 200, omission: '.....'}
    
 
+  :javascript
+    $(document).ready(function(){
+      var column = $("#widget_#{@column.id}");
+      setWidget(column);
+    });

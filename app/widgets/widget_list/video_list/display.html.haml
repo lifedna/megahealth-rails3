@@ -27,20 +27,22 @@
               .play_video
                
 
-:javascript
-  $(document).ready(function(){
-    //
-    $('.video').click(function(){
-      if ($(this).children('iframe').length > 0) return;
-      $(this).children().toggle(false); //Hide thumbnail and play button
-      $(this).append('<iframe width="480" height="360" src="' + $(this).attr('src') + ' frameborder="0"></iframe>');
-    });
+  :javascript
+    $(document).ready(function(){
+      var video_list = $("#widget_#{@video_list.id}");
+      setWidget(video_list);
+      //
+      $('.video').click(function(){
+        if ($(this).children('iframe').length > 0) return;
+        $(this).children().toggle(false); //Hide thumbnail and play button
+        $(this).append('<iframe width="480" height="360" src="' + $(this).attr('src') + ' frameborder="0"></iframe>');
+      });
 
-    var self = this;
-    $('.video').each(function() { //Revert any playing videos back to static images
-      if (this != self && $(this).children('iframe').length > 0) {
-        $(this).children('iframe').remove();
-        $(this).children().toggle(true); //Show thumbnail and play button
-      }
-    });
-  });         
+      var self = this;
+      $('.video').each(function() { //Revert any playing videos back to static images
+        if (this != self && $(this).children('iframe').length > 0) {
+          $(this).children('iframe').remove();
+          $(this).children().toggle(true); //Show thumbnail and play button
+        }
+      });
+    });         

@@ -7,4 +7,3 @@ jQuery ->
     handle: '.handle',
     update: ->
       $.post($(this).data('event-url'), $(this).sortable('serialize'))
-

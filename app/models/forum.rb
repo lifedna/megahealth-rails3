@@ -1,8 +1,5 @@
 # encoding: UTF-8
 class Forum < Widget
-  include Mongoid::Document	
-  include Mongoid::Timestamps
-
   field :name, type: String
   field :limit, type: Integer
 

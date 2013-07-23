@@ -104,6 +104,23 @@ $(document).ready(function(){
 
 });
 
+function setWidget(widget){
+	widget.find('.widget-actions').hide();
+	widget.find('.widget-setting').hide();
+
+	widget.find('.widget-setting-link').click(function(e) {
+		e.preventDefault();
+		$(this).parents('.widget-actions').next().toggle();
+	});
+
+	widget.find('.panel').hover(function() {
+		$(this).find('.widget-actions:hidden').toggle();     
+	},function(){
+		if( $(this).find('.widget-setting').is(':hidden') ) {
+	  		$(this).find('.widget-actions').toggle();
+		}
+	});
+}
 
 // $(document).ready(function(){
 //   //min font size

@@ -14,6 +14,7 @@ class AddWidgetsWidget < Apotomo::Widget
   	section = Section.find evt[:id]
     class_name = evt[:category].to_s.camelize
     widget = class_name.constantize.create(:community_id => section.community.id, :section_id => section.id)
+
   	trigger :widgetAdded, :widget => widget
   end
 
