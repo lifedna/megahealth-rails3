@@ -42,7 +42,7 @@
         %p
           = f.text_field :title
         %p
-          = f.text_area :body, :size => "60x12"
+          = f.text_area :body, :size => "60x120", :class => "redactor"
         %p
           = f.hidden_field :community_id, :value => @column.community.id
         %p

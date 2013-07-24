@@ -1,5 +1,7 @@
 class WidgetList::ColumnWidget < AuthorizableWidget
   responds_to_event :delete_widget, :with => :destroy
+  include ApplicationHelper
+  helper_method :first_image_url
 
   def display
   	@column = options[:widget]

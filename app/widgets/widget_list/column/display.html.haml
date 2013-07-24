@@ -24,7 +24,12 @@
               .col
                 %small #{article.created_at.strftime("%Y-%m-%d %H:%M:%S")}
               .col
-                %p #{truncate article.body, length: 200, omission: '.....'}
+                - if first_image_url(article.body)
+                  .col.sizefit
+                    .margin-r10
+                      = image_tag first_image_url(article.body), size: "60x60"  
+                .col.sizefill
+                  %p #{truncate strip_tags(article.body), length: 140, omission: '.....'}
    
 
   :javascript

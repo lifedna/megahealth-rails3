@@ -36,158 +36,168 @@
                   花生        
 
   .col.sizefill
-    .healthsummary.margin-l30
-      .healthsummary.margin-b20
-        %h3{:style => "margin:0;"} #{@phr.name}              
-        %hr
-        %span{:style => "font-size: 20px;"} #{@phr.age}
-        %span 岁，女
+    .tab-block.top-nav.margin-l30
+      .tabs
+        %ul.nav
+          %li.active
+            %a{:href => "#tabcontent1", :style => "font-size: 16px;"} 健康记录
+          %li
+            %a{:href => "#tabcontent2", :style => "font-size: 16px;"} 我的收藏  
+      .tab-content
+        .cell#tabcontent1
+          .healthsummary
+            .healthsummary.margin-b20
+              %h3{:style => "margin:0;"} #{@phr.name}              
+              %hr
+              %span{:style => "font-size: 20px;"} #{@phr.age}
+              %span 岁，女
 
-      .healthsummary
-        %dl
-          %dt
-            = link_to '疾病', phr_conditions_path(@phr)
-            %a.add-conditions{"data-reveal-id" => "add-conditions"} 
-              %span.icon.icon-16.icon-plus.color-blue
-          %dd
-            .symptom 
-              - @phr.conditions.each do |c|
-                %b #{c.name}
-                %b.middot &middot; 
-      .healthsummary
-        %dl
-          %dt
-            = link_to '病症', phr_symptoms_path(@phr)
-            %a.add-symptoms{"data-reveal-id" => "add-symptoms"} 
-              %span.icon.icon-16.icon-plus.color-blue
-          %dd
-            .symptom 
-              - @phr.symptoms.each do |s|
-                %b #{s.name}
-                %b.middot &middot;
-            / 您还没有任何病症          
-      .healthsummary
-        %dl
-          %dt
-            %a{:href => "/healthrecords/treatments"} 
-              当前治疗
-            %a.add-treatments{"data-reveal-id" => "add-treatments"} 
-              %span.icon.icon-16.icon-plus.color-blue
-          %dd
-            .symptom 
-              %b 逍遥丸
-            / 您还没有任何治疗
-      .healthsummary
-        %dl
-          %dt
-            %a{:href => "/healthrecords/caretopics"} 
-              关心的健康主题
-              %span.icon.icon-16.icon-plus.color-blue
-          %dd
-            .symptom 
-              %b 减肥
-              %b.middot &middot;
-              %b 美白     
-      %hr
-      .healthupdate
-        %h3 我的收藏  
-        .categories
-          %ul.nav
-            %li
-              .label.background-orange 健康知识
-            %li
-              .label.background-grey 就医指南  
-            %li
-              .label.background-grey 治疗交流
-            %li
-              .label.background-grey 护理园地
-            %li
-              .label.background-grey 用药常识       
-        .my-list.margin-t20
-          %ul.unstyled
-            %li
-              .col
-                %dl
-                  %dt
-                    %a 关于贝贝的发病经历和治疗交流
-                    .small.delete.float-right 取消收藏
-                  %dd
-                    .source.small   
-                      病友日记
-                      %span.middot &middot;
-                      贝贝妈妈
-                      %span.middot &middot;
-                      3月28日
+            .healthsummary
+              %dl
+                %dt
+                  = link_to '疾病', phr_conditions_path(@phr)
+                  %a.add-conditions{"data-reveal-id" => "add-conditions"} 
+                    %span.icon.icon-16.icon-plus.color-blue
+                %dd
+                  .symptom 
+                    - @phr.conditions.each do |c|
+                      %b #{c.name}
+                      %b.middot &middot; 
+            .healthsummary
+              %dl
+                %dt
+                  = link_to '病症', phr_symptoms_path(@phr)
+                  %a.add-symptoms{"data-reveal-id" => "add-symptoms"} 
+                    %span.icon.icon-16.icon-plus.color-blue
+                %dd
+                  .symptom 
+                    - @phr.symptoms.each do |s|
+                      %b #{s.name}
+                      %b.middot &middot;
+                  / 您还没有任何病症          
+            .healthsummary
+              %dl
+                %dt
+                  %a{:href => "/healthrecords/treatments"} 
+                    当前治疗
+                  %a.add-treatments{"data-reveal-id" => "add-treatments"} 
+                    %span.icon.icon-16.icon-plus.color-blue
+                %dd
+                  .symptom 
+                    %b 逍遥丸
+                  / 您还没有任何治疗
+            .healthsummary
+              %dl
+                %dt
+                  %a{:href => "/healthrecords/caretopics"} 
+                    关心的健康主题
+                    %span.icon.icon-16.icon-plus.color-blue
+                %dd
+                  .symptom 
+                    %b 减肥
+                    %b.middot &middot;
+                    %b 美白                 
 
-              / .col.sizefit.float-right
-              /   .small.padding-t10 取消收藏
-              / .col.sizefill
-              /   %dl
-              /     %dt
-              /       %a 关于贝贝的发病经历和治疗交流
-              /     %dd
-              /       .source.small   
-              /         病友日记
-              /         %span.middot &middot;
-              /         贝贝妈妈
-              /         %span.middot &middot;
-              /         3月28日
-            %li
-              .col
-                %dl
-                  %dt
-                    %a 如何才可以挂到范瑞强的号？电话、网上都不行
-                    .small.delete.float-right 取消收藏
-                  %dd
-                    .source.small   
-                      问答
-                      %span.middot &middot;
-                      糖尿病病友会
-                      %span.middot &middot;
-                      3月28日
-            %li
-              .col
-                %dl
-                  %dt
-                    %a 如何才可以挂到范瑞强的号？电话、网上都不行
-                    .small.delete.float-right 取消收藏
-                  %dd
-                    .source.small   
-                      食补
-                      %span.middot &middot;
-                      养生苑
-                      %span.middot &middot;
-                      3月28日
-            %li
-              .col
-                %dl
-                  %dt
-                    %a 如何才可以挂到范瑞强的号？电话、网上都不行
-                    .small.delete.float-right 取消收藏
-                  %dd
-                    .source.small   
-                      专家讲堂
-                      %span.middot &middot;
-                      梁晓华大夫
-                      %span.middot &middot;
-                      3月28日
-            %li
-              .col
-                %dl
-                  %dt
-                    %a 如何才可以挂到范瑞强的号？电话、网上都不行
-                    .small.delete.float-right 取消收藏
-                  %dd
-                    .source.small   
-                      专家讲堂
-                      %span.middot &middot;
-                      陈剑秋大夫    
-                      %span.middot &middot;
-                      3月28日
-  
+        .cell.hidden-tab#tabcontent2  
+          .healthupdate
+            %h3 我的收藏  
+            .categories
+              %ul.nav
+                %li
+                  .label.background-orange 健康知识
+                %li
+                  .label.background-grey 就医指南  
+                %li
+                  .label.background-grey 治疗交流
+                %li
+                  .label.background-grey 护理园地
+                %li
+                  .label.background-grey 用药常识       
+            .my-list.margin-t20
+              %ul.unstyled
+                %li
+                  .col
+                    %dl
+                      %dt
+                        %a 关于贝贝的发病经历和治疗交流
+                        .small.delete.float-right 取消收藏
+                      %dd
+                        .source.small   
+                          病友日记
+                          %span.middot &middot;
+                          贝贝妈妈
+                          %span.middot &middot;
+                          3月28日
 
-        %h5.float-right.margin-t20
-          %a 显示更多                  
+                  / .col.sizefit.float-right
+                  /   .small.padding-t10 取消收藏
+                  / .col.sizefill
+                  /   %dl
+                  /     %dt
+                  /       %a 关于贝贝的发病经历和治疗交流
+                  /     %dd
+                  /       .source.small   
+                  /         病友日记
+                  /         %span.middot &middot;
+                  /         贝贝妈妈
+                  /         %span.middot &middot;
+                  /         3月28日
+                %li
+                  .col
+                    %dl
+                      %dt
+                        %a 如何才可以挂到范瑞强的号？电话、网上都不行
+                        .small.delete.float-right 取消收藏
+                      %dd
+                        .source.small   
+                          问答
+                          %span.middot &middot;
+                          糖尿病病友会
+                          %span.middot &middot;
+                          3月28日
+                %li
+                  .col
+                    %dl
+                      %dt
+                        %a 如何才可以挂到范瑞强的号？电话、网上都不行
+                        .small.delete.float-right 取消收藏
+                      %dd
+                        .source.small   
+                          食补
+                          %span.middot &middot;
+                          养生苑
+                          %span.middot &middot;
+                          3月28日
+                %li
+                  .col
+                    %dl
+                      %dt
+                        %a 如何才可以挂到范瑞强的号？电话、网上都不行
+                        .small.delete.float-right 取消收藏
+                      %dd
+                        .source.small   
+                          专家讲堂
+                          %span.middot &middot;
+                          梁晓华大夫
+                          %span.middot &middot;
+                          3月28日
+                %li
+                  .col
+                    %dl
+                      %dt
+                        %a 如何才可以挂到范瑞强的号？电话、网上都不行
+                        .small.delete.float-right 取消收藏
+                      %dd
+                        .source.small   
+                          专家讲堂
+                          %span.middot &middot;
+                          陈剑秋大夫    
+                          %span.middot &middot;
+                          3月28日
+        
+
+              %h5.float-right.margin-t20
+                %a 显示更多                    
     
   .reveal-modal.large#add-conditions
     %h2 添加疾病

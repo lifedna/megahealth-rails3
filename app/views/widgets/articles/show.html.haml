@@ -35,8 +35,8 @@
       %h3 #{@article.title}
       %small #{@article.created_at.strftime("%Y-%m-%d %H:%M:%S")}
       %p
-        #{simple_format @article.body}
-
+        #{@article.body.html_safe}
+    .col
       %hr
       %ul
         - @article.comments.each do |c|

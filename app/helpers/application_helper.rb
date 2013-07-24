@@ -6,4 +6,9 @@ module ApplicationHelper
     yield presenter if block_given?
     presenter
   end	
+
+  def first_image_url(html_string)
+  	image = Nokogiri::HTML.parse(html_string).css("img").first
+  	image['src'] unless image.nil?
+  end
 end

@@ -8,8 +8,17 @@
         .margin-l20
           .col.color-grey     
             #{activity_presenter.metadata}
-          .col
-            %p #{activity_presenter.text }
-          - if activity_presenter.content?  
-            .col
-              %p #{truncate activity.the_object.body, length: 140, omission: '.....'} 
+          - if activity_presenter.content? && first_image_url(activity.the_object.body)   
+            .col.sizefit.float-right
+              = image_tag first_image_url(activity.the_object.body), size: "80x80"  
+          .col.sizefill
+            .margin-r20
+              %p #{activity_presenter.text }            
+              - if activity_presenter.content?  
+                .mediaobject
+                  .col.sizefit
+                    = image_tag activity.the_actor.avatar_url(:thumb), size: "30x30"
+                  .col.sizefill
+                    %p #{truncate strip_tags(activity.the_object.body), length: 140, omission: '.....'} 
+
+                  

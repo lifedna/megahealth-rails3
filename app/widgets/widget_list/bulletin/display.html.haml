@@ -19,7 +19,7 @@
     .body          
       .col.sizefill       
         %div{:id => dom_id(@bulletin), :style => "min-height:100px; background:#f4f4ec; padding:20px;"}
-          %p #{simple_format @bulletin.body}
+          %p #{raw @bulletin.body}
   
 
   :javascript

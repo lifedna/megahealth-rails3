@@ -1,7 +1,8 @@
 - items.each do |item|
   .feed.margin-b20
     .col.sizefit.margin-r20
-      .button{:style => "background:#fae9da;color:#ca6445;border:none;"} #{item.category}
+      = render :partial => "category", :locals => {:category => item.category}
+      / .button{:style => "background:#fae9da;color:#ca6445;border:none;"} #{item.category}
     .col.sizefill.border-bottom.padding-b20 
       %h4 
         - if item.class.to_s.underscore == 'blog'
@@ -12,7 +13,7 @@
       %p{:style => "color: #999;"} 
         / #{item.user.name}
         %span #{time_ago_in_words(item.created_at).capitalize}前      
-      %p #{item.body} 
+      %p #{truncate strip_tags(item.body), length: 140, omission: '.....'} 
       - unless item.tags.nil?
         .tags
           %ul.nav.blocks

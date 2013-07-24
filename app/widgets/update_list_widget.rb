@@ -3,7 +3,7 @@ class UpdateListWidget < AuthorizableWidget
 
   include ActionView::Helpers::JavaScriptHelper
   include ApplicationHelper
-  helper_method :present
+  helper_method :present, :first_image_url
 
   has_widgets do
     self << widget("update_list/load_more", :load_more_activities)
