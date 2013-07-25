@@ -90,7 +90,26 @@
 	margin-left: -16px;
 }
 
+.video {
+	position: relative;
+}
 
+.video .play_video {
+	background: url(<%= asset_path 'play-video.png' %>) no-repeat;
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	margin-left: -38.5px;
+	margin-top: -38.5px;
+	width: 77px;
+	height: 77px;
+	opacity: 0.75;
+}
+
+.video img {
+	width: 130px; 
+	height: 98px;
+}
 
 .user-nav-popup {
 	display: none;

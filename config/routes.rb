@@ -1,15 +1,18 @@
 require 'genghis'
 
 MegahealthRails3::Application.routes.draw do
-  # different uploaded versions
+  # different uploaded versions for avatar
   match '/uploads/grid/user/avatar/:id/:filename' => 'gridfs#thumb_avatar', constraints: { filename: /thumb.*/ }
   # route configuration for the uploaded image
   match '/uploads/grid/user/avatar/:id/:filename' => 'gridfs#avatar'
 
-  # different uploaded versions
+  # different uploaded versions for uploaded pictures
   match '/uploads/grid/redactor_rails/picture/data/:id/:filename' => 'gridfs#thumb_redactor_pitcure', constraints: { filename: /thumb.*/ }
   # route configuration for the uploaded image
   match '/uploads/grid/redactor_rails/picture/data/:id/:filename' => 'gridfs#redactor_pitcure'
+
+  # path for embeded video thumbnail
+  match '/uploads/grid/video/thumb/:id/:filename' => 'gridfs#thumb_video'
 
   mount RedactorRails::Engine => '/redactor_rails'
 
@@ -35,6 +38,10 @@ MegahealthRails3::Application.routes.draw do
     match '/:community_id/poll_sets/:id' => 'widgets/poll_sets#show', :as => :show_community_poll_set, :via => :get
     match '/:community_id/polls/:id' => 'widgets/polls#show', :as => :show_community_poll, :via => :get
     match '/:community_id/polls/:id/comment' => 'widgets/polls#comment', :as => :comment_community_poll, :via => :get
+
+    match '/:community_id/video_lists/:id' => 'widgets/video_lists#show', :as => :show_community_video_list, :via => :get
+    match '/:community_id/videos/:id' => 'widgets/videos#show', :as => :show_community_video, :via => :get
+    match '/:community_id/videos/:id/comment' => 'widgets/videos#comment', :as => :comment_community_video, :via => :get
   end    
 
   resources :blogs do 

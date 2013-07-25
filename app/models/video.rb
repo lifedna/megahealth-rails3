@@ -1,19 +1,26 @@
 class Video
   include Mongoid::Document	
   include Mongoid::Timestamps
+  include Mongoid::Commentable
   include Getvideo
 
   field :title, type: String
   field :url, type: String
-  field :provider, type: String
+  field :thumb, type: String
 
   validates :title, :url, :presence => true
   validates :url, :uniqueness => true
 
-  def info
-  	Getvideo.parse(self.url)
-  end 	
+  after_validation do |record|
+    record.remote_thumb_url = record.info.cover if record.thumb.file.nil?
+  end
+
+  mount_uploader :thumb, VideoThumbUploader  
 
   belongs_to :community
   belongs_to :video_list
+
+  def info
+  	Getvideo.parse(url)
+  end 	
 end

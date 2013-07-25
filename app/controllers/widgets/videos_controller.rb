@@ -10,8 +10,7 @@ class Widgets::VideosController < ApplicationController
 
   def create
     @video_list = VideoList.find(params[:video_list_id])
-    @video = Video.new(params[:video])
-    if @video.save
+    if Video.create(params[:video])
       # current_user.publish_activity(:new_poll, :object => @poll, :target_object => @poll_set.community)
       redirect_to community_section_path(@video_list.community, @video_list.section) 
     else  
@@ -39,5 +38,16 @@ class Widgets::VideosController < ApplicationController
     @video = Video.find(params[:id])
     @video.destroy
     # redirect_to surveys_url, :notice => "Successfully destroyed survey."
+  end
+
+  def comment
+    @video = Video.find params[:id]
+    @comment = current_user.comment_on(@video, params[:comment])
+    if @comment.persisted?
+      current_user.publish_activity(:new_comment, :object => @comment, :target_object => @video.video_list.community)
+      redirect_to :action => "show"
+    else
+      flash[:notice] = "Comment save failed!"
+    end  
   end
 end

@@ -1,3 +1,6 @@
+- if @activities.empty?
+  %p{:style => "color:#999;"}
+    只有加入社群，才会显示社群动态信息。快去#{link_to '浏览', '#'}并加入你感兴趣的社群吧！
 - @activities.each do |activity|
   .support-group-feed.margin-b20.border-bottom
     - present activity, ActivityPresenter do |activity_presenter|

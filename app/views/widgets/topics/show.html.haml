@@ -34,7 +34,7 @@
       %h3 #{@topic.title}
       %small #{@topic.created_at.strftime("%Y-%m-%d %H:%M:%S")}
       %p
-        #{@topic.body}
+        %iframe{:width=>500, :height=>400, :src=>@topic.info.flash, :frameborder=>0} 
 
       %hr
       %ul

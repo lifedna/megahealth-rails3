@@ -36,4 +36,13 @@ class GridfsController < ApplicationController
       expires_in 0, public: true
     end
   end
+
+  def thumb_video
+    @video = Video.find params[:id]
+    content = @video.thumb.read
+    if stale?(etag: content, last_modified: @video.updated_at.utc, public: true)
+      send_data content, type: @video.thumb.file.content_type, disposition: "inline"
+      expires_in 0, public: true
+    end
+  end
 end

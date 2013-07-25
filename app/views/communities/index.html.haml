@@ -4,7 +4,7 @@
 .site-center.center-page
   .section.your-communities
     .title.margin-b20
-      %h2 你的社群
+      %h2 我的社群
     .my-community-list
       - @my_communities.each do |c|
         .my-community
@@ -19,6 +19,9 @@
               4231 个成员 
             .last-update
               更新于上午11:15
+      - if @my_communities.empty?
+        %p{:style => "color: #999;"}
+          你还没有加入任何社群，快去搜索你感兴趣的社群吧！        
        
             
   .reveal-doctors-wrapper
