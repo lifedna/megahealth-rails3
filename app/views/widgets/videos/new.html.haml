@@ -1,15 +1,57 @@
-%h3 在#{@video_list.name}中发布新视频
-%p 请输入视频的网站源地址，目前支持土豆、优酷、酷6、新浪视频、搜狐视频等多家视频网站
-= form_for @video, :url => {:action => "create"}  do |f|
-  %p
-    = f.label "标题"
-    = f.text_field :title
-  %p
-    = f.label "网页地址"
-    = f.text_field :url
-  %p
-    = f.hidden_field :community_id, :value => @video_list.community.id
-  %p
-    = f.hidden_field :video_list_id, :value => @video_list.id    
-  %p  
-    = f.submit "更新"
+- @community = Community.find params[:community_id]
+- @current_section = @video_list.section
+- @sections = @community.sections 
+/ Page
+.site-center
+  = render :partial => "shared/community_head", :locals => {:community => @community}
+  / .header-info{:style => "background:#398fd1; color:#fff"}
+  /   .col.sizefit.padding-l30.padding-r30
+  /     .doc-image.margin-t20
+  /       .p240-box
+  /         %a{:href => "#"}
+  /           %img{:src => "#{asset_path 'doctors/126708301394155.jpg'}" }
+
+  /   .col.sizefill
+  /     .doc-community-info.margin-t20
+  /       %h3 #{@community.name} 
+ 
+  /       %p 
+  /         四川成都华西医院 儿科 主任医师 副教授
+        
+  /     .doc-expertise.padding-r20
+  /       %p
+  /         #{@community.brief}
+  /     .col       
+  /       .col.size1of2
+  /         .doc-share.margin-t20
+  /           %p 如果觉得对你的家人、朋友有帮助，分享给TA吧
+  /       .col.sizefill
+  /         .button.background-green.large-button.center 
+  /           %span 加入
+
+  .margin-t20
+    = render :partial => "shared/section_list", :locals => {:sections => @sections, :current_section => @current_section}
+
+  .col.size2of3.margin-t20    
+    .float-right
+      #{link_to "> #{@video_list.name}", show_community_video_list_url(@community, @video_list)}
+    .col
+      %h3 在#{@video_list.name}中发布新视频
+      %p 请输入视频的网站源地址，目前支持土豆、优酷、酷6、新浪视频、搜狐视频等多家视频网站
+      = form_for @video, :url => {:action => "create"}  do |f|
+        %p
+          = f.label "标题"
+          = f.text_field :title
+        %p
+          = f.label "网页地址"
+          = f.text_field :url
+        %p
+          = f.hidden_field :community_id, :value => @video_list.community.id
+        %p
+          = f.hidden_field :video_list_id, :value => @video_list.id    
+        %p  
+          = f.submit "更新"
+
+  .col.size1of3.margin-t20
+    .margin-l20
+      = render :partial => "shared/content_sidebar"         

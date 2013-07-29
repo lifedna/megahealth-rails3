@@ -4,7 +4,7 @@ class Community
 
   field :name, type: String
   field :brief, type: String
-
+  field :category, type: String
   embeds_one :owner
 
   validates :name, :presence => true, :uniqueness => true
@@ -45,11 +45,5 @@ class Community
     Activity.all_in(target_object: hash_array)
   end
 
-  # def all_update
-  #   hash = {"id"=>"51e37648f9dffb5e4c000013", "type"=>"Community"}
-  #   hash_array = []
-  #   hash_array.push(hash)
-  #   # Acitvity.where(:target_object.in => hash_array)
-  #   Activity.in(target_object: hash_array)
-  # end
+  scope :category, ->(category){where(category: category)}
 end

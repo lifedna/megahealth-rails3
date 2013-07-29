@@ -1,4 +1,4 @@
-class SectionWidget < Apotomo::Widget
+class SectionWidget < AuthorizableWidget
 
   has_widgets do
     self << widget(:add_widgets)

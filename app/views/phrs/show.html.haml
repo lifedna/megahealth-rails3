@@ -163,25 +163,4 @@
       %button.button 取消 
     %a.close-reveal-modal &#215;         
 
-:javascript 
-  $(document).ready(function() {
-    $('.condition-link').click(function(e) {
-      e.preventDefault();
-      $('#myCondition').reveal();
-    });
-
-    $('.symptom-link').click(function(e) {
-      e.preventDefault();
-      $('#mySymptom').reveal();
-    });
-
-    $('.treatment-link').click(function(e) {
-      e.preventDefault();
-      $('#myTreatment').reveal();
-    });
-
-    $('.phrs').hide();
-    $('.switch-phr').click(function() {
-      $('.phrs').slideToggle();
-    });
-  });            
+            

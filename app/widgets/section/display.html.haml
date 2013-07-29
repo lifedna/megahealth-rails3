@@ -1,9 +1,19 @@
+- @community = @section.community
+
 = widget_div do  
   = render_widget :add_widgets, :display, :section => @section
   .col.size2of3
     = render_widget :widget_list, :display, :section => @section
   .col.size1of3 
     .margin-l20 
+      - if !@community.users.empty? && @community.users.include?(current_user)
+        .margin-b30
+          %h5 我加入了这个社群。#{link_to '>退出', leave_community_path(@community), :confirm => '你确定要退出社群?'}        
+      - else
+        .margin-b30
+          %a.button.background-green.large-button.center{:href => join_community_path(@community)}
+            %span 加入          
+    
       .section.margin-b30
         %form.community-search{:style => "width: 100%;"}
           %input{:type => "search", :width => "100%", :placeholder => "站内搜索"}

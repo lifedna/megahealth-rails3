@@ -58,7 +58,7 @@ class CommunitiesController < ApplicationController
     @community.users << current_user
     # @community.save
     current_user.publish_activity(:join, :object => @community, :target_object => @community)
-    redirect_to :action => "index"
+    redirect_to community_path(@community)
   end
 
   def leave
@@ -66,6 +66,6 @@ class CommunitiesController < ApplicationController
     @community.users.delete(current_user)
     current_user.publish_activity(:leave, :object => @community, :target_object => @community)
     # @community.save
-    redirect_to :action => "index"
+    redirect_to community_path(@community)
   end
 end

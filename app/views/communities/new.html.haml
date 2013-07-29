@@ -73,7 +73,7 @@
               %p
                 %span.icon.icon-ok.color-green
                 %span 提供最新健康资讯、资源
-            %a.btn.orange.medium.margin-t20{"data-reveal-id" => "create-community"} 创建健康社群 
+            %a.btn.orange.medium.margin-t20.create-health-community{"data-reveal-id" => "create-health-community"} 创建健康社群 
       .col.size1of3
         .white-content-container{:style => "min-height:280px"}
           .cell
@@ -91,7 +91,7 @@
               %p
                 %span.icon.icon-ok.color-green
                 %span 改进的自我宣传，改善医患相互依存的关系
-            %a.btn.orange.medium.margin-t20{"data-reveal-id" => "create-community"} 创建医生社群 
+            %a.btn.orange.medium.margin-t20.create-doctor-community{"data-reveal-id" => "create-doctor-community"} 创建医生社群 
       .col.size1of3
         .white-content-container{:style => "min-height:280px"}
           .cell
@@ -109,7 +109,7 @@
               %p
                 %span.icon.icon-ok.color-green
                 %span 帮助彼此更加明智的做出医疗决定
-            %a.btn.orange.medium.margin-t20{"data-reveal-id" => "create-community"} 创建病友社群 
+            %a.btn.orange.medium.margin-t20.create-patients-community{"data-reveal-id" => "create-patients-community"} 创建病友社群 
 
 .site-center.center-page 
   - if user_signed_in?
@@ -118,8 +118,8 @@
     = render_widget :new_community
 
 
-.reveal-modal.large#create-community
-  %h2 创建社群
+.reveal-modal.large#create-health-community
+  %h2 创建健康社群
   %hr
   .col
     = form_for @community do |f|
@@ -128,16 +128,64 @@
           %label 社群名称
         .col
           = f.text_field :name 
+        .col
+          = f.hidden_field :category, :value => "健康"
 
       .col
         = f.submit "保存"      
 
-  %a.close-reveal-modal &#215;    
+  %a.close-reveal-modal &#215;   
+
+.reveal-modal.large#create-doctor-community
+  %h2 创建医生社群
+  %hr
+  .col
+    = form_for @community do |f|
+      .margin-b20
+        .col
+          %label 社群名称
+        .col
+          = f.text_field :name 
+        .col
+          = f.hidden_field :category, :value => "医生"
+
+      .col
+        = f.submit "保存"      
+
+  %a.close-reveal-modal &#215;
+
+.reveal-modal.large#create-patients-community
+  %h2 创建病友社群
+  %hr
+  .col
+    = form_for @community do |f|
+      .margin-b20
+        .col
+          %label 社群名称
+        .col
+          = f.text_field :name 
+        .col
+          = f.hidden_field :category, :value => "病友"
+
+      .col
+        = f.submit "保存"      
+
+  %a.close-reveal-modal &#215;     
 
 :javascript 
   $(document).ready(function() {
-    $('.btn').click(function(e) {
+    $('.create-health-community').click(function(e) {
       e.preventDefault();
-      $('#create-community').reveal();
+      $('#create-health-community').reveal();
+    });
+
+    $('.create-doctor-community').click(function(e) {
+      e.preventDefault();
+      $('#create-doctor-community').reveal();
+    });
+
+    $('.create-patients-community').click(function(e) {
+      e.preventDefault();
+      $('#create-patients-community').reveal();
     });
   });   
