@@ -4,6 +4,7 @@
       .cell.handle
         .section-title.float-left #{@column.name} 
         .widget-actions.float-right
+          = link_to '全部', show_community_column_path(@column.community, @column)
           - if can? :update, @column.community            
             = link_to '添加文章', new_community_column_article_path(@column.community, @column)
             %a.widget-setting-link{:href => "#", :id => "#{@column.id}-settings"} 设置

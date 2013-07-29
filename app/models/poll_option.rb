@@ -6,5 +6,5 @@ class PollOption
   # field :details, type: String
 
   belongs_to :poll
-  # has_many :poll_answers
+  has_many :poll_answers
 end

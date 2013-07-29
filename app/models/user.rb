@@ -64,6 +64,7 @@ class User
   has_many :phrs
   has_many :questions
   has_many :answers
+  has_many :poll_answers
   has_many :topics
   has_one :feature_filter
 

@@ -5,8 +5,8 @@
       .cell.handle
         .section-title.float-left #{@video_list.name}
         .widget-actions.float-right
-          - if can? :update, @video_list.community        
-            = link_to '全部', show_community_video_list_path(@video_list.community, @video_list)
+          = link_to '全部', show_community_video_list_path(@video_list.community, @video_list)
+          - if can? :update, @video_list.community                    
             = link_to '添加', new_community_video_list_video_path(@video_list.community, @video_list)
             %a.widget-setting-link{:href => "#", :id => "#{@video_list.id}-settings"} 设置
             = link_to '删除', url_for_event(:delete_widget, :id => @video_list.section.id, :widget_id => @video_list.id), :confirm => 'Are you sure?', :method => 'delete', :remote => true
@@ -26,8 +26,8 @@
                 .cell
                   %p #{v.title}
                   .stream
-                    .video{:src => "#{v.info.flash}"}
-                      = link_to image_tag(v.thumb_url), show_community_video_url(v.community, v)
+                    .video{:src => "#{v.src}"}
+                      = link_to image_tag(v.thumb_url, :class=> "thumb"), show_community_video_url(v.community, v)
                       .play_video
                
 
@@ -35,18 +35,4 @@
     $(document).ready(function(){
       var video_list = $("#widget_#{@video_list.id}");
       setWidget(video_list);
-      //
-    //  $('.video').click(function(){
-    //    if ($(this).children('iframe').length > 0) return;
-    //    $(this).children().toggle(false); //Hide thumbnail and play button
-    //    $(this).append('<iframe width="480" height="360" src="' + $(this).attr('src') + ' frameborder="0"></iframe>');
-    //  });
-
-    //  var self = this;
-    //  $('.video').each(function() { //Revert any playing videos back to static images
-    //    if (this != self && $(this).children('iframe').length > 0) {
-    //      $(this).children('iframe').remove();
-    //      $(this).children().toggle(true); //Show thumbnail and play button
-    //    }
-    //  });
     });         

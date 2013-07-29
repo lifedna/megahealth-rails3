@@ -36,4 +36,4 @@
       %div{:id => dom_id(@poll_set)}
         %ul
           - @poll_set.polls.each do |poll|
-            %li #{poll.name}  
+            %li #{link_to poll.name, show_community_poll_path(poll.community, poll)}  

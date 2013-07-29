@@ -1,3 +1,4 @@
+- @answered_at
 / Page
 .site-center
   .header-info{:style => "background:#398fd1; color:#fff"}
@@ -27,21 +28,16 @@
 
   .margin-t20
     = render :partial => "shared/section_list", :locals => {:sections => @sections, :current_section => @current_section}
-
+  
   .col.size2of3.margin-t20
     .float-right
-      #{link_to "> 回#{@current_section.name}", community_section_url(@community, @current_section)}
+      #{link_to "> 返回#{@poll.name}", show_community_poll_url(@poll.community, @poll)}
     .col
-      %h3 #{@video_list.name}
-      - @video_list.videos.each do |v|
-        .col
-          .col.sizefit
-            .video
-              = link_to image_tag(v.thumb_url, :class => "thumb"), show_community_video_url(v.community, v)
-              .play_video
-          .col.sizefill
-            .col #{v.title}
-            .col #{v.url}
-            .col #{v.created_at.strftime("%Y-%m-%d")}上传
-
-
+      %h3 #{@poll.name}的投票详情
+      - @poll.answered_user_ids.each do |id|
+        #{User.find(id).name}
+        - @poll.answers(User.find(id)).each do |answer|
+          #{answer.poll_option.name}
+          -@answered_at = answer.created_at
+        #{@answered_at.strftime("%Y-%m-%d %H:%M:%S")}  
+        %br  

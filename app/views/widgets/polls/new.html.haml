@@ -48,5 +48,27 @@
           = f.fields_for :options do |option|
             = option.label "选项"
             = option.text_field :name  
+        %p
+          = f.link_to_add "添加选项", :options    
+
+        %hr
+        %p
+          = f.select(:multiple_allowed, [['单选', false], ['多选', true]])
+          %span.max_answers
+            = f.label "最多:"
+            = f.text_field :max_answers, :size => 1 
+            = f.label "项"
+        %p
+          = f.label "结束时间："
+          = f.datetime_select :end_at    
         %p  
           = f.submit "发布"
+
+:javascript
+  $('select[id=poll_multiple_allowed]').change(function(){
+    if($(this).val() == 'true') {
+      $('.max_answers').show();
+    }else{
+      $('.max_answers').hide();
+    };         
+  }).change();       

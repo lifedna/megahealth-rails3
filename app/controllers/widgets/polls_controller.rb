@@ -43,4 +43,37 @@ class Widgets::PollsController < ApplicationController
     @poll.destroy
     # redirect_to surveys_url, :notice => "Successfully destroyed survey."
   end
+
+  def answer
+    poll = Poll.find params[:poll][:id]
+    if poll.multiple_allowed
+      options = params['poll_answer']
+      options.each do |key, value|
+        create_poll_answer(poll, value) 
+      end
+    else  
+      poll_option_id = params['poll_answer']['poll_option_id']
+      create_poll_answer(poll, poll_option_id) 
+    end
+    redirect_to show_community_poll_path(poll.community, poll)
+  end
+
+  def details
+    @poll = Poll.find params[:id]
+    @community = Community.find params[:community_id]
+    @current_section = @poll.poll_set.section
+    @sections = @community.sections
+  end
+
+  private
+
+  def create_poll_answer(poll, poll_option_id) 
+    poll_option = poll.options.find_by(id: poll_option_id)
+    poll_answer = PollAnswer.new
+
+    if poll_answer.save
+      poll_option.poll_answers << poll_answer
+      current_user.poll_answers << poll_answer
+    end
+  end
 end

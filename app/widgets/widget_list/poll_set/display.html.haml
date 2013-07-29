@@ -1,29 +1,32 @@
 / %li{:id => dom_id(@poll_set)}
 %li{:id => "widget_#{@poll_set.id}"}
   .introduction.panel.margin-b30
-    .cell.handle
-      .section-title.float-left #{@poll_set.name}
-      .widget-actions.float-right
-        - if can? :update, @poll_set.community            
-          = link_to '全部', community_poll_set_polls_path(@poll_set.community, @poll_set)
-          = link_to '添加', new_community_poll_set_poll_path(@poll_set.community, @poll_set)
-          %a.widget-setting-link{:href => "#", :id => "#{@poll_set.id}-settings"} 设置
-          = link_to '删除', url_for_event(:delete_widget, :id => @poll_set.section.id, :widget_id => @poll_set.id), :confirm => 'Are you sure?', :method => 'delete', :remote => true
+    .body
+      .cell.handle
+        .section-title.float-left #{@poll_set.name}
+        .widget-actions.float-right
+          = link_to '全部', show_community_poll_set_path(@poll_set.community, @poll_set)
+          - if can? :update, @poll_set.community         
+            = link_to '添加', new_community_poll_set_poll_path(@poll_set.community, @poll_set)
+            %a.widget-setting-link{:href => "#", :id => "#{@poll_set.id}-settings"} 设置
+            = link_to '删除', url_for_event(:delete_widget, :id => @poll_set.section.id, :widget_id => @poll_set.id), :confirm => 'Are you sure?', :method => 'delete', :remote => true
 
-      .widget-setting{"data-id" => "#{@poll_set.id}"}
-        = form_for @poll_set, :url => community_poll_set_url(@poll_set.community, @poll_set) do |f|
-          %p
-            = f.text_field :name
-          %p  
-            = f.submit "保存"
+        .widget-setting{"data-id" => "#{@poll_set.id}"}
+          = form_for @poll_set, :url => community_poll_set_url(@poll_set.community, @poll_set) do |f|
+            %p
+              = f.text_field :name
+            %p  
+              = f.submit "保存"
+    .body          
       .col.sizefill
         %div{:id => dom_id(@poll_set)}
-          - @poll_set.polls.each do |poll|
-            %p
-              #{poll.name}
-            %ul
-              - poll.options.each do |option|
-                %li #{option.name} 
+          = render partial: "poll", collection: @poll_set.polls
+          / - @poll_set.polls.each do |poll|
+          /   %p
+          /     #{poll.name}
+          /   %ul.left
+          /     - poll.options.each do |option|
+          /       %li #{option.name} 
                 
   :javascript
     $(document).ready(function(){

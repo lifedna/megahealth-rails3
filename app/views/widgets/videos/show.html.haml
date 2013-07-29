@@ -33,7 +33,7 @@
     .col
       %h3 #{@video.title}
       %p
-        %iframe{:width=>500, :height=>400, :src=>@video.info.flash, :frameborder=>0} 
+        %iframe{:width=>500, :height=>400, :src=>@video.src, :frameborder=>0} 
       %p #{@video.url}
       %p #{@video.created_at.strftime("%Y-%m-%d %H:%M:%S")}上传
       %p 本视频内容来自第三方网站，其版权归合作网站或第三方网站所有          

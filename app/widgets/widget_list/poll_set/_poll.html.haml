@@ -1,0 +1,30 @@
+- if poll.answered_by?(current_user)
+  .cell
+    %h3 #{poll.name}
+    %small #{poll.created_at}
+    %ul.left
+      - poll.options.each do |option|
+        %li #{option.name}
+    %p
+      %span 我已投票 
+      %br
+      #{link_to "查看结果(#{poll.answered_user_ids.count})", show_community_poll_path(poll.community, poll)}
+       
+- else      
+  = form_tag answer_community_poll_path(poll.community, poll), :method => "get" do 
+    .cell
+      %h3 #{poll.name}
+      = hidden_field_tag "poll[id]", poll.id
+      - if poll.multiple_allowed
+        - poll.options.each_with_index do |option, index|
+          %p
+            = check_box_tag "poll_answer[answer#{index}]", option.id
+            #{option.name}
+      - else 
+        - poll.options.each do |option|
+          %p
+            = radio_button_tag "poll_answer[poll_option_id]", option.id
+            #{option.name}
+        
+      %p
+        = submit_tag "投票"  
