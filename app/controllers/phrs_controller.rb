@@ -6,29 +6,23 @@ class PhrsController < ApplicationController
   def create
     if current_user.phrs.create(params[:phr])
       flash[:notice] = "Health Record has been created."
-      redirect_to mine_url
+      redirect_to healthportal_url
     end
   end
 
-  # def conditions
-  #   @phr = Phr.find params[:id]
-  #   @conditions = @phr.conditions
-  # end
+  def show
+    @phr = Phr.find params[:id]
+  end
 
-  # def symptoms
-  #   @phr = Phr.find params[:id]
-  # end
-
-  # def treatments
-  #   @phr = Phr.find params[:id]
-  # end
-
+  def edit
+    @phr = Phr.find params[:id]
+  end
 
   def update
     @phr = Phr.find params[:id]
     if @phr.update_attributes(params[:phr])
       flash[:notice] = "Health Record has been updated."
-      redirect_to mine_url
+      redirect_to healthportal_url
     end  
   end
 

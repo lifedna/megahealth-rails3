@@ -92,12 +92,13 @@ class User
   end
 
   private
-    def create_initial_phr
-      self.phrs.build(:name => self.name, :relationship => '自己').tap do |phr|
-        phr.user = self
-        phr.save
-      end
+  
+  def create_initial_phr
+    self.phrs.build(:name => self.name, :relationship => '自己').tap do |phr|
+      phr.user = self
+      phr.save
     end
+  end
 
   def create_initial_filter
     self.build_feature_filter.tap do |i|

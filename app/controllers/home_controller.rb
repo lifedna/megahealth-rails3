@@ -32,7 +32,7 @@ class HomeController < ApplicationController
     # end   
   end
 
-  def mine
+  def healthportal
     if params[:phr]
       @phr = Phr.find params[:phr]
     else

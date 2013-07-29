@@ -1,0 +1,28 @@
+- @healthportal = "active"
+
+/ Page
+.site-center.center-page  
+  .page-head{:style => "margin-bottom:30px;"}
+    %h2 #{@phr.name}的健康
+  .col.size1of4
+    = render :partial => "shared/healthportal_sidebar", :locals => {:phr => @phr}  
+
+  .col.sizefill
+    .margin-l20
+      %h2 健康日记
+      %hr
+      .col
+        = link_to '写日记', new_blog_path(:phr => @phr), :class => "float-right"
+      .col
+        - @blogs.each do |b|
+          .article.margin-b10
+            %h4 #{link_to b.title, blog_path(b)}
+            .col
+              %small #{b.created_at.strftime("%Y-%m-%d %H:%M:%S")}
+            .col
+              - if first_image_url(b.body)
+                .col.sizefit
+                  .margin-r10
+                    = image_tag first_image_url(b.body), size: "60x60"  
+              .col.sizefill
+                %p #{truncate strip_tags(b.body), length: 140, omission: '.....'}

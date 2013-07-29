@@ -48,22 +48,6 @@
               / %td #{time_ago_in_words(t.created_at).capitalize}前
               %td #{t.created_at.strftime("%Y-%m-%d %H:%M:%S")} 
 
-/ %p
-/   #{link_to ">#{@current_section.name}", community_section_url(@community, @current_section)}
-
-/ %h3 #{@forum.name}
-/ %div{:id => dom_id(@forum), :style => "min-height:100px; width:500px; background:#f4f4ec; padding:20px;"}
-/   %table
-/     %tr
-/       %th 话题
-/       %th 作者
-/       %th 回应
-/       %th 浏览
-/       %th 最后更新
-/     - @forum.topics.each do |t|
-/       %tr 
-/         %td #{link_to t.title, show_community_topic_url(t.community, t)}
-/         %td 
-/         %td #{t.posts_count}
-/         %td #{t.hits}
-/         %td #{t.created_at.strftime("%H:%M %Y-%m-%d ")} 
+  .col.size1of3.margin-t20
+    .margin-l20
+      = render :partial => "shared/content_sidebar"            

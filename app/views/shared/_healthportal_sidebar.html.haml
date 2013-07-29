@@ -1,0 +1,37 @@
+.sidebar.portlet
+  .profile-card
+    .img-wrapper
+      %img{:src => "#{asset_path 'default-profile-lrg.jpg'}"}
+    .cell
+      .col
+        %h5 #{link_to '编辑资料', edit_phr_path(phr)}  
+    .cell{:style => "margin-top: 20px;"} 
+      .col.sizefit.float-right
+        %a{:href => "#{new_phr_path}" }
+          %span.icon.icon-plus.color-blue
+      .col.sizefill 
+        %a
+          %h5 #{link_to '添加家庭成员', new_phr_path}
+    .cell
+      .col.switch-record 
+        .col.sizefit.float-right
+          %span.icon.icon-chevron-down.color-blue
+        .col.sizefill 
+          %a
+            %h5 切换家庭成员  
+      .col.health-records.menu
+        %ul.left.nav
+          - current_user.phrs.excludes(:id => phr.id).each do |phr|
+            %li
+              = link_to phr.name, healthportal_path(:phr => phr)
+    
+
+  .panel.margin-t30{:style => "background-color:#eee"}
+    .cell.menu
+      %ul.left.nav
+        %li
+          = link_to '健康信息', phr_path(phr)
+        %li
+          %a 知识收藏
+        %li
+          = link_to '健康日记', blogs_path(:phr => phr)    

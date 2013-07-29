@@ -5,4 +5,5 @@ class Blog < Content
 
   search_in :title, :body
 
+  belongs_to :phr
 end

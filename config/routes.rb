@@ -18,7 +18,7 @@ MegahealthRails3::Application.routes.draw do
 
   match '/update' => 'home#update', :as => :update
   match '/features' => 'home#features', :as => :features
-  match '/mine' => 'home#mine', :as => :mine
+  match '/healthportal' => 'home#healthportal', :as => :healthportal
   match '/profile' => 'home#profile', :as => :profile
   match '/account' => 'home#account', :as => :account
 
@@ -80,11 +80,13 @@ MegahealthRails3::Application.routes.draw do
     get 'leave', :on => :member
   end
 
-  resources :phrs do
-    scope :module => "phrs" do
-      resources :conditions
-      resources :symptoms
-      resources :treatments
+  scope '/healthportal' do
+    resources :phrs do
+      scope :module => "phrs" do
+        resources :conditions
+        resources :symptoms
+        resources :treatments
+      end
     end
   end
 

@@ -1,21 +1,73 @@
-%h1 疾病
-%p
-%table
-  %tbody
-    %tr
-      %th 名称
-      %th 状况
-      %th 开始时间
-      %th 痊愈时间
-    - @conditions.each do |c|
-      %tr.data-row{'data-id' => c.id, 'phr-id' => c.phr.id, 'data-event-url' => url_for_event(:show, :source => :condition)}
-        %td #{c.name}
-        %td 
-        %td
-        %td
+- @healthportal = "active"
 
-= render_widget :condition, :display, :instance => @conditions.first
+/ Page
+.site-center.center-page  
+  .page-head{:style => "margin-bottom:30px;"}
+    %h2 #{@phr.name}的健康
+  .col.size1of4
+    = render :partial => "shared/healthportal_sidebar", :locals => {:phr => @phr}  
+   
+  .col.sizefill
+    .margin-l20
+      %h2 疾病
+      %hr
+      .col
+        %a.button-link.margin-b20.add-conditions{"data-reveal-id" => "add-conditions"}  添加:疾病
+        .panel.datasheet.margin-b20
+          .head 我的数据       
+          %table.body
+            %thead
+              %tr
+                %th{:style => "width:2%"} #
+                %th{:style => "width:30%", :nowrap => "nowrap"} 名称
+                %th{:style => "width:28%", :nowrap => "nowrap"} 状况
+                %th{:style => "width:20%", :nowrap => "nowrap"} 开始时间
+                %th{:style => "width:20%", :nowrap => "nowrap"} 结束时间
+            %tbody
+              - @conditions.each_with_index do |c, index|
+                %tr.data-row{'data-id' => c.id, 'phr-id' => c.phr.id, 'data-event-url' => url_for_event(:show, :source => :condition)}
+                  %td #{index+1}
+                  %td #{c.name}
+                  %td 
+                  %td
+                  %td
 
+      = render_widget :condition, :display, :instance => @conditions.first unless @conditions.empty?
+
+
+
+  .reveal-modal.large#add-conditions
+    %h2  添加疾病
+    %hr
+    .col
+      = form_for :condition, :url => phr_conditions_path(@phr) do |f|
+        .margin-b20
+          .col
+            %label 名称
+          .col
+            = f.text_field :name 
+
+        .margin-b20     
+          .col
+            %label 状态
+          .col
+            = f.text_field :status
+
+        .margin-b20
+          .col.size1of2
+            .col
+              %label 开始时间
+            .col
+              = f.date_select :started_at, :start_year => 1940
+          .col.size1of2    
+            .col
+              %label 结束时间
+            .col
+              = f.date_select :ended_at, :start_year => 1940 
+        .col
+          = f.submit "保存"      
+
+    %a.close-reveal-modal &#215;
 
 :javascript
   $(document).ready(function() {

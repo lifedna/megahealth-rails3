@@ -11,6 +11,20 @@ class CommunitiesController < ApplicationController
     @my_communities = current_user.communities
   end
 
+  def new
+    @community = Community.new
+  end
+
+  def create
+    community = Community.new(params[:community])
+    community.owner = current_user
+    community.users << current_user
+    if community.save      
+      flash[:notice] = "Community has been created."
+      redirect_to communities_path
+    end 
+  end
+
   def show
   	@community = Community.find(params[:id])
   	@section = @community.sections.first

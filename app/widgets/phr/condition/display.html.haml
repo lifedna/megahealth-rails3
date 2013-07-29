@@ -1,11 +1,12 @@
 = widget_div do
   %h2
     #{@condition.name}
-  %h4 相似病人
+  / %h4 相似病人
   - present @condition, ConditionPresenter do |condition_presenter|  
     %p
     #{condition_presenter.text}
 
+  %hr  
   %h4 相关内容
   %ul
   - @condition.relevant_items.each do |item|

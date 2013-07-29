@@ -34,7 +34,7 @@
       %h3 #{@topic.title}
       %small #{@topic.created_at.strftime("%Y-%m-%d %H:%M:%S")}
       %p
-        %iframe{:width=>500, :height=>400, :src=>@topic.info.flash, :frameborder=>0} 
+        #{raw @topic.body}
 
       %hr
       %ul
@@ -52,5 +52,9 @@
               = text_area_tag :comment, '', :size => "60x6" 
             %p
               = submit_tag '加上去' 
+
+  .col.size1of3.margin-t20
+    .margin-l20
+      = render :partial => "shared/content_sidebar"            
              
    

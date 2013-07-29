@@ -2,4 +2,52 @@
   = render_widget :add_widgets, :display, :section => @section
   .col.size2of3
     = render_widget :widget_list, :display, :section => @section
-  .col.size1of3  
+  .col.size1of3 
+    .margin-l20 
+      .section.margin-b30
+        %form.community-search{:style => "width: 100%;"}
+          %input{:type => "search", :width => "100%", :placeholder => "站内搜索"}
+      .members.panel.margin-b30
+        .header
+          .cell
+            成员
+            %small (#{@section.community.users.count})
+        .body
+          .cell
+            %ul.nav
+              - @section.community.users.each do |m|
+                %li
+                  = image_tag m.avatar_url(:thumb), size: "48x48"
+
+              / %li
+              /   %img{:src => "http://placehold.it/48x48"}
+              / %li
+              /   %img{:src => "http://placehold.it/48x48"}
+              / %li
+              /   %img{:src => "http://placehold.it/48x48"}
+              / %li
+              /   %img{:src => "http://placehold.it/48x48"}
+              / %li
+              /   %img{:src => "http://placehold.it/48x48"}
+              / %li
+              /   %img{:src => "http://placehold.it/48x48"}
+              / %li
+              /   %img{:src => "http://placehold.it/48x48"}
+              / %li
+              /   %img{:src => "http://placehold.it/48x48"}
+              / %li
+              /   %img{:src => "http://placehold.it/48x48"}
+              / %li
+              /   %img{:src => "http://placehold.it/48x48"}                  
+
+      .guide.panel.margin-b30
+        .header
+          .cell
+            社区指南
+        .body
+          .cell
+            xxx  
+      .panel.margin-b30
+        .header
+          .cell.text-center
+            邀请朋友加入

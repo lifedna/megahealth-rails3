@@ -1,6 +1,143 @@
-/ page
+/ Page
+.site-center
+  .center-page
+    %h1 
+      创建社群
+    %p{:style => "font-size:110%;"} 这是一个很好的方式来分享健康医疗知识，建立自己的品牌和帮助别人。
+    %p.margin-t20{:style => "font-size:110%;"} 在你创建社群之前，请认真考虑以下方面：
+
+    / %hr
+  .margin-t20  
+    %dl.accordion
+      .panel.margin-b10
+        %dt{:style => "padding:8px;"}
+          %h4{:style => "cursor:pointer;"}
+            %span.icon.icon-chevron-down.color-grey
+            %b 目的
+        %dd{:style => "padding:0 10px 10px 8px;"} 
+          %ul
+            %li 你希望通过社群来实现什么目标?
+            %li 你的长期目标是什么?
+            %li 是否已经存在这样的社群? 请先浏览大健康网站，如果已经存在相似的社群，请避免重复创建。
+      .panel.margin-b10  
+        %dt{:style => "padding:8px;"}
+          %h4{:style => "cursor:pointer;"}
+            %span.icon.icon-chevron-down.color-grey
+            %b 领导
+        %dd{:style => "padding:0 10px 10px 8px;"} 
+          %ul
+            %li 你会领导你的社群吗?
+            %li 社群领导者将促进学习，激发社区的互动，管理社群，包括批准新成员和成员的贡献。      
+      .panel.margin-b10  
+        %dt{:style => "padding:8px;"}
+          %h4{:style => "cursor:pointer;"}
+            %span.icon.icon-chevron-down.color-grey
+            %b 时间表
+        %dd{:style => "padding:0 10px 10px 8px;"} 
+          %ul
+            %li 你计划何时让社群上线? 
+      .panel.margin-b10  
+        %dt{:style => "padding:8px;"}
+          %h4{:style => "cursor:pointer;"}
+            %span.icon.icon-chevron-down.color-grey 
+            %b 目标受众
+        %dd{:style => "padding:0 10px 10px 8px;"}
+          %ul
+            %li 谁将是你的目标受众? 你能接触到他们吗? 你是否知道他们愿意使用这样的社群来分享信息?   
+      .panel.margin-b10        
+        %dt{:style => "padding:8px;"}
+          %h4{:style => "cursor:pointer;"}
+            %span.icon.icon-chevron-down.color-grey
+            %b 策略
+        %dd{:style => "padding:0 10px 10px 8px;"}
+          %ul
+            %li 你将采用什么样的策略吸引到你的目标受众? 你会采用什么样的策略来实现自己的目标?   
+
+
+  .center-page
+    .col
+      .col.size1of3
+        .white-content-container{:style => "min-height:280px"}
+          .cell
+            %h3{:style => "color: #333"} 
+              %span.icon.icon-leaf
+              健康社群
+            %p{:style => "font-size:110%;"} 与更多的人分享你的心得，促进健康生活
+            .margin-t20
+              %p
+                %span.icon.icon-ok.color-green
+                %span 吸引关心共同健康主题的人群
+              %p
+                %span.icon.icon-ok.color-green
+                %span 分享专业的健康知识与最佳实践
+              %p
+                %span.icon.icon-ok.color-green
+                %span 提供最新健康资讯、资源
+            %a.btn.orange.medium.margin-t20{"data-reveal-id" => "create-community"} 创建健康社群 
+      .col.size1of3
+        .white-content-container{:style => "min-height:280px"}
+          .cell
+            %h3{:style => "color: #333"} 
+              %span.icon.icon-user-md
+              医生社群
+            %p{:style => "font-size:110%;"} 与更多的人分享你的知识，帮助患者康复
+            .margin-t20
+              %p
+                %span.icon.icon-ok.color-green
+                %span 教育患者和有效沟通，提高病人的依从动机
+              %p
+                %span.icon.icon-ok.color-green
+                %span 提供患者需要的信息，减少不必要的就诊
+              %p
+                %span.icon.icon-ok.color-green
+                %span 改进的自我宣传，改善医患相互依存的关系
+            %a.btn.orange.medium.margin-t20{"data-reveal-id" => "create-community"} 创建医生社群 
+      .col.size1of3
+        .white-content-container{:style => "min-height:280px"}
+          .cell
+            %h3{:style => "color: #333"} 
+              %span.icon.icon-link
+              病友社群
+            %p{:style => "font-size:110%;"} 与更多的人分享你的经历，增进病友信心
+            .margin-t20
+              %p
+                %span.icon.icon-ok.color-green
+                %span 吸引同病的患者，相互鼓励与支持
+              %p
+                %span.icon.icon-ok.color-green
+                %span 分享亲身经验，更好的与疾病相处
+              %p
+                %span.icon.icon-ok.color-green
+                %span 帮助彼此更加明智的做出医疗决定
+            %a.btn.orange.medium.margin-t20{"data-reveal-id" => "create-community"} 创建病友社群 
+
 .site-center.center-page 
   - if user_signed_in?
     = render_widget :community_list
     %p
     = render_widget :new_community
+
+
+.reveal-modal.large#create-community
+  %h2 创建社群
+  %hr
+  .col
+    = form_for @community do |f|
+      .margin-b20
+        .col
+          %label 社群名称
+        .col
+          = f.text_field :name 
+
+      .col
+        = f.submit "保存"      
+
+  %a.close-reveal-modal &#215;    
+
+:javascript 
+  $(document).ready(function() {
+    $('.btn').click(function(e) {
+      e.preventDefault();
+      $('#create-community').reveal();
+    });
+  });   

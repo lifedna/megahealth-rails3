@@ -1,0 +1,187 @@
+- @healthportal = "active"
+
+/ Page
+.site-center.center-page  
+  .page-head{:style => "margin-bottom:30px;"}
+    %h2 #{@phr.name}的健康
+  .col.size1of4
+    = render :partial => "shared/healthportal_sidebar", :locals => {:phr => @phr}    
+
+  .col.sizefill
+    .margin-l20
+      .cell.healthsummary
+        %h2{:style => "margin:0;"} 健康信息              
+        %hr
+        %span{:style => "font-size: 20px;"} #{@phr.age}
+        %span 岁，女
+      .cell      
+        .healthsummary
+          %dl
+            %dt
+              = link_to '疾病', phr_conditions_path(@phr)
+              %a.add-conditions{"data-reveal-id" => "add-conditions"} 
+                %span.icon.icon-16.icon-plus.color-blue
+            %dd
+              .symptom 
+                - @phr.conditions.each do |c|
+                  %b #{c.name}
+                  %b.middot &middot; 
+        .healthsummary
+          %dl
+            %dt
+              = link_to '病症', phr_symptoms_path(@phr)
+              %a.add-symptoms{"data-reveal-id" => "add-symptoms"} 
+                %span.icon.icon-16.icon-plus.color-blue
+            %dd
+              .symptom 
+                - @phr.symptoms.each do |s|
+                  %b #{s.name}
+                  %b.middot &middot;
+              / 您还没有任何病症          
+        .healthsummary
+          %dl
+            %dt
+              %a{:href => "/healthrecords/treatments"} 
+                当前治疗
+              %a.add-treatments{"data-reveal-id" => "add-treatments"} 
+                %span.icon.icon-16.icon-plus.color-blue
+            %dd
+              .symptom 
+                %b 逍遥丸
+              / 您还没有任何治疗
+        .healthsummary
+          %dl
+            %dt
+              %a{:href => "/healthrecords/caretopics"} 
+                关心的健康主题
+                %span.icon.icon-16.icon-plus.color-blue
+            %dd
+              .symptom 
+                %b 减肥
+                %b.middot &middot;
+                %b 美白
+
+
+  .reveal-modal.large#add-conditions
+    %h2 添加疾病
+    %hr
+    .col
+      = form_for :condition, :url => phr_conditions_path(@phr) do |f|
+        .margin-b20
+          .col
+            %label 名称
+          .col
+            = f.text_field :name 
+
+        .margin-b20     
+          .col
+            %label 状态
+          .col
+            = f.text_field :status
+
+        .margin-b20
+          .col.size1of2
+            .col
+              %label 开始时间
+            .col
+              = f.date_select :started_at, :start_year => 1940
+          .col.size1of2    
+            .col
+              %label 结束时间
+            .col
+              = f.date_select :ended_at, :start_year => 1940 
+        .col
+          = f.submit "保存"      
+
+    %a.close-reveal-modal &#215;
+
+  .reveal-modal.large#add-symptoms
+    %h2 添加症状
+    %hr
+    .col
+      = form_for :symptom, :url => phr_symptoms_path(@phr) do |f|
+        .margin-b20
+          .col
+            %label 名称
+          .col
+            = f.text_field :name  
+
+        .margin-b20     
+          .col
+            %label 程度
+          .col
+            = f.text_field :extent
+
+        .margin-b20
+          .col.size1of2
+            .col
+              %label 开始时间
+            .col
+              = f.date_select :started_at, :start_year => 1940   
+          .col.size1of2    
+            .col
+              %label 结束时间
+            .col
+              = f.date_select :ended_at, :start_year => 1940  
+        .col
+          = f.submit "保存"
+    %a.close-reveal-modal &#215;
+
+  .reveal-modal.large#add-treatments
+    %h2 添加治疗
+    %hr
+    .col
+      %form
+        .margin-b20
+          .col
+            %label 名称
+          .col
+            %input.text{:type => "text"} 
+
+        .margin-b20     
+          .col
+            %label 治疗原因
+          .col
+            %input.text{:type => "text"}  
+
+        .margin-b20
+          .col.size1of2
+            .col
+              %label 开始时间
+            .col
+              %input.text.focused-input{:id => "location"}   
+          .col.size1of2    
+            .col
+              %label 结束时间
+            .col
+              %input.text.focused-input{:id => "location"} 
+    .col
+      %hr           
+    .col
+      %button.button.background-blue 保存 
+      %button.button.background-blue 保存并添加新治疗  
+      %button.button 取消 
+    %a.close-reveal-modal &#215;         
+
+:javascript 
+  $(document).ready(function() {
+    $('.condition-link').click(function(e) {
+      e.preventDefault();
+      $('#myCondition').reveal();
+    });
+
+    $('.symptom-link').click(function(e) {
+      e.preventDefault();
+      $('#mySymptom').reveal();
+    });
+
+    $('.treatment-link').click(function(e) {
+      e.preventDefault();
+      $('#myTreatment').reveal();
+    });
+
+    $('.phrs').hide();
+    $('.switch-phr').click(function() {
+      $('.phrs').slideToggle();
+    });
+  });            

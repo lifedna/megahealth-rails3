@@ -2,19 +2,26 @@ class BlogsController < ApplicationController
   before_filter :authenticate_user!, :except => [:show]
   # impressionist :actions=>[:show]
 
+  def index
+    @phr = Phr.find params[:phr]
+    @blogs = @phr.blogs
+  end
+
   def new
+    @phr = Phr.find params[:phr]
     @blog = Blog.new
   end
 
   def create
     if current_user.blogs.create(params[:blog])
       flash[:notice] = "Article has been created."
-      redirect_to mine_url
+      redirect_to blogs_url(:phr => params[:blog]['phr_id'])
     end  
   end
 
   def show
     @blog = Blog.find params[:id]
+    @phr = @blog.phr
     @comment = @blog.comments.build
   end
 

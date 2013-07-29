@@ -15,7 +15,7 @@ class Phrs::ConditionsController < ApplicationController
     @phr = Phr.find params[:phr_id]
     if @phr.conditions.create(params[:condition])
       flash[:notice] = "Condition has been created."
-      redirect_to mine_url(:phr => @phr)
+      redirect_to healthportal_url(:phr => @phr)
     end  
   end
 
