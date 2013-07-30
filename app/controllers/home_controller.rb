@@ -14,8 +14,8 @@ class HomeController < ApplicationController
   end
   
   def features   
-    @feature_filter = current_user.feature_filter
-    # @keywords = current_user.feature_filter.merged_keywords
+    @content_filter = current_user.content_filter
+    # @keywords = current_user.content_filter.merged_keywords
 
     # if params[:category]
     #   if @keywords.nil? or @keywords.empty?

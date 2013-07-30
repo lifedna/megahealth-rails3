@@ -66,12 +66,13 @@ class User
   has_many :answers
   has_many :poll_answers
   has_many :topics
-  has_one :feature_filter
+  # has_one :feature_filter
+  has_one :content_filter
 
   mount_uploader :avatar, AvatarUploader
 
   # Callbacks
-  after_create :create_initial_phr, :create_initial_filter
+  after_create :create_initial_filter, :create_initial_phr
 
   # features filter
   def conditions_keywords
@@ -101,12 +102,17 @@ class User
   end
 
   def create_initial_filter
-    self.build_feature_filter.tap do |i|
-      i.conditions = Hash.new
-      i.symptoms = Hash.new
-      i.treatments = Hash.new
-      i.user = self
-      i.save
+    self.build_content_filter.tap do |f|
+      f.phrs = Hash.new
+      f.user = self
+      f.save
     end
+    # self.build_feature_filter.tap do |i|
+    #   i.conditions = Hash.new
+    #   i.symptoms = Hash.new
+    #   i.treatments = Hash.new
+    #   i.user = self
+    #   i.save
+    # end
   end    
 end

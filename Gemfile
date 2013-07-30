@@ -24,7 +24,7 @@ gem 'genghisapp'
 # mongoid activity stream
 gem 'streama'
 
-# mongoid comment, like, and share
+# Like, comment, share mongoid documents
 gem 'mongoid_socializer_actions'
 
 # mongoid tagging

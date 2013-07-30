@@ -21,34 +21,85 @@
     .col.size2of3
       .padding-r20
         .title.margin-b30
-          %h2.float-left 精选内容
+          %h2.float-left 有啥内容
           %a.settings.float-right 
             %span.icon.icon-cog &nbsp;精选设置 
           .col.slidediv
             .settings-block
-              = form_for @feature_filter, :url => feature_filter_url do |f|
-                %h4 显示与您和家人健康相关的内容，还希望进一步筛选？
-                .section
-                  .section-header.color-orange 疾病
-                  - @feature_filter.conditions.each do |k, v|
-                    = f.fields_for :conditions do |c|
-                      = c.check_box k, checked: (v == "1" ? "checked" : ""), :class =>"checkbox"
-                      = c.label k
-      
-                .section      
-                  .section-header.color-orange 病症
-                  - @feature_filter.symptoms.each do |k, v|
-                    = f.fields_for :symptoms do |c|
-                      = c.check_box k, checked: (v == "1" ? "checked" : ""), :class =>"checkbox"
-                      = c.label k   
-                .section      
-                  .section-header.color-orange 关心主题        
-   
+              = form_for @content_filter, :url => content_filter_url do |f|
+                .col
+                  %h4 显示大健康的热点内容。你还希望多看点什么？
+                  - @content_filter.content.each do |k, v|
+                    .col.size1of3
+                      = f.fields_for :content do |c|
+                        = c.check_box k, checked: (v == "1" ? "checked" : ""), :class =>"checkbox"
+                        = c.label k
+                / .col
+                /   .col.size1of3
+                /     .col
+                /       %input{:type => "checkbox", :class =>"checkbox", :checked => true}
+                /       %label 文章    
+                /   .col.size1of3  
+                /     .col
+                /       %input{:type => "checkbox", :class =>"checkbox", :checked => true}
+                /       %label 健康日记
+                /   .col.size1of3  
+                /     .col
+                /       %input{:type => "checkbox", :class =>"checkbox", :checked => true}
+                /       %label 视频
+                / .col
+                /   .col.size1of3
+                /     .col
+                /       %input{:type => "checkbox", :class =>"checkbox", :checked => true}
+                /       %label 讨论    
+                /   .col.size1of3  
+                /     .col
+                /       %input{:type => "checkbox", :class =>"checkbox", :checked => true}
+                /       %label 问答
+                /   .col.size1of3  
+                /     .col
+                /       %input{:type => "checkbox", :class =>"checkbox", :checked => true}
+                /       %label 活动
+
+                .col.margin-t20     
+                  %h4 你还可以筛选只看与您和家人健康相关的内容
+                  - @content_filter.phrs.each do |k, v|
+                    .col.size1of3
+                      = f.fields_for :phrs do |c|
+                        = c.check_box k, checked: (v == "1" ? "checked" : ""), :class =>"checkbox"
+                        = c.label k
+
                 .col
                   .cell.slidediv-ft
                     %a.settings.float-right 收起
                     %span.float-right &nbsp;&nbsp;
-                    = f.submit '保存', :class => "button float-right"
+                    = f.submit '保存', :class => "button float-right"        
+
+              / = form_for @feature_filter, :url => feature_filter_url do |f|
+              /   %h4 你还可以筛选与您和家人健康相关的内容。
+              /   .section
+              /     .section-header.color-orange 疾病
+              /     - @feature_filter.conditions.each do |k, v|
+              /       = f.fields_for :conditions do |c|
+              /         = c.check_box k, checked: (v == "1" ? "checked" : ""), :class =>"checkbox"
+              /         = c.label k
+      
+              /   .section      
+              /     .section-header.color-orange 病症
+              /     - @feature_filter.symptoms.each do |k, v|
+              /       = f.fields_for :symptoms do |c|
+              /         = c.check_box k, checked: (v == "1" ? "checked" : ""), :class =>"checkbox"
+              /         = c.label k   
+              /   .section      
+              /     .section-header.color-orange 关心主题        
+   
+              /   .col
+              /     .cell.slidediv-ft
+              /       %a.settings.float-right 收起
+              /       %span.float-right &nbsp;&nbsp;
+              /       = f.submit '保存', :class => "button float-right"
+
+
         .feeds
           = render_widget :content_list, :display, :category => params[:category]
           / - if params[:category]
@@ -97,7 +148,7 @@
             %input{:type => "search", :width => "100%", :placeholder => "搜索"}
         .section
           .header
-            %h5 充实您的个人资料  
+            %h5 充实您的健康资料  
           .body
             .col.sizefit.float-right
               完整度25%
@@ -107,7 +158,7 @@
                   .progress-bar{:style => "width: 25%;"}   
         .section
           .header
-            %h5 最热社群
+            %h5 本周最佳内容
           .body
             %ul.nav.recommendation
               - Community.all.limit(5).each do |c|
@@ -120,18 +171,42 @@
                       %dd
                         %p 中山大学附属第三医院
                         %p 皮肤科
-              / %li
-              /   .col.sizefit.float-right
-              /     %img{:src =>"#{asset_path 'g11942-1.jpg'}"}
-              /   .col.sizefill.margin-r10 
-              /     %dl
-              /       %dt 牙齿装修工程 
-              /       %dd
-              /         %p 72977 个人        
-  
+                        
         .section
           .header
-            %h5 站内主题
+            %h5 本周热点讨论
+          .body
+            %ul.nav.recommendation
+              - Community.all.limit(5).each do |c|
+                %li
+                  .col.sizefit.float-right
+                    %img{:src =>"#{asset_path 'doctors/12033.jpg'}"}
+                  .col.sizefill.margin-r10 
+                    %dl
+                      %dt #{link_to c.name, community_path(c)} 
+                      %dd
+                        %p 中山大学附属第三医院
+                        %p 皮肤科
+      
+        .section
+          .header
+            %h5 本周热点问答
+          .body
+            %ul.nav.recommendation
+              - Community.all.limit(5).each do |c|
+                %li
+                  .col.sizefit.float-right
+                    %img{:src =>"#{asset_path 'doctors/12033.jpg'}"}
+                  .col.sizefill.margin-r10 
+                    %dl
+                      %dt #{link_to c.name, community_path(c)} 
+                      %dd
+                        %p 中山大学附属第三医院
+                        %p 皮肤科
+
+        .section
+          .header
+            %h5 最热主题
           .body{:style => "font-size:85%;"}
             .col
               .tags

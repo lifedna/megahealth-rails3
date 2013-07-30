@@ -57,6 +57,9 @@ class Phr
   end
 
    
+  def merged_keywords
+    conditions_keywords.concat(symptoms_keywords).concat(treatments_keywords).uniq
+  end 
 
   # Callbacks
   # after_create :create_initialize_phr

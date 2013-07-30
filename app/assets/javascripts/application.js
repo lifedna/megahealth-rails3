@@ -18,6 +18,7 @@
 //= require bootstrap
 //= require jquery-plugins
 //= require redactor-rails
+//= require social-share-button
 //= require_tree .
 
 

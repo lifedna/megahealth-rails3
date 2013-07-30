@@ -18,6 +18,9 @@ class Community
   has_many :topics
   has_many :posts 
 
+  default_scope desc(:created_at)
+  scope :category, ->(category){where(category: category)}
+
   def the_owner
     User.find_by(id: self.owner.id)
   end
@@ -43,7 +46,5 @@ class Community
     hash_array = []
     hash_array.push(hash)
     Activity.all_in(target_object: hash_array)
-  end
-
-  scope :category, ->(category){where(category: category)}
+  end  
 end

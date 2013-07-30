@@ -50,7 +50,8 @@ MegahealthRails3::Application.routes.draw do
     get 'comment', :on => :member
   end  
 
-  resource :feature_filter
+  # resource :feature_filter
+  resource :content_filter
 
   resources :communities do
     resources :sections

@@ -3,15 +3,15 @@ class ContentListWidget < AuthorizableWidget
 
   include ActionView::Helpers::JavaScriptHelper
   include ApplicationHelper
-  helper_method :present
+  helper_method :present, :first_image_url
 
   has_widgets do
     self << widget("content_list/load_more", :load_more_content)
   end
 
   after_initialize do
-    @feature_filter = current_user.feature_filter
-    @keywords = current_user.feature_filter.merged_keywords
+    @klass = current_user.content_filter.merged_klass
+    @keywords = current_user.content_filter.merged_keywords
   end 
 
   def display(*args)
@@ -20,15 +20,15 @@ class ContentListWidget < AuthorizableWidget
 
     if @category
       if @keywords.nil? or @keywords.empty?
-        @items = Content.where(category: @category).page params[:page]
+        @items = Content.in(_type: @klass).where(category: @category).page params[:page]
       else
-        @items = Content.where(category: @category).full_text_search(@keywords).page params[:page]
+        @items = Content.in(_type: @klass).where(category: @category).full_text_search(@keywords).page params[:page]
       end  
     else
       if @keywords.nil? or @keywords.empty?
-        @items = Content.all.page params[:page]
+        @items = Content.in(_type: @klass).all.page params[:page]
       else
-        @items = Content.all.full_text_search(@keywords).page params[:page]
+        @items = Content.in(_type: @klass).all.full_text_search(@keywords).page params[:page]
       end 
     end 
     render
