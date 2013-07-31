@@ -15,7 +15,7 @@ class Phrs::SymptomsController < ApplicationController
     @phr = Phr.find params[:phr_id]
     if @phr.symptoms.create(params[:symptom])
       flash[:notice] = "Symptom has been created."
-      redirect_to mine_url(:phr => @phr)
+      redirect_to phr_symptoms_path(@phr)
     end  
   end
 

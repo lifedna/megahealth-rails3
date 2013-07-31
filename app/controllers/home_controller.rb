@@ -33,14 +33,18 @@ class HomeController < ApplicationController
   end
 
   def healthportal
-    if params[:phr]
-      @phr = Phr.find params[:phr]
-    else
-      @phr = current_user.phrs.first
-    end
-    @condition = @phr.conditions.build
-    @symptom = @phr.symptoms.build
-    @treatment = @phr.treatments.build
+    @my_communities = current_user.communities
+    @my_phrs = current_user.phrs
+    @my_blogs = current_user.blogs.limit(2)
+
+    # if params[:phr]
+    #   @phr = Phr.find params[:phr]
+    # else
+    #   @phr = current_user.phrs.first
+    # end
+    # @condition = @phr.conditions.build
+    # @symptom = @phr.symptoms.build
+    # @treatment = @phr.treatments.build
   end	
 
   def profile

@@ -1,3 +1,4 @@
+# encoding: UTF-8
 class Community
   include Mongoid::Document	
   include Mongoid::Timestamps
@@ -5,6 +6,8 @@ class Community
   field :name, type: String
   field :brief, type: String
   field :category, type: String
+  field :online, type: Boolean, default: false
+  field :offline_reason, type: String, default: "感谢访问，社群建设中"
   embeds_one :owner
 
   validates :name, :presence => true, :uniqueness => true

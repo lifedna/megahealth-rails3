@@ -66,7 +66,6 @@ class User
   has_many :answers
   has_many :poll_answers
   has_many :topics
-  # has_one :feature_filter
   has_one :content_filter
 
   mount_uploader :avatar, AvatarUploader
@@ -107,12 +106,5 @@ class User
       f.user = self
       f.save
     end
-    # self.build_feature_filter.tap do |i|
-    #   i.conditions = Hash.new
-    #   i.symptoms = Hash.new
-    #   i.treatments = Hash.new
-    #   i.user = self
-    #   i.save
-    # end
   end    
 end

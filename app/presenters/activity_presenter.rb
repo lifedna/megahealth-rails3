@@ -34,13 +34,13 @@ class ActivityPresenter < BasePresenter
   	when :new_article
   	  out = %(#{raw link_to(activity.the_actor.name, activity.the_actor)} 写了新文章 #{raw link_to(activity.the_object.title, show_community_article_path(activity.the_object.community, activity.the_object))})
   	when :new_question
-  	  out = %(#{raw link_to(activity.the_actor.name, activity.the_actor)} 发起了新问题 #{raw link_to(activity.the_object.title, show_community_question_path(activity.the_object.community, activity.the_object))})
+  	  out = %(#{raw link_to(activity.the_actor.name, activity.the_actor)} 提了新问题 #{raw link_to(activity.the_object.title, show_community_question_path(activity.the_object.community, activity.the_object))})
   	when :new_topic
-      out = %(#{raw link_to(activity.the_actor.name, activity.the_actor)} 写了新帖子 #{raw link_to(activity.the_object.title, show_community_topic_path(activity.the_object.community, activity.the_object))})  
+      out = %(#{raw link_to(activity.the_actor.name, activity.the_actor)} 发起新话题 #{raw link_to(activity.the_object.title, show_community_topic_path(activity.the_object.community, activity.the_object))})  
     when :new_poll
       out = %(#{raw link_to(activity.the_actor.name, activity.the_actor)} 发起了新投票 #{raw link_to(activity.the_object.name, show_community_poll_path(activity.the_object.community, activity.the_object))})
     when :new_comment
-      out = %(#{raw link_to(activity.the_actor.name, activity.the_actor)} 评论了帖子 #{raw link_to(activity.the_object.commentable.title, show_community_topic_path(activity.the_object.commentable.community, activity.the_object.commentable))})
+      out = %(#{raw link_to(activity.the_actor.name, activity.the_actor)} 评论了话题 #{raw link_to(activity.the_object.commentable.title, show_community_topic_path(activity.the_object.commentable.community, activity.the_object.commentable))})
     when :join
       out = %(#{raw link_to(activity.the_actor.name, activity.the_actor)} 加入了社群 #{raw link_to(activity.the_object.name, activity.the_object)})   
     else

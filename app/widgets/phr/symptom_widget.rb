@@ -5,7 +5,7 @@ class Phr::SymptomWidget < Apotomo::Widget
 
   def display(*args)
   	options = args.extract_options!
-  	@condition = options[:symptom]
+  	@symptom = options[:instance]
     render
   end
 

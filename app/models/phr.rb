@@ -20,9 +20,9 @@ class Phr
   validates :gender, :inclusion => {:in => %w(男 女), :message => "%{value} is not a valid gender" }, :allow_nil => true	
   validates :relationship, :inclusion => {:in => %w(父亲 母亲 配偶 儿子 女儿 亲戚 朋友 自己), :message => "%{value} is not a valid relationship" }, :allow_nil => true	
 
+  default_scope asc(:created_at)
+
   belongs_to :user
-  has_many :blogs
-  # has_many :collections
 
   class << self
     def conditions_keywords 

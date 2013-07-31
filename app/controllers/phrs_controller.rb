@@ -12,6 +12,7 @@ class PhrsController < ApplicationController
 
   def show
     @phr = Phr.find params[:id]
+    redirect_to phr_conditions_url(@phr)
   end
 
   def edit

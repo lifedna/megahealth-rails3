@@ -1,17 +1,20 @@
-- @healthportal = "active"
+/ - @healthportal = "active"
 
 / Page
-.site-center.center-page  
-  .page-head{:style => "margin-bottom:30px;"}
-    %h2 #{@phr.name}的健康
-  .col.size1of4
-    = render :partial => "shared/healthportal_sidebar", :locals => {:phr => @phr}  
-   
-  .col.sizefill
-    .margin-l20
-      %h2 疾病
-      %hr
-      .col
+.site-center.center-page 
+  %h2.margin-b30 #{@phr.name}的健康记录  
+  .col.size2of3  
+    .tab-block.top-nav           
+      .tabs        
+        %ul.nav
+          %li.active.active-item 
+            = link_to '疾病', phr_conditions_path(@phr)
+          %li 
+            = link_to '症状', phr_symptoms_path(@phr)
+          / %li 
+          /   %a 治疗
+    .col
+      .margin-t20
         %a.button-link.margin-b20.add-conditions{"data-reveal-id" => "add-conditions"}  添加:疾病
         .panel.datasheet.margin-b20
           .head 我的数据       
@@ -32,7 +35,12 @@
                   %td
                   %td
 
-      = render_widget :condition, :display, :instance => @conditions.first unless @conditions.empty?
+        = render_widget :condition, :display, :instance => @conditions.first unless @conditions.empty?
+   
+  .col.size1of3
+    .margin-l20
+      %h2 我的全部健康记录
+      
 
 
 
@@ -76,5 +84,10 @@
       $(this).siblings('tr').removeClass('hilite');
       $(this).toggleClass('hilite');
       $.ajax({url: $(this).attr("data-event-url") + "&id=" + $(this).attr("data-id") + "&phr_id=" + $(this).attr("phr-id")})
+    });
+
+    $(".top-nav li").click(function(){
+     window.location=$(this).find("a").attr("href"); 
+     return false;
     });
   }); 

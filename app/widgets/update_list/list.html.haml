@@ -22,6 +22,6 @@
                   .col.sizefit
                     = image_tag activity.the_actor.avatar_url(:thumb), size: "30x30"
                   .col.sizefill
-                    %p #{truncate strip_tags(activity.the_object.body), length: 140, omission: '.....'} 
+                    %p #{truncate strip_tags(activity.the_object.body), length: 80, omission: '.....'} 
 
                   

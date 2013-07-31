@@ -3,25 +3,26 @@ class BlogsController < ApplicationController
   # impressionist :actions=>[:show]
 
   def index
-    @phr = Phr.find params[:phr]
-    @blogs = @phr.blogs
+    @user = User.find params[:id]
+    @blogs = @user.blogs
   end
 
   def new
-    @phr = Phr.find params[:phr]
     @blog = Blog.new
   end
 
-  def create
-    if current_user.blogs.create(params[:blog])
+  def create   
+    @blog = Blog.new(params[:blog]) 
+    if @blog.save
       flash[:notice] = "Article has been created."
-      redirect_to blogs_url(:phr => params[:blog]['phr_id'])
+      render :action => "show"
+    else
+      render :action => "new"  
     end  
   end
 
   def show
     @blog = Blog.find params[:id]
-    @phr = @blog.phr
     @comment = @blog.comments.build
   end
 

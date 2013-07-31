@@ -50,6 +50,8 @@ MegahealthRails3::Application.routes.draw do
     get 'comment', :on => :member
   end  
 
+  match '/people/:id/blogs' => 'blogs#index', :as => :people_blogs, :via => :get
+
   # resource :feature_filter
   resource :content_filter
 
@@ -81,15 +83,15 @@ MegahealthRails3::Application.routes.draw do
     get 'leave', :on => :member
   end
 
-  scope '/healthportal' do
-    resources :phrs do
-      scope :module => "phrs" do
-        resources :conditions
-        resources :symptoms
-        resources :treatments
-      end
+
+  resources :phrs do
+    scope :module => "phrs" do
+      resources :conditions
+      resources :symptoms
+      resources :treatments
     end
   end
+
 
   authenticated :user do
     root :to => 'home#update'

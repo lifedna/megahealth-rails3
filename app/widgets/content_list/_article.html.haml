@@ -1,0 +1,21 @@
+- present item, ArticlePresenter do |presenter|
+  %h4 #{presenter.title}    
+  %p{:style => "color: #999;"} 
+    %small #{presenter.metadata}     
+  - if presenter.image
+    .col.sizefit.float-right
+      #{presenter.image}
+    .col.sizefill
+      .margin-r20
+        %p #{presenter.text} 
+  - else
+    %p #{presenter.text}  
+
+  - unless item.tags.nil?
+    .tags
+      %ul.nav.blocks
+        - item.tags.each do |tag|
+          %li
+            %a #{tag}
+  .source #{presenter.stats} 
+      

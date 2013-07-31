@@ -2,7 +2,7 @@
 class ContentFilter
   include Mongoid::Document
 
-  field :content, type: Hash, default: {"文章" => "1", "日记" => "1", "视频" => "0", "讨论" => "0", "问答" => "0"}
+  field :content, type: Hash, default: {"文章" => "1", "日记" => "1", "视频" => "0", "话题" => "0", "问答" => "0"}
   field :phrs, type: Hash
 
   belongs_to :user	
@@ -18,7 +18,7 @@ class ContentFilter
           klass << 'Blog'
         when '视频'  
           klass << 'Video'
-        when '讨论'  
+        when '话题'  
           klass << 'Topic'
         when '问答'  
           klass << 'Question'    

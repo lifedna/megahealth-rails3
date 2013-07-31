@@ -2,34 +2,34 @@
   .feed.margin-b20
     .col.sizefit.margin-r20
       = render :partial => "category", :locals => {:content => item.class.to_s}
-      / .button{:style => "background:#fae9da;color:#ca6445;border:none;"} #{item.category}
     .col.sizefill.border-bottom.padding-b20 
-      %h4 
-        - if item.class.to_s.underscore == 'blog'
-          = link_to item.title, blog_url(item)
-        - else
-          = link_to item.title, self.send("show_community_#{item.class.to_s.underscore}_url", item.community, item)
+      = render :partial => item.class.to_s.underscore, :locals => {:item => item}  
+      / %h4 
+      /   - if item.class.to_s.underscore == 'blog'
+      /     = link_to item.title, blog_url(item)
+      /   - else
+      /     = link_to item.title, self.send("show_community_#{item.class.to_s.underscore}_url", item.community, item)
 
-      %p{:style => "color: #999;"} 
-        %span #{time_ago_in_words(item.created_at).capitalize}前     
-      - if first_image_url(item.body)
-        .col.sizefit.float-right
-          = image_tag first_image_url(item.body), size: "80x80"
-        .col.sizefill
-          .margin-r20
-            %p #{truncate strip_tags(item.body), length: 140, omission: '.....'} 
-      - else
-        %p #{truncate strip_tags(item.body), length: 140, omission: '.....'} 
+      / %p{:style => "color: #999;"} 
+      /   %span #{time_ago_in_words(item.created_at).capitalize}前     
+      / - if first_image_url(item.body)
+      /   .col.sizefit.float-right
+      /     = image_tag first_image_url(item.body), size: "80x80"
+      /   .col.sizefill
+      /     .margin-r20
+      /       %p #{truncate strip_tags(item.body), length: 140, omission: '.....'} 
+      / - else
+      /   %p #{truncate strip_tags(item.body), length: 140, omission: '.....'} 
 
-      - unless item.tags.nil?
-        .tags
-          %ul.nav.blocks
-            - item.tags.each do |tag|
-              %li
-                %a #{tag}
-      .source 
-        来自#{link_to item.community.name, community_path(item.community)}
-        %span.middot &middot;
-        浏览15次
-        %span.middot &middot;
-        10人推荐
+      / - unless item.tags.nil?
+      /   .tags
+      /     %ul.nav.blocks
+      /       - item.tags.each do |tag|
+      /         %li
+      /           %a #{tag}
+      / .source 
+      /   / 来自#{link_to item.community.name, community_path(item.community)}
+      /   %span.middot &middot;
+      /   浏览15次
+      /   %span.middot &middot;
+      /   10人推荐

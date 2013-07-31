@@ -3,49 +3,18 @@
 / Page
 .site-center.center-page  
   .page-head{:style => "margin-bottom:30px;"}
-    %h2 #{@phr.name}的健康
-  .col.size1of4
-    .sidebar.portlet
-      .profile-card
-        .img-wrapper
-          %img{:src => "#{asset_path 'default-profile-lrg.jpg'}"}
-        .cell
-          %h4 #{@phr.name}  
-        .cell{:style => "margin-top: 20px;"} 
-          .col.sizefit.float-right
-            %a{:href => "#{new_phr_path}" }
-              %span.icon.icon-plus.color-blue
-          .col.sizefill 
-            %a
-              %h5 #{link_to '添加家庭成员', new_phr_path}
-        .cell
-          .col.switch-record 
-            .col.sizefit.float-right
-              %span.icon.icon-chevron-down.color-blue
-            .col.sizefill 
-              %a
-                %h5 切换家庭成员  
-          .col.health-records.menu
-            %ul.left.nav
-              - current_user.phrs.excludes(:id => @phr.id).each do |phr|
-                %li
-                  = link_to phr.name, healthportal_path(:phr => p)
-        
-
-   
-
-  .col.sizefill
-    .margin-l20
-      %h3 添加家庭成员
-      %hr
-      = form_for @phr do |f|
-        %p
-          = f.label "姓名"
-          = f.text_field :name
-        %p
-          = f.label "年龄"
-          = f.text_field :age
-        %p
-          = f.submit "添加", :class => "background-blue"
-          %a{:href => "#{healthportal_path}"}
-            .button.background-gray 取消
+    %h2 新加健康记录
+  .col.size1of3
+    = simple_form_for @phr do |f|
+      %p
+        = f.label "姓名"
+        = f.text_field :name
+      %p
+        = f.label "年龄"
+        = f.text_field :age
+      %p
+        = f.input :relationship, label:'关系:', collection: ['父亲', '母亲', '配偶', '儿子', '女儿', '亲戚', '朋友', '自己']
+      %p
+        = f.submit "添加", :class => "background-blue"
+        %a{:href => "#"}
+          .button.background-gray 取消

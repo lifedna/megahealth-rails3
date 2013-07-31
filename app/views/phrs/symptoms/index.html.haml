@@ -1,21 +1,78 @@
-%h1 病症
-%p
-%table
-  %tbody
-    %tr
-      %th 名称
-      %th 程度
-      %th 开始时间
-      %th 结束时间
-    - @symptoms.each do |s|
-      %tr.data-row{'data-id' => s.id, 'phr-id' => s.phr.id, 'data-event-url' => url_for_event(:show, :source => :symptom)}
-        %td #{s.name}
-        %td 
-        %td
-        %td
 
-= render_widget :symptom, :display, :instance => @symptoms.first
+/ Page
+.site-center.center-page  
+  %h2.margin-b30 #{@phr.name}的健康记录
+  .col.size2of3   
+    .tab-block.top-nav           
+      .tabs        
+        %ul.nav
+          %li
+            = link_to '疾病', phr_conditions_path(@phr)
+          %li.active.active-item  
+            = link_to '症状', phr_symptoms_path(@phr)
+    .col
+      .margin-t20
+        %a.button-link.margin-b20.add-symptoms{"data-reveal-id" => "add-symptoms"}  添加:病症
+        .panel.datasheet.margin-b20
+          .head 我的数据       
+          %table.body
+            %thead
+              %tr
+                %th{:style => "width:2%"} #
+                %th{:style => "width:30%", :nowrap => "nowrap"} 名称
+                %th{:style => "width:28%", :nowrap => "nowrap"} 状况
+                %th{:style => "width:20%", :nowrap => "nowrap"} 开始时间
+                %th{:style => "width:20%", :nowrap => "nowrap"} 结束时间
+            %tbody
+              - @symptoms.each_with_index do |s, index|
+                %tr.data-row{'data-id' => s.id, 'phr-id' => s.phr.id, 'data-event-url' => url_for_event(:show, :source => :symptom)}
+                  %td #{index+1}
+                  %td #{s.name}
+                  %td 
+                  %td
+                  %td
 
+        = render_widget :symptom, :display, :instance => @symptoms.first unless @symptoms.empty?
+   
+  .col.size1of3
+    .margin-l20
+      %h2 我的全部健康记录
+      
+
+
+
+  .reveal-modal.large#add-symptoms
+    %h2  添加病症
+    %hr
+    .col
+      = form_for :symptom, :url => phr_symptoms_path(@phr) do |f|
+        .margin-b20
+          .col
+            %label 名称
+          .col
+            = f.text_field :name 
+
+        .margin-b20     
+          .col
+            %label 程度
+          .col
+            = f.text_field :extent
+
+        .margin-b20
+          .col.size1of2
+            .col
+              %label 开始时间
+            .col
+              = f.date_select :started_at, :start_year => 1940
+          .col.size1of2    
+            .col
+              %label 结束时间
+            .col
+              = f.date_select :ended_at, :start_year => 1940 
+        .col
+          = f.submit "保存"      
+
+    %a.close-reveal-modal &#215;
 
 :javascript
   $(document).ready(function() {
@@ -25,4 +82,13 @@
       $(this).toggleClass('hilite');
       $.ajax({url: $(this).attr("data-event-url") + "&id=" + $(this).attr("data-id") + "&phr_id=" + $(this).attr("phr-id")})
     });
+
+    $(".top-nav li").click(function(){
+     window.location=$(this).find("a").attr("href"); 
+     return false;
+    });
   }); 
+
+
+
+

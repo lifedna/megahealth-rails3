@@ -1,20 +1,41 @@
 = widget_div do
-  - unless @symptom.nil?
-    %h2
-      #{@symptom.name}
-    %h4 相似病人
-    - present @symptom, SymptomPresenter do |symptom_presenter|  
-      %p
-      #{symptom_presenter.text}
+  %h2
+    #{@symptom.name}
+  / %h4 相似病人
+  - present @symptom, SymptomPresenter do |presenter|  
+    %p
+    #{presenter.text}
 
-    %h4 相关内容
-    %ul
-    - @symptom.relevant_items.each do |item|
-      %li
-        - if item.class.to_s.underscore == 'blog'
-          = link_to item.title, blog_url(item)
-        - else
-          = link_to item.title, self.send("show_community_#{item.class.to_s.underscore}_url", item.community, item)
-        %br
-        %small #{time_ago_in_words(item.created_at).capitalize}前 #{item.category}  
+  %hr  
+  %h4 相关社群
+  .my-community-list
+    - Community.all.each_with_index do |c, index|
+      - if index < 3
+        .my-community
+          .col.sizefit
+            %a{:href => "#{community_path(c)}", :style => "margin-right:10px;"}
+              %img{:src => "#{asset_path 'doctors/126708301394155.jpg'}"}
+          .col.sizefill
+            %b #{c.name}
+            %p{:style => "color:#777; font-size:80%;"} 
+              儿科 主任医师
+              %br
+              4231 个成员 
+            .last-update
+              更新于上午11:15
+      - else
+        .my-community.wrapper
+          .col.sizefit
+            %a{:href => "#{community_path(c)}", :style => "margin-right:10px;"}
+              %img{:src => "#{asset_path 'doctors/126708301394155.jpg'}"}
+          .col.sizefill
+            %b #{c.name}
+            %p{:style => "color:#777; font-size:80%;"} 
+              儿科 主任医师
+              %br
+              4231 个成员 
+            .last-update
+              更新于上午11:15 
+
+
 

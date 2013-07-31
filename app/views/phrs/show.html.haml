@@ -1,65 +1,72 @@
-- @healthportal = "active"
+/ - @healthportal = "active"
 
 / Page
 .site-center.center-page  
-  .page-head{:style => "margin-bottom:30px;"}
-    %h2 #{@phr.name}的健康
-  .col.size1of4
-    = render :partial => "shared/healthportal_sidebar", :locals => {:phr => @phr}    
+  .col.size2of3 
+    .healthsummary
+      %h2{:style => "margin:0;"} #{@phr.name}的健康记录            
+      .menu
+        %ul.nav
+          %li 
+            %a 疾病
+          %li 
+            %a 症状
+          %li 
+            %a 治疗
 
-  .col.sizefill
-    .margin-l20
-      .cell.healthsummary
-        %h2{:style => "margin:0;"} 健康信息              
-        %hr
-        %span{:style => "font-size: 20px;"} #{@phr.age}
-        %span 岁，女
-      .cell      
-        .healthsummary
-          %dl
-            %dt
-              = link_to '疾病', phr_conditions_path(@phr)
-              %a.add-conditions{"data-reveal-id" => "add-conditions"} 
-                %span.icon.icon-16.icon-plus.color-blue
-            %dd
-              .symptom 
-                - @phr.conditions.each do |c|
-                  %b #{c.name}
-                  %b.middot &middot; 
-        .healthsummary
-          %dl
-            %dt
-              = link_to '病症', phr_symptoms_path(@phr)
-              %a.add-symptoms{"data-reveal-id" => "add-symptoms"} 
-                %span.icon.icon-16.icon-plus.color-blue
-            %dd
-              .symptom 
-                - @phr.symptoms.each do |s|
-                  %b #{s.name}
-                  %b.middot &middot;
-              / 您还没有任何病症          
-        .healthsummary
-          %dl
-            %dt
-              %a{:href => "/healthrecords/treatments"} 
-                当前治疗
-              %a.add-treatments{"data-reveal-id" => "add-treatments"} 
-                %span.icon.icon-16.icon-plus.color-blue
-            %dd
-              .symptom 
-                %b 逍遥丸
-              / 您还没有任何治疗
-        .healthsummary
-          %dl
-            %dt
-              %a{:href => "/healthrecords/caretopics"} 
-                关心的健康主题
-                %span.icon.icon-16.icon-plus.color-blue
-            %dd
-              .symptom 
-                %b 减肥
-                %b.middot &middot;
-                %b 美白
+
+      %span{:style => "font-size: 20px;"} #{@phr.age}
+      %span 岁，女
+      
+    .healthsummary
+      %dl
+        %dt
+          = link_to '疾病', phr_conditions_path(@phr)
+          %a.add-conditions{"data-reveal-id" => "add-conditions"} 
+            %span.icon.icon-16.icon-plus.color-blue
+        %dd
+          .symptom 
+            - @phr.conditions.each do |c|
+              %b #{c.name}
+              %b.middot &middot; 
+    .healthsummary
+      %dl
+        %dt
+          = link_to '病症', phr_symptoms_path(@phr)
+          %a.add-symptoms{"data-reveal-id" => "add-symptoms"} 
+            %span.icon.icon-16.icon-plus.color-blue
+        %dd
+          .symptom 
+            - @phr.symptoms.each do |s|
+              %b #{s.name}
+              %b.middot &middot;
+          / 您还没有任何病症          
+    .healthsummary
+      %dl
+        %dt
+          %a{:href => "/healthrecords/treatments"} 
+            当前治疗
+          %a.add-treatments{"data-reveal-id" => "add-treatments"} 
+            %span.icon.icon-16.icon-plus.color-blue
+        %dd
+          .symptom 
+            %b 逍遥丸
+          / 您还没有任何治疗
+    .healthsummary
+      %dl
+        %dt
+          %a{:href => "/healthrecords/caretopics"} 
+            关心的健康主题
+            %span.icon.icon-16.icon-plus.color-blue
+        %dd
+          .symptom 
+            %b 减肥
+            %b.middot &middot;
+            %b 美白
+
+  .col.size1of3
+    .margin-l20.margin-t20
+      %h2 我的全部健康记录
 
 
   .reveal-modal.large#add-conditions
