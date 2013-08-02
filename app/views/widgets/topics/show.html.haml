@@ -35,7 +35,7 @@
       %h3 #{@topic.title}
       %small #{@topic.created_at.strftime("%Y-%m-%d %H:%M:%S")}
       %p
-        #{raw @topic.body}
+        #{simple_format @topic.body}
 
       %hr
       %ul

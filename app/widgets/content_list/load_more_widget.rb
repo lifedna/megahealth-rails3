@@ -9,8 +9,8 @@ class ContentList::LoadMoreWidget  < AuthorizableWidget
   end
 
   def process_more(evt)
-  	@feature_filter = current_user.feature_filter
-    @keywords = current_user.feature_filter.merged_keywords
+  	# @feature_filter = current_user.feature_filter
+    @keywords = current_user.content_filter.merged_keywords
 
     if evt[:content_category]
       if @keywords.nil? or @keywords.empty?

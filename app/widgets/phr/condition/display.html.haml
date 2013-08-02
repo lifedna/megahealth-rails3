@@ -7,14 +7,14 @@
     #{condition_presenter.text}
 
   %hr  
-  %h4 相关社群
+  %h4 推荐社群
   .my-community-list
-    - Community.all.each_with_index do |c, index|
+    - @communities.each_with_index do |c, index|
       - if index < 3
         .my-community
           .col.sizefit
             %a{:href => "#{community_path(c)}", :style => "margin-right:10px;"}
-              %img{:src => "#{asset_path 'doctors/126708301394155.jpg'}"}
+              = image_tag c.logo_url(:thumb)
           .col.sizefill
             %b #{c.name}
             %p{:style => "color:#777; font-size:80%;"} 

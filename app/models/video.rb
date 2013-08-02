@@ -1,10 +1,10 @@
-class Video
+class Video < Content
   include Mongoid::Document	
   include Mongoid::Timestamps
   include Mongoid::Commentable
   include Getvideo
 
-  field :title, type: String
+  field :body, type: String
   field :url, type: String
   field :thumb, type: String
   field :src, type: String

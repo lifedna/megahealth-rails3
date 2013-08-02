@@ -2,7 +2,9 @@
 
 / Page
 .site-center.center-page 
-  %h2.margin-b30 #{@phr.name}的健康记录  
+  %h2.margin-b30 
+    健康记录
+    %small #{@phr.name}  
   .col.size2of3  
     .tab-block.top-nav           
       .tabs        
@@ -39,7 +41,12 @@
    
   .col.size1of3
     .margin-l20
-      %h2 我的全部健康记录
+      %h2{:style => "text-align:right"} 我关心的人
+      .my-list.margin-t20
+        %ul.unstyled
+          - @phrs.excludes(:id => @phr.id).each do |phr|
+            %li{:style => "text-align:right; border-width:0px;"} #{link_to phr.name, phr_path(phr)}
+
       
 
 
@@ -80,11 +87,25 @@
 :javascript
   $(document).ready(function() {
     $('tbody tr.data-row:first').addClass('hilite');
+
     $('tr').click(function () {
-      $(this).siblings('tr').removeClass('hilite');
-      $(this).toggleClass('hilite');
-      $.ajax({url: $(this).attr("data-event-url") + "&id=" + $(this).attr("data-id") + "&phr_id=" + $(this).attr("phr-id")})
+      if (!$(this).hasClass('hilite')){
+        $(this).siblings('tr').removeClass('hilite');
+        $(this).toggleClass('hilite');
+        $(this).toggleClass('hovered');
+        $.ajax({url: $(this).attr("data-event-url") + "&id=" + $(this).attr("data-id") + "&phr_id=" + $(this).attr("phr-id")})
+      }
     });
+
+    $('tr').hover(function(){
+      if (!$(this).hasClass('hilite')){
+        $(this).toggleClass('hovered');
+      }
+    }, function(){
+      if (!$(this).hasClass('hilite')){
+        $(this).toggleClass('hovered');
+      }  
+    }); 
 
     $(".top-nav li").click(function(){
      window.location=$(this).find("a").attr("href"); 

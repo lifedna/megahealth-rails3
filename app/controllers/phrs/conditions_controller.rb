@@ -6,6 +6,7 @@ class Phrs::ConditionsController < ApplicationController
   def index
     @phr = Phr.find params[:phr_id]
     @conditions = @phr.conditions
+    @phrs = @phr.user.phrs
   end
 
   def new

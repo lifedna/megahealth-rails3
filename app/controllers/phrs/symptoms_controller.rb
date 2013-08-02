@@ -6,6 +6,7 @@ class Phrs::SymptomsController < ApplicationController
   def index
     @phr = Phr.find params[:phr_id]
     @symptoms = @phr.symptoms
+    @phrs = @phr.user.phrs
   end
 
   def new

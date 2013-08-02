@@ -15,7 +15,7 @@ class BlogsController < ApplicationController
     @blog = Blog.new(params[:blog]) 
     if @blog.save
       flash[:notice] = "Article has been created."
-      render :action => "show"
+      redirect_to blog_path(@blog)
     else
       render :action => "new"  
     end  
@@ -24,6 +24,7 @@ class BlogsController < ApplicationController
   def show
     @blog = Blog.find params[:id]
     @comment = @blog.comments.build
+    @blogs = @blog.user.blogs
   end
 
   def comment

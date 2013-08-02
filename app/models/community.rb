@@ -2,15 +2,22 @@
 class Community
   include Mongoid::Document	
   include Mongoid::Timestamps
+  include Mongoid::TaggableWithContext
+  # include Mongoid::TaggableWithContext::AggregationStrategy::MapReduce
+  include Mongoid::TaggableWithContext::AggregationStrategy::RealTime
 
   field :name, type: String
   field :brief, type: String
   field :category, type: String
-  field :online, type: Boolean, default: false
-  field :offline_reason, type: String, default: "感谢访问，社群建设中"
+  field :offline, type: String, default: "1"
+  field :offline_reason, type: String, default: "感谢访问，社群建设中..."
   embeds_one :owner
 
+  taggable :conditions
+
   validates :name, :presence => true, :uniqueness => true
+
+  mount_uploader :logo, LogoUploader
 
   has_and_belongs_to_many :users
   has_many :sections

@@ -3,7 +3,7 @@
 / Page
 .site-center.center-page  
   .col.size2of3  
-    %h3 #{@blog.title}
+    %h2 #{@blog.title}
     %small 
       #{@blog.created_at.strftime("%Y-%m-%d %H:%M:%S")} #{@blog.category}
     %p #{raw @blog.body}
@@ -26,6 +26,8 @@
 
   .col.size1of3
     .margin-l30.margin-t20
-      %h2 我的日记   
-      %ul.unstyled
-        %li            
+      %h3{:style => "text-align:right"} 我的日记   
+      .my-list.margin-t20
+        %ul.unstyled
+          - @blogs.excludes(:id => @blog.id).each do |blog|
+            %li{:style => "text-align:right;"} #{link_to blog.title, blog_path(blog)}           

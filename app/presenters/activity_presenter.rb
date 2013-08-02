@@ -24,15 +24,18 @@ class ActivityPresenter < BasePresenter
     # out << link_to('Like', activity_likes_path(activity),    :method => 'post')                     if options[:like]        && activity.respond_to?(:vote)       && !current_user.voted?(activity)
     # out << link_to('Unlike', activity_likes_path(activity),  :method => 'destroy')                  if options[:like]        && activity.respond_to?(:vote)       && current_user.voted?(activity)
     # out << link_to(content_tag(:i, '', :class => 'icon-heart') + " #{activity.up_votes_count}", '#') if options[:like_count]  && activity.respond_to?(:vote)       && activity.up_votes_count > 0
-    out << link_to(activity.the_target.name, activity.the_target)                        if options[:target]  && activity.respond_to?(:the_target)
 
-    return raw out.join(" &middot; ")
+      
+    # out << link_to(activity.the_target.name, activity.the_target)                        if options[:target]  && activity.respond_to?(:the_target)
+
+    # return raw out.join(" &middot; ")
+    return raw out.join("")
   end
 
   def text
   	case activity.verb
   	when :new_article
-  	  out = %(#{raw link_to(activity.the_actor.name, activity.the_actor)} 写了新文章 #{raw link_to(activity.the_object.title, show_community_article_path(activity.the_object.community, activity.the_object))})
+  	  out = %(#{raw link_to(activity.the_target.name, activity.the_target)} 写了新文章 #{raw link_to(activity.the_object.title, show_community_article_path(activity.the_object.community, activity.the_object))})
   	when :new_question
   	  out = %(#{raw link_to(activity.the_actor.name, activity.the_actor)} 提了新问题 #{raw link_to(activity.the_object.title, show_community_question_path(activity.the_object.community, activity.the_object))})
   	when :new_topic

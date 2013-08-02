@@ -1,26 +1,27 @@
 / Page
 .site-center
-  .header-info{:style => "background:#398fd1; color:#fff"}
-    .col.sizefit.padding-l30.padding-r30
-      .doc-image.margin-t20
-        .p240-box
-          %a{:href => "#"}
-            %img{:src => "#{asset_path 'doctors/126708301394155.jpg'}" }
+  = render :partial => "shared/community_head", :locals => {:community => @community}
+  / .header-info{:style => "background:#398fd1; color:#fff"}
+  /   .col.sizefit.padding-l30.padding-r30
+  /     .doc-image.margin-t20
+  /       .p240-box
+  /         %a{:href => "#"}
+  /           %img{:src => "#{asset_path 'doctors/126708301394155.jpg'}" }
 
-    .col.sizefill
-      .doc-community-info.margin-t20
-        %h3 #{@community.name} 
+  /   .col.sizefill
+  /     .doc-community-info.margin-t20
+  /       %h3 #{@community.name} 
  
-        %p 
-          四川成都华西医院 儿科 主任医师 副教授
+  /       %p 
+  /         四川成都华西医院 儿科 主任医师 副教授
         
-      .doc-expertise.padding-r20
-        %p
-          #{@community.brief}
+  /     .doc-expertise.padding-r20
+  /       %p
+  /         #{@community.brief}
      
-      .col.size1of2
-        .doc-share.margin-t20
-          %p 如果觉得对你的家人、朋友有帮助，分享给TA吧
+  /     .col.size1of2
+  /       .doc-share.margin-t20
+  /         %p 如果觉得对你的家人、朋友有帮助，分享给TA吧
 
 
   .margin-t20
@@ -28,7 +29,7 @@
   .margin-t20
     %h2 社群管理
     .cell  
-      = form_for @community do |f|
+      = form_for @community, :html => { :multipart => true } do |f|
         %p
           = f.label "小站名称:"
           = @community.name
@@ -39,5 +40,20 @@
         %p
           = f.label "描述:"   
           = f.text_area :brief, :size => "60x6" 
+        %p
+          = f.label "主治疾病:"
+          = f.text_field :conditions  
+        %p
+          = f.check_box :online, checked: (@community.online == "1" ? "checked" : "")    
+          = f.label "维护中"
+        %p  
+          = f.label "维护原因："
+          = f.text_field :offline_reason  
+        %p
+          社群Logo图片最大不得超过2MB(.jpg, .jpeg, .png, .gif)
+        %p
+          = image_tag @community.logo_url(:thumb)   
+        %p
+          = f.file_field :logo 
         %p
           = f.submit "保存"  

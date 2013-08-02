@@ -45,4 +45,22 @@ class GridfsController < ApplicationController
       expires_in 0, public: true
     end
   end
+
+  def logo
+    @community = Community.find(params[:id])
+    content = @community.logo.read
+    if stale?(etag: content, last_modified: @community.updated_at.utc, public: true)
+      send_data content, type: @community.logo.file.content_type, disposition: "inline"
+      expires_in 0, public: true
+    end
+  end
+
+  def thumb_logo
+    @community = Community.find(params[:id])
+    content = @community.logo.thumb.read
+    if stale?(etag: content, last_modified: @community.updated_at.utc, public: true)
+      send_data content, type: @community.logo.file.content_type, disposition: "inline"
+      expires_in 0, public: true
+    end
+  end  
 end

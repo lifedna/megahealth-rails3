@@ -2,6 +2,11 @@ require 'genghis'
 
 MegahealthRails3::Application.routes.draw do
   # different uploaded versions for avatar
+  match '/uploads/grid/community/logo/:id/:filename' => 'gridfs#thumb_logo', constraints: { filename: /thumb.*/ }
+  # route configuration for the uploaded image
+  match '/uploads/grid/community/logo/:id/:filename' => 'gridfs#logo'
+
+  # different uploaded versions for avatar
   match '/uploads/grid/user/avatar/:id/:filename' => 'gridfs#thumb_avatar', constraints: { filename: /thumb.*/ }
   # route configuration for the uploaded image
   match '/uploads/grid/user/avatar/:id/:filename' => 'gridfs#avatar'

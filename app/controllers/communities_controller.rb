@@ -57,14 +57,14 @@ class CommunitiesController < ApplicationController
     @community = Community.find(params[:id])
     @community.users << current_user
     # @community.save
-    current_user.publish_activity(:join, :object => @community, :target_object => @community)
+    # current_user.publish_activity(:join, :object => @community, :target_object => @community)
     redirect_to community_path(@community)
   end
 
   def leave
     @community = Community.find(params[:id])
     @community.users.delete(current_user)
-    current_user.publish_activity(:leave, :object => @community, :target_object => @community)
+    # current_user.publish_activity(:leave, :object => @community, :target_object => @community)
     # @community.save
     redirect_to community_path(@community)
   end

@@ -62,7 +62,7 @@
           %h2 我的社群
         .widget-body    
           .my-community-list
-            - Community.all.each_with_index do |c, index|
+            - @my_communities.each_with_index do |c, index|
               - if index < 3
                 .my-community
                   .col.sizefit
