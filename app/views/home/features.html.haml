@@ -21,7 +21,7 @@
     .col.size2of3
       .padding-r20
         .title.margin-b30
-          %h2.float-left 有啥内容
+          %h2.float-left 热门内容
           %a.settings.float-right 
             %span.icon.icon-cog &nbsp;精选设置 
           .col.slidediv
@@ -62,7 +62,7 @@
                 /       %label 活动
 
                 .col.margin-t20     
-                  %h4 你还可以筛选只看与您和家人健康相关的内容
+                  %h4 只看与你关心的人健康相关的热点内容？
                   - @content_filter.phrs.each do |k, v|
                     .col.size1of3
                       = f.fields_for :phrs do |c|

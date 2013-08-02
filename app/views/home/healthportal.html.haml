@@ -25,7 +25,7 @@
             %h2 我的日记
         .widget-body
           - if @my_blogs.empty?
-            %p{:style => "color: #999;"} 在大健康上写日记，记录自己的生活、想法。
+            %p{:style => "color: #999;"} 用日记来记录疾病有关的经历、心情和感想。
           - @my_blogs.each do |b|
             .margin-b10
               %h4 #{link_to b.title, blog_path(b)}
@@ -44,7 +44,7 @@
           .col.sizefit.float-right
             = link_to '+ 添加', new_phr_path, :class => "button"
           .col.sizefill
-            %h2 健康记录
+            %h2 我关心的人
         .widget-body    
           - @my_phrs.each do |phr|
             .col.size1of4.health-record
@@ -58,70 +58,112 @@
                   %a{:href => "#"} 编辑
 
       .user-widget.margin-b20
-        %h2 我的推荐
-        / %p{:style => "color: #999;"} 在大健康上收藏你认为好的内容。
-        .widget-body
-          .my-list
-            %ul.unstyled
-              %li
-                .col.sizefit.float-right
-                  .source.small 3月28日
-                .col.sizefill
-                  %a 如何才可以挂到范瑞强的号？电话、网上都不行
-              %li
-                .col.sizefit.float-right
-                  .source.small 3月28日
-                .col.sizefill
-                  %a 如何才可以挂到范瑞强的号？电话、网上都不行
-              %li
-                .col.sizefit.float-right
-                  .source.small 3月28日
-                .col.sizefill
-                  %a 如何才可以挂到范瑞强的号？电话、网上都不行
+        .widget-head
+          %h2 我的社群
+        .widget-body    
+          .my-community-list
+            - Community.all.each_with_index do |c, index|
+              - if index < 3
+                .my-community
+                  .col.sizefit
+                    %a{:href => "#{community_path(c)}", :style => "margin-right:10px;"}
+                      %img{:src => "#{asset_path 'doctors/126708301394155.jpg'}"}
+                  .col.sizefill
+                    %b #{c.name}
+                    %p{:style => "color:#777; font-size:80%;"} 
+                      儿科 主任医师
+                      %br
+                      4231 个成员 
+                    .last-update
+                      更新于上午11:15
+              - else
+                .my-community.wrapper
+                  .col.sizefit
+                    %a{:href => "#{community_path(c)}", :style => "margin-right:10px;"}
+                      %img{:src => "#{asset_path 'doctors/126708301394155.jpg'}"}
+                  .col.sizefill
+                    %b #{c.name}
+                    %p{:style => "color:#777; font-size:80%;"} 
+                      儿科 主任医师
+                      %br
+                      4231 个成员 
+                    .last-update
+                      更新于上午11:15    
 
-      .user-widget.margin-b20
-        %h2 我的喜欢
-        / %p{:style => "color: #999;"} 在大健康上收藏你认为好的内容。  
-        .widget-body
-          .my-list
-            %ul.unstyled
-              %li
-                .col.sizefit.float-right
-                  .source.small 3月28日
-                .col.sizefill
-                  %a 如何才可以挂到范瑞强的号？电话、网上都不行
-              %li
-                .col.sizefit.float-right
-                  .source.small 3月28日
-                .col.sizefill
-                  %a 如何才可以挂到范瑞强的号？电话、网上都不行
-              %li
-                .col.sizefit.float-right
-                  .source.small 3月28日
-                .col.sizefill
-                  %a 如何才可以挂到范瑞强的号？电话、网上都不行
+            - if Community.all.empty?
+              %p{:style => "color: #999;"}
+                你还没有加入任何社群，快去搜索你感兴趣的社群吧！        
+       
+            
+          .reveal-community-wrapper
+            = link_to "显示全部(#{@my_communities.count})", "#", :id => "reveal-wrapper" if @my_communities.count > 3
 
-      .user-widget.margin-b20
-        %h2 我的关注
-        / %p{:style => "color: #999;"} 在大健康上收藏你认为好的内容。  
-        .widget-body
-          .my-list
-            %ul.unstyled
-              %li
-                .col.sizefit.float-right
-                  .source.small 3月28日
-                .col.sizefill
-                  %a 如何才可以挂到范瑞强的号？电话、网上都不行
-              %li
-                .col.sizefit.float-right
-                  .source.small 3月28日
-                .col.sizefill
-                  %a 如何才可以挂到范瑞强的号？电话、网上都不行
-              %li
-                .col.sizefit.float-right
-                  .source.small 3月28日
-                .col.sizefill
-                  %a 如何才可以挂到范瑞强的号？电话、网上都不行            
+
+      / .user-widget.margin-b20
+      /   %h2 我的推荐
+      /   / %p{:style => "color: #999;"} 在大健康上收藏你认为好的内容。
+      /   .widget-body
+      /     .my-list
+      /       %ul.unstyled
+      /         %li
+      /           .col.sizefit.float-right
+      /             .source.small 3月28日
+      /           .col.sizefill
+      /             %a 如何才可以挂到范瑞强的号？电话、网上都不行
+      /         %li
+      /           .col.sizefit.float-right
+      /             .source.small 3月28日
+      /           .col.sizefill
+      /             %a 如何才可以挂到范瑞强的号？电话、网上都不行
+      /         %li
+      /           .col.sizefit.float-right
+      /             .source.small 3月28日
+      /           .col.sizefill
+      /             %a 如何才可以挂到范瑞强的号？电话、网上都不行
+
+      / .user-widget.margin-b20
+      /   %h2 我的喜欢
+      /   / %p{:style => "color: #999;"} 在大健康上收藏你认为好的内容。  
+      /   .widget-body
+      /     .my-list
+      /       %ul.unstyled
+      /         %li
+      /           .col.sizefit.float-right
+      /             .source.small 3月28日
+      /           .col.sizefill
+      /             %a 如何才可以挂到范瑞强的号？电话、网上都不行
+      /         %li
+      /           .col.sizefit.float-right
+      /             .source.small 3月28日
+      /           .col.sizefill
+      /             %a 如何才可以挂到范瑞强的号？电话、网上都不行
+      /         %li
+      /           .col.sizefit.float-right
+      /             .source.small 3月28日
+      /           .col.sizefill
+      /             %a 如何才可以挂到范瑞强的号？电话、网上都不行
+
+      / .user-widget.margin-b20
+      /   %h2 我的关注
+      /   / %p{:style => "color: #999;"} 在大健康上收藏你认为好的内容。  
+      /   .widget-body
+      /     .my-list
+      /       %ul.unstyled
+      /         %li
+      /           .col.sizefit.float-right
+      /             .source.small 3月28日
+      /           .col.sizefill
+      /             %a 如何才可以挂到范瑞强的号？电话、网上都不行
+      /         %li
+      /           .col.sizefit.float-right
+      /             .source.small 3月28日
+      /           .col.sizefill
+      /             %a 如何才可以挂到范瑞强的号？电话、网上都不行
+      /         %li
+      /           .col.sizefit.float-right
+      /             .source.small 3月28日
+      /           .col.sizefill
+      /             %a 如何才可以挂到范瑞强的号？电话、网上都不行            
 
  
       
@@ -162,21 +204,21 @@
                 / %img{:src => "images/whiteArrow.png"}            
           %a.close-reveal-modal &#215;
 
-        .section
-          .header
-            %h5 我加入的社群
-          .body
-            %ul.nav.recommendation
-              - Community.all.limit(5).each do |c|
-                %li
-                  .col.sizefit.float-right
-                    %img{:src => "#{asset_path 'doctors/12033.jpg'}"}  
-                  .col.sizefill.margin-r10 
-                    %dl
-                      %dt #{link_to c.name, community_path(c)}
-                      %dd
-                        %p 中山大学附属第三医院
-                        %p 皮肤科
+        / .section
+        /   .header
+        /     %h5 我加入的社群
+        /   .body
+        /     %ul.nav.recommendation
+        /       - Community.all.limit(5).each do |c|
+        /         %li
+        /           .col.sizefit.float-right
+        /             %img{:src => "#{asset_path 'doctors/12033.jpg'}"}  
+        /           .col.sizefill.margin-r10 
+        /             %dl
+        /               %dt #{link_to c.name, community_path(c)}
+        /               %dd
+        /                 %p 中山大学附属第三医院
+        /                 %p 皮肤科
 
 
  

@@ -2,46 +2,45 @@
 
 /Page
 .site-center.center-page
-  .section.your-communities
-    .title.margin-b20
-      %h2 我的地儿
-    .my-community-list
-      - @my_communities.each_with_index do |c, index|
-        - if index < 3
-          .my-community
-            .col.sizefit
-              %a{:href => "#{community_path(c)}", :style => "margin-right:10px;"}
-                %img{:src => "#{asset_path 'doctors/126708301394155.jpg'}"}
-            .col.sizefill
-              %b #{c.name}
-              %p{:style => "color:#777; font-size:80%;"} 
-                儿科 主任医师
-                %br
-                4231 个成员 
-              .last-update
-                更新于上午11:15
-        - else
-          .my-community.wrapper
-            .col.sizefit
-              %a{:href => "#{community_path(c)}", :style => "margin-right:10px;"}
-                %img{:src => "#{asset_path 'doctors/126708301394155.jpg'}"}
-            .col.sizefill
-              %b #{c.name}
-              %p{:style => "color:#777; font-size:80%;"} 
-                儿科 主任医师
-                %br
-                4231 个成员 
-              .last-update
-                更新于上午11:15    
+  / .section.your-communities
+  /   .title.margin-b20
+  /     %h2 我的地儿
+  /   .my-community-list
+  /     - @my_communities.each_with_index do |c, index|
+  /       - if index < 3
+  /         .my-community
+  /           .col.sizefit
+  /             %a{:href => "#{community_path(c)}", :style => "margin-right:10px;"}
+  /               %img{:src => "#{asset_path 'doctors/126708301394155.jpg'}"}
+  /           .col.sizefill
+  /             %b #{c.name}
+  /             %p{:style => "color:#777; font-size:80%;"} 
+  /               儿科 主任医师
+  /               %br
+  /               4231 个成员 
+  /             .last-update
+  /               更新于上午11:15
+  /       - else
+  /         .my-community.wrapper
+  /           .col.sizefit
+  /             %a{:href => "#{community_path(c)}", :style => "margin-right:10px;"}
+  /               %img{:src => "#{asset_path 'doctors/126708301394155.jpg'}"}
+  /           .col.sizefill
+  /             %b #{c.name}
+  /             %p{:style => "color:#777; font-size:80%;"} 
+  /               儿科 主任医师
+  /               %br
+  /               4231 个成员 
+  /             .last-update
+  /               更新于上午11:15    
 
-      - if @my_communities.empty?
-        %p{:style => "color: #999;"}
-          你还没有加入任何社群，快去搜索你感兴趣的社群吧！        
+  /     - if @my_communities.empty?
+  /       %p{:style => "color: #999;"}
+  /         你还没有加入任何社群，快去搜索你感兴趣的社群吧！        
        
             
-  .reveal-community-wrapper
-    = link_to "显示全部(#{@my_communities.count})", "#", :id => "reveal-wrapper" if @my_communities.count > 3
-    / %a 显示全部(#{@my_communities.count}) 
+  / .reveal-community-wrapper
+  /   = link_to "显示全部(#{@my_communities.count})", "#", :id => "reveal-wrapper" if @my_communities.count > 3
 
 
   .search-communities.text-center.margin-b20{:style => "background: #f0f6f3; padding: 10px 20px 0 20px;"}
