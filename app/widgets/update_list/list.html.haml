@@ -6,7 +6,7 @@
     - present activity, ActivityPresenter do |presenter|
       .col.sizefit
         - case presenter.activity.verb
-        - when :new_article, :new_poll
+        - when :new_article, :new_poll, :new_video
           = image_tag activity.the_target.logo_url(:thumb), size: "48x48", :style => "margin-right:15px;padding-top:5px;"  
         - else 
           = image_tag activity.the_actor.avatar_url(:thumb), size: "48x48", :style => "margin-right:15px;padding-top:5px;" 

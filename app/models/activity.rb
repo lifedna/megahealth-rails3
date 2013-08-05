@@ -9,23 +9,31 @@ class Activity
     target_object :community
   end
 
-  activity :new_question do 
-    actor :user
-    object :question
-    target_object :community
-  end
-
-  activity :new_topic do 
-    actor :user
-    object :topic
-    target_object :community
-  end
-
   activity :new_poll do 
     actor :user
     object :poll
     target_object :community
   end
+
+  activity :new_video do 
+    actor :user
+    object :video
+    target_object :community
+  end
+
+  # activity :new_question do 
+  #   actor :user
+  #   object :question
+  #   target_object :community
+  # end
+
+  # activity :new_topic do 
+  #   actor :user
+  #   object :topic
+  #   target_object :community
+  # end
+
+
 
   activity :new_comment do 
     actor :user
@@ -33,17 +41,17 @@ class Activity
     target_object :community
   end
 
-  activity :join do
-    actor :user
-    object :community
-    target_object :community
-  end
+  # activity :join do
+  #   actor :user
+  #   object :community
+  #   target_object :community
+  # end
 
-  activity :leave do
-    actor :user
-    object :community
-    target_object :community
-  end  
+  # activity :leave do
+  #   actor :user
+  #   object :community
+  #   target_object :community
+  # end  
 
   default_scope desc(:created_at)
     

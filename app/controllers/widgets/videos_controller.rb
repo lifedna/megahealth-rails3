@@ -10,8 +10,9 @@ class Widgets::VideosController < ApplicationController
 
   def create
     @video_list = VideoList.find(params[:video_list_id])
-    if Video.create(params[:video])
-      # current_user.publish_activity(:new_poll, :object => @poll, :target_object => @poll_set.community)
+    @video = Video.new(params[:video])
+    if @video.save
+      # current_user.publish_activity(:new_video, :object => @video, :target_object => @video_list.community)
       redirect_to community_section_path(@video_list.community, @video_list.section) 
     else  
       render :action => "new"

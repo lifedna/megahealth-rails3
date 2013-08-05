@@ -33,7 +33,7 @@
     .float-right
       #{link_to "> #{@poll.poll_set.name}", show_community_poll_set_url(@poll.community, @poll.poll_set)}
     .col
-      %h3 #{@poll.name}
+      %h3 #{@poll.title}
       %small #{@poll.created_at}
       %ul.left
         - @poll.options.each do |option|

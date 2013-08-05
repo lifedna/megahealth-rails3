@@ -46,6 +46,11 @@
           = f.label "网页地址"
           = f.text_field :url
         %p
+          = f.label "简介"
+          = f.text_area :body, size: "60x10"
+        %p
+          = f.hidden_field :user_id, :value => current_user.id   
+        %p
           = f.hidden_field :community_id, :value => @video_list.community.id
         %p
           = f.hidden_field :video_list_id, :value => @video_list.id    

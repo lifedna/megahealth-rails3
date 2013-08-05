@@ -3,8 +3,9 @@ class BlogsController < ApplicationController
   # impressionist :actions=>[:show]
 
   def index
-    @user = User.find params[:id]
-    @blogs = @user.blogs
+    # @user = User.find params[:id]
+    # @blogs = @user.blogs
+    @blogs = Blog.all
   end
 
   def new

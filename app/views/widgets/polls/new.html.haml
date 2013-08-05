@@ -40,7 +40,9 @@
       = nested_form_for @poll, :url => {:action => "create"} do |f|
         %p
           = f.label "投票主题："
-          = f.text_field :name
+          = f.text_field :title
+        %p
+          = f.hidden_field :user_id, :value => current_user.id   
         %p
           = f.hidden_field :poll_set_id, :value => @poll_set.id  
         %p

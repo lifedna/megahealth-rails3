@@ -2,7 +2,7 @@
 class ContentFilter
   include Mongoid::Document
 
-  field :content, type: Hash, default: {"文章" => "1", "日记" => "1", "视频" => "0", "话题" => "0", "问答" => "0"}
+  field :content, type: Hash, default: {"文章" => "1", "视频" => "1", "话题" => "1", "问答" => "1", "投票" => "1"}
   field :phrs, type: Hash
 
   belongs_to :user	
@@ -14,8 +14,8 @@ class ContentFilter
       case key
         when '文章'
           klass << 'Article'
-        when '日记'  
-          klass << 'Blog'
+        when '投票'  
+          klass << 'Poll'
         when '视频'  
           klass << 'Video'
         when '话题'  

@@ -21,14 +21,14 @@
     .col.size2of3
       .padding-r20
         .title.margin-b30
-          %h2.float-left 热门内容
+          %h2.float-left 热点内容
           %a.settings.float-right 
-            %span.icon.icon-cog &nbsp;精选设置 
+            %span.icon.icon-cog &nbsp;内容设置 
           .col.slidediv
             .settings-block
               = form_for @content_filter, :url => content_filter_url do |f|
                 .col
-                  %h4 显示大健康的热点内容。你还希望多看点什么？
+                  %h4 显示大健康的热点内容。
                   - @content_filter.content.each do |k, v|
                     .col.size1of3
                       = f.fields_for :content do |c|

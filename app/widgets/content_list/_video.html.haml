@@ -1,0 +1,13 @@
+- present item, VideoPresenter do |presenter|
+  %h4 #{presenter.title}    
+  %p 
+    %small{:style => "color: #999;"} #{presenter.metadata}  
+  %p #{presenter.text}  
+
+  - unless item.tags.nil?
+    .tags
+      %ul.nav.blocks
+        - item.tags.each do |tag|
+          %li
+            %a #{tag}
+  .source #{presenter.stats} 

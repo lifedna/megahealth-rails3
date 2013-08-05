@@ -1,6 +1,6 @@
 - if poll.answered_by?(current_user)
   .cell
-    %h3 #{poll.name}
+    %h3 #{poll.title}
     %small #{poll.created_at}
     %ul.left
       - poll.options.each do |option|
@@ -13,7 +13,7 @@
 - else      
   = form_tag answer_community_poll_path(poll.community, poll), :method => "get" do 
     .cell
-      %h3 #{poll.name}
+      %h3 #{poll.title}
       = hidden_field_tag "poll[id]", poll.id
       - if poll.multiple_allowed
         - poll.options.each_with_index do |option, index|

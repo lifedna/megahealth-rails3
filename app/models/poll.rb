@@ -1,16 +1,16 @@
-class Poll
+class Poll < Content
   include Mongoid::Document
   include Mongoid::Timestamps
 
-  field :name, type: String
-  field :details, type: String
+  # field :name, type: String
+  # field :details, type: String
   field :active, type: Boolean, default: true
   field :multiple_allowed, type: Boolean, default: false
   field :max_answers, type: Integer
   field :end_at, type: Time
   # field :vote_count, type: Integer
 
-  validates :name, :presence => true
+  # validates :name, :presence => true
 
   has_many :options, :class_name => "PollOption", :dependent =>:delete, :autosave => true 
   accepts_nested_attributes_for :options, :reject_if => lambda { |a| a[:name].blank? }, :allow_destroy => true

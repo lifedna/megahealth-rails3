@@ -45,6 +45,8 @@
         %p
           = f.text_area :body, :size => "60x120", :class => "redactor"
         %p
+          = f.hidden_field :user_id, :value => current_user.id   
+        %p
           = f.hidden_field :community_id, :value => @column.community.id
         %p
           = f.hidden_field :column_id, :value => @column.id    

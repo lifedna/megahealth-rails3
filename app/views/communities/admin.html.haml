@@ -44,7 +44,7 @@
           = f.label "主治疾病:"
           = f.text_field :conditions  
         %p
-          = f.check_box :online, checked: (@community.online == "1" ? "checked" : "")    
+          = f.check_box :offline, checked: (@community.offline == "1" ? "checked" : "")    
           = f.label "维护中"
         %p  
           = f.label "维护原因："

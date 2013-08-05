@@ -10,7 +10,7 @@ class Widgets::ArticlesController < ApplicationController
     @article = Article.new(params[:article])
     if @article.save 
       flash[:notice] = "Article saved successfully."
-      current_user.publish_activity(:new_article, :object => @article, :target_object => @column.community)
+      # current_user.publish_activity(:new_article, :object => @article, :target_object => @column.community)
       redirect_to community_section_path(@column.community, @column.section)
     else
       flash[:notice] = "Failed to save article."    

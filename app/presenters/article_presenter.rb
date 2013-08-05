@@ -28,7 +28,7 @@ class ArticlePresenter < BasePresenter
   def stats
   	out ||= []
   	out << "浏览15次"
-  	out << "10人推荐"
+  	out << "10人收藏"
 
   	return raw out.join(" &middot; ")
   end

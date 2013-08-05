@@ -6,8 +6,11 @@
     %h2 #{@blog.title}
     %small 
       #{@blog.created_at.strftime("%Y-%m-%d %H:%M:%S")} #{@blog.category}
-    %p #{raw @blog.body}
-    %p #{@blog.tags}
+    .col   
+      %p #{raw @blog.body}
+    .col  
+      %p #{@blog.tags}
+
     %hr
     %ul
       - @blog.comments.each do |comment|
