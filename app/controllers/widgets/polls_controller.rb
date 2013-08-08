@@ -27,6 +27,8 @@ class Widgets::PollsController < ApplicationController
     @community = Community.find params[:community_id]
     @current_section = @poll.poll_set.section
     @sections = @community.sections
+
+    impressionist @poll
   end
 
   def update

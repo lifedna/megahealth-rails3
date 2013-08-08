@@ -31,6 +31,8 @@ class BlogsController < ApplicationController
     @comment = @blog.comments.build
     @user = @blog.user
     @blogs = @blog.user.blogs
+
+    impressionist @blog
   end
 
   def comment

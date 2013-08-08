@@ -60,6 +60,8 @@ gem 'redactor-rails'
 # social share feature
 gem 'social-share-button'
 
+gem 'impressionist'
+
 group :development do
   gem 'better_errors'
   gem 'binding_of_caller', :platforms=>[:mri_19, :rbx]

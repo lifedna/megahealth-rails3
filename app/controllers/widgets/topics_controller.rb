@@ -23,6 +23,8 @@ class Widgets::TopicsController < ApplicationController
     @community = Community.find params[:community_id]
     @current_section = @topic.forum.section
     @sections = @community.sections
+
+    impressionist @topic
   end
 
   def comment

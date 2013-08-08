@@ -27,7 +27,7 @@ class BlogPresenter < BasePresenter
 
   def stats
     out ||= []
-    out << "浏览15次"
+    out << "浏览#{blog.impressionist_count(:filter=>:ip_address)}次"
     out << "#{blog.likers_count}人喜欢"
 
     return raw out.join(" &middot; ")

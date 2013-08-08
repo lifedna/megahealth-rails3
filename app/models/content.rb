@@ -13,7 +13,9 @@ class Content
   paginates_per 5
 
   taggable
-
+  # impressionist gem
+  is_impressionable :counter_cache => true
+  
   field :title, type: String
   field :body, type: String
   field :category, type: String

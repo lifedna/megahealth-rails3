@@ -27,6 +27,8 @@ class Widgets::ArticlesController < ApplicationController
     @community = Community.find params[:community_id]
     @current_section = @article.column.section
     @sections = @community.sections
+
+    impressionist @article
   end
 
   def comment

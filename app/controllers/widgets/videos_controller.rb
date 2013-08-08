@@ -28,6 +28,8 @@ class Widgets::VideosController < ApplicationController
     @community = Community.find params[:community_id]
     @current_section = @video.video_list.section
     @sections = @community.sections
+
+    impressionist @video
   end
 
   def update
