@@ -60,6 +60,7 @@ gem 'redactor-rails'
 # social share feature
 gem 'social-share-button'
 
+# tracks impressions and page views
 gem 'impressionist'
 
 group :development do
