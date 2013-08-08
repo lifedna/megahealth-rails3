@@ -119,15 +119,23 @@
           %dt 热点文章
           %dd
             %ul.links
-              - Community.all.limit(5).each do |c|
-                %li #{link_to c.name, community_path(c)}    
+              - @hot_articles.each do |a|
+                %li #{link_to a.title, show_community_article_path(a.community, a)}    
 
         %dl.highlight.blue
           %dt 热点话题
           %dd
             %ul.links
-              - Community.all.limit(5).each do |c|
-                %li #{link_to c.name, community_path(c)}                  
+              - @hot_topics.each do |t|
+                %li #{link_to c.title, show_community_topic_path(t.community, t)}  
+
+        %dl.highlight.purple
+          %dt 最受欢迎日记
+          %dd
+            %ul.links
+              - @hot_blogs.each do |b|
+                %li #{link_to b.title, blog_path(b)}
+
         / .section
         /   .header
         /     %h5 推荐文章

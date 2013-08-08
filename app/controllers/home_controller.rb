@@ -15,9 +15,13 @@ class HomeController < ApplicationController
   
   def explore   
     @content_filter = current_user.content_filter  
+    @hot_articles = Article.hot.limit(5)
+    @hot_topics = Topic.hot.limit(5)
+    @hot_blogs = Blog.hot.limit(5)
   end
 
   def dashboard
+    @communities = current_user.communities
   end	
 
   def profile

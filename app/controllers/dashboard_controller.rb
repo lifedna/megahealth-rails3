@@ -1,7 +1,9 @@
+# encoding: UTF-8
 class DashboardController < ApplicationController
   before_filter :authenticate_user!
 
   def index
+    
   end
 
   def phrs
@@ -10,12 +12,14 @@ class DashboardController < ApplicationController
   end
 
   def stars
-    if params[:category]
-      @contents = current_user.liked_objects - current_user.liked_blogs
-      @contents.select! {|i| i.category == params[:category]}
+    @contents = current_user.liked_objects - current_user.liked_blogs
+
+    if params[:category]      
+      @stared = @contents.select {|i| i.category == params[:category]}
     else
-      @contents = current_user.liked_objects - current_user.liked_blogs
+      @stared = @contents
     end
+    return @stared
   end
 
   def blogs

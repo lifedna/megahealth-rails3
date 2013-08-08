@@ -20,28 +20,28 @@
         %ul.stat.left.nav
           %li
             %a{:href => stars_path(:category => "健康知识")} 
-              %span.data 12 
+              %span.data #{@contents.select {|i| i.category == "健康知识"}.nil? ? "0" : @contents.select {|i| i.category == "健康知识"}.size}
               健康知识 
           %li 
             %a{:href => stars_path(:category => "就医指南")} 
-              %span.data 9
+              %span.data #{@contents.select {|i| i.category == "就医指南"}.nil? ? "0" : @contents.select {|i| i.category == "就医指南"}.size}
               就医指南  
           %li 
             %a{:href => stars_path(:category => "治疗交流")}  
-              %span.data 36
+              %span.data #{@contents.select {|i| i.category == "治疗交流"}.nil? ? "0" : @contents.select {|i| i.category == "治疗交流"}.size}
               治疗交流 
           %li 
             %a{:href => stars_path(:category => "护理园地")}  
-              %span.data 5
+              %span.data #{@contents.select {|i| i.category == "护理园地"}.nil? ? "0" : @contents.select {|i| i.category == "护理园地"}.size} 
               护理园地
           %li 
             %a{:href => stars_path(:category => "用药常识")}  
-              %span.data 2
+              %span.data #{@contents.select {|i| i.category == "用药常识"}.nil? ? "0" : @contents.select {|i| i.category == "用药常识"}.size} 
               用药常识    
 
   .col.size3of4  
     .panel.margin-l30
-      - @contents.each do |item|
+      - @stared.each do |item|
         .body{:style => "padding:20px;"}
           %h4
             #{item.title}

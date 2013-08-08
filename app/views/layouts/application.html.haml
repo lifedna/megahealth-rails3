@@ -10,10 +10,9 @@
         = yield(:head)
   %body{:class => "#{controller_name} #{action_name}"}
     #container.container
-      %header
-        = render 'layouts/navigation'
-        .site-center
-          = render 'layouts/messages'
+      = render 'layouts/navigation'
+      .site-center
+        = render 'layouts/messages'
       #main{:role => "main"}
         = yield
       %footer
