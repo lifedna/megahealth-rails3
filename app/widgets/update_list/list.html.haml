@@ -17,7 +17,8 @@
             #{presenter.text}
           - if presenter.content? && first_image_url(activity.the_object.body)   
             .col.sizefit.float-right
-              = image_tag first_image_url(activity.the_object.body), size: "100x80"
+              .margin-b10
+                = image_tag first_image_url(activity.the_object.body), size: "100x80"
           .col.sizefill    
             .col.color-grey     
               #{presenter.metadata}
