@@ -1,14 +1,16 @@
 - present item, BlogPresenter do |presenter|
-  %h4 #{presenter.title}    
-  %p{:style => "color: #999;"} 
-    %small #{presenter.metadata}  
+  %h4 #{presenter.title}   
   - if presenter.image
     .col.sizefit.float-right
       #{presenter.image}
     .col.sizefill
+      %p{:style => "color: #999;"} 
+        %small #{presenter.metadata}
       .margin-r20
         %p #{presenter.text} 
   - else
+    %p{:style => "color: #999;"} 
+      %small #{presenter.metadata}
     %p #{presenter.text}  
 
   - unless item.tags.nil?
