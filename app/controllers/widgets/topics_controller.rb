@@ -1,4 +1,8 @@
 class Widgets::TopicsController < ApplicationController
+  has_widgets do |root|
+    root << widget(:like)
+  end
+  
   def new
   	@forum = Forum.find params[:forum_id]
   	@topic = Topic.new

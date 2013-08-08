@@ -34,6 +34,8 @@ class LikeWidget < AuthorizableWidget
     case instance.class.to_s
     when "Blog"
       @text  = "喜欢"
+    when "Topic"
+      @text  = "关注"  
     else
       @text = "收藏"
     end

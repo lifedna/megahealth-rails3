@@ -27,11 +27,11 @@ class Activity
   #   target_object :community
   # end
 
-  # activity :new_topic do 
-  #   actor :user
-  #   object :topic
-  #   target_object :community
-  # end
+  activity :new_topic do 
+    actor :user
+    object :topic
+    target_object :community
+  end
 
 
 

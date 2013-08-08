@@ -19,8 +19,9 @@ class TopicPresenter < BasePresenter
 
   def stats
     out ||= []
-    out << "9条回复"
-    out << "10人关注"
+    out << "浏览#{topic.impressionist_count(:filter=>:session_hash)}次"
+    out << "#{topic.comments.size}条回复"
+    out << "#{topic.likers_count}人关注"
 
     return raw out.join(" &middot; ")
   end
