@@ -15,16 +15,17 @@
         .user-content
           %h4
             #{presenter.text}
-          - if presenter.content? && first_image_url(activity.the_object.body)   
-            .col.sizefit.float-right
-              .margin-b10
-                = image_tag first_image_url(activity.the_object.body), size: "100x80"
-          .col.sizefill    
-            .col.color-grey     
-              #{presenter.metadata}
-            .col                    
-              .margin-r10 
-                %span #{truncate strip_tags(activity.the_object.body), length: 80, omission: '.....'}
+          .col  
+            - if presenter.content? && first_image_url(activity.the_object.body)   
+              .col.sizefit.float-right
+                .margin-b10
+                  = image_tag first_image_url(activity.the_object.body), size: "100x80"
+            .col.sizefill    
+              .col.color-grey     
+                #{presenter.metadata}
+              .col                    
+                .margin-r10 
+                  %span #{truncate strip_tags(activity.the_object.body), length: 80, omission: '.....'}
               
 
 / - @activities.each do |activity|
