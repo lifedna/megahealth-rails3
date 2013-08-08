@@ -27,7 +27,7 @@ class BlogPresenter < BasePresenter
 
   def stats
     out ||= []
-    out << "浏览#{blog.impressionist_count(:filter=>:session_hash)}次"
+    out << "#{blog.impressionist_count(:filter=>:session_hash)}次浏览"
     out << "#{blog.comments.size}条回复"
     out << "#{blog.likers_count}人喜欢"
 
