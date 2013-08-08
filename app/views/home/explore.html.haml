@@ -127,7 +127,7 @@
           %dd
             %ul.links
               - @hot_topics.each do |t|
-                %li #{link_to c.title, show_community_topic_path(t.community, t)}  
+                %li #{link_to t.title, show_community_topic_path(t.community, t)}  
 
         %dl.highlight.purple
           %dt 最受欢迎日记
