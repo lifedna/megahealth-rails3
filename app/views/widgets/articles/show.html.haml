@@ -11,8 +11,9 @@
     .col
       %h3 #{@article.title}
       %small #{@article.created_at.strftime("%Y-%m-%d %H:%M:%S")}
-      %p
-        #{raw @article.body}
+      .col
+        %p
+          #{raw @article.body}
       .col.sizefit.float-right
         = render_widget :like, :display, :instance => @article  
       .col.sizefill
