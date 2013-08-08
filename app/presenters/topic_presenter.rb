@@ -14,7 +14,7 @@ class TopicPresenter < BasePresenter
   end
 
   def metadata
-  	raw "#{topic.user.name} &middot; #{time_ago_in_words(topic.created_at).capitalize}前" 
+  	raw "<span class ='icon icon-16 icon-user'></span>#{topic.user.name} &middot; #{time_ago_in_words(topic.created_at).capitalize}前" 
   end
 
   def stats

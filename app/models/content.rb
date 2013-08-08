@@ -30,7 +30,6 @@ class Content
 
   belongs_to :user
 
-  # default_scope desc(:created_at)
   scope :newest, desc(:created_at)
   scope :hot, desc(:likers_count)
   scope :popular, desc(:impressionist_count)

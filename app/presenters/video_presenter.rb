@@ -14,7 +14,7 @@ class VideoPresenter < BasePresenter
   end
 
   def metadata
-  	raw "#{video.community.name}社群 &middot; #{time_ago_in_words(video.created_at)}前"
+  	raw "<span class ='icon icon-16 icon-group'></span>#{video.community.name}社群 &middot; #{time_ago_in_words(video.created_at)}前"
   end
 
   def stats

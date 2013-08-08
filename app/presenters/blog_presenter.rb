@@ -22,7 +22,7 @@ class BlogPresenter < BasePresenter
   end
 
   def metadata
-  	raw "#{blog.user.name} &middot; #{time_ago_in_words(blog.created_at).capitalize}前" 
+  	raw "<span class ='icon icon-16 icon-user'></span>#{blog.user.name} &middot; #{time_ago_in_words(blog.created_at).capitalize}前" 
   end
 
   def stats

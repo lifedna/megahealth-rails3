@@ -45,7 +45,7 @@ class ActivityPresenter < BasePresenter
     when :new_poll
       out = %(#{raw link_to(activity.the_target.name, activity.the_target)} 发起了新投票 #{raw link_to(activity.the_object.title, show_community_poll_path(activity.the_object.community, activity.the_object))})
     when :new_comment
-      out = %(#{raw link_to(activity.the_actor.name, activity.the_actor)} 评论了话题 #{raw link_to(activity.the_object.commentable.title, show_community_topic_path(activity.the_object.commentable.community, activity.the_object.commentable))})
+      out = %(#{raw link_to(activity.the_actor.name, activity.the_actor)} 回复了话题 #{raw link_to(activity.the_object.commentable.title, show_community_topic_path(activity.the_object.commentable.community, activity.the_object.commentable))})
     when :join
       out = %(#{raw link_to(activity.the_actor.name, activity.the_actor)} 加入了社群 #{raw link_to(activity.the_object.name, activity.the_object)})   
     else
