@@ -1,4 +1,4 @@
-require 'genghis'
+# require 'genghis'
 
 MegahealthRails3::Application.routes.draw do
   # different uploaded versions for avatar
@@ -116,5 +116,5 @@ MegahealthRails3::Application.routes.draw do
     post 'update_password', :on => :member, :as => :upadte_password
   end
 
-  mount Genghis::Server.new, :at => '/genghis'
+  # mount Genghis::Server.new, :at => '/genghis'
 end

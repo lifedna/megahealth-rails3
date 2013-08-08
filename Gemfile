@@ -19,7 +19,7 @@ gem 'simple_form'
 gem 'nested_form'
 
 # The single-file MongoDB admin app
-gem 'genghisapp'
+# gem 'genghisapp'
 
 # mongoid activity stream
 gem 'streama'
