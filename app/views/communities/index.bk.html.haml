@@ -1,0 +1,173 @@
+- @communities = "active"
+
+/Page
+.site-center.center-page
+  / .section.your-communities
+  /   .title.margin-b20
+  /     %h2 我的地儿
+  /   .my-community-list
+  /     - @my_communities.each_with_index do |c, index|
+  /       - if index < 3
+  /         .my-community
+  /           .col.sizefit
+  /             %a{:href => "#{community_path(c)}", :style => "margin-right:10px;"}
+  /               %img{:src => "#{asset_path 'doctors/126708301394155.jpg'}"}
+  /           .col.sizefill
+  /             %b #{c.name}
+  /             %p{:style => "color:#777; font-size:80%;"} 
+  /               儿科 主任医师
+  /               %br
+  /               4231 个成员 
+  /             .last-update
+  /               更新于上午11:15
+  /       - else
+  /         .my-community.wrapper
+  /           .col.sizefit
+  /             %a{:href => "#{community_path(c)}", :style => "margin-right:10px;"}
+  /               %img{:src => "#{asset_path 'doctors/126708301394155.jpg'}"}
+  /           .col.sizefill
+  /             %b #{c.name}
+  /             %p{:style => "color:#777; font-size:80%;"} 
+  /               儿科 主任医师
+  /               %br
+  /               4231 个成员 
+  /             .last-update
+  /               更新于上午11:15    
+
+  /     - if @my_communities.empty?
+  /       %p{:style => "color: #999;"}
+  /         你还没有加入任何社群，快去搜索你感兴趣的社群吧！        
+       
+            
+  / .reveal-community-wrapper
+  /   = link_to "显示全部(#{@my_communities.count})", "#", :id => "reveal-wrapper" if @my_communities.count > 3
+
+
+  .search-communities.text-center.margin-b20{:style => "background: #f0f6f3; padding: 10px 20px 0 20px;"}
+    %h2 探索社群
+    %form.explore-search-big
+      .outer
+        .inner
+          %input{:type => "text", :id => "q", :autocomplete => "off", :maxlength => "100"}
+          %input{:type => "submit", :id =>"explore-search-submit", :style => "font-size: 16px;" }
+
+  .section.organization
+    .title.margin-b20
+      %h2.float-left
+        新增社群
+      %a.float-right{:href => "category"}
+        更多
+        %span.icon.icon-double-angle-right.no-margin
+    .community-tiles   
+      .community-tile.margin-b30    
+        - Community.limit(3).each do |c|    
+          .col.size1of3
+            .white-content-container.margin-r20 
+              .col.sizefit
+                .cell
+                  %a
+                    = image_tag c.logo_url(:thumb), width: "48px", height: "48px"  
+                  %br
+                  - case c.category
+                  - when "医生"
+                    %span.icon.icon-user-md{:style => "font-size: 10px"} 
+                      医生
+                  - when "健康"
+                    %span.icon.icon-leaf{:style => "font-size: 10px"} 
+                      健康
+                  - when "病友"
+                    %span.icon.icon-link{:style => "font-size: 10px"} 
+                      病友      
+              .col.sizefill
+                .cell
+                  %h4 
+                    #{link_to c.name, community_path(c)}
+                  %p 
+                    4231 个成员 在此聚集
+                    %br
+                    主任医师 副教授
+                  .info
+                    %p
+                      名老中医继承人，中西医结合治疗内科常见病：如高血压病、糖尿病、冠心病等，尤其擅长治疗各种肿瘤、包括...
+
+                            
+  .section.trending
+    .title.margin-b20
+      %h2.float-left
+        人气社群
+      %a.float-right{:href => "category"}
+        更多
+        %span.icon.icon-double-angle-right.no-margin
+    .community-titles
+      .community-tile.margin-b30
+      - Community.limit(3).each do |c| 
+        .col.size1of3
+          .white-content-container.margin-r20 
+            .col.sizefit
+              .cell
+                %a
+                  = image_tag c.logo_url(:thumb), width: "48px", height: "48px"  
+                %br  
+                - case c.category
+                - when "医生"
+                  %span.icon.icon-user-md{:style => "font-size: 10px"} 
+                    医生
+                - when "健康"
+                  %span.icon.icon-leaf{:style => "font-size: 10px"} 
+                    健康
+                - when "病友"
+                  %span.icon.icon-link{:style => "font-size: 10px"} 
+                    病友   
+            .col.sizefill
+              .cell
+                %h4 
+                  #{link_to c.name, community_path(c)}
+                %p 4231 个成员 在此聚集
+                .info
+                  %p
+                    美容护肤 养生保健，内调外养 健康美容，中医美容保健，祛斑，除痘，美白，保湿，抗皱，眼袋，黑眼圈，减肥 丰胸，延缓衰老，...
+      
+  .section.staff-picks
+    .title.margin-b20
+      %h2.float-left
+        成长社群
+      %a.float-right{:href => "category"} 
+        更多
+        %span.icon.icon-double-angle-right.no-margin 
+    .community-tiles
+      .community-tile.margin-b30
+        - Community.category("病友").each do |c|
+          .col.size1of3
+            .white-content-container.margin-r20 
+              .col.sizefit
+                .cell
+                  %a
+                    %img{:src => "#{asset_path 'bingyouhui/thumbnail_1338879504.png'}"} 
+                  %br  
+                  - case c.category
+                  - when "医生"
+                    %span.icon.icon-user-md{:style => "font-size: 10px"} 
+                      医生
+                  - when "健康"
+                    %span.icon.icon-leaf{:style => "font-size: 10px"} 
+                      健康
+                  - when "病友"
+                    %span.icon.icon-link{:style => "font-size: 10px"} 
+                      病友  
+              .col.sizefill
+                .cell
+                  %h4 
+                    #{link_to c.name, community_path(c)}
+                  %p 4231 个成员 在此聚集
+                  .info
+                    %p
+                      享受跑步的乐趣 running Beijing　 北京马拉松 　http://www.beijing-marathon.com/ Shanghai　　 上海马拉松 　...
+
+:javascript
+  $('.wrapper').hide();
+  
+  $('#reveal-wrapper').click(function(e){
+    e.preventDefault();
+    $('.wrapper').toggle();
+    $(this).hide();
+  });

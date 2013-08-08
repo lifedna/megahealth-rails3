@@ -1,0 +1,293 @@
+- @healthportal = "active"
+
+/ Page
+.site-center.center-page  
+  .page-head{:style => "margin-bottom:30px;"}
+    .col.sizefit
+      = image_tag current_user.avatar_url(:thumb), size: "100x100"
+    .col.sizefill
+      .col
+        %h1 #{current_user.name}
+      .col.menu
+        %ul.nav
+          %li 健康记录
+          %li 日记
+          %li 留言板
+          %li 设置  
+    
+  .pagy-content
+    .col.size2of3  
+      .user-widget.margin-b20
+        .widget-head
+          .col.sizefit.float-right
+            = link_to '+ 写日记', new_blog_url, :class => "button"
+          .col.sizefill
+            %h2 我的日记
+        .widget-body
+          - if @my_blogs.empty?
+            %p{:style => "color: #999;"} 用日记来记录疾病有关的经历、心情和感想。
+          - @my_blogs.each do |b|
+            .margin-b10
+              %h4 #{link_to b.title, blog_path(b)}
+              .col
+                %small #{b.created_at.strftime("%Y-%m-%d %H:%M:%S")}
+              .col
+                - if first_image_url(b.body)
+                  .col.sizefit
+                    .margin-r10
+                      = image_tag first_image_url(b.body), size: "60x60"  
+                .col.sizefill
+                  %p #{truncate strip_tags(b.body), length: 120, omission: '.....'}
+
+      .user-widget.margin-b20
+        .widget-head
+          .col.sizefit.float-right
+            = link_to '+ 添加', new_phr_path, :class => "button"
+          .col.sizefill
+            %h2 我关心的人
+        .widget-body    
+          - @my_phrs.each do |phr|
+            .col.size1of4.health-record
+              .col.sizefit
+                = link_to image_tag(current_user.avatar_url(:thumb), size: "60x680", :style => "margin-right:10px;"), phr_path(phr)               
+              .col.sizefill
+                %span #{link_to phr.name, phr_path(phr)}
+                %p{:style => "color:#999; font-size:80%;"}
+                  #{phr.relationship}
+                  %br
+                  %a{:href => "#"} 编辑
+
+      .user-widget.margin-b20
+        .widget-head
+          %h2 我的收藏夹
+        .widget-body    
+          .my-list.margin-t20
+            %ul.unstyled
+              %li
+                .col
+                  %dl
+                    %dt
+                      %a 关于贝贝的发病经历和治疗交流
+                      .small.delete.float-right 取消收藏
+                    %dd
+                      .source.small   
+                        病友日记
+                        %span.middot &middot;
+                        贝贝妈妈
+                        %span.middot &middot;
+                        3月28日
+
+              %li
+                .col
+                  %dl
+                    %dt
+                      %a 如何才可以挂到范瑞强的号？电话、网上都不行
+                      .small.delete.float-right 取消收藏
+                    %dd
+                      .source.small   
+                        问答
+                        %span.middot &middot;
+                        糖尿病病友会
+                        %span.middot &middot;
+                        3月28日
+              %li
+                .col
+                  %dl
+                    %dt
+                      %a 如何才可以挂到范瑞强的号？电话、网上都不行
+                      .small.delete.float-right 取消收藏
+                    %dd
+                      .source.small   
+                        食补
+                        %span.middot &middot;
+                        养生苑
+                        %span.middot &middot;
+                        3月28日
+              %li
+                .col
+                  %dl
+                    %dt
+                      %a 如何才可以挂到范瑞强的号？电话、网上都不行
+                      .small.delete.float-right 取消收藏
+                    %dd
+                      .source.small   
+                        问答
+                        %span.middot &middot;
+                        糖尿病病友会
+                        %span.middot &middot;
+                        3月28日
+                              
+      .user-widget.margin-b20
+        .widget-head
+          %h2 我的社群
+        .widget-body    
+          .my-community-list
+            - @my_communities.each_with_index do |c, index|
+              - if index < 3
+                .my-community
+                  .col.sizefit
+                    %a{:href => "#{community_path(c)}", :style => "margin-right:10px;"}
+                      %img{:src => "#{asset_path 'doctors/126708301394155.jpg'}"}
+                  .col.sizefill
+                    %b #{c.name}
+                    %p{:style => "color:#777; font-size:80%;"} 
+                      儿科 主任医师
+                      %br
+                      4231 个成员 
+                    .last-update
+                      更新于上午11:15
+              - else
+                .my-community.wrapper
+                  .col.sizefit
+                    %a{:href => "#{community_path(c)}", :style => "margin-right:10px;"}
+                      %img{:src => "#{asset_path 'doctors/126708301394155.jpg'}"}
+                  .col.sizefill
+                    %b #{c.name}
+                    %p{:style => "color:#777; font-size:80%;"} 
+                      儿科 主任医师
+                      %br
+                      4231 个成员 
+                    .last-update
+                      更新于上午11:15    
+
+            - if Community.all.empty?
+              %p{:style => "color: #999;"}
+                你还没有加入任何社群，快去搜索你感兴趣的社群吧！        
+       
+            
+          .reveal-community-wrapper
+            = link_to "显示全部(#{@my_communities.count})", "#", :id => "reveal-wrapper" if @my_communities.count > 3
+
+
+      / .user-widget.margin-b20
+      /   %h2 我的推荐
+      /   / %p{:style => "color: #999;"} 在大健康上收藏你认为好的内容。
+      /   .widget-body
+      /     .my-list
+      /       %ul.unstyled
+      /         %li
+      /           .col.sizefit.float-right
+      /             .source.small 3月28日
+      /           .col.sizefill
+      /             %a 如何才可以挂到范瑞强的号？电话、网上都不行
+      /         %li
+      /           .col.sizefit.float-right
+      /             .source.small 3月28日
+      /           .col.sizefill
+      /             %a 如何才可以挂到范瑞强的号？电话、网上都不行
+      /         %li
+      /           .col.sizefit.float-right
+      /             .source.small 3月28日
+      /           .col.sizefill
+      /             %a 如何才可以挂到范瑞强的号？电话、网上都不行
+
+      / .user-widget.margin-b20
+      /   %h2 我的喜欢
+      /   / %p{:style => "color: #999;"} 在大健康上收藏你认为好的内容。  
+      /   .widget-body
+      /     .my-list
+      /       %ul.unstyled
+      /         %li
+      /           .col.sizefit.float-right
+      /             .source.small 3月28日
+      /           .col.sizefill
+      /             %a 如何才可以挂到范瑞强的号？电话、网上都不行
+      /         %li
+      /           .col.sizefit.float-right
+      /             .source.small 3月28日
+      /           .col.sizefill
+      /             %a 如何才可以挂到范瑞强的号？电话、网上都不行
+      /         %li
+      /           .col.sizefit.float-right
+      /             .source.small 3月28日
+      /           .col.sizefill
+      /             %a 如何才可以挂到范瑞强的号？电话、网上都不行
+
+      / .user-widget.margin-b20
+      /   %h2 我的关注
+      /   / %p{:style => "color: #999;"} 在大健康上收藏你认为好的内容。  
+      /   .widget-body
+      /     .my-list
+      /       %ul.unstyled
+      /         %li
+      /           .col.sizefit.float-right
+      /             .source.small 3月28日
+      /           .col.sizefill
+      /             %a 如何才可以挂到范瑞强的号？电话、网上都不行
+      /         %li
+      /           .col.sizefit.float-right
+      /             .source.small 3月28日
+      /           .col.sizefill
+      /             %a 如何才可以挂到范瑞强的号？电话、网上都不行
+      /         %li
+      /           .col.sizefit.float-right
+      /             .source.small 3月28日
+      /           .col.sizefill
+      /             %a 如何才可以挂到范瑞强的号？电话、网上都不行            
+
+ 
+      
+
+    .col.size1of3
+      .margin-l20
+        .section.how-it-works
+          %a{"data-reveal-id" => "how-it-works"}
+            .action
+              .col.sizefit
+                %span.icon.icon-cogs{:style => "font-size:36px;margin-right:10px"}
+              .col.sizefill
+                %h4 如何参与大健康网
+                %p 查看 →  
+        .reveal-modal.xlarge#how-it-works
+          %h2
+            如何参与大健康
+            %sup{:style => "font-size:13px;top:-0.8em;"} MegaHealth
+          %p.margin-b20
+            记录健康、参与健康、保持健康，我为人人、人人为我
+          .col.size1of3
+            .margin-r20
+              %a.blueBox
+                %h3 填写您的健康资料
+                %p 大健康将精确推送与您身体健康相关的内容，您还可以进一步设置推送您关心的内容。
+                / %img{:src => "images/whiteArrow.png"}
+          .col.size1of3
+            .margin-r20
+              %a.blueBox
+                %h3 加入您感兴趣的社群
+                %p 连接医生、专家和病友，与他们互动。大健康会把您的社群动态推送给您，您还可以进一步设置您关心的动态。
+                / %img{:src => "images/whiteArrow.png"}
+          .col.size1of3
+            .margin-r20
+              %a.blueBox
+                %h3 评价/收藏内容
+                %p 您也可以依据您的经验对社群产生的内容是否有效进行评价，以供他人参考，同时收藏你认为有价值的内容。
+                / %img{:src => "images/whiteArrow.png"}            
+          %a.close-reveal-modal &#215;
+
+        / .section
+        /   .header
+        /     %h5 我加入的社群
+        /   .body
+        /     %ul.nav.recommendation
+        /       - Community.all.limit(5).each do |c|
+        /         %li
+        /           .col.sizefit.float-right
+        /             %img{:src => "#{asset_path 'doctors/12033.jpg'}"}  
+        /           .col.sizefill.margin-r10 
+        /             %dl
+        /               %dt #{link_to c.name, community_path(c)}
+        /               %dd
+        /                 %p 中山大学附属第三医院
+        /                 %p 皮肤科
+
+
+ 
+
+:javascript
+  $('.wrapper').hide();
+  
+  $('#reveal-wrapper').click(function(e){
+    e.preventDefault();
+    $('.wrapper').toggle();
+    $(this).hide();
+  });

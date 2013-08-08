@@ -1,34 +1,10 @@
-- @page = "dashboard"
-- @selected = "phrs"
-- @current = Phr.find params[:phr_id]
-
 
 / Page
 .site-center.center-page  
-  .page-head{:style => "margin-bottom:30px;"}
-    %ul.dashboard-tabs
-      %li 
-        %a{:href => "/dashboard", :class => (@selected == "feeds" ? "selected" : "")} 动态
-      %li 
-        %a{:href => "/dashboard/phrs", :class => (@selected == "phrs" ? "selected" : "")} 健康记录
-      %li
-        %a{:href => "/dashboard/stars", :class => (@selected == "stars" ? "selected" : "")} 收藏夹
-      %li 
-        %a{:href => "/dashboard/blogs", :class => (@selected == "blogs" ? "selected" : "")} 日记
-
-  .col.size1of4
-    .list.padding-r20 
-      %h4 我关心的人
-      .menu
-        %ul.left.nav
-          - @phrs.each do |p|
-            %li{:class => (p == @current ? "active" : "")}
-              #{link_to p.name, phr_conditions_path(p)}  
-
-      %hr
-      = link_to '新增', new_phr_path
-  .col.size3of4  
-    %h3 #{@current.name}的健康
+  %h2.margin-b30
+    健康记录
+    %small #{@phr.name}
+  .col.size2of3   
     .tab-block.top-nav           
       .tabs        
         %ul.nav
@@ -59,7 +35,15 @@
                   %td
 
         = render_widget :symptom, :display, :instance => @symptoms.first unless @symptoms.empty?
-     
+   
+  .col.size1of3
+    .margin-l20
+      %h2{:style => "text-align:right"} 我关心的人
+      .my-list.margin-t20
+        %ul.unstyled
+          - @phrs.excludes(:id => @phr.id).each do |phr|
+            %li{:style => "text-align:right; border-width:0px;"} #{link_to phr.name, phr_path(phr)}
+      
 
 
 

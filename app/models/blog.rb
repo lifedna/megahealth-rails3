@@ -3,7 +3,4 @@ class Blog < Content
 
   field :public, type: Boolean, :default => true
 
-  search_in :title, :body
-
-  belongs_to :user
 end

@@ -1,12 +1,18 @@
 class PhrsController < ApplicationController
+  def index
+    redirect_to phr_conditions_path(current_user.phrs.first) 
+  end
+
   def new
     @phr = Phr.new
+    @phrs = current_user.phrs
   end
 
   def create
-    if current_user.phrs.create(params[:phr])
+    phr = Phr.create(params[:phr])
+    unless phr.nil?
       flash[:notice] = "Health Record has been created."
-      redirect_to healthportal_url
+      redirect_to phr_conditions_url(phr)
     end
   end
 

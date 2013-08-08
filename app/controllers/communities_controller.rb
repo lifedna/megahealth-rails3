@@ -8,7 +8,11 @@ class CommunitiesController < ApplicationController
   end
 
   def index
-    @my_communities = current_user.communities
+    if params[:category] && !(params[:category] == "all")
+      @communities = Community.category(params[:category])
+    else
+      @communities = Community.all
+    end
   end
 
   def new

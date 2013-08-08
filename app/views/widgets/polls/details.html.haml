@@ -32,9 +32,9 @@
   
   .col.size2of3.margin-t20
     .float-right
-      #{link_to "> 返回#{@poll.name}", show_community_poll_url(@poll.community, @poll)}
+      #{link_to "> 返回#{@poll.title}", show_community_poll_url(@poll.community, @poll)}
     .col
-      %h3 #{@poll.name}的投票详情
+      %h3 #{@poll.title}的投票详情
       - @poll.answered_user_ids.each do |id|
         #{User.find(id).name}
         - @poll.answers(User.find(id)).each do |answer|

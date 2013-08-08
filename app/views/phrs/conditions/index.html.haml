@@ -1,53 +1,67 @@
-/ - @healthportal = "active"
+- @page = "dashboard"
+- @selected = "phrs"
+- @current = Phr.find params[:phr_id]
 
 / Page
-.site-center.center-page 
-  %h2.margin-b30 
-    健康记录
-    %small #{@phr.name}  
-  .col.size2of3  
-    .tab-block.top-nav           
-      .tabs        
-        %ul.nav
-          %li.active.active-item 
-            = link_to '疾病', phr_conditions_path(@phr)
-          %li 
-            = link_to '症状', phr_symptoms_path(@phr)
-          / %li 
-          /   %a 治疗
-    .col
-      .margin-t20
-        %a.button-link.margin-b20.add-conditions{"data-reveal-id" => "add-conditions"}  添加:疾病
-        .panel.datasheet.margin-b20
-          .head 我的数据       
-          %table.body
-            %thead
-              %tr
-                %th{:style => "width:2%"} #
-                %th{:style => "width:30%", :nowrap => "nowrap"} 名称
-                %th{:style => "width:28%", :nowrap => "nowrap"} 状况
-                %th{:style => "width:20%", :nowrap => "nowrap"} 开始时间
-                %th{:style => "width:20%", :nowrap => "nowrap"} 结束时间
-            %tbody
-              - @conditions.each_with_index do |c, index|
-                %tr.data-row{'data-id' => c.id, 'phr-id' => c.phr.id, 'data-event-url' => url_for_event(:show, :source => :condition)}
-                  %td #{index+1}
-                  %td #{c.name}
-                  %td 
-                  %td
-                  %td
+.site-center.center-page  
+  .page-head{:style => "margin-bottom:30px;"}
+    %ul.dashboard-tabs
+      %li 
+        %a{:href => "/dashboard", :class => (@selected == "feeds" ? "selected" : "")} 动态
+      %li 
+        %a{:href => "/dashboard/phrs", :class => (@selected == "phrs" ? "selected" : "")} 健康记录
+      %li
+        %a{:href => "/dashboard/stars", :class => (@selected == "stars" ? "selected" : "")} 收藏夹
+      %li 
+        %a{:href => "/dashboard/blogs", :class => (@selected == "blogs" ? "selected" : "")} 日记
 
-        = render_widget :condition, :display, :instance => @conditions.first unless @conditions.empty?
-   
-  .col.size1of3
+  .col.size1of4
+    .list{:style => "border-bottom: 1px solid #F1F1F1;padding: 0 10px 20px 0;"} 
+      %h4 我关心的人
+      .menu
+        %ul.left.nav
+          - @phrs.each do |p|
+            %li{:class => (p == @current ? "active" : "")}
+              #{link_to p.name, phr_path(p)}
+
+    .margin-t20
+      = link_to '增加健康记录', new_phr_path
+  .col.size3of4
     .margin-l20
-      %h2{:style => "text-align:right"} 我关心的人
-      .my-list.margin-t20
-        %ul.unstyled
-          - @phrs.excludes(:id => @phr.id).each do |phr|
-            %li{:style => "text-align:right; border-width:0px;"} #{link_to phr.name, phr_path(phr)}
+      %h3 #{@current.name}的健康
+      .tab-block.top-nav           
+        .tabs        
+          %ul.nav
+            %li.active.active-item 
+              = link_to '疾病', phr_conditions_path(@phr)
+            %li 
+              = link_to '症状', phr_symptoms_path(@phr)
+            / %li 
+            /   %a 治疗
+      .col
+        .margin-t20
+          %a.button-link.margin-b20.add-conditions{"data-reveal-id" => "add-conditions"}  添加:疾病
+          .panel.datasheet.margin-b20
+            .head 我的数据       
+            %table.body
+              %thead
+                %tr
+                  %th{:style => "width:2%"} #
+                  %th{:style => "width:30%", :nowrap => "nowrap"} 名称
+                  %th{:style => "width:28%", :nowrap => "nowrap"} 状况
+                  %th{:style => "width:20%", :nowrap => "nowrap"} 开始时间
+                  %th{:style => "width:20%", :nowrap => "nowrap"} 结束时间
+              %tbody
+                - @conditions.each_with_index do |c, index|
+                  %tr.data-row{'data-id' => c.id, 'phr-id' => c.phr.id, 'data-event-url' => url_for_event(:show, :source => :condition)}
+                    %td #{index+1}
+                    %td #{c.name}
+                    %td 
+                    %td
+                    %td
 
-      
+          = render_widget :condition, :display, :instance => @conditions.first unless @conditions.empty?
+   
 
 
 

@@ -1,0 +1,196 @@
+- @features = "active"
+/ Page
+.site-center.center-page
+  .page-head.text-center
+    .category-bar.middot
+      %ul
+        %li{:class => "#{params[:category].nil?? 'current' : nil }"} 
+          = link_to '所有', explore_path
+        %li{:class => "#{params[:category] == '健康知识'? 'current' : nil }"} 
+          = link_to '健康知识', explore_path(:category => '健康知识')
+        %li{:class => "#{params[:category] == '就医指南'? 'current' : nil }"}
+          = link_to '就医指南', explore_path(:category => '就医指南')
+        %li{:class => "#{params[:category] == '治疗交流'? 'current' : nil }"}
+          = link_to '治疗交流', explore_path(:category => '治疗交流')   
+        %li{:class => "#{params[:category] == '护理园地'? 'current' : nil }"}
+          = link_to '护理园地', explore_path(:category => '护理园地')
+        %li{:class => "#{params[:category] == '用药常识'? 'current' : nil }"}
+          = link_to '用药常识', explore_path(:category => '用药常识')  
+
+  .page-content
+    .col.size2of3
+      .padding-r20
+        .title.margin-b30
+          %h2.float-left 欢迎，#{current_user.name}
+          %a.settings.float-right 
+            %span.icon.icon-cog &nbsp;首页设置 
+          .col.slidediv
+            .settings-block
+              = form_for @content_filter, :url => content_filter_url do |f|
+                .col
+                  %h4 显示更多内容
+                  - @content_filter.content.each do |k, v|
+                    .col.size1of3
+                      = f.fields_for :content do |c|
+                        = c.check_box k, checked: (v == "1" ? "checked" : ""), :class =>"checkbox"
+                        = c.label k
+
+                .col.margin-t20     
+                  %h4 给内容排序
+                  %span{:style => "margin-right: 20px;"}
+                    = f.radio_button :scope, :newest
+                    最新
+                  %span{:style => "margin-right: 20px;"}
+                    = f.radio_button :scope, :hot
+                    最热
+                  %span
+                    = f.radio_button :scope, :popular
+                    最多浏览
+
+                .col.margin-t20     
+                  %h4 只看与你关心的人健康相关的内容？
+                  - @content_filter.phrs.each do |k, v|
+                    .col.size1of3
+                      = f.fields_for :phrs do |c|
+                        = c.check_box k, checked: (v == "1" ? "checked" : ""), :class =>"checkbox"
+                        = c.label k    
+
+                .col
+                  .cell.slidediv-ft
+                    %a.settings.float-right 收起
+                    %span.float-right &nbsp;&nbsp;
+                    = f.submit '保存', :class => "button float-right"        
+
+        .feeds
+          = render_widget :content_list, :display, :category => params[:category]
+
+    .col.size1of3
+      .padding-l10
+        .section.how-it-works
+          %a{"data-reveal-id" => "how-it-works"}
+            .action
+              .col.sizefit
+                %span.icon.icon-cogs{:style => "font-size:36px;margin-right:10px"}
+              .col.sizefill
+                %h4 如何参与大健康网
+                %p 查看 →  
+        .reveal-modal.xlarge#how-it-works
+          %h2
+            如何参与大健康
+            %sup{:style => "font-size:13px;top:-0.8em;"} MegaHealth
+          %p.margin-b20
+            记录健康、参与健康、保持健康，我为人人、人人为我
+          .col.size1of3
+            .margin-r20
+              %a.blueBox
+                %h3 填写您的健康资料
+                %p 大健康将精确推送与您身体健康相关的内容，您还可以进一步设置推送您关心的内容。
+                / %img{:src => "images/whiteArrow.png"}
+          .col.size1of3
+            .margin-r20
+              %a.blueBox
+                %h3 加入您感兴趣的社群
+                %p 连接医生、专家和病友，与他们互动。大健康会把您的社群动态推送给您，您还可以进一步设置您关心的动态。
+                / %img{:src => "images/whiteArrow.png"}
+          .col.size1of3
+            .margin-r20
+              %a.blueBox
+                %h3 评价/收藏内容
+                %p 您也可以依据您的经验对社群产生的内容是否有效进行评价，以供他人参考，同时收藏你认为有价值的内容。
+                / %img{:src => "images/whiteArrow.png"}            
+          %a.close-reveal-modal &#215;
+              
+        .section.margin-b20
+          %form.community-search{:style => "width: 100%;"}
+            %input{:type => "search", :width => "100%", :placeholder => "搜索"}
+        .section
+          .header
+            %h5 充实您的健康资料  
+          .body
+            .col.sizefit.float-right
+              完整度25%
+            .col.sizefill.margin-r10
+              .profile-progress
+                .progress-container
+                  .progress-bar{:style => "width: 25%;"} 
+
+
+        %dl.highlight.green
+          %dt 热点文章
+          %dd
+            %ul.links
+              - Community.all.limit(5).each do |c|
+                %li #{link_to c.name, community_path(c)}    
+
+        %dl.highlight.blue
+          %dt 热点话题
+          %dd
+            %ul.links
+              - Community.all.limit(5).each do |c|
+                %li #{link_to c.name, community_path(c)}                  
+        / .section
+        /   .header
+        /     %h5 推荐文章
+        /   .body
+        /     %ul.nav.recommendation
+        /       - Community.all.limit(5).each do |c|
+        /         %li
+        /           .col.sizefit.float-right
+        /             %img{:src =>"#{asset_path 'doctors/12033.jpg'}"}
+        /           .col.sizefill.margin-r10 
+        /             %dl
+        /               %dt #{link_to c.name, community_path(c)} 
+        /               %dd
+        /                 %p 中山大学附属第三医院
+        /                 %p 皮肤科
+                        
+        / .section
+        /   .header
+        /     %h5 热点话题  
+        /   .body
+        /     %ul.nav.recommendation
+        /       - Community.all.limit(5).each do |c|
+        /         %li
+        /           .col.sizefit.float-right
+        /             %img{:src =>"#{asset_path 'doctors/12033.jpg'}"}
+        /           .col.sizefill.margin-r10 
+        /             %dl
+        /               %dt #{link_to c.name, community_path(c)} 
+        /               %dd
+        /                 %p 中山大学附属第三医院
+        /                 %p 皮肤科
+      
+        / .section
+        /   .header
+        /     %h5 热点问答
+        /   .body
+        /     %ul.nav.recommendation
+        /       - Community.all.limit(5).each do |c|
+        /         %li
+        /           .col.sizefit.float-right
+        /             %img{:src =>"#{asset_path 'doctors/12033.jpg'}"}
+        /           .col.sizefill.margin-r10 
+        /             %dl
+        /               %dt #{link_to c.name, community_path(c)} 
+        /               %dd
+        /                 %p 中山大学附属第三医院
+        /                 %p 皮肤科
+
+        / .section
+        /   .header
+        /     %h5 最热主题
+        /   .body{:style => "font-size:85%;"}
+        /     .col
+        /       .tags
+        /         %ul.cloud.nav
+        /           - Content.tags_with_weight.each do |tag|
+        /             %li{:class => "tag#{tag[1]+1}"}
+        /               %a #{tag[0]}
+
+/ :javascript
+//   $(document).ready(function(){
+//    $('.features-setting').hide();
+//       $('.link-setting').click(function() {
+//         $('.features-setting').slideToggle();
+//     });
+//   });        

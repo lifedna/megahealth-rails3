@@ -5,9 +5,13 @@
   .col.size2of3  
     %h2 #{@blog.title}
     %small 
-      #{@blog.created_at.strftime("%Y-%m-%d %H:%M:%S")} #{@blog.category}
+      #{@blog.created_at.strftime("%Y-%m-%d %H:%M:%S")} 
     .col   
       %p #{raw @blog.body}
+      .col.sizefit.float-right
+        = render_widget :like, :display, :instance => @blog  
+      .col.sizefill
+        = social_share_button_tag(@blog.title) 
     .col  
       %p #{@blog.tags}
 
@@ -29,7 +33,7 @@
 
   .col.size1of3
     .margin-l30.margin-t20
-      %h3{:style => "text-align:right"} 我的日记   
+      %h3{:style => "text-align:right"} #{@user.name}的日记   
       .my-list.margin-t20
         %ul.unstyled
           - @blogs.excludes(:id => @blog.id).each do |blog|

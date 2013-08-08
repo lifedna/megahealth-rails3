@@ -1,11 +1,14 @@
 class BlogsController < ApplicationController
   before_filter :authenticate_user!, :except => [:show]
-  # impressionist :actions=>[:show]
-
+  
+  has_widgets do |root|
+    root << widget(:like)
+  end
+  
   def index
     # @user = User.find params[:id]
     # @blogs = @user.blogs
-    @blogs = Blog.all
+    @blogs = current_user.blogs
   end
 
   def new
@@ -16,8 +19,9 @@ class BlogsController < ApplicationController
     @blog = Blog.new(params[:blog]) 
     if @blog.save
       flash[:notice] = "Article has been created."
-      redirect_to blog_path(@blog)
+      redirect_to "/dashboard/blogs"
     else
+      flash[:notice] = @blog.errors.to_s
       render :action => "new"  
     end  
   end
@@ -25,6 +29,7 @@ class BlogsController < ApplicationController
   def show
     @blog = Blog.find params[:id]
     @comment = @blog.comments.build
+    @user = @blog.user
     @blogs = @blog.user.blogs
   end
 

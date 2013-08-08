@@ -28,7 +28,7 @@ class BlogPresenter < BasePresenter
   def stats
     out ||= []
     out << "浏览15次"
-    out << "10人喜欢"
+    out << "#{blog.likers_count}人喜欢"
 
     return raw out.join(" &middot; ")
   end

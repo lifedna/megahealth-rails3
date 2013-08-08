@@ -42,13 +42,13 @@
       .col.sizefill.site-menu  
         .col.sizefill.mobile-sizefill
           %ul.nav
-            %li{:class => "#{@features}"}
-              %a.border-left{:href => "/features"} 热点
-            %li{:class => "#{@communities}"}
-              %a{:href => "/communities"} 社群  
-            %li{:class => "#{@blogs}"}
-              %a{:href => "/blogs"} 祈福墙   
+            / %li{:class => "#{@update}"}
+            /   %a.border-left{:href => "/update"} 动态
+            %li{:class => (@page == "communities" ? "active" : "")}
+              %a.border-left{:href => "/communities"} 社群  
+            / %li{:class => (@page == "blogs" ? "active" : "")}
+            /   %a{:href => "/blogs"} 祈福墙  
             
-            %li{:class => "#{@healthportal}"}
-              #{link_to '我的健康', healthportal_url}    
+            %li{:class => (@page == "dashboard" ? "active" : "")}
+              #{link_to '我的健康', dashboard_url}    
              

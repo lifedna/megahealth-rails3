@@ -21,11 +21,15 @@ MegahealthRails3::Application.routes.draw do
 
   mount RedactorRails::Engine => '/redactor_rails'
 
-  match '/update' => 'home#update', :as => :update
-  match '/features' => 'home#features', :as => :features
-  match '/healthportal' => 'home#healthportal', :as => :healthportal
+  # match '/update' => 'home#update', :as => :update
+  match '/explore' => 'home#explore', :as => :explore
+  match '/dashboard' => 'home#dashboard', :as => :dashboard
   match '/profile' => 'home#profile', :as => :profile
   match '/account' => 'home#account', :as => :account
+
+
+  match '/dashboard/stars' => 'dashboard#stars', :as => :stars
+
 
   scope 'communities' do
     match '/:community_id/columns/:id' => 'widgets/columns#show', :as => :show_community_column, :via => :get
@@ -51,11 +55,13 @@ MegahealthRails3::Application.routes.draw do
     match '/:community_id/videos/:id/comment' => 'widgets/videos#comment', :as => :comment_community_video, :via => :get
   end    
 
-  resources :blogs do 
-    get 'comment', :on => :member
-  end  
+  scope "dashboard" do
+    resources :blogs, except: :show do 
+      get 'comment', :on => :member
+    end 
+  end   
 
-  match '/people/:id/blogs' => 'blogs#index', :as => :people_blogs, :via => :get
+  match '/blogs/:id' => 'blogs#show', :as => :blog, :via => :get
 
   # resource :feature_filter
   resource :content_filter
@@ -88,18 +94,19 @@ MegahealthRails3::Application.routes.draw do
     get 'leave', :on => :member
   end
 
-
-  resources :phrs do
-    scope :module => "phrs" do
-      resources :conditions
-      resources :symptoms
-      resources :treatments
+  scope "dashboard" do
+    resources :phrs do    
+      scope :module => "phrs" do
+        resources :conditions
+        resources :symptoms
+        # resources :treatments
+      end
     end
   end
 
 
   authenticated :user do
-    root :to => 'home#update'
+    root :to => 'home#explore'
   end
   root :to => "home#index"
   devise_for :users do

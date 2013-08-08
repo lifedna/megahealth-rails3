@@ -1,5 +1,5 @@
-- @selected = "blogs"
 - @page = "dashboard"
+- @selected = "phrs"
 
 / Page
 .site-center.center-page  
@@ -14,18 +14,15 @@
       %li 
         %a{:href => "/dashboard/blogs", :class => (@selected == "blogs" ? "selected" : "")} 日记
 
-  .col.size2of3
-    .margin-r30
-      - @blogs.each do |b|
-        .blog-row{:style => "padding: 0 0 30px 0;"}
-          %h4 #{link_to b.title, blog_path(b)}
-          %p{:style => "color: #999;"} 
-            %span #{b.created_at.strftime("%Y-%m-%d %H:%M:%S")}
-          %span
-            #{truncate strip_tags(b.body), length: 140, omission: '.....'}      
+  .col.size1of4
+    .list.padding-r20 
+      %h4 我关心的人
+      .menu
+        %ul.left.nav
+          - @phrs.each do |p|
+            %li
+              %a #{p.name}   
 
-  .col.size1of3  
-    .col
-      = link_to '+ 写日记', new_blog_url, :class => "button"
-    .col.margin-t20
-      %h3 最新回应...
+  .col.size3of4
+    = render :partial => "phrs/conditions/index", :locals => {:phr => @phrs.first}
+ 

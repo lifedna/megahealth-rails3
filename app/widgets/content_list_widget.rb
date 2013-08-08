@@ -12,6 +12,7 @@ class ContentListWidget < AuthorizableWidget
   after_initialize do
     @klass = current_user.content_filter.merged_klass
     @keywords = current_user.content_filter.merged_keywords
+    @scope = current_user.content_filter.scope
   end 
 
   def display(*args)
@@ -20,15 +21,15 @@ class ContentListWidget < AuthorizableWidget
 
     if @category
       if @keywords.nil? or @keywords.empty?
-        @items = Content.in(_type: @klass).where(category: @category).page params[:page]
+        @items = Content.send("#{@scope}").in(_type: @klass).where(category: @category).page params[:page]
       else
-        @items = Content.in(_type: @klass).where(category: @category).full_text_search(@keywords).page params[:page]
+        @items = Content.send("#{@scope}").in(_type: @klass).where(category: @category).full_text_search(@keywords).page params[:page]
       end  
     else
       if @keywords.nil? or @keywords.empty?
-        @items = Content.in(_type: @klass).all.page params[:page]
+        @items = Content.send("#{@scope}").in(_type: @klass).all.page params[:page]
       else
-        @items = Content.in(_type: @klass).all.full_text_search(@keywords).page params[:page]
+        @items = Content.send("#{@scope}").in(_type: @klass).all.full_text_search(@keywords).page params[:page]
       end 
     end 
     render

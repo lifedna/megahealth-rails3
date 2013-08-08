@@ -7,6 +7,7 @@ class Content
   # include Mongoid::TaggableWithContext::AggregationStrategy::MapReduce
   include Mongoid::TaggableWithContext::AggregationStrategy::RealTime
   include Mongoid::Likeable
+  include Mongoid::Sharable
   include Mongoid::Search
 
   paginates_per 5
@@ -27,6 +28,7 @@ class Content
 
   belongs_to :user
 
-  default_scope desc(:created_at)
-
+  # default_scope desc(:created_at)
+  scope :newest, desc(:created_at)
+  scope :hot, desc(:likers_count)
 end  

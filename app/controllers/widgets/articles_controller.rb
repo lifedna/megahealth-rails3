@@ -1,5 +1,9 @@
 # 
 class Widgets::ArticlesController < ApplicationController
+  has_widgets do |root|
+    root << widget(:like)
+  end
+
   def new
     @column = Column.find params[:column_id]
     @article = Article.new

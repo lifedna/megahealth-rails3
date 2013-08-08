@@ -1,0 +1,6 @@
+= widget_div do
+  #{@instance.likers_count}人#{@text}
+  - if @instance.likers.include?(current_user)
+    = link_to "取消#{@text}", url_for_event(:unlike, :id =>@instance.id, :klass => @instance.class.to_s), :remote => true
+  - else
+    = link_to "#{@text}", url_for_event(:like, :id =>@instance.id, :klass => @instance.class.to_s), :remote => true

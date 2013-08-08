@@ -20,7 +20,7 @@ class VideoPresenter < BasePresenter
   def stats
   	out ||= []
   	out << "浏览15次"
-  	out << "10人收藏"
+  	out << "#{video.likers_count}人收藏"
 
   	return raw out.join(" &middot; ")
   end

@@ -20,7 +20,7 @@ class ContentObserver < Mongoid::Observer
     when 'video'
       Activity.find_by(verb: :new_video, object: {"id" => record.id, "type"=>"Video"}).destroy
     when 'article'
-      Activity.find_by(verb: :new_articl, object: {"id" => record.id, "type"=>"Article"}).destroy
+      Activity.find_by(verb: :new_article, object: {"id" => record.id, "type"=>"Article"}).destroy
     when 'poll'
       Activity.find_by(verb: :new_poll, object: {"id" => record.id, "type"=>"Poll"}).destroy 
     end  
