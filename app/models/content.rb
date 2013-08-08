@@ -7,10 +7,10 @@ class Content
   # include Mongoid::TaggableWithContext::AggregationStrategy::MapReduce
   include Mongoid::TaggableWithContext::AggregationStrategy::RealTime
   include Mongoid::Likeable
-  include Mongoid::Sharable
+  # include Mongoid::Sharable
   include Mongoid::Search
 
-  paginates_per 5
+  paginates_per 10
 
   taggable
   # impressionist gem

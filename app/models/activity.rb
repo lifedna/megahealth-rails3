@@ -1,7 +1,7 @@
 class Activity
   include Streama::Activity
 
-  paginates_per 5
+  paginates_per 10
 
   activity :new_article do 
     actor :user
