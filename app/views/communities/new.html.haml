@@ -111,11 +111,11 @@
                 %span 帮助彼此更加明智的做出医疗决定
             %a.btn.orange.medium.margin-t20.create-patients-community{"data-reveal-id" => "create-patients-community"} 创建病友社群 
 
-.site-center.center-page 
-  - if user_signed_in?
-    = render_widget :community_list
-    %p
-    = render_widget :new_community
+/ .site-center.center-page 
+/   - if user_signed_in?
+/     = render_widget :community_list
+/     %p
+/     = render_widget :new_community
 
 
 .reveal-modal.large#create-health-community
