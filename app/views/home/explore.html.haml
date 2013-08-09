@@ -3,19 +3,20 @@
 .site-center.center-page
   .page-head.text-center
     .category-bar.middot
-      %ul
-        %li{:class => "#{params[:category].nil?? 'current' : nil }"} 
-          = link_to '所有', explore_path
-        %li{:class => "#{params[:category] == '健康知识'? 'current' : nil }"} 
-          = link_to '健康知识', explore_path(:category => '健康知识')
-        %li{:class => "#{params[:category] == '就医指南'? 'current' : nil }"}
-          = link_to '就医指南', explore_path(:category => '就医指南')
-        %li{:class => "#{params[:category] == '治疗交流'? 'current' : nil }"}
-          = link_to '治疗交流', explore_path(:category => '治疗交流')   
-        %li{:class => "#{params[:category] == '护理园地'? 'current' : nil }"}
-          = link_to '护理园地', explore_path(:category => '护理园地')
-        %li{:class => "#{params[:category] == '用药常识'? 'current' : nil }"}
-          = link_to '用药常识', explore_path(:category => '用药常识')  
+      .top-nav{:style => "background: #faefe3; display: inline-block;padding: 10px 20px;border-radius: 5px;"}
+        %ul
+          %li{:class => "#{params[:category].nil?? 'current' : nil }"} 
+            = link_to '所有', explore_path
+          %li{:class => "#{params[:category] == '健康知识'? 'current' : nil }"} 
+            = link_to '健康知识', explore_path(:category => '健康知识')
+          %li{:class => "#{params[:category] == '就医指南'? 'current' : nil }"}
+            = link_to '就医指南', explore_path(:category => '就医指南')
+          %li{:class => "#{params[:category] == '治疗交流'? 'current' : nil }"}
+            = link_to '治疗交流', explore_path(:category => '治疗交流')   
+          %li{:class => "#{params[:category] == '护理园地'? 'current' : nil }"}
+            = link_to '护理园地', explore_path(:category => '护理园地')
+          %li{:class => "#{params[:category] == '用药常识'? 'current' : nil }"}
+            = link_to '用药常识', explore_path(:category => '用药常识')  
 
   .page-content
     .col.size2of3
