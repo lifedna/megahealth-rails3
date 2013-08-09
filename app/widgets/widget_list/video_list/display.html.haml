@@ -26,7 +26,7 @@
                 .cell
                   %p #{v.title}
                   .stream
-                    .video{:src => "#{v.src}"}
+                    .clickable.video{:src => "#{v.src}"}
                       = link_to image_tag(v.thumb_url, :class=> "thumb"), show_community_video_url(v.community, v)
                       .play_video
                

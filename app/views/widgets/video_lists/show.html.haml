@@ -37,7 +37,7 @@
       - @video_list.videos.each do |v|
         .col
           .col.sizefit
-            .video
+            .clickable.video
               = link_to image_tag(v.thumb_url, :class => "thumb"), show_community_video_url(v.community, v)
               .play_video
           .col.sizefill
