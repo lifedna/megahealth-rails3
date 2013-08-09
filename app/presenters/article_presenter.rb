@@ -22,7 +22,7 @@ class ArticlePresenter < BasePresenter
   end
 
   def metadata
-  	raw "<span class ='icon icon-16 icon-group'></span>#{article.community.name}社群 &middot; #{time_ago_in_words(article.created_at).capitalize}前"
+  	raw "<span class ='icon icon-16 icon-group'></span>#{article.community.name} &middot; #{time_ago_in_words(article.created_at).capitalize}前"
   end
 
   def stats
