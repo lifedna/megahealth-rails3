@@ -32,7 +32,7 @@ class BlogsController < ApplicationController
     @user = @blog.user
     @blogs = @blog.user.blogs
 
-    impressionist @blog
+    impressionist @blog, nil, :unique => [:session_hash]
   end
 
   def comment

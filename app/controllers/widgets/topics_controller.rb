@@ -28,7 +28,7 @@ class Widgets::TopicsController < ApplicationController
     @current_section = @topic.forum.section
     @sections = @community.sections
 
-    impressionist @topic
+    impressionist @topic, nil, :unique => [:session_hash]
   end
 
   def comment

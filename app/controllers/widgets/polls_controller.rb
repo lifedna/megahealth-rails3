@@ -28,7 +28,7 @@ class Widgets::PollsController < ApplicationController
     @current_section = @poll.poll_set.section
     @sections = @community.sections
 
-    impressionist @poll
+    impressionist @poll, nil, :unique => [:session_hash]
   end
 
   def update

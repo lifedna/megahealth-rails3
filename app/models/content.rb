@@ -11,15 +11,16 @@ class Content
   include Mongoid::Search
 
   paginates_per 10
-
-  taggable
-  # impressionist gem
-  is_impressionable :counter_cache => true
   
   field :title, type: String
   field :body, type: String
   field :category, type: String
   field :locked, type: Boolean, :default => false
+  field :impressions_count, type: Integer, :default => 0
+
+  taggable
+  # impressionist gem
+  is_impressionable :column_name => :impressions_count, :unique => :session_hash, :counter_cache => true
 
   validates :title, :presence => true
   validates :category, :inclusion => {:in => %w(健康知识 就医指南 治疗交流 护理园地 用药常识), :message => "%{value} is not a valid category" }, :allow_nil => true
@@ -32,5 +33,5 @@ class Content
 
   scope :newest, desc(:created_at)
   scope :hot, desc(:likers_count)
-  scope :popular, desc(:impressionist_count)
+  scope :popular, desc(:impressions_count)
 end  

@@ -28,7 +28,7 @@ class Widgets::ArticlesController < ApplicationController
     @current_section = @article.column.section
     @sections = @community.sections
 
-    impressionist @article
+    impressionist @article, nil, :unique => [:session_hash]
   end
 
   def comment

@@ -29,7 +29,7 @@ class Widgets::VideosController < ApplicationController
     @current_section = @video.video_list.section
     @sections = @community.sections
 
-    impressionist @video
+    impressionist @video, nil, :unique => [:session_hash]
   end
 
   def update
