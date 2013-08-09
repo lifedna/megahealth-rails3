@@ -10,7 +10,7 @@ class VideoPresenter < BasePresenter
   end
 
   def text
-  	raw truncate(strip_tags(video.body), length: 140, omission: '.....') if video.body.length > 0
+  	raw truncate(strip_tags(video.body), length: 30, omission: '.....') if video.body.length > 0
   end
 
   def metadata
