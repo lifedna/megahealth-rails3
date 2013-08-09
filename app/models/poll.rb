@@ -1,9 +1,5 @@
 class Poll < Content
-  include Mongoid::Document
-  include Mongoid::Timestamps
 
-  # field :name, type: String
-  # field :details, type: String
   field :active, type: Boolean, default: true
   field :multiple_allowed, type: Boolean, default: false
   field :max_answers, type: Integer
