@@ -1,0 +1,23 @@
+- present item, PollPresenter do |presenter|
+  %h4 #{presenter.title}          
+  %p{:style => "color: #999;"} 
+    %small #{presenter.metadata}
+  .vote-mini
+    .col.sizefit
+      .vote-mini-pic
+        / = image_tag asset_path('vote-bg.png')
+    .col.sizefill  
+      .vote-section{:style => "font-size: 90%;"}
+        %p #{item.title}
+        - item.options.each_with_index do |option, index|
+          - if index < 2
+            %p &middot; #{option.name} 
+        %p ......
+
+  - unless item.tags.nil?
+    .tags
+      %ul.nav.blocks
+        - item.tags.each do |tag|
+          %li
+            %a #{tag}
+  .source #{presenter.stats} 

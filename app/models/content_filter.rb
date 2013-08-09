@@ -4,7 +4,6 @@ class ContentFilter
 
   field :content, type: Hash, default: {"文章" => "1", "日记" => "1", "视频" => "1", "话题" => "1", "问答" => "1", "投票" => "1"}
   field :phrs, type: Hash
-  # field :scope, type: Hash, default: {"最新" => "1", "最热" => "0", "最多浏览" => "0"}
   field :scope, type: String, default: "newest"
 
   belongs_to :user	

@@ -28,15 +28,7 @@
             .settings-block
               = form_for @content_filter, :url => content_filter_url do |f|
                 .col
-                  %h4 显示更多内容
-                  - @content_filter.content.each do |k, v|
-                    .col.size1of3
-                      = f.fields_for :content do |c|
-                        = c.check_box k, checked: (v == "1" ? "checked" : ""), :class =>"checkbox"
-                        = c.label k
-
-                .col.margin-t20     
-                  %h4 给内容排序
+                  %h4 内容排序
                   %span{:style => "margin-right: 20px;"}
                     = f.radio_button :scope, :newest
                     最新
@@ -46,6 +38,14 @@
                   %span
                     = f.radio_button :scope, :popular
                     最多浏览
+
+                .col.margin-t20     
+                  %h4 显示更多内容
+                  - @content_filter.content.each do |k, v|
+                    .col.size1of3
+                      = f.fields_for :content do |c|
+                        = c.check_box k, checked: (v == "1" ? "checked" : ""), :class =>"checkbox"
+                        = c.label k
 
                 .col.margin-t20     
                   %h4 只看与你关心的人健康相关的内容？
@@ -115,21 +115,21 @@
                   .progress-bar{:style => "width: 25%;"} 
 
 
-        %dl.highlight.green
+        %dl.highlight.purple
           %dt 热点文章
           %dd
             %ul.links
               - @hot_articles.each do |a|
                 %li #{link_to a.title, show_community_article_path(a.community, a)}    
 
-        %dl.highlight.blue
+        %dl.highlight.green
           %dt 热点话题
           %dd
             %ul.links
               - @hot_topics.each do |t|
                 %li #{link_to t.title, show_community_topic_path(t.community, t)}  
 
-        %dl.highlight.purple
+        %dl.highlight.blue
           %dt 最受欢迎日记
           %dd
             %ul.links

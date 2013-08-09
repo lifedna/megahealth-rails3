@@ -11,8 +11,8 @@
   %body{:class => "#{controller_name} #{action_name}"}
     #container.container
       = render 'layouts/navigation'
-      .site-center
-        = render 'layouts/messages'
+      / .site-center
+      /   = render 'layouts/messages'
       #main{:role => "main"}
         = yield
       %footer
