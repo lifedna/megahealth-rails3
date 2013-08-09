@@ -1,7 +1,4 @@
 class Video < Content
-  include Mongoid::Document	
-  include Mongoid::Timestamps
-  include Mongoid::Commentable
   include Getvideo
 
   field :body, type: String
