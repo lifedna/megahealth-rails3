@@ -1,23 +1,25 @@
-.panel.guide.margin-b20
-  .header
-    .cell
-      本周热点讨论
-  .body
-    .cell
-      xxx 
+- unless community.articles.empty?
+  .panel.guide.margin-b20
+    .header
+      .cell
+        热点文章
 
-.panel.guide.margin-b20
-  .header
-    .cell
-      本周热点问答
-  .body
-    .cell
-      xxx       
-
-.panel.guide.margin-b20
-  .header
-    .cell
-      最新投票
-  .body
-    .cell
-      xxx       
+    - community.articles.hot.limit(10).each do |a|    
+      .body
+        .cell #{link_to a.title, show_community_article_path(community, a)}      
+- unless community.topics.empty?
+  .panel.guide.margin-b20
+    .header
+      .cell
+        热点话题
+    .body
+      .cell
+        xxx       
+- unless community.polls.empty?
+  .panel.guide.margin-b20
+    .header
+      .cell
+        最新投票
+    .body
+      .cell
+        xxx       

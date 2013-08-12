@@ -44,10 +44,15 @@
       - @stared.each do |item|
         .body{:style => "padding:20px;"}
           %h4
-            #{item.title}
+            #{link_to item.title}
           %p{:style => "color: #999;"} 
             %span #{item.created_at.strftime("%Y-%m-%d %H:%M:%S")}  
           %span #{truncate strip_tags(item.body), length: 140, omission: '.....'}
+          - case item.class.to_s
+          - when "Video"
+            .clickable.video{:src => "#{item.src}"}
+              = link_to image_tag(item.thumb_url, :class=> "thumb"), show_community_video_url(item.community, item)
+              .play_video
           
       / .body{:style => "padding:20px;"}
       /   %h4

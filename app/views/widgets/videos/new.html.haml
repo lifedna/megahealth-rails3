@@ -40,6 +40,8 @@
       %p 请输入视频的网站源地址，目前支持土豆、优酷、酷6、新浪视频、搜狐视频等多家视频网站
       = form_for @video, :url => {:action => "create"}  do |f|
         %p
+          = f.input :category, label:'类别:', collection: ['健康知识', '就医指南', '治疗交流', '护理园地', '用药常识']
+        %p
           = f.label "标题"
           = f.text_field :title
         %p
