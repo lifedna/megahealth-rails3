@@ -4,15 +4,14 @@
 - @activities.each do |activity|
   .support-group-feed.margin-b30
     - present activity, ActivityPresenter do |presenter|
-      .col.sizefit
-        .user-image.margin-r20
+      .col.sizefit.activity-image        
         - case presenter.activity.verb
         - when :new_article, :new_poll, :new_video
-          = image_tag activity.the_target.logo_url(:thumb), size: "48x48", :style => "margin-right:20px;padding-top:5px;" 
+          = image_tag activity.the_target.logo_url(:thumb)
         - else 
-          = image_tag activity.the_actor.avatar_url(:thumb), size: "48x48", :style => "margin-right:20px;padding-top:5px;" 
+          = image_tag activity.the_actor.avatar_url(:thumb)
       .col.sizefill
-        .user-content
+        .activity-content.margin-l20
           .color-grey  #{presenter.metadata}
           %h4
             #{presenter.text} 
