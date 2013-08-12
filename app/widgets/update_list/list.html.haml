@@ -15,7 +15,7 @@
           .color-grey  #{presenter.metadata}
           %h4 #{presenter.text} 
           .margin-r10 
-            %span #{truncate strip_tags(activity.the_object.body), length: 80, omission: '.....'}
+            %span #{truncate strip_tags(activity.the_object.body), length: 65, omission: '.....'}
           / - if presenter.content? && first_image_url(activity.the_object.body)   
           /   .col.sizefit.float-right
           /     .margin-b10
