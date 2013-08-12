@@ -3,5 +3,5 @@
 
 - unless @items.last_page?  
   = render_widget :load_more_content, :display, :page_num => @items.current_page + 1, :category => @category
-  #spinner
-    %span.icon.spin.icon-64.icon-spinner
+  #spinner.text-center
+    %span.icon.spin.icon-32.icon-spinner

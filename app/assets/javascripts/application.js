@@ -23,6 +23,10 @@
 
 
 $(document).ready(function(){
+
+	$("#load_more_content a").click(function(){
+    	$("#load_more_content").hide();
+  	});
 	// hide it first
 	$("#spinner").hide();
 
