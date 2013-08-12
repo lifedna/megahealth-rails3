@@ -23,6 +23,19 @@
 
 
 $(document).ready(function(){
+	// hide it first
+	$("#spinner").hide();
+
+	// when an ajax request starts, show spinner
+	$.ajaxStart(function(){
+	    $("#spinner").show();
+	});
+
+	// when an ajax request complets, hide spinner    
+	$.ajaxStop(function(){
+	    $("#spinner").hide();
+	});
+
 	$(".my-community").click(function(){
 	   window.location=$(this).find("a").attr("href"); 
 	   return false;

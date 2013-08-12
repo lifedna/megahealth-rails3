@@ -1,2 +1,4 @@
 = widget_div do
   = link_to '显示更多', url_for_event(:more, :page => @page_num, :content_category => @category), :remote => true
+  #spinner
+    %span.icon.spin.icon-64.icon-spinner

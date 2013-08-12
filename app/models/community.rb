@@ -11,6 +11,7 @@ class Community
   field :category, type: String
   field :offline, type: String, default: "1"
   field :offline_reason, type: String, default: "感谢访问，社群建设中..."
+  field :members_count, type: Integer, default: 0
   embeds_one :owner
 
   taggable :conditions
@@ -28,7 +29,9 @@ class Community
   has_many :topics
   has_many :posts 
 
-  default_scope desc(:created_at)
+  # default_scope desc(:created_at)
+  scope :new, desc(:created_at)
+  # scope :hot, desc(:members_count) 
   scope :category, ->(category){where(category: category)}
 
   def the_owner
