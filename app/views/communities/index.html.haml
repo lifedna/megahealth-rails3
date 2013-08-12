@@ -70,4 +70,9 @@
     $(".menu li a").click(function(){
       $(this).next().prop("checked", true).change();
     });
+
+    $(".community-row").click(function(){
+       window.location=$(this).find("a").attr("href"); 
+       return false;
+    });
   });

@@ -13,6 +13,7 @@
           = image_tag activity.the_actor.avatar_url(:thumb), size: "48x48", :style => "margin-right:20px;padding-top:5px;" 
       .col.sizefill
         .user-content
+          .color-grey  #{presenter.metadata}
           %h4
             #{presenter.text} 
           - if presenter.content? && first_image_url(activity.the_object.body)   
@@ -20,11 +21,8 @@
               .margin-b10
                 = image_tag first_image_url(activity.the_object.body), size: "80x80"
           .col.sizefill    
-            .col.color-grey     
-              #{presenter.metadata}
-            .col                    
-              .margin-r10 
-                %span #{truncate strip_tags(activity.the_object.body), length: 80, omission: '.....'}
+            .margin-r10 
+              %span #{truncate strip_tags(activity.the_object.body), length: 80, omission: '.....'}
               
 
 / - @activities.each do |activity|

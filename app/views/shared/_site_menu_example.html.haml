@@ -1,7 +1,7 @@
 .site-header.background-white.site-header-border
   .site-center
     .col.sizefit
-      .cell
+      .site-logo
         %a.logo{:href => "/"}
     .col.sizefit.float-right
       - if user_signed_in?
@@ -52,3 +52,10 @@
             %li{:class => (@page == "dashboard" ? "active" : "")}
               #{link_to '我的健康', dashboard_url}    
              
+:javascript
+  $(document).ready(function(){
+    $(".site-logo").click(function(){
+       window.location=$(this).find("a").attr("href"); 
+       return false;
+    });
+  });             

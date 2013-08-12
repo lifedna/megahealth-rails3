@@ -10,7 +10,10 @@
  	background-color: #fff;
  }
 
-
+.community-row, 
+.site-logo {
+	cursor: pointer;
+}
 /* top menu*/
 
 .site-header-border {
@@ -18,13 +21,15 @@
 	border-bottom: #ddd 1px solid;
 }
 
+.site-logo {
+	padding:10px;	
+}
+.site-logo:hover {
+	background-color: #f8f8f8;
+}
 .logo {
-	/*background: url('/images/logo-small-bg.png');*/
-	background: url(<%= asset_path 'logo-megahealth.png' %>);
-	/*border: solid #ddd;
-	border-width: 0 1px 0 0;*/
-	/*margin-right: 10px;*/
-	margin-top: 2px;
+	background: url(<%= asset_path 'logo-megahealth.png' %>) no-repeat;
+	margin-top: 4px;
 }
 
 .site-menu .nav li {
