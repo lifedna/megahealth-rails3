@@ -1,25 +1,55 @@
-- unless community.articles.empty?
-  .panel.guide.margin-b20
-    .header
-      .cell
-        热点文章
+- case controller_name
+- when 'articles', 'columns'
+  %dl.highlight.orange
+    %dt 热点文章
+    %dd
+      %ul.links
+        - widget.articles.limit(5).each do |a|
+          %li #{link_to a.title, show_community_article_path(a.community, a)} 
+- when 'topics', 'forums'
+  %dl.highlight.orange
+    %dt 热点话题
+    %dd
+      %ul.links
+        - widget.topics.limit(5).each do |t|
+          %li #{link_to t.title, show_community_topic_path(t.community, t)} 
+- when 'polls', 'poll_sets'
+  %dl.highlight.orange
+    %dt 最新投票
+    %dd
+      %ul.links
+        - widget.polls.limit(5).each do |ap|
+          %li #{link_to p.title, show_community_poll_path(p.community, p)} 
+- when 'videos', 'video_lists'
+  %dl.highlight.orange
+    %dt 热点视频
+    %dd
+      %ul.links
+        - widget.videos.limit(5).each do |v|
+          %li #{link_to v.title, show_community_video_path(v.community, v)}           
 
-    - community.articles.hot.limit(10).each do |a|    
-      .body
-        .cell #{link_to a.title, show_community_article_path(community, a)}      
-- unless community.topics.empty?
-  .panel.guide.margin-b20
-    .header
-      .cell
-        热点话题
-    .body
-      .cell
-        xxx       
-- unless community.polls.empty?
-  .panel.guide.margin-b20
-    .header
-      .cell
-        最新投票
-    .body
-      .cell
-        xxx       
+/   - unless community.articles.empty?
+/   .panel.guide.margin-b20
+/     .header
+/       .cell
+/         热点文章
+
+/     - community.articles.hot.limit(10).each do |a|    
+/       .body
+/         .cell #{link_to a.title, show_community_article_path(community, a)}      
+/ - unless community.topics.empty?
+/   .panel.guide.margin-b20
+/     .header
+/       .cell
+/         热点话题
+/     .body
+/       .cell
+/         xxx       
+/ - unless community.polls.empty?
+/   .panel.guide.margin-b20
+/     .header
+/       .cell
+/         最新投票
+/     .body
+/       .cell
+/         xxx       

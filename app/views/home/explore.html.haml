@@ -118,27 +118,36 @@
                 .progress-container
                   .progress-bar{:style => "width: 25%;"} 
 
-
-        %dl.highlight.purple
-          %dt 热点文章
-          %dd
-            %ul.links
-              - @hot_articles.each do |a|
-                %li #{link_to a.title, show_community_article_path(a.community, a)}    
-
         %dl.highlight.green
-          %dt 热点话题
+          %dt 最新社群
           %dd
             %ul.links
-              - @hot_topics.each do |t|
-                %li #{link_to t.title, show_community_topic_path(t.community, t)}  
+              - Community.limit(5).each do |c|
+                %li #{link_to c.name, community_path(c)}
+              %li
+                #{link_to '更多...', communities_path}   
 
-        %dl.highlight.blue
-          %dt 最受欢迎日记
-          %dd
-            %ul.links
-              - @hot_blogs.each do |b|
-                %li #{link_to b.title, blog_path(b)}
+
+        / %dl.highlight.purple
+        /   %dt 热点文章
+        /   %dd
+        /     %ul.links
+        /       - @hot_articles.each do |a|
+        /         %li #{link_to a.title, show_community_article_path(a.community, a)}    
+
+        / %dl.highlight.green
+        /   %dt 热点话题
+        /   %dd
+        /     %ul.links
+        /       - @hot_topics.each do |t|
+        /         %li #{link_to t.title, show_community_topic_path(t.community, t)}  
+
+        / %dl.highlight.blue
+        /   %dt 最受欢迎日记
+        /   %dd
+        /     %ul.links
+        /       - @hot_blogs.each do |b|
+        /         %li #{link_to b.title, blog_path(b)}
 
 :javascript
   $(document).ready(function(){

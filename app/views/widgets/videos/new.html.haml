@@ -38,7 +38,7 @@
     .col
       %h3 在#{@video_list.name}中发布新视频
       %p 请输入视频的网站源地址，目前支持土豆、优酷、酷6、新浪视频、搜狐视频等多家视频网站
-      = form_for @video, :url => {:action => "create"}  do |f|
+      = simple_form_for @video, :url => {:action => "create"}  do |f|
         %p
           = f.input :category, label:'类别:', collection: ['健康知识', '就医指南', '治疗交流', '护理园地', '用药常识']
         %p
@@ -61,4 +61,4 @@
 
   .col.size1of3.margin-t20
     .margin-l20
-      = render :partial => "shared/content_sidebar"         
+    /  = render :partial => "shared/content_sidebar"         

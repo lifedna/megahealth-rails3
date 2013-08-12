@@ -23,7 +23,8 @@ class ArticlePresenter < BasePresenter
 
   def metadata
     out = []
-    out << "<span class ='icon icon-16 icon-group'></span>#{link_to article.community.name, community_path(article.community)}"
+    # out << "<span class ='icon icon-16 icon-group'></span>#{link_to article.community.name, community_path(article.community)}"
+    out << "<span class ='icon icon-16 icon-group'></span>#{article.community.name}"
     out << "#{time_ago_in_words(article.created_at).capitalize}前"
   	return raw out.join(" &middot; ")
   end
