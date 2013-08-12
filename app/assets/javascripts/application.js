@@ -28,12 +28,12 @@ $(document).ready(function(){
 
 	// when an ajax request starts, show spinner
 	$(document).ajaxStart(function(){
-		$("#spinner").show();
+	    $("#spinner").show();
 	});
 
 	// when an ajax request complets, hide spinner    
 	$(document).ajaxStop(function(){
-	    $("#spinner").hide();
+		$("#spinner").hide();
 	});
 
 	$(".my-community").click(function(){
