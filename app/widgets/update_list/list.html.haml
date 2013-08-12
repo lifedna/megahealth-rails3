@@ -13,15 +13,16 @@
       .col.sizefill
         .activity-content.margin-l20
           .color-grey  #{presenter.metadata}
-          %h4
-            #{presenter.text} 
-          - if presenter.content? && first_image_url(activity.the_object.body)   
-            .col.sizefit.float-right
-              .margin-b10
-                = image_tag first_image_url(activity.the_object.body), size: "80x80"
-          .col.sizefill    
-            .margin-r10 
-              %span #{truncate strip_tags(activity.the_object.body), length: 60, omission: '.....'}
+          %h4 #{presenter.text} 
+          .margin-r10 
+            %span #{truncate strip_tags(activity.the_object.body), length: 80, omission: '.....'}
+          / - if presenter.content? && first_image_url(activity.the_object.body)   
+          /   .col.sizefit.float-right
+          /     .margin-b10
+          /       = image_tag first_image_url(activity.the_object.body), size: "80x80"
+          / .col.sizefill    
+          /   .margin-r10 
+          /     %span #{truncate strip_tags(activity.the_object.body), length: 60, omission: '.....'}
               
 
 
