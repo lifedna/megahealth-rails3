@@ -22,29 +22,8 @@
                 = image_tag first_image_url(activity.the_object.body), size: "80x80"
           .col.sizefill    
             .margin-r10 
-              %span #{truncate strip_tags(activity.the_object.body), length: 80, omission: '.....'}
+              %span #{truncate strip_tags(activity.the_object.body), length: 60, omission: '.....'}
               
-
-/ - @activities.each do |activity|
-/   .support-group-feed.margin-b20.border-bottom
-/     - present activity, ActivityPresenter do |presenter|
-/       .col.sizefit
-/         - case presenter.activity.verb
-/         - when :new_article, :new_poll, :new_video
-/           = image_tag activity.the_target.logo_url(:thumb), size: "48x48", :style => "margin-right:15px;padding-top:5px;"  
-/         - else 
-/           = image_tag activity.the_actor.avatar_url(:thumb), size: "48x48", :style => "margin-right:15px;padding-top:5px;" 
-
-/       .col.sizefill
-/         .col.color-grey     
-/           #{presenter.metadata}
-/         / - if presenter.content? && first_image_url(activity.the_object.body)   
-/         /   .col.sizefit.float-right
-/         /     = image_tag first_image_url(activity.the_object.body), size: "80x80"
-/         .col.sizefill                       
-/           .margin-r10
-/             %p #{presenter.text}
-/             %p #{truncate strip_tags(activity.the_object.body), length: 100, omission: '.....'}
 
 
                   
