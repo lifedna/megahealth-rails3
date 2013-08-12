@@ -41,12 +41,15 @@
                     最多浏览
 
                 .col.margin-t20     
-                  %h4 显示更多内容
-                  - @content_filter.content.each do |k, v|
-                    .col.size1of3
-                      = f.fields_for :content do |c|
-                        = c.check_box k, checked: (v == "1" ? "checked" : ""), :class =>"checkbox"
-                        = c.label k
+                  %h4 
+                    显示更多内容
+                    %small{:style =>'font-size:80%'} (#{link_to '全选', '#', :id => 'select_all'}, #{link_to '全不选', '#', :id => 'unselect_all'})
+                  .content_filter  
+                    - @content_filter.content.each do |k, v|
+                      .col.size1of3
+                        = f.fields_for :content do |c|
+                          = c.check_box k, checked: (v == "1" ? "checked" : ""), :class =>"checkbox"
+                          = c.label k
 
                 .col.margin-t20     
                   %h4 只看与你关心的人健康相关的内容？
@@ -137,69 +140,20 @@
               - @hot_blogs.each do |b|
                 %li #{link_to b.title, blog_path(b)}
 
-        / .section
-        /   .header
-        /     %h5 推荐文章
-        /   .body
-        /     %ul.nav.recommendation
-        /       - Community.all.limit(5).each do |c|
-        /         %li
-        /           .col.sizefit.float-right
-        /             %img{:src =>"#{asset_path 'doctors/12033.jpg'}"}
-        /           .col.sizefill.margin-r10 
-        /             %dl
-        /               %dt #{link_to c.name, community_path(c)} 
-        /               %dd
-        /                 %p 中山大学附属第三医院
-        /                 %p 皮肤科
-                        
-        / .section
-        /   .header
-        /     %h5 热点话题  
-        /   .body
-        /     %ul.nav.recommendation
-        /       - Community.all.limit(5).each do |c|
-        /         %li
-        /           .col.sizefit.float-right
-        /             %img{:src =>"#{asset_path 'doctors/12033.jpg'}"}
-        /           .col.sizefill.margin-r10 
-        /             %dl
-        /               %dt #{link_to c.name, community_path(c)} 
-        /               %dd
-        /                 %p 中山大学附属第三医院
-        /                 %p 皮肤科
+:javascript
+  $(document).ready(function(){
+    $('#select_all').click(function(e){
+      e.preventDefault();
+      $('input[id^=content_filter_content]').each(function(){
+        $(this).prop('checked', true);
+      });
+    });
+
+    $('#unselect_all').click(function(e){
+      e.preventDefault();
+      $('input[id^=content_filter_content]').each(function(){
+        $(this).prop('checked', false);
+      });
+    });
       
-        / .section
-        /   .header
-        /     %h5 热点问答
-        /   .body
-        /     %ul.nav.recommendation
-        /       - Community.all.limit(5).each do |c|
-        /         %li
-        /           .col.sizefit.float-right
-        /             %img{:src =>"#{asset_path 'doctors/12033.jpg'}"}
-        /           .col.sizefill.margin-r10 
-        /             %dl
-        /               %dt #{link_to c.name, community_path(c)} 
-        /               %dd
-        /                 %p 中山大学附属第三医院
-        /                 %p 皮肤科
-
-        / .section
-        /   .header
-        /     %h5 最热主题
-        /   .body{:style => "font-size:85%;"}
-        /     .col
-        /       .tags
-        /         %ul.cloud.nav
-        /           - Content.tags_with_weight.each do |tag|
-        /             %li{:class => "tag#{tag[1]+1}"}
-        /               %a #{tag[0]}
-
-/ :javascript
-//   $(document).ready(function(){
-//    $('.features-setting').hide();
-//       $('.link-setting').click(function() {
-//         $('.features-setting').slideToggle();
-//     });
-//   });        
+  });        
