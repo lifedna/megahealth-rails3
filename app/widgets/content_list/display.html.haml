@@ -2,6 +2,6 @@
   = render({:state => :list}, @items)
 
 - unless @items.last_page?  
-  = render_widget :load_more_content, :display, :page_num => @items.current_page + 1, :category => @category
+  = render_widget :load_more_link, :display, :page_num => @items.current_page + 1, :category => @category
   #spinner.text-center
     %span.icon.spin.icon-32.icon-spinner

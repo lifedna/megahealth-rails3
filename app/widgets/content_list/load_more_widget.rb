@@ -1,6 +1,12 @@
 class ContentList::LoadMoreWidget  < AuthorizableWidget
   responds_to_event :more, :with => :process_more
 
+  after_initialize do
+    @klass = current_user.content_filter.merged_klass
+    @keywords = current_user.content_filter.merged_keywords
+    @scope = current_user.content_filter.scope
+  end 
+
   def display(*args)
     options = args.extract_options!
   	@page_num = options[:page_num]
@@ -9,20 +15,18 @@ class ContentList::LoadMoreWidget  < AuthorizableWidget
   end
 
   def process_more(evt)
-  	# @feature_filter = current_user.feature_filter
-    @keywords = current_user.content_filter.merged_keywords
 
     if evt[:content_category]
       if @keywords.nil? or @keywords.empty?
-        @items = Content.where(category: evt[:content_category]).page evt[:page]
+        @items = Content.send("#{@scope}").in(_type: @klass).where(category: evt[:content_category]).page evt[:page]
       else
-        @items = Content.where(category: evt[:content_category]).full_text_search(@keywords).page evt[:page]
+        @items = Content.send("#{@scope}").in(_type: @klass).where(category: evt[:content_category]).full_text_search(@keywords).page evt[:page]
       end  
     else
       if @keywords.nil? or @keywords.empty?
-        @items = Content.all.page evt[:page]
+        @items = Content.send("#{@scope}").in(_type: @klass).all.page evt[:page]
       else
-        @items = Content.all.full_text_search(@keywords).page evt[:page]
+        @items = Content.send("#{@scope}").in(_type: @klass).all.full_text_search(@keywords).page evt[:page]
       end 
     end
 

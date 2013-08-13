@@ -10,7 +10,7 @@ class Content
   # include Mongoid::Sharable
   include Mongoid::Search
 
-  paginates_per 5
+  paginates_per 8
   
   field :title, type: String
   field :body, type: String

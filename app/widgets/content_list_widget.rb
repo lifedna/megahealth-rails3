@@ -6,7 +6,7 @@ class ContentListWidget < AuthorizableWidget
   helper_method :present, :first_image_url
 
   has_widgets do
-    self << widget("content_list/load_more", :load_more_content)
+    self << widget("content_list/load_more", :load_more_link)
   end
 
   after_initialize do
@@ -21,32 +21,34 @@ class ContentListWidget < AuthorizableWidget
 
     if @category
       if @keywords.nil? or @keywords.empty?
-        @items = Content.send("#{@scope}").in(_type: @klass).where(category: @category).page params[:page]
+        @items = Content.send("#{@scope}").in(_type: @klass).where(category: @category).page(1)
       else
-        @items = Content.send("#{@scope}").in(_type: @klass).where(category: @category).full_text_search(@keywords).page params[:page]
+        @items = Content.send("#{@scope}").in(_type: @klass).where(category: @category).full_text_search(@keywords).page(1)
       end  
     else
       if @keywords.nil? or @keywords.empty?
-        @items = Content.send("#{@scope}").in(_type: @klass).all.page params[:page]
+        @items = Content.send("#{@scope}").in(_type: @klass).all.page(1)
       else
-        @items = Content.send("#{@scope}").in(_type: @klass).all.full_text_search(@keywords).page params[:page]
+        @items = Content.send("#{@scope}").in(_type: @klass).all.full_text_search(@keywords).page(1)
       end 
     end 
+
     render
+
   end
 
   def process_more(evt)
     if evt[:content_category]
       if @keywords.nil? or @keywords.empty?
-        @items = Content.where(category: evt[:content_category]).page evt[:page]
+        @items = Content.send("#{@scope}").in(_type: @klass).where(category: evt[:content_category]).page evt[:page]
       else
-        @items = Content.where(category: evt[:content_category]).full_text_search(@keywords).page evt[:page]
+        @items = Content.send("#{@scope}").in(_type: @klass).where(category: evt[:content_category]).full_text_search(@keywords).page evt[:page]
       end  
     else
       if @keywords.nil? or @keywords.empty?
-        @items = Content.all.page evt[:page]
+        @items = Content.send("#{@scope}").in(_type: @klass).all.page evt[:page]
       else
-        @items = Content.all.full_text_search(@keywords).page evt[:page]
+        @items = Content.send("#{@scope}").in(_type: @klass).all.full_text_search(@keywords).page evt[:page]
       end 
     end
 
