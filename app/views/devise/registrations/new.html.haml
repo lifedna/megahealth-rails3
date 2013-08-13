@@ -1,13 +1,17 @@
 / Page
 .site-center.center-page
-  %h2 Sign up
-  = simple_form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f|
-    = f.error_notification
-    .form-inputs
-      = f.input :name, :required => true
-      = f.input :email, :required => true, :autofocus => true
-      = f.input :password, :required => true
-      = f.input :password_confirmation, :required => true
-    .form-actions
-      = f.button :submit, "Sign up"
-  = render "devise/shared/links"
+  .auth-form  
+    = simple_form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f|
+      = f.error_notification
+      .auth-form-header
+        %h2 创建一个帐户
+      .auth-form-body  
+        .form-inputs
+          = f.input :name, label: '用户名', :required => true, input_html: {class: 'input-block'}
+          = f.input :email, label: '邮箱', :required => true, :autofocus => true, input_html: {class: 'input-block'}
+          = f.input :password, label: '密码', :required => true, input_html: {class: 'input-block'}
+          = f.input :password_confirmation, label: '密码确认', :required => true, input_html: {class: 'input-block'}
+        %br
+        .form-actions
+          = f.button :submit, "注册"
+    = render "devise/shared/links"

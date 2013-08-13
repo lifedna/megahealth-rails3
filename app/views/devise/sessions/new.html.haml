@@ -1,11 +1,14 @@
 / Page
 .site-center.center-page
-  %h2 Sign in
-  = simple_form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f|
-    .form-inputs
-      = f.input :email, :required => false, :autofocus => true
-      = f.input :password, :required => false
-      = f.input :remember_me, :as => :boolean if devise_mapping.rememberable?
-    .form-actions
-      = f.button :submit, "Sign in"
-  = render "devise/shared/links"
+  .auth-form   
+    = simple_form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f|
+      .auth-form-header
+        %h2 登录
+      .auth-form-body  
+        .form-inputs
+          = f.input :email, label: '邮箱', :required => false, :autofocus => true, input_html: {class: 'input-block'}
+          = f.input :password, label: '密码', :required => false, input_html: {class: 'input-block'}
+          = f.input :remember_me, label: '记住我', :as => :boolean if devise_mapping.rememberable?
+        .form-actions
+          = f.button :submit, "登入"   
+    = render "devise/shared/links"
