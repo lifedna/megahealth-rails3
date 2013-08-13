@@ -21,11 +21,11 @@ class Activity
     target_object :community
   end
 
-  # activity :new_question do 
-  #   actor :user
-  #   object :question
-  #   target_object :community
-  # end
+  activity :new_question do 
+    actor :user
+    object :question
+    target_object :community
+  end
 
   activity :new_topic do 
     actor :user

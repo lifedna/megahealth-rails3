@@ -1,4 +1,8 @@
 class Widgets::QuestionsController < ApplicationController
+  has_widgets do |root|
+    root << widget(:like)
+  end
+  
   def new
     @qa = Qa.find params[:qa_id]
     @question = Question.new
@@ -27,6 +31,8 @@ class Widgets::QuestionsController < ApplicationController
     @community = Community.find params[:community_id]
     @sections = @question.community.sections
     @current_section = @question.qa.section
+
+    impressionist @question, nil, :unique => [:session_hash]
   end
 
   def answer
