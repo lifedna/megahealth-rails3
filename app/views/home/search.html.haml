@@ -90,7 +90,7 @@
         .contentlist
           .content-source
             - if @results.size == 0
-              我们没有找到有关 "#{params[:q]}" 在 #{params[:category]} 类别中的#{params[:type]}
+              我们没有找到有关 "#{params[:q]}" 在 #{params[:category]} 类别中的任何内容
             - else
               找到#{@results.size}条结果
           - @results.each do |e|
