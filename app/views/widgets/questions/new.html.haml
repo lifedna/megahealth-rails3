@@ -34,7 +34,9 @@
       #{link_to "> #{@qa.name}", show_community_qa_url(@community, @qa)}
     .col  
       %h3 在#{@qa.name}中提问
-      = form_for @question, :url => {:action => "create"}  do |f|
+      = simple_form_for @question, :url => {:action => "create"}  do |f|
+        %p
+          = f.input :category, label:'类别:', collection: ['健康知识', '就医指南', '治疗交流', '护理园地', '用药常识']
         %p
           = f.label '标题'
           = f.text_field :title
