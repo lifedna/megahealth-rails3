@@ -1,3 +1,16 @@
+- @articles_count = @category_entries.select {|i| i._type == "Article"}.nil? ? 0 : @category_entries.select {|i| i._type == "Article"}.size
+- @blogs_count = @category_entries.select {|i| i._type == "Blog"}.nil? ? 0 : @category_entries.select {|i| i._type == "Blog"}.size
+- @topics_count = @category_entries.select {|i| i._type == "Topic"}.nil? ? 0 : @category_entries.select {|i| i._type == "Topic"}.size
+- @videos_count = @category_entries.select {|i| i._type == "Video"}.nil? ? 0 : @category_entries.select {|i| i._type == "Video"}.size
+- @questions_count = @category_entries.select {|i| i._type == "Question"}.nil? ? 0 : @category_entries.select {|i| i._type == "Question"}.size
+- @polls_count = @category_entries.select {|i| i._type == "Poll"}.nil? ? 0 : @category_entries.select {|i| i._type == "Poll"}.size
+
+- @cate1_count = @entries.select {|i| i.category == "健康知识"}.nil? ? 0 : @entries.select {|i| i.category == "健康知识"}.size
+- @cate2_count = @entries.select {|i| i.category == "就医指南"}.nil? ? 0 : @entries.select {|i| i.category == "就医指南"}.size
+- @cate3_count = @entries.select {|i| i.category == "治疗交流"}.nil? ? 0 : @entries.select {|i| i.category == "治疗交流"}.size
+- @cate4_count = @entries.select {|i| i.category == "护理园地"}.nil? ? 0 : @entries.select {|i| i.category == "护理园地"}.size
+- @cate5_count = @entries.select {|i| i.category == "用药常识"}.nil? ? 0 : @entries.select {|i| i.category == "用药常识"}.size
+
 / Page
 .site-center  
   .content-search-head
@@ -15,56 +28,62 @@
     .col.size1of4
       .padding-r20
         %h4 类别
-        .menu-container.menu
+        .category-container.menu
           %ul.stat.left.nav
             %li{:class => (params[:category] == "健康知识" ? "active" : "")}
               %a{:href => "#{search_path :q => params[:q], :category => "健康知识", :type => params[:type]}"}
-                %span.data #{@entries.select {|i| i.category == "健康知识"}.nil? ? "0" : @entries.select {|i| i.category == "健康知识"}.size}
+                %span.data #{@cate1_count}
                 健康知识 
             %li{:class => (params[:category] == "就医指南" ? "active" : "")} 
               %a{:href => "#{search_path :q => params[:q], :category => "就医指南", :type => params[:type]}"}
-                %span.data #{@entries.select {|i| i.category == "就医指南"}.nil? ? "0" : @entries.select {|i| i.category == "就医指南"}.size}
+                %span.data #{@cate2_count}
                 就医指南  
             %li{:class => (params[:category] == "治疗交流" ? "active" : "")} 
               %a{:href => "#{search_path :q => params[:q], :category => "治疗交流", :type => params[:type]}"} 
-                %span.data #{@entries.select {|i| i.category == "治疗交流"}.nil? ? "0" : @entries.select {|i| i.category == "治疗交流"}.size}
+                %span.data #{@cate3_count}
                 治疗交流 
             %li{:class => (params[:category] == "护理园地" ? "active" : "")} 
               %a{:href => "#{search_path :q => params[:q], :category => "护理园地", :type => params[:type]}"}
-                %span.data #{@entries.select {|i| i.category == "护理园地"}.nil? ? "0" : @entries.select {|i| i.category == "护理园地"}.size} 
+                %span.data #{@cate4_count} 
                 护理园地
             %li{:class => (params[:category] == "用药常识" ? "active" : "")} 
               %a{:href => "#{search_path :q => params[:q], :category => "用药常识", :type => params[:type]}"}
-                %span.data #{@entries.select {|i| i.category == "用药常识"}.nil? ? "0" : @entries.select {|i| i.category == "用药常识"}.size} 
+                %span.data #{@cate5_count} 
                 用药常识 
 
         %h4 内容
-        .menu
+        .type-container.menu
           %ul.stat.left.nav
-            %li{:class => (params[:type] == "Article" ? "active" : "")} 
-              %a{:href => "#{search_path :q => params[:q], :category => params[:category], :type => "Article"}"}
-                %span.data #{@category_entries.select {|i| i._type == "Article"}.nil? ? "0" : @category_entries.select {|i| i._type == "Article"}.size}
-                文章    
-            %li{:class => (params[:type] == "Blog" ? "active" : "")}  
-              %a{:href => "#{search_path :q => params[:q], :category => params[:category], :type => "Blog"}"}
-                %span.data #{@category_entries.select {|i| i._type == "Blog"}.nil? ? "0" : @category_entries.select {|i| i._type == "Blog"}.size}
-                日记     
-            %li{:class => (params[:type] == "Topic" ? "active" : "")}  
-              %a{:href => "#{search_path :q => params[:q], :category => params[:category], :type => "Topic"}"}
-                %span.data #{@category_entries.select {|i| i._type == "Topic"}.nil? ? "0" : @category_entries.select {|i| i._type == "Topic"}.size}
-                话题    
-            %li{:class => (params[:type] == "Question" ? "active" : "")}  
-              %a{:href => "#{search_path :q => params[:q], :category => params[:category], :type => "Question"}"} 
-                %span.data #{@category_entries.select {|i| i._type == "Question"}.nil? ? "0" : @category_entries.select {|i| i._type == "Question"}.size} 
-                问题 
-            %li{:class => (params[:type] == "Video" ? "active" : "")}  
-              %a{:href => "#{search_path :q => params[:q], :category => params[:category], :type => "Video"}"} 
-                %span.data #{@category_entries.select {|i| i._type == "Video"}.nil? ? "0" : @category_entries.select {|i| i._type == "Video"}.size} 
-                视频  
-            %li{:class => (params[:type] == "Poll" ? "active" : "")}  
-              %a{:href => "#{search_path :q => params[:q], :category => params[:category], :type => "Poll"}"} 
-                %span.data #{@category_entries.select {|i| i._type == "Poll"}.nil? ? "0" : @category_entries.select {|i| i._type == "Poll"}.size} 
-                投票       
+            - if @articles_count > 0
+              %li{:class => (params[:type] == "Article" ? "active" : "")} 
+                %a{:href => "#{search_path :q => params[:q], :category => params[:category], :type => "Article"}"}
+                  %span.data #{@articles_count}
+                  文章    
+            - if @blogs_count > 0      
+              %li{:class => (params[:type] == "Blog" ? "active" : "")}  
+                %a{:href => "#{search_path :q => params[:q], :category => params[:category], :type => "Blog"}"}
+                  %span.data #{@blogs_count}
+                  日记    
+            - if @topics_count > 0        
+              %li{:class => (params[:type] == "Topic" ? "active" : "")}  
+                %a{:href => "#{search_path :q => params[:q], :category => params[:category], :type => "Topic"}"}
+                  %span.data #{@topics_count}
+                  话题  
+            - if @questions_count > 0         
+              %li{:class => (params[:type] == "Question" ? "active" : "")}  
+                %a{:href => "#{search_path :q => params[:q], :category => params[:category], :type => "Question"}"} 
+                  %span.data #{@questions_count} 
+                  问题 
+            - if @videos_count > 0       
+              %li{:class => (params[:type] == "Video" ? "active" : "")}  
+                %a{:href => "#{search_path :q => params[:q], :category => params[:category], :type => "Video"}"} 
+                  %span.data #{@videos_count} 
+                  视频 
+            - if @polls_count > 0        
+              %li{:class => (params[:type] == "Poll" ? "active" : "")}  
+                %a{:href => "#{search_path :q => params[:q], :category => params[:category], :type => "Poll"}"} 
+                  %span.data #{@polls_count} 
+                  投票       
 
     .col.size3of4
       .padding-l10
@@ -89,6 +108,46 @@
                   %p{:style => "color:#999"} #{time_ago_in_words(e.created_at)}前
 
 
+:javascript
+  $(document).ready(function(){
+    $(".type-container li a").click(function(e){
+      e.preventDefault();
 
+      //
+      var vars = [], hash;
+      var q = document.URL.split('?')[1];
+      if(q != undefined){
+        q = q.split('&');
+        for(var i = 0; i < q.length; i++){
+            hash = q[i].split('=');
+            vars.push(hash[1]);
+            vars[hash[0]] = hash[1];
+        }
+      }
+      var old_type = vars['type']
+
+      //
+      var vars = [], hash;
+      var q = $(this).attr("href").split('?')[1];
+      if(q != undefined){
+        q = q.split('&');
+        for(var i = 0; i < q.length; i++){
+            hash = q[i].split('=');
+            vars.push(hash[1]);
+            vars[hash[0]] = hash[1];
+        }
+      }
+      var new_type = vars['type']
+
+      if(new_type == old_type){
+        var href = $(this).attr("href").replace(/([\?&])(type=)[^&#]*/, '');
+        window.location.href = href;
+      } else {
+        window.location.href = $(this).attr("href");
+      }
+
+    });
+      
+  });
             
 
