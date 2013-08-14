@@ -1,3 +1,4 @@
+# coding: utf-8
 class HomeController < ApplicationController
   before_filter :authenticate_user!, :except => [:index, :communities]
 
@@ -28,5 +29,25 @@ class HomeController < ApplicationController
   end
 
   def account
+  end
+
+  def search
+    keywords ||= []
+    keywords << params[:q]
+    @entries = Content.all.full_text_search(keywords)
+
+    if params[:category]
+      category = params[:category]
+    else
+      category = '健康知识'
+    end   
+
+    @category_entries = Content.where(category: category).full_text_search(keywords)
+
+    if params[:type]
+      @results = Content.where(_type: params[:type]).where(category: category).full_text_search(keywords)
+    else
+      @results = Content.where(category: category).full_text_search(keywords)
+    end
   end
 end

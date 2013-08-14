@@ -1,7 +1,6 @@
 class Video < Content
   include Getvideo
 
-  field :body, type: String
   field :url, type: String
   field :thumb, type: String
   field :src, type: String

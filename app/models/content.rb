@@ -34,4 +34,29 @@ class Content
   scope :newest, desc(:created_at)
   scope :hot, desc(:likers_count)
   scope :popular, desc(:impressions_count)
+
+  def presenter_klass
+    klass = "#{self.class.to_s}Presenter"
+    klass.constantize
+  end
+
+  def content_type
+    case self.class.to_s
+    when "Article"
+      out = "文章"
+    when "Blog"
+      out = "日记"
+    when "Topic"
+      out = "话题"
+    when "Question"
+      out = "问题"
+    when "Video"
+      out = "视频"  
+    when "Poll"
+      out = "投票"  
+    else
+      out = "content"
+    end  
+    return out
+  end
 end  

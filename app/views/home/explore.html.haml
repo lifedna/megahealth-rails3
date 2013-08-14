@@ -107,8 +107,12 @@
           %a.close-reveal-modal &#215;
               
         .section.margin-b20
-          %form.community-search{:style => "width: 100%;"}
-            %input{:type => "search", :width => "100%", :placeholder => "搜索"}
+          / %form.community-search{:style => "width: 100%;"}
+          = form_tag "/search", :method => "get" do
+            = text_field_tag :q, nil, :type => "search", :placeholder => "搜索", :required => true
+            = hidden_field_tag :category, nil, :value => '健康知识'
+            / %input{:type => "search", :width => "100%", :placeholder => "搜索"}
+
         .section
           .header
             %h5 充实您的健康资料  

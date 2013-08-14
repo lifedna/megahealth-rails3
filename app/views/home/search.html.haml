@@ -1,0 +1,94 @@
+/ Page
+.site-center  
+  .content-search-head
+    .container
+      .col.size1of4
+        %h2 查询
+      .col.size3of4  
+        #content_search.float-right
+          = form_tag "/search", :method => "get" do          
+            = text_field_tag :q, nil, :value => params[:q], :size => 70, :required => true
+            = hidden_field_tag :category, nil, :value => params[:category]
+            = submit_tag "查询", :class => "search-button gradient"
+
+  .page-content
+    .col.size1of4
+      .padding-r20
+        %h4 类别
+        .menu-container.menu
+          %ul.stat.left.nav
+            %li{:class => (params[:category] == "健康知识" ? "active" : "")}
+              %a{:href => "#{search_path :q => params[:q], :category => "健康知识", :type => params[:type]}"}
+                %span.data #{@entries.select {|i| i.category == "健康知识"}.nil? ? "0" : @entries.select {|i| i.category == "健康知识"}.size}
+                健康知识 
+            %li{:class => (params[:category] == "就医指南" ? "active" : "")} 
+              %a{:href => "#{search_path :q => params[:q], :category => "就医指南", :type => params[:type]}"}
+                %span.data #{@entries.select {|i| i.category == "就医指南"}.nil? ? "0" : @entries.select {|i| i.category == "就医指南"}.size}
+                就医指南  
+            %li{:class => (params[:category] == "治疗交流" ? "active" : "")} 
+              %a{:href => "#{search_path :q => params[:q], :category => "治疗交流", :type => params[:type]}"} 
+                %span.data #{@entries.select {|i| i.category == "治疗交流"}.nil? ? "0" : @entries.select {|i| i.category == "治疗交流"}.size}
+                治疗交流 
+            %li{:class => (params[:category] == "护理园地" ? "active" : "")} 
+              %a{:href => "#{search_path :q => params[:q], :category => "护理园地", :type => params[:type]}"}
+                %span.data #{@entries.select {|i| i.category == "护理园地"}.nil? ? "0" : @entries.select {|i| i.category == "护理园地"}.size} 
+                护理园地
+            %li{:class => (params[:category] == "用药常识" ? "active" : "")} 
+              %a{:href => "#{search_path :q => params[:q], :category => "用药常识", :type => params[:type]}"}
+                %span.data #{@entries.select {|i| i.category == "用药常识"}.nil? ? "0" : @entries.select {|i| i.category == "用药常识"}.size} 
+                用药常识 
+
+        %h4 内容
+        .menu
+          %ul.stat.left.nav
+            %li{:class => (params[:type] == "Article" ? "active" : "")} 
+              %a{:href => "#{search_path :q => params[:q], :category => params[:category], :type => "Article"}"}
+                %span.data #{@category_entries.select {|i| i._type == "Article"}.nil? ? "0" : @category_entries.select {|i| i._type == "Article"}.size}
+                文章    
+            %li{:class => (params[:type] == "Blog" ? "active" : "")}  
+              %a{:href => "#{search_path :q => params[:q], :category => params[:category], :type => "Blog"}"}
+                %span.data #{@category_entries.select {|i| i._type == "Blog"}.nil? ? "0" : @category_entries.select {|i| i._type == "Blog"}.size}
+                日记     
+            %li{:class => (params[:type] == "Topic" ? "active" : "")}  
+              %a{:href => "#{search_path :q => params[:q], :category => params[:category], :type => "Topic"}"}
+                %span.data #{@category_entries.select {|i| i._type == "Topic"}.nil? ? "0" : @category_entries.select {|i| i._type == "Topic"}.size}
+                话题    
+            %li{:class => (params[:type] == "Question" ? "active" : "")}  
+              %a{:href => "#{search_path :q => params[:q], :category => params[:category], :type => "Question"}"} 
+                %span.data #{@category_entries.select {|i| i._type == "Question"}.nil? ? "0" : @category_entries.select {|i| i._type == "Question"}.size} 
+                问题 
+            %li{:class => (params[:type] == "Video" ? "active" : "")}  
+              %a{:href => "#{search_path :q => params[:q], :category => params[:category], :type => "Video"}"} 
+                %span.data #{@category_entries.select {|i| i._type == "Video"}.nil? ? "0" : @category_entries.select {|i| i._type == "Video"}.size} 
+                视频  
+            %li{:class => (params[:type] == "Poll" ? "active" : "")}  
+              %a{:href => "#{search_path :q => params[:q], :category => params[:category], :type => "Poll"}"} 
+                %span.data #{@category_entries.select {|i| i._type == "Poll"}.nil? ? "0" : @category_entries.select {|i| i._type == "Poll"}.size} 
+                投票       
+
+    .col.size3of4
+      .padding-l10
+        .contentlist
+          .content-source
+            - if @results.size == 0
+              我们没有找到有关 "#{params[:q]}" 在 #{params[:category]} 类别中的#{params[:type]}
+            - else
+              找到#{@results.size}条结果
+          - @results.each do |e|
+            - present e, e.presenter_klass do |presenter|
+              .content-source
+                %ul.nav.content-stats
+                  %li 
+                    .label.background-grey #{e.content_type}                 
+                  %li 浏览 #{e.impressionist_count}
+                  %li 收藏 #{e.likers_count}
+                %h3.content-title 
+                  %a #{presenter.title}    
+                .body 
+                  %span #{presenter.text}   
+                  %p{:style => "color:#999"} #{time_ago_in_words(e.created_at)}前
+
+
+
+            
+
