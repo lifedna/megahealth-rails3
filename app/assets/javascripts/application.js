@@ -24,7 +24,7 @@
 
 $(document).ready(function(){
 
-	$("#load_more_content a").click(function(){
+	$("#load_more_link a").click(function(){
     	$("#load_more_link").hide();
   	});
 	// hide it first
