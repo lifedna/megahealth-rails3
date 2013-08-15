@@ -128,7 +128,7 @@
           %dt 最新社群
           %dd
             %ul.links
-              - Community.limit(5).each do |c|
+              - Community.newest.limit(5).each do |c|
                 %li #{link_to c.name, community_path(c)}
               %li
                 #{link_to '更多...', communities_path}   
