@@ -32,9 +32,9 @@
             %li{:class => (params[:scope] == "hot" ? "active" : "")}
               %a 最热  
               = radio_button_tag "scope", "hot", (params[:scope] == "hot"), hidden: true 
-            %li{:class => (params[:scope] == "new" ? "active" : "")}
+            %li{:class => (params[:scope] == "newest" ? "active" : "")}
               %a 新增
-              = radio_button_tag "scope", "new", (params[:scope] == "new"), hidden: true  
+              = radio_button_tag "scope", "newest", (params[:scope] == "newest"), hidden: true  
             %li{:class => (params[:scope] == "classic" ? "active" : "")}
               %a 精选  
               = radio_button_tag "scope", "classic", (params[:scope] == "classic"), hidden: true    

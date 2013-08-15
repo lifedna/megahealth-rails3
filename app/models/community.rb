@@ -30,7 +30,7 @@ class Community
   has_many :posts 
 
   # default_scope desc(:created_at)
-  scope :new, desc(:created_at)
+  scope :newest, desc(:created_at)
   # scope :hot, desc(:members_count) 
   scope :category, ->(category){where(category: category)}
 
