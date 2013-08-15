@@ -5,7 +5,7 @@
       .cell
         .section-title
           .handle
-            #{@video_list.name}
+            #{@video_list.name} (#{@video_list.videos.size})
             %small{:style => "font-size: 80%"}
               ( #{link_to '全部', show_community_video_list_path(@video_list.community, @video_list), :class =>'color-orange'}
               - if can? :update, @video_list.community 
@@ -29,7 +29,7 @@
       .col.sizefill
         %div{:id => dom_id(@video_list)}
           %ul.nav
-            - @video_list.videos.each do |v|
+            - @video_list.videos.newest.limit(3).each do |v|
               %li
                 .cell
                   %p #{v.title}

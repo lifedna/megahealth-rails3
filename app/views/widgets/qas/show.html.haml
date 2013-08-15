@@ -39,7 +39,7 @@
           = text_field_tag :title, '', :size => 60, :style => "margin-left: 30px;"
           = submit_tag "提问" 
       .questions-list.margin-t20
-        - @qa.questions.each do |q|
+        - @qa.questions.newest.each do |q|
           .question.border-top
             .col.sizefit
               .cell.pipes.margin-r20

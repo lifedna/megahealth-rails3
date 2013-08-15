@@ -20,6 +20,14 @@
             %p
               = f.label "应用名称:"
               = f.text_field :name
+            %p
+              = f.label "显示数量："
+              = f.radio_button :limits, 10
+              10
+              = f.radio_button :limits, 20
+              20
+              = f.radio_button :limits, 30
+              30  
             %p  
               = f.submit "保存"     
           %a.cancel 取消     
@@ -34,7 +42,7 @@
                 %th.size2of8 作者
                 %th.size1of8 回应
                 %th.size2of8 更新时间
-              - @forum.topics.each do |t|
+              - @forum.topics.newest.limit(@forum.limits).each do |t|
                 %tr 
                   %td #{link_to t.title, show_community_topic_url(t.community, t)}
                   %td #{t.user.name}

@@ -21,6 +21,14 @@
             %p
               = f.label "应用名称:"
               = f.text_field :name
+            %p
+              = f.label "显示数量："
+              = f.radio_button :limits, 2
+              2
+              = f.radio_button :limits, 5
+              5
+              = f.radio_button :limits, 10
+              10
             %p  
               = f.submit "保存"
           %a.cancel 取消     
@@ -28,7 +36,7 @@
     .body          
       .col.sizefill
         %div{:id => dom_id(@poll_set)}
-          = render partial: "poll", collection: @poll_set.polls
+          = render partial: "poll", collection: @poll_set.polls.newest.limit(@poll_set.limits)
           / - @poll_set.polls.each do |poll|
           /   %p
           /     #{poll.name}

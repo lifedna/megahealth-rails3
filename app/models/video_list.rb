@@ -1,7 +1,7 @@
 # encoding: UTF-8
 class VideoList < Widget
   field :name, type: String
-  field :limit, type: Integer
+  # field :limit, type: Integer
 
   def default_values
   	community = Community.find self.community_id

@@ -1,6 +1,6 @@
 # encoding: UTF-8
 class PollSet < Widget
-  field :display_counts, type: Integer
+  field :limits, type: Integer, default: 2
 
   has_many :polls, dependent: :delete do
     def find_by_id(id)

@@ -36,7 +36,7 @@
       %h3 #{@poll_set.name}
       %div{:id => dom_id(@poll_set)}
         %ul
-          - @poll_set.polls.each do |poll|
+          - @poll_set.polls.newest.each do |poll|
             %li #{link_to poll.title, show_community_poll_path(poll.community, poll)}  
 
   .col.size1of3.margin-t20

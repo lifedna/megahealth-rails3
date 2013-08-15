@@ -14,6 +14,14 @@
             %p
               = f.label "应用名称:"
               = f.text_field :name
+            %p
+              = f.label "显示数量："
+              = f.radio_button :limits, 10
+              10
+              = f.radio_button :limits, 20
+              20
+              = f.radio_button :limits, 30
+              30   
             %p  
               = f.submit "保存"
           %a.cancel 取消     
@@ -27,7 +35,7 @@
                 = text_field_tag :title, '', :size => 60, :style => "margin-left: 30px;"
                 = submit_tag "提问"    
           .questions-list.margin-t20
-            - @qa.questions.each do |q|
+            - @qa.questions.newest.limit(@qa.limits).each do |q|
               .question.border-top
                 .col.sizefit
                   .cell.pipes.margin-r20

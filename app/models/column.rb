@@ -1,7 +1,7 @@
 # encoding: UTF-8
 class Column < Widget
   field :name, type: String
-  field :limit, type: Integer
+  field :limits, type: Integer, default: 10  
 
   def default_values
   	community = Community.find self.community_id

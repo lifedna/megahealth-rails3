@@ -10,7 +10,7 @@
       #{link_to "> 回#{@current_section.name}", community_section_url(@community, @current_section)}
     .col
       %h3 #{@video_list.name}
-      - @video_list.videos.each do |v|
+      - @video_list.videos.newest.each do |v|
         .col
           .col.sizefit
             .clickable.video
