@@ -31,7 +31,7 @@ class HomeController < ApplicationController
 
     if params[:category]
       if params[:type]
-        @results = Content.where(_type: params[:type]).where(category: params[:category]).full_text_search(keywords)
+        @results = Content.where(_type: params[:type], category: params[:category]).full_text_search(keywords)
       else
         @results = Content.where(category: params[:category]).full_text_search(keywords)
       end

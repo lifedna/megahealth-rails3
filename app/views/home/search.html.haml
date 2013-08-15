@@ -23,7 +23,7 @@
         #content_search.float-right
           = form_tag "/search", :method => "get" do          
             = text_field_tag :q, nil, :value => params[:q], :size => 70, :required => true
-            = hidden_field_tag :category, nil, :value => params[:category]
+            / = hidden_field_tag :category, nil, :value => params[:category]
             = submit_tag "查询", :class => "search-button gradient"
 
   .page-content
