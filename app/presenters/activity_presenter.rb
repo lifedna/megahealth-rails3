@@ -35,13 +35,13 @@ class ActivityPresenter < BasePresenter
   def text
   	case activity.verb
   	when :new_video
-      out = %(#{raw link_to(activity.the_target.name, activity.the_target)} 发布了新视频 #{raw link_to(activity.the_object.title, show_community_video_path(activity.the_object.community, activity.the_object))})
+      out = %(#{raw link_to(activity.the_target.name, activity.the_target)} 添加了新视频 #{raw link_to(activity.the_object.title, show_community_video_path(activity.the_object.community, activity.the_object))})
     when :new_article
   	  out = %(#{raw link_to(activity.the_target.name, activity.the_target)} 写了新文章 #{raw link_to(activity.the_object.title, show_community_article_path(activity.the_object.community, activity.the_object))})
   	when :new_question
   	  out = %(#{raw link_to(activity.the_actor.name, activity.the_actor)} 提了新问题 #{raw link_to(activity.the_object.title, show_community_question_path(activity.the_object.community, activity.the_object))})
   	when :new_topic
-      out = %(#{raw link_to(activity.the_actor.name, activity.the_actor)} 发起新话题 #{raw link_to(activity.the_object.title, show_community_topic_path(activity.the_object.community, activity.the_object))})  
+      out = %(#{raw link_to(activity.the_actor.name, activity.the_actor)} 发起了新话题 #{raw link_to(activity.the_object.title, show_community_topic_path(activity.the_object.community, activity.the_object))})  
     when :new_poll
       out = %(#{raw link_to(activity.the_target.name, activity.the_target)} 发起了新投票 #{raw link_to(activity.the_object.title, show_community_poll_path(activity.the_object.community, activity.the_object))})
     when :new_comment
