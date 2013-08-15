@@ -18,7 +18,7 @@
             #{@topic.created_at.strftime("%Y-%m-%d %H:%M:%S")}&nbsp;&nbsp;&nbsp;来自: #{@topic.user.name}
           %p #{simple_format @topic.body}          
                     
-          - if can? :update, @topic.community
+          - if @topic.user == current_user
             .margin-t20
               %span{:style => "padding-right: 10px;"} #{link_to '> 修改', edit_community_forum_topic_path(@topic.community, @topic.forum, @topic)}
               %span{:style => "padding-right: 10px;"} #{link_to '> 删除', community_forum_topic_path(@topic.community, @topic.forum, @topic), :method => "delete"}
