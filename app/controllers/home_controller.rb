@@ -7,13 +7,6 @@ class HomeController < ApplicationController
     root << widget(:content_list)
   end
 
-  # def index
-  #   @users = User.all
-  # end
-
-  # def update
-  # end
-  
   def explore   
     @content_filter = current_user.content_filter  
     @hot_articles = Article.hot.limit(5)
@@ -37,17 +30,20 @@ class HomeController < ApplicationController
     @entries = Content.all.full_text_search(keywords)
 
     if params[:category]
-      category = params[:category]
+      if params[:type]
+        @results = Content.where(_type: params[:type]).where(category: params[:category]).full_text_search(keywords)
+      else
+        @results = Content.where(category: params[:category]).full_text_search(keywords)
+      end
     else
-      category = '健康知识'
+      if params[:type]
+        @results = Content.where(_type: params[:type]).full_text_search(keywords)
+      else
+        @results = Content.all.full_text_search(keywords)
+      end
     end   
 
-    @category_entries = Content.where(category: category).full_text_search(keywords)
-
-    if params[:type]
-      @results = Content.where(_type: params[:type]).where(category: category).full_text_search(keywords)
-    else
-      @results = Content.where(category: category).full_text_search(keywords)
-    end
+    @category_entries = Content.where(category: params[:category]).full_text_search(keywords)
+    
   end
 end

@@ -10,6 +10,8 @@
 - @cate3_count = @entries.select {|i| i.category == "治疗交流"}.nil? ? 0 : @entries.select {|i| i.category == "治疗交流"}.size
 - @cate4_count = @entries.select {|i| i.category == "护理园地"}.nil? ? 0 : @entries.select {|i| i.category == "护理园地"}.size
 - @cate5_count = @entries.select {|i| i.category == "用药常识"}.nil? ? 0 : @entries.select {|i| i.category == "用药常识"}.size
+- @category_stats = {"健康知识" => @cate1_count, "就医指南" => @cate2_count, "治疗交流" => @cate3_count, "护理园地" => @cate4_count, "用药常识" => @cate5_count}
+- @stats = @category_stats.sort_by {|k,v| v}.reverse
 
 / Page
 .site-center  
@@ -30,26 +32,15 @@
         %h4 类别
         .category-container.menu
           %ul.stat.left.nav
-            %li{:class => (params[:category] == "健康知识" ? "active" : "")}
-              %a{:href => "#{search_path :q => params[:q], :category => "健康知识", :type => params[:type]}"}
-                %span.data #{@cate1_count}
-                健康知识 
-            %li{:class => (params[:category] == "就医指南" ? "active" : "")} 
-              %a{:href => "#{search_path :q => params[:q], :category => "就医指南", :type => params[:type]}"}
-                %span.data #{@cate2_count}
-                就医指南  
-            %li{:class => (params[:category] == "治疗交流" ? "active" : "")} 
-              %a{:href => "#{search_path :q => params[:q], :category => "治疗交流", :type => params[:type]}"} 
-                %span.data #{@cate3_count}
-                治疗交流 
-            %li{:class => (params[:category] == "护理园地" ? "active" : "")} 
-              %a{:href => "#{search_path :q => params[:q], :category => "护理园地", :type => params[:type]}"}
-                %span.data #{@cate4_count} 
-                护理园地
-            %li{:class => (params[:category] == "用药常识" ? "active" : "")} 
-              %a{:href => "#{search_path :q => params[:q], :category => "用药常识", :type => params[:type]}"}
-                %span.data #{@cate5_count} 
-                用药常识 
+            - @stats.each do |v|
+              %li{:class => (params[:category] == v[0] ? "active" : "")}
+                %a{:href => "#{search_path :q => params[:q], :category => v[0], :type => params[:type]}"}
+                  %span.data #{v[1]}
+                  #{v[0]}
+            / %li{:class => (params[:category] == "健康知识" ? "active" : "")}
+            /   %a{:href => "#{search_path :q => params[:q], :category => "健康知识", :type => params[:type]}"}
+            /     %span.data #{@cate1_count}
+            /     健康知识 
 
         %h4 内容
         .type-container.menu
