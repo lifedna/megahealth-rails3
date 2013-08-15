@@ -1,22 +1,30 @@
 / %li{:id => dom_id(@poll_set)}
-%li{:id => "widget_#{@poll_set.id}"}
+%li.widget{:id => "widget_#{@poll_set.id}"}
   .introduction.panel.margin-b30
     .body
-      .cell.handle
-        .section-title.float-left #{@poll_set.name}
-        .widget-actions.float-right
-          = link_to '全部', show_community_poll_set_path(@poll_set.community, @poll_set)
-          - if can? :update, @poll_set.community         
-            = link_to '添加', new_community_poll_set_poll_path(@poll_set.community, @poll_set)
-            %a.widget-setting-link{:href => "#", :id => "#{@poll_set.id}-settings"} 设置
-            = link_to '删除', url_for_event(:delete_widget, :id => @poll_set.section.id, :widget_id => @poll_set.id), :confirm => 'Are you sure?', :method => 'delete', :remote => true
+      .cell
+        .section-title
+          .handle
+            #{@poll_set.name}
+            %small{:style => "font-size: 80%"}
+              ( #{link_to '全部', show_community_poll_set_path(@poll_set.community, @poll_set), :class =>'color-orange'}
+              - if can? :update, @poll_set.community
+                &middot;
+                #{link_to '添加', new_community_poll_set_poll_path(@poll_set.community, @poll_set), :class =>'color-orange'} 
+              )
+          .edit.color-grey
+            = link_to raw("<span class = 'icon icon-16 icon-cog'>设置</span>"), '#', :id => "#{@poll_set.id}-settings", :class => 'widget-setting-link' if can? :update, @poll_set.community 
+            
 
         .widget-setting{"data-id" => "#{@poll_set.id}"}
           = form_for @poll_set, :url => community_poll_set_url(@poll_set.community, @poll_set) do |f|
             %p
+              = f.label "应用名称:"
               = f.text_field :name
             %p  
               = f.submit "保存"
+          %a.cancel 取消     
+          = link_to '删除应用', url_for_event(:delete_widget, :id => @poll_set.section.id, :widget_id => @poll_set.id), :confirm => 'Are you sure?', :method => 'delete', :remote => true, :class => "delete" if can? :update, @poll_set.community      
     .body          
       .col.sizefill
         %div{:id => dom_id(@poll_set)}

@@ -123,71 +123,32 @@ $(document).ready(function(){
 });
 
 function setWidget(widget){
-	widget.find('.widget-actions').hide();
+	widget.find('.edit').hide();
 	widget.find('.widget-setting').hide();
 
-	widget.find('.widget-setting-link').click(function(e) {
-		e.preventDefault();
-		$(this).parents('.widget-actions').next().toggle();
-	});
-
-	widget.find('.panel').hover(function() {
-		$(this).find('.widget-actions:hidden').toggle();     
+	widget.hover(function() {
+		if( $(this).find('.widget-setting').is(':hidden') ) {
+			$(this).find('.edit').toggle();
+		}	     
 	},function(){
 		if( $(this).find('.widget-setting').is(':hidden') ) {
-	  		$(this).find('.widget-actions').toggle();
+	  		$(this).find('.edit').toggle();
+		}
+	}); 
+	
+	widget.find('.widget-setting-link').click(function(e) {
+		e.preventDefault();
+		widget.find('.widget-setting').toggle();
+		if(widget.find('.widget-setting').is(':visible')) {
+			widget.find('.widget-setting-link span').text('关闭设置');
+		} else {
+			widget.find('.widget-setting-link span').text('设置');
 		}
 	});
+
+	widget.find('.cancel').click(function(e) {
+		e.preventDefault();
+		widget.find('.widget-setting').hide();
+		widget.find('.widget-setting-link span').text('设置');
+	});	
 }
-
-// $(document).ready(function(){
-//   //min font size
-//   var min=11;
-
-//   //max font size
-//   var max=21;
-
-//   var COOKIE_NAME = "Page-Fontsize";
-
-//   // alert('current fontsize:'+$.cookie(COOKIE_NAME)+'px')
-
-//   if ($.cookie(COOKIE_NAME)) {
-//   	var fontsize =  parseFloat($.cookie(COOKIE_NAME), 10);  	
-//   	$('body').css('font-size', fontsize);
-//   } else {
-//   	$.cookie(COOKIE_NAME, 14), { path: '/' };
-//   }
-
-//   // Reset Font Size
-//   $(".resetFont").click(function(){
-//     $('body').css('font-size', 14);
-//     // $.cookie(COOKIE_NAME, 14);
-//     $.removeCookie(COOKIE_NAME, { path: '/' });
-//   });
-
-//   // Increase Font Size
-//   $(".increaseFont").click(function(){
-//     var currentFontSize = $('body').css('font-size');
-//     var currentFontSizeNum = parseFloat(currentFontSize, 10);
-//     var newFontSize = currentFontSizeNum*1.1;
-//     if (newFontSize <= max) {
-//     	$('body').css('font-size', newFontSize);
-//     	$.cookie(COOKIE_NAME, newFontSize);
-//     }    	
-//     // alert('after increase fontsize:'+$.cookie(COOKIE_NAME)+'px')
-//     return false;
-//   });
-
-//   // Decrease Font Size
-//   $(".decreaseFont").click(function(){
-//     var currentFontSize = $('body').css('font-size');
-//     var currentFontSizeNum = parseFloat(currentFontSize, 10);
-//     var newFontSize = currentFontSizeNum*0.8;
-//     if (newFontSize >= min){
-//     	$('body').css('font-size', newFontSize);
-//     	$.cookie(COOKIE_NAME, newFontSize);
-//     }    
-//     // alert('after derease fontsize:'+$.cookie(COOKIE_NAME)+'px')
-//     return false;
-//   });
-// });

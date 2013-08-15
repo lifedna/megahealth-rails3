@@ -1,22 +1,30 @@
 / %li{:id => dom_id(@video_list)}
-%li{:id => "widget_#{@video_list.id}"}
+%li.widget{:id => "widget_#{@video_list.id}"}
   .introduction.panel.margin-b30
     .body
-      .cell.handle
-        .section-title.float-left #{@video_list.name}
-        .widget-actions.float-right
-          = link_to '全部', show_community_video_list_path(@video_list.community, @video_list)
-          - if can? :update, @video_list.community                    
-            = link_to '添加', new_community_video_list_video_path(@video_list.community, @video_list)
-            %a.widget-setting-link{:href => "#", :id => "#{@video_list.id}-settings"} 设置
-            = link_to '删除', url_for_event(:delete_widget, :id => @video_list.section.id, :widget_id => @video_list.id), :confirm => 'Are you sure?', :method => 'delete', :remote => true
+      .cell
+        .section-title
+          .handle
+            #{@video_list.name}
+            %small{:style => "font-size: 80%"}
+              ( #{link_to '全部', show_community_video_list_path(@video_list.community, @video_list), :class =>'color-orange'}
+              - if can? :update, @video_list.community 
+                &middot;
+                #{link_to '添加', new_community_video_list_video_path(@video_list.community, @video_list), :class =>'color-orange'} 
+              )
+          .edit.color-grey
+            = link_to raw("<span class = 'icon icon-16 icon-cog'>设置</span>"), '#', :id => "#{@video_list.id}-settings", :class => 'widget-setting-link' if can? :update, @video_list.community 
+
         
         .widget-setting{"data-id" => "#{@video_list.id}"}
           = form_for @video_list, :url => community_video_list_url(@video_list.community, @video_list)  do |f|
             %p
+              = f.label "应用名称:"
               = f.text_field :name
             %p  
               = f.submit "保存"
+          %a.cancel 取消     
+          = link_to '删除应用', url_for_event(:delete_widget, :id => @video_list.section.id, :widget_id => @video_list.id), :confirm => 'Are you sure?', :method => 'delete', :remote => true, :class => "delete" if can? :update, @video_list.community   
     .body
       .col.sizefill
         %div{:id => dom_id(@video_list)}

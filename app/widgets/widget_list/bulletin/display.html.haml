@@ -1,21 +1,34 @@
 / %li{:id => dom_id(@bulletin)}
-%li{:id => "widget_#{@bulletin.id}"}
+%li.widget{:id => "widget_#{@bulletin.id}"}
   .introduction.panel.margin-b30
     .body
-      .cell.handle
-        .section-title.float-left #{@bulletin.name}
-        .widget-actions.float-right
-          - if can? :update, @bulletin.community          
-            = link_to '修改', edit_community_bulletin_path(@bulletin.community, @bulletin)
-            %a.widget-setting-link{:href => "#", :id => "#{@bulletin.id}-settings"} 设置
-            = link_to '删除', url_for_event(:delete_widget, :id => @bulletin.section.id, :widget_id => @bulletin.id), :confirm => 'Are you sure?', :method => 'delete', :remote => true
+      .cell
+        .section-title
+          .handle
+            #{@bulletin.name}
+            %small{:style => "font-size: 80%"}
+              - if can? :update, @bulletin.community 
+                (
+                #{link_to '修改', edit_community_bulletin_path(@bulletin.community, @bulletin), :class =>'color-orange'} 
+                )
+          .edit.color-grey
+            = link_to raw("<span class = 'icon icon-16 icon-cog'>设置</span>"), '#', :id => "#{@bulletin.id}-settings", :class => 'widget-setting-link' if can? :update, @bulletin.community 
+
+        / .widget-actions.float-right
+        /   - if can? :update, @bulletin.community          
+        /     = link_to '修改', edit_community_bulletin_path(@bulletin.community, @bulletin)
+        /     %a.widget-setting-link{:href => "#", :id => "#{@bulletin.id}-settings"} 设置
+        /     = link_to '删除', url_for_event(:delete_widget, :id => @bulletin.section.id, :widget_id => @bulletin.id), :confirm => 'Are you sure?', :method => 'delete', :remote => true
 
         .widget-setting{"data-id" => "#{@bulletin.id}"}
           = form_for @bulletin, :url => community_bulletin_url(@bulletin.community, @bulletin)  do |f|
             %p
+              = f.label "应用名称:"
               = f.text_field :name
             %p  
               = f.submit "保存"
+          %a.cancel 取消     
+          = link_to '删除应用', url_for_event(:delete_widget, :id => @bulletin.section.id, :widget_id => @bulletin.id), :confirm => 'Are you sure?', :method => 'delete', :remote => true, :class => "delete" if can? :update, @bulletin.community    
     .body          
       .col.sizefill       
         %div{:id => dom_id(@bulletin), :style => "min-height:100px; background:#f4f4ec; padding:20px;"}

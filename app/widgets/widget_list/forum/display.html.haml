@@ -1,22 +1,29 @@
 / %li{:id => dom_id(@forum)}
-%li{:id => "widget_#{@forum.id}"}
+%li.widget{:id => "widget_#{@forum.id}"}
   .introduction.panel.margin-b30
     .body
-      .cell.handle
-        .section-title.float-left #{@forum.name} 
-        .widget-actions.float-right
-          - if (can? :update, @forum.community) || (can? :participate, @forum.community)
-            = link_to '发言', new_community_forum_topic_path(@forum.community, @forum)
-          - if can? :update, @forum.community
-            %a.widget-setting-link{:href => "#", :id => "#{@forum.id}-settings"} 设置
-            = link_to '删除', url_for_event(:delete_widget, :id => @forum.section.id, :widget_id => @forum.id), :confirm => 'Are you sure?', :method => 'delete', :remote => true            
+      .cell
+        .section-title
+          .handle
+            #{@forum.name} 
+            %small{:style => "font-size: 80%"}            
+              - if (can? :update, @forum.community) || (can? :participate, @forum.community)
+                (
+                #{link_to '发言', new_community_forum_topic_path(@forum.community, @forum), :class =>'color-orange'} 
+                )
+          .edit.color-grey
+            = link_to raw("<span class = 'icon icon-16 icon-cog'>设置</span>"), '#', :id => "#{@forum.id}-settings", :class => 'widget-setting-link' if can? :update, @forum.community 
+       
 
         .widget-setting{"data-id" => "#{@forum.id}"}
           = form_for @forum, :url => community_forum_url(@forum.community, @forum) do |f|
             %p
+              = f.label "应用名称:"
               = f.text_field :name
             %p  
               = f.submit "保存"     
+          %a.cancel 取消     
+          = link_to '删除应用', url_for_event(:delete_widget, :id => @forum.section.id, :widget_id => @forum.id), :confirm => 'Are you sure?', :method => 'delete', :remote => true, :class => "delete" if can? :update, @forum.community    
     .body
       .col.sizefill
         .cell.forum
