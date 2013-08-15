@@ -27,6 +27,10 @@ $(document).ready(function(){
 	$("#load_more_link a").click(function(){
     	$("#load_more_link").hide();
   	});
+
+  	$("#load_more_stream a").click(function(){
+    	$("#load_more_stream").hide();
+  	});
 	// hide it first
 	$("#spinner").hide();
 

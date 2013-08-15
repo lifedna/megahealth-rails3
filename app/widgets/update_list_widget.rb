@@ -6,7 +6,7 @@ class UpdateListWidget < AuthorizableWidget
   helper_method :present, :first_image_url
 
   has_widgets do
-    self << widget("update_list/load_more", :load_more_link)
+    self << widget("update_list/load_more", :load_more_stream)
   end
 
   def display
