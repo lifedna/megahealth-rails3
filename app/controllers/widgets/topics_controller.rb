@@ -31,6 +31,14 @@ class Widgets::TopicsController < ApplicationController
     impressionist @topic, nil, :unique => [:session_hash]
   end
 
+  def edit
+    @topic = Topic.find params[:id]
+    @community = Community.find params[:community_id]
+    @forum = Forum.find params[:forum_id]
+    @current_section = @topic.forum.section
+    @sections = @community.sections
+  end
+
   def comment
     @topic = Topic.find params[:id]
     @comment = current_user.comment_on(@topic, params[:comment])
@@ -43,16 +51,21 @@ class Widgets::TopicsController < ApplicationController
   end
 
   def update
-  	@widget = Widget.find params[:id]
+  	@topic = Topic.find params[:id]
 
-  	if @widget.update_attributes(params[@widget.class.to_s.camelize(:lower).to_sym])	
-  	  flash[:notice] = "Project has been updated."	
-  	  redirect_to community_section_path(@widget.community, @widget.section)
+  	if @topic.update_attributes(params[:topic])	
+  	  flash[:notice] = "Topic has been updated."	
+  	  redirect_to show_community_topic_path(@topic.community, @topic)
   	else
   	  flash[:notice] = "Failed to save topic."	  
   	end	
   end	
 
   def destroy
+    @topic = Topic.find params[:id]
+    forum = @topic.forum
+    community = @topic.community
+    @topic.destroy
+    redirect_to show_community_forum_path(community, forum)
   end	
 end

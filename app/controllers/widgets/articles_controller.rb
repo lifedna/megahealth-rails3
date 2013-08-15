@@ -31,11 +31,14 @@ class Widgets::ArticlesController < ApplicationController
     impressionist @article, nil, :unique => [:session_hash]
   end
 
+  def edit
+    @article = Article.find params[:id]
+  end
+
   def comment
     @article = Article.find params[:id]
     comment = current_user.comment_on(@article, params[:comment])
     if comment.persisted?
-      # current_user.publish_activity(:new_comment, :object => comment, :target_object => @article.community)
       redirect_to :action => "show"
     else
       flash[:notice] = "Comment save failed!"
@@ -43,16 +46,21 @@ class Widgets::ArticlesController < ApplicationController
   end
 
   def update
-    @widget = Widget.find params[:id]
+    @article = Article.find params[:id]
 
-    if @widget.update_attributes(params[@widget.class.to_s.camelize(:lower).to_sym])  
-      flash[:notice] = "Community has been updated."  
-      redirect_to community_section_path(@widget.community, @widget.section)
+    if @article.update_attributes(params[:article]) 
+      flash[:notice] = "Topic has been updated."  
+      redirect_to show_community_article_path(@article.community, @article)
     else
       flash[:notice] = "Failed to save article."    
-    end
+    end 
   end
 
   def destroy
+    @article = Article.find params[:id]
+    column = @article.column
+    community = @article.community
+    @article.destroy
+    redirect_to show_community_column_path(community, column)    
   end
 end

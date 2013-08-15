@@ -1,0 +1,35 @@
+- @community = Community.find params[:community_id]
+- @column = Column.find params[:column_id]
+- @current_section = @column.section
+- @sections = @community.sections 
+/ Page
+.site-center
+  = render :partial => "shared/community_head", :locals => {:community => @community}
+
+  .margin-t20
+    = render :partial => "shared/section_list", :locals => {:sections => @sections, :current_section => @current_section}
+ 
+  .col.size2of3.margin-t20    
+    .float-right
+      #{link_to "> #{@column.name}", show_community_column_url(@community, @column)}
+    .col  
+      %h3 添加文章
+      = simple_form_for @article, :url => {:action => "update"}  do |f|
+        %p
+          = f.input :category, label:'类别:', collection: ['健康知识', '就医指南', '治疗交流', '护理园地', '用药常识']
+        %p
+          = f.text_field :title
+        %p
+          = f.text_area :body, :size => "60x120", :class => "redactor"
+        %p
+          = f.hidden_field :user_id, :value => current_user.id   
+        %p
+          = f.hidden_field :community_id, :value => @column.community.id
+        %p
+          = f.hidden_field :column_id, :value => @column.id    
+        %p  
+          = f.submit "保存"
+
+  .col.size1of3.margin-t20
+    .margin-l20
+      / = render :partial => "shared/content_sidebar"         
