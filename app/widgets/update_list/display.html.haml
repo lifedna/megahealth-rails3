@@ -2,4 +2,6 @@
   = render({:state => :list}, @activities)
 
 - unless @activities.last_page?  
-  = render_widget :load_more_activities, :display, :page_num => @activities.current_page + 1
+  = render_widget :load_more_link, :display, :page_num => @activities.current_page + 1
+  #spinner.text-center
+    %span.icon.spin.icon-32.icon-spinner
