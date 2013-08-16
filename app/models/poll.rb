@@ -26,7 +26,7 @@ class Poll < Content
   end
 
   def answers(user)
-    opt_ids ||= Array.new
+    opt_ids ||= []
     self.options.each do |option|
       opt_ids << option.id
     end
@@ -35,7 +35,7 @@ class Poll < Content
   end
 
   def answered_user_ids
-    opt_ids ||= Array.new
+    opt_ids ||= []
     self.options.each do |option|
       opt_ids << option.id
     end
@@ -44,12 +44,10 @@ class Poll < Content
   end  
 
   def answers_count
-    opt_ids ||= Array.new
+    count = 0
     self.options.each do |option|
-      opt_ids << option.id
+      count += option.poll_answers.size
     end
-
-    answers = PollAnswer.where(:poll_option_id.in => opt_ids)
-    return answers.size
+    return count
   end
 end
