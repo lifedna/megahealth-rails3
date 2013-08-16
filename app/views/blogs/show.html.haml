@@ -6,9 +6,9 @@
     %h2 #{@blog.title}
     %small 
       #{@blog.created_at.strftime("%Y-%m-%d %H:%M:%S")} 
-    .col   
+    .margint-t10  
       %p #{raw @blog.body}
-    .col.margint-30  
+    .margint-t30  
       .col.sizefit.float-right
         = render_widget :like, :display, :instance => @blog  
       .col.sizefill
