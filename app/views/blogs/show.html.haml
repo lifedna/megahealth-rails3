@@ -13,14 +13,14 @@
         = render_widget :like, :display, :instance => @blog  
       .col.sizefill
         = social_share_button_tag(@blog.title) 
-    .col  
-      %p #{@blog.tags}
+    / .col  
+    /   %p #{@blog.tags}
 
-    %hr
-    %ul#comments.nav
+
+    #comments.margin-t30
       - @blog.comments.each do |c|
         - if c.persisted?
-          %li.comment
+          .comment
             .col.sizefit.float-left
               = image_tag c.commenter.avatar_url(:thumb)
             .col.sizefill
