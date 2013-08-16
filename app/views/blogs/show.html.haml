@@ -8,6 +8,7 @@
       #{@blog.created_at.strftime("%Y-%m-%d %H:%M:%S")} 
     .margint-t10  
       %p #{raw @blog.body}
+      %span.float-right #{@blog.impressionist_count}人阅读
     .margint-t30  
       .col.sizefit.float-right
         = render_widget :like, :display, :instance => @blog  
