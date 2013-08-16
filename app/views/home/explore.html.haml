@@ -190,5 +190,9 @@
     $('.back-to-top').click(function() {
       $('body,html').animate({scrollTop:0},100);
     });
+
+    if("#{session[:first_visit]}" == "true") {
+      $(".slidediv").slideToggle();
+    }
       
   });        

@@ -12,6 +12,12 @@ class HomeController < ApplicationController
     @hot_articles = Article.hot.limit(5)
     @hot_topics = Topic.hot.limit(5)
     @hot_blogs = Blog.hot.limit(5)
+
+    if session[:first_visit]
+      session[:first_visit] = "false"
+    else
+      session[:first_visit] = "true"
+    end
   end
 
   def dashboard
