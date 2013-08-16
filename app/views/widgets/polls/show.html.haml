@@ -11,9 +11,16 @@
     .col
       %h3 #{@poll.title}
       %small #{@poll.created_at}
-      %ul.left
+      .poll.margin-t20
         - @poll.options.each do |option|
-          %li #{option.name} #{option.poll_answers.count}
+          .option
+            .col.size3of8
+              #{option.name} 
+            .col.size3of8
+              %span.vote-line
+                %em{:style => "width:#{line_width(@poll.answers_count, option.poll_answers.count)}"}
+            .col.size2of8
+              %span.vote-percent #{option.poll_answers.size}(#{line_percent(@poll.answers_count, option.poll_answers.count)})
       - if can? :update, @poll.community    
         #{link_to '投票详情', details_community_poll_url(@poll.community, @poll)}  
       %hr

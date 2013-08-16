@@ -1,13 +1,12 @@
 - if poll.answered_by?(current_user)
-  .cell
+  .cell.poll
     %h3 #{poll.title}
     %small #{poll.created_at}
-    %ul.left
+    .margin-t10
       - poll.options.each do |option|
-        %li #{option.name}
-    %p
+        .option #{option.name}
+    .margin-t10
       %span 我已投票 
-      %br
       #{link_to "查看结果(#{poll.answered_user_ids.count})", show_community_poll_path(poll.community, poll)}
        
 - else      

@@ -37,12 +37,7 @@
       .col.sizefill
         %div{:id => dom_id(@poll_set)}
           = render partial: "poll", collection: @poll_set.polls.newest.limit(@poll_set.limits)
-          / - @poll_set.polls.each do |poll|
-          /   %p
-          /     #{poll.name}
-          /   %ul.left
-          /     - poll.options.each do |option|
-          /       %li #{option.name} 
+
                 
   :javascript
     $(document).ready(function(){

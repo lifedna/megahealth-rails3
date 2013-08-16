@@ -42,4 +42,14 @@ class Poll < Content
 
     ids = PollAnswer.where(:poll_option_id.in => opt_ids).distinct(:user_id)
   end  
+
+  def answers_count
+    opt_ids ||= Array.new
+    self.options.each do |option|
+      opt_ids << option.id
+    end
+
+    answers = PollAnswer.where(:poll_option_id.in => opt_ids)
+    return answers.size
+  end
 end
