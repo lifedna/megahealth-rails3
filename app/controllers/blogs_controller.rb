@@ -44,6 +44,12 @@ class BlogsController < ApplicationController
     end     
   end
 
+  def remove_comment
+    if current_user.delete_comment(params[:comment_id])
+      redirect_to :action => "show"
+    end
+  end
+
   def update
   end
 

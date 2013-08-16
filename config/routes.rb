@@ -61,6 +61,7 @@ MegahealthRails3::Application.routes.draw do
   scope "dashboard" do
     resources :blogs, except: :show do 
       get 'comment', :on => :member
+      get 'remove_comment', :on => :member
     end 
   end   
 
