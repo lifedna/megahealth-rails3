@@ -2,30 +2,6 @@
 / Page
 .site-center
   = render :partial => "shared/community_head", :locals => {:community => @community}
-  / .header-info{:style => "background:#398fd1; color:#fff"}
-  /   .col.sizefit.padding-l30.padding-r30
-  /     .doc-image.margin-t20
-  /       .p240-box
-  /         %a{:href => "#"}
-  /           %img{:src => "#{asset_path 'doctors/126708301394155.jpg'}" }
-
-  /   .col.sizefill
-  /     .doc-community-info.margin-t20
-  /       %h3 #{@community.name} 
- 
-  /       %p 
-  /         四川成都华西医院 儿科 主任医师 副教授
-        
-  /     .doc-expertise.padding-r20
-  /       %p
-  /         #{@community.brief}
-  /     .col       
-  /       .col.size1of2
-  /         .doc-share.margin-t20
-  /           %p 如果觉得对你的家人、朋友有帮助，分享给TA吧
-  /       .col.sizefill
-  /         .button.background-green.large-button.center 
-  /           %span 加入
 
   .margin-t20
     = render :partial => "shared/section_list", :locals => {:sections => @sections, :current_section => @current_section}
@@ -35,10 +11,16 @@
       #{link_to "> 返回#{@poll.title}", show_community_poll_url(@poll.community, @poll)}
     .col
       %h3 #{@poll.title}的投票详情
-      - @poll.answered_user_ids.each do |id|
-        #{User.find(id).name}
-        - @poll.answers(User.find(id)).each do |answer|
-          #{answer.poll_option.name}
-          -@answered_at = answer.created_at
-        #{@answered_at.strftime("%Y-%m-%d %H:%M:%S")}  
-        %br  
+      %table.horizontal-border
+        %tr
+          %th.size3of8 投票者
+          %th.size3of8 投票
+          %th.size2of8 投票时间
+        - @poll.answered_user_ids.each do |id|
+          %tr
+            %td #{User.find(id).name}
+            %td
+              - @poll.answers(User.find(id)).each do |answer|
+                #{answer.poll_option.name}
+                -@answered_at = answer.created_at
+            %td #{@answered_at.strftime("%Y-%m-%d %H:%M:%S")}  
