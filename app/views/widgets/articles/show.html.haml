@@ -17,6 +17,8 @@
         .margin-t20
           %span{:style => "padding-right: 4px;"} #{link_to '> 修改', edit_community_column_article_path(@article.community, @article.column, @article)}
           %span{:style => "padding-right: 4px;"} #{link_to '> 删除', community_column_article_path(@article.community, @article.column, @article), :method => "delete"}
+
+          %span.float-right #{@article.impressionist_count}人阅读
       
       .margin-t20
         .col.sizefit.float-right
@@ -24,12 +26,21 @@
         .col.sizefill
           = social_share_button_tag(@article.title) 
     .col
-      .margin-t20
-        %ul
+      .margin-t30
+        %ul#comments.nav
           - @article.comments.each do |c|
             - if c.persisted?
-              %li
-                #{simple_format c.body}  
+              %li.comment
+                .col.sizefit
+                  = image_tag c.commenter.avatar_url(:thumb)
+                .col.sizefill
+                  .margin-l20 
+                    .author #{c.created_at.strftime("%Y-%m-%d %H:%M:%S")}&nbsp;&nbsp;&nbsp;来自: #{c.commenter.name}
+                    #{simple_format c.body}  
+                    .op-links
+                      .col.sizefit.float-right
+                        #{link_to '删除', remove_comment_community_article_path(@article.community, @article, c.id)}
+                  
 
         - if user_signed_in?        
           %p

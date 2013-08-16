@@ -35,16 +35,6 @@ class Widgets::ArticlesController < ApplicationController
     @article = Article.find params[:id]
   end
 
-  def comment
-    @article = Article.find params[:id]
-    comment = current_user.comment_on(@article, params[:comment])
-    if comment.persisted?
-      redirect_to :action => "show"
-    else
-      flash[:notice] = "Comment save failed!"
-    end  
-  end
-
   def update
     @article = Article.find params[:id]
 
@@ -62,5 +52,21 @@ class Widgets::ArticlesController < ApplicationController
     community = @article.community
     @article.destroy
     redirect_to show_community_column_path(community, column)    
+  end
+
+  def comment
+    @article = Article.find params[:id]
+    comment = current_user.comment_on(@article, params[:comment])
+    if comment.persisted?
+      redirect_to :action => "show"
+    else
+      flash[:notice] = "Comment save failed!"
+    end  
+  end
+
+  def remove_comment
+    if current_user.delete_comment(params[:comment_id])
+      redirect_to :action => "show"
+    end 
   end
 end

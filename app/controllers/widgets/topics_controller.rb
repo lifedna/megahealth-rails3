@@ -39,17 +39,6 @@ class Widgets::TopicsController < ApplicationController
     @sections = @community.sections
   end
 
-  def comment
-    @topic = Topic.find params[:id]
-    @comment = current_user.comment_on(@topic, params[:comment])
-    if @comment.persisted?
-      current_user.publish_activity(:new_comment, :object => @comment, :target_object => @topic.forum.community)
-      redirect_to :action => "show"
-    else
-      flash[:notice] = "Comment save failed!"
-    end  
-  end
-
   def update
   	@topic = Topic.find params[:id]
 
@@ -68,4 +57,21 @@ class Widgets::TopicsController < ApplicationController
     @topic.destroy
     redirect_to show_community_forum_path(community, forum)
   end	
+
+  def comment
+    @topic = Topic.find params[:id]
+    @comment = current_user.comment_on(@topic, params[:comment])
+    if @comment.persisted?
+      current_user.publish_activity(:new_comment, :object => @comment, :target_object => @topic.forum.community)
+      redirect_to :action => "show"
+    else
+      flash[:notice] = "Comment save failed!"
+    end  
+  end
+
+  def remove_comment
+    if current_user.delete_comment(params[:comment_id])
+      redirect_to :action => "show"
+    end
+  end
 end

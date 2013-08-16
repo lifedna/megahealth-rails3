@@ -14,7 +14,7 @@
         = image_tag @topic.user.avatar_url(:thumb)  
       .col.sizefill
         .margin-l20  
-          %small 
+          .author 
             #{@topic.created_at.strftime("%Y-%m-%d %H:%M:%S")}&nbsp;&nbsp;&nbsp;来自: #{@topic.user.name}
           %p #{simple_format @topic.body}          
                     
@@ -30,12 +30,20 @@
               = social_share_button_tag(@topic.title)
 
 
-          %div{:style => "margin-top:10px;"}
-            %ul
+          .margin-t30
+            %ul#comments.nav
               - @topic.comments.each do |c|
                 - if c.persisted?
-                  %li
-                    #{c.body}  
+                  %li.comment
+                    .col.sizefit
+                      = image_tag c.commenter.avatar_url(:thumb)
+                    .col.sizefill
+                      .margin-l20 
+                        .author #{c.created_at.strftime("%Y-%m-%d %H:%M:%S")}&nbsp;&nbsp;&nbsp;来自: #{c.commenter.name}
+                        #{c.body}  
+                        .op-links
+                          .col.sizefit.float-right
+                            #{link_to '删除', remove_comment_community_topic_path(@topic.community, @topic, c.id)}
 
             - if user_signed_in?        
               %p

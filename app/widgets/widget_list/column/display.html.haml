@@ -45,7 +45,10 @@
                     .margin-r10
                       = image_tag first_image_url(article.body), size: "60x60"  
                 .col.sizefill
-                  %p #{truncate strip_tags(article.body), length: 140, omission: '.....'}
+                  %p
+                    #{truncate strip_tags(article.body), length: 140, omission: '.....'}
+                    - if article.comments.size > 0
+                      = link_to "(#{article.comments.size }回应)", show_community_article_path(article.community, article, :anchor => "comments"), :class => "color-orange comment-link"
    
 
   :javascript

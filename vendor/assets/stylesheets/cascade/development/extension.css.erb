@@ -171,11 +171,51 @@ padding-left: 10px;
 }
 
 
-
-.content-detail img {
+.content-detail img,
+#comments .comment img {
 	width: 48px;
 	height: 48px;
 }
+
+.content-detail .author {
+	background: #efe;
+}
+
+#comments .author {
+	margin-bottom: 10px;
+	background: #efe;
+}
+
+#comments .comment {
+	margin-bottom: 20px;
+}
+
+#comments .comment .op-links {
+	visibility: hidden;
+	text-align: right;
+}
+
+#comments .comment:hover .op-links {
+	visibility: visible;
+}
+
+
+#comments .comment .op-links a {
+	color:#999; 
+	padding: 0px;
+}
+
+.nav a.comment-link {
+	float:none;
+	display: inline-block;
+}
+
+
+
+
+
+
+
 /* top menu*/
 
 .site-header-border {
