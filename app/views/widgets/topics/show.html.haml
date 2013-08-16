@@ -41,9 +41,10 @@
                       .margin-l20 
                         .author #{c.created_at.strftime("%Y-%m-%d %H:%M:%S")}&nbsp;&nbsp;&nbsp;来自: #{c.commenter.name}
                         #{c.body}  
-                        .op-links
-                          .col.sizefit.float-right
-                            #{link_to '删除', remove_comment_community_topic_path(@topic.community, @topic, c.id)}
+                        - if can? :update, @topic.community  
+                          .op-links
+                            .col.sizefit.float-right
+                              #{link_to '删除', remove_comment_community_topic_path(@topic.community, @topic, c.id)}
 
             - if user_signed_in?        
               %p
