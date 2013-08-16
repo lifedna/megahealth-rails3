@@ -12,13 +12,13 @@
       %h3 #{@article.title}
       %small #{@article.created_at.strftime("%Y-%m-%d %H:%M:%S")}
       %p #{raw @article.body}
-
-      - if can? :update, @article.community
-        .margin-t20
+      
+      .margin-t20
+        - if can? :update, @article.community
           %span{:style => "padding-right: 4px;"} #{link_to '> 修改', edit_community_column_article_path(@article.community, @article.column, @article)}
           %span{:style => "padding-right: 4px;"} #{link_to '> 删除', community_column_article_path(@article.community, @article.column, @article), :method => "delete"}
 
-          %span.float-right #{@article.impressionist_count}人阅读
+        %span.float-right #{@article.impressionist_count}人阅读
       
       .margin-t20
         .col.sizefit.float-right
