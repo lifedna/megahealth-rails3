@@ -67,6 +67,22 @@ class Widgets::PollsController < ApplicationController
     @sections = @community.sections
   end
 
+  def comment
+    @poll = Poll.find params[:id]
+    comment = current_user.comment_on(@poll, params[:comment])
+    if comment.persisted?
+      redirect_to :action => "show"
+    else
+      flash[:notice] = "Comment save failed!"
+    end  
+  end
+
+  def remove_comment
+    if current_user.delete_comment(params[:comment_id])
+      redirect_to :action => "show"
+    end 
+  end
+
   private
 
   def create_poll_answer(poll, poll_option_id) 

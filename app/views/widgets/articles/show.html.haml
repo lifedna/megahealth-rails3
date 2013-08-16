@@ -43,8 +43,6 @@
                           #{link_to '删除', remove_comment_community_article_path(@article.community, @article, c.id)}
                 
                 
-                  
-
         - if user_signed_in?        
           %p
             = form_tag comment_community_article_url(@community, @article), :method => :get do
