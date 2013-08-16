@@ -36,11 +36,11 @@
                 .col.sizefill
                   .margin-l20 
                     .author #{c.created_at.strftime("%Y-%m-%d %H:%M:%S")}&nbsp;&nbsp;&nbsp;来自: #{c.commenter.name}
-                    #{simple_format c.body}
-                    / - if can? :update, @article.community  
-                    .op-links
-                      .col.sizefit.float-right
-                        #{link_to '删除', remove_comment_community_article_path(@article.community, @article, c.id)}
+                    %span{:style => "margin-right: 4px;"} #{simple_format c.body}
+                    - if can? :update, @article.community  
+                      .op-links
+                        .col.sizefit.float-right
+                          #{link_to '删除', remove_comment_community_article_path(@article.community, @article, c.id)}
                   
 
         - if user_signed_in?        
