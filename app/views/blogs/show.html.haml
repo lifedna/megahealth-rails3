@@ -8,7 +8,7 @@
       #{@blog.created_at.strftime("%Y-%m-%d %H:%M:%S")} 
     .col   
       %p #{raw @blog.body}
-    .col  
+    .col.margint-30  
       .col.sizefit.float-right
         = render_widget :like, :display, :instance => @blog  
       .col.sizefill
@@ -17,7 +17,7 @@
     /   %p #{@blog.tags}
 
 
-    #comments.margin-t30
+    #comments.margin-t30.col
       - @blog.comments.each do |c|
         - if c.persisted?
           .comment
