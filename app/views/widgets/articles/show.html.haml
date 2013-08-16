@@ -30,7 +30,7 @@
         %ul#comments.nav
           - @article.comments.each do |c|
             - if c.persisted?
-              %li.comment
+              %li.comment.col
                 .col.sizefit
                   = image_tag c.commenter.avatar_url(:thumb)
                 .col.sizefill
