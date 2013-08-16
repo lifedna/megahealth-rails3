@@ -25,22 +25,23 @@
           = render_widget :like, :display, :instance => @article  
         .col.sizefill
           = social_share_button_tag(@article.title) 
-    .col
+
       .margin-t30
         %ul#comments.nav
           - @article.comments.each do |c|
             - if c.persisted?
               %li.comment
-                .col.sizefill.float-right
+                .col.sizefit
+                  = image_tag c.commenter.avatar_url(:thumb)
+                .col.sizefill
                   .margin-l20 
                     .author #{c.created_at.strftime("%Y-%m-%d %H:%M:%S")}&nbsp;&nbsp;&nbsp;来自: #{c.commenter.name}
-                    %span{:style => "margin-right: 4px;"} #{simple_format c.body}
+                    #{simple_format c.body}
                     - if can? :update, @article.community  
                       .op-links
                         .col.float-right
                           #{link_to '删除', remove_comment_community_article_path(@article.community, @article, c.id)}
-                .col.sizefit
-                  = image_tag c.commenter.avatar_url(:thumb)
+                
                 
                   
 
