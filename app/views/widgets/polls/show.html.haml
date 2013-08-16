@@ -14,7 +14,8 @@
       %ul.left
         - @poll.options.each do |option|
           %li #{option.name} #{option.poll_answers.count}
-      #{link_to '投票详情', details_community_poll_url(@poll.community, @poll)}  
+      - if can? :update, @poll.community    
+        #{link_to '投票详情', details_community_poll_url(@poll.community, @poll)}  
       %hr
       .margin-t30
         #comments
