@@ -1,28 +1,6 @@
 / Page
 .site-center
   = render :partial => "shared/community_head", :locals => {:community => @community}
-  / .header-info{:style => "background:#398fd1; color:#fff"}
-  /   .col.sizefit.padding-l30.padding-r30
-  /     .doc-image.margin-t20
-  /       .p240-box
-  /         %a{:href => "#"}
-  /           %img{:src => "#{asset_path 'doctors/126708301394155.jpg'}" }
-
-  /   .col.sizefill
-  /     .doc-community-info.margin-t20
-  /       %h3 #{@community.name} 
- 
-  /       %p 
-  /         四川成都华西医院 儿科 主任医师 副教授
-        
-  /     .doc-expertise.padding-r20
-  /       %p
-  /         #{@community.brief}
-     
-  /     .col.size1of2
-  /       .doc-share.margin-t20
-  /         %p 如果觉得对你的家人、朋友有帮助，分享给TA吧
-
 
   .margin-t20
     = render_widget :section_list, :display, :community => @community
@@ -39,7 +17,16 @@
           = link_to '添加房间', community_sections_path(@community), :method => :post
         %p
           = f.label "描述:"   
-          = f.text_area :brief, :size => "60x6" 
+          = f.text_area :brief, :size => "60x6"
+        %p
+          = f.label "组织机构:"   
+          = f.text_field :organization
+        %p
+          = f.label "科室:"   
+          = f.text_field :dept     
+        %p
+          = f.label "职称:"   
+          = f.text_field :title 
         %p
           = f.label "主治疾病:"
           = f.text_field :conditions  

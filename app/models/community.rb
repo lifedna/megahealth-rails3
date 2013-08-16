@@ -8,6 +8,9 @@ class Community
 
   field :name, type: String
   field :brief, type: String
+  field :organization, type: String
+  field :title, type: String
+  field :dept, type: String
   field :category, type: String
   field :offline, type: String, default: "1"
   field :offline_reason, type: String, default: "感谢访问，社群建设中..."

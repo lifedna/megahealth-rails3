@@ -1,5 +1,5 @@
 $(document).ready(function(){
-	$(".clickable").click(function(){
+	$(document).on("click", ".clickable", function(){
 		if ($(this).children('iframe').length > 0) return;
 
 		$(this).children().toggle(false);

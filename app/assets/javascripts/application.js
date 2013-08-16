@@ -44,6 +44,16 @@ $(document).ready(function(){
 		$("#spinner").hide();
 	});
 
+	$(document).ajaxComplete(function(){
+		$(".widget").each(function(){
+			setWidget($(this));
+		});
+	});
+
+	$(".widget").each(function(){
+		setWidget($(this));
+	});
+
 	$(".my-community").click(function(){
 	   window.location=$(this).find("a").attr("href"); 
 	   return false;
@@ -156,3 +166,6 @@ function setWidget(widget){
 		widget.find('.widget-setting-link span').text('设置');
 	});	
 }
+
+
+
