@@ -18,8 +18,6 @@
 
   :javascript
     $(document).ready(function(){
-      $('.bxslider').bxSlider();
-      $("#add_widgets").hide();
 
       $('.icon-pencil').hover(function() {
         $(this).toggleClass('background-grey');
@@ -32,6 +30,15 @@
       $('.icon-pencil').click(function(e) {
         e.preventDefault();
         $("#add_widgets").slideToggle();
+        $("#slides").slidesjs({
+            width: 500,
+            height: 60
+        });
+        $('.slidesjs-pagination').prependTo('#slides');
+        $('.slidesjs-navigation').insertBefore('.slidesjs-pagination');
       });
-      
+
+      $('#add_widgets .close').click(function(e) {
+        $("#add_widgets").slideToggle();
+      });
     });

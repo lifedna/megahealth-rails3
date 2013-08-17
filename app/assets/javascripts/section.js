@@ -17,17 +17,8 @@ $(document).ready(function(){
 	        return $.post($(this).data('event-url'), $(this).sortable('serialize'));
 	      }
 	    });
-
-		// $(".widget").each(function(e){
-		// 	e.stopPropagation();
-		// 	e.preventDefault();
-		// 	setWidget($(this));
-		// });
 	});
 
-	// $(".widget").each(function(){
-	// 	setWidget($(this));
-	// });
 });
 
 function setWidget(widget){

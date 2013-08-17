@@ -2,44 +2,46 @@
 
 = widget_div do  
   = render_widget :add_widgets, :display, :section => @section
-  .col.size2of3
-    = render_widget :widget_list, :display, :section => @section
-  .col.size1of3 
-    .margin-l20 
-      - if @community.the_owner != current_user     
-        - if !@community.users.empty? && @community.users.include?(current_user)
-          %p{:style => "text-align:right;"} 我加入了这个社群。#{link_to '>退出', leave_community_path(@community), :confirm => '你确定要退出社群?'}        
-        - else
-          .margin-b30
-            %a.button.background-green.large-button.center{:href => join_community_path(@community)}
-              %span 加入    
-      - else
-        %p{:style => "text-align:right;"} 我管理这个社群。        
-    
-      / .section.margin-b30
-      /   %form.community-search{:style => "width: 100%;"}
-      /     %input{:type => "search", :width => "100%", :placeholder => "站内搜索"}
-      .members.panel.margin-b30
-        .header
-          .cell
-            成员
-            %small (#{@section.community.users.count})
-        .body
-          .cell
-            %ul.nav
-              - @section.community.users.each do |m|
-                %li
-                  = image_tag m.avatar_url(:thumb), size: "48x48"
-                 
 
-      .guide.panel.margin-b30
-        .header
-          .cell
-            社区指南
-        .body
-          .cell
-            xxx  
-      / .panel.margin-b30
-      /   .header
-      /     .cell.text-center
-      /       邀请朋友加入
+  .margin-t30
+    .col.size2of3
+      = render_widget :widget_list, :display, :section => @section
+    .col.size1of3 
+      .margin-l20 
+        - if @community.the_owner != current_user     
+          - if !@community.users.empty? && @community.users.include?(current_user)
+            %p{:style => "text-align:right;"} 我加入了这个社群。#{link_to '>退出', leave_community_path(@community), :confirm => '你确定要退出社群?'}        
+          - else
+            .margin-b30
+              %a.button.background-green.large-button.center{:href => join_community_path(@community)}
+                %span 加入    
+        - else
+          %p{:style => "text-align:right;"} 我管理这个社群。        
+      
+        / .section.margin-b30
+        /   %form.community-search{:style => "width: 100%;"}
+        /     %input{:type => "search", :width => "100%", :placeholder => "站内搜索"}
+        .members.panel.margin-b30
+          .header
+            .cell
+              成员
+              %small (#{@section.community.users.count})
+          .body
+            .cell
+              %ul.nav
+                - @section.community.users.each do |m|
+                  %li
+                    = image_tag m.avatar_url(:thumb), size: "48x48"
+                   
+
+        .guide.panel.margin-b30
+          .header
+            .cell
+              社区指南
+          .body
+            .cell
+              xxx  
+        / .panel.margin-b30
+        /   .header
+        /     .cell.text-center
+        /       邀请朋友加入
