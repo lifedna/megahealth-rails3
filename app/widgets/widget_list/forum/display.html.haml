@@ -11,9 +11,9 @@
                 (
                 #{link_to '发言', new_community_forum_topic_path(@forum.community, @forum), :class =>'color-orange'} 
                 )
-          .edit.color-grey
-            %span.icon.icon-16.icon-cog 设置
-            / = link_to raw("<span class = 'icon icon-16 icon-cog'>设置</span>"), '#', :id => "#{@forum.id}-settings", :class => 'widget-setting-link' if can? :update, @forum.community 
+          - if (can? :update, @forum.community)
+            .edit.color-grey
+              %span.icon.icon-16.icon-cog 设置
        
 
         .widget-setting{"data-id" => "#{@forum.id}"}

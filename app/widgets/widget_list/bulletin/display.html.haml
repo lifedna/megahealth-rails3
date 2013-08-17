@@ -11,9 +11,9 @@
                 (
                 #{link_to '修改', edit_community_bulletin_path(@bulletin.community, @bulletin), :class =>'color-orange'} 
                 )
-          .edit.color-grey
-            %span.icon.icon-16.icon-cog 设置
-            / = link_to raw("<span class = 'icon icon-16 icon-cog'>设置</span>"), '#', :id => "#{@bulletin.id}-settings", :class => 'widget-setting-link' if can? :update, @bulletin.community 
+          - if can? :update, @bulletin.community       
+            .edit.color-grey
+              %span.icon.icon-16.icon-cog 设置
 
 
         .widget-setting{"data-id" => "#{@bulletin.id}"}

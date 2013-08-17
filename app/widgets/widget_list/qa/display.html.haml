@@ -6,9 +6,9 @@
         .section-title
           .handle
             #{@qa.name}
-          .edit.color-grey
-            %span.icon.icon-16.icon-cog 设置
-            / = link_to raw("<span class = 'icon icon-16 icon-cog'>设置</span>"), '#', :id => "#{@qa.id}-settings", :class => 'widget-setting-link' if can? :update, @qa.community  
+          - if can? :update, @qa.community  
+            .edit.color-grey
+              %span.icon.icon-16.icon-cog 设置
         
         .widget-setting{"data-id" => "#{@qa.id}"}
           = form_for @qa, :url => community_qa_url(@qa.community, @qa)  do |f|
