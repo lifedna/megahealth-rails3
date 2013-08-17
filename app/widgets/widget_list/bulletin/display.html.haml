@@ -1,5 +1,5 @@
 / %li{:id => dom_id(@bulletin)}
-%li.widget{:id => "widget_#{@bulletin.id}"}
+.widget{:id => "widget_#{@bulletin.id}"}
   .introduction.panel.margin-b30
     .body
       .cell
@@ -12,7 +12,8 @@
                 #{link_to '修改', edit_community_bulletin_path(@bulletin.community, @bulletin), :class =>'color-orange'} 
                 )
           .edit.color-grey
-            = link_to raw("<span class = 'icon icon-16 icon-cog'>设置</span>"), '#', :id => "#{@bulletin.id}-settings", :class => 'widget-setting-link' if can? :update, @bulletin.community 
+            %span.icon.icon-16.icon-cog 设置
+            / = link_to raw("<span class = 'icon icon-16 icon-cog'>设置</span>"), '#', :id => "#{@bulletin.id}-settings", :class => 'widget-setting-link' if can? :update, @bulletin.community 
 
 
         .widget-setting{"data-id" => "#{@bulletin.id}"}
@@ -22,10 +23,16 @@
               = f.text_field :name
             %p  
               = f.submit "保存"
-          %a.cancel 取消     
-          = link_to '删除应用', url_for_event(:delete_widget, :id => @bulletin.section.id, :widget_id => @bulletin.id), :confirm => 'Are you sure?', :method => 'delete', :remote => true, :class => "delete" if can? :update, @bulletin.community    
+              %a.cancel 取消     
+              = link_to '删除应用', url_for_event(:delete_widget, :id => @bulletin.section.id, :widget_id => @bulletin.id), :confirm => 'Are you sure?', :method => 'delete', :remote => true, :class => "delete" if can? :update, @bulletin.community    
     .body          
       .col.sizefill       
         %div{:id => dom_id(@bulletin), :style => "min-height:100px; background:#f4f4ec; padding:20px;"}
           %p #{raw @bulletin.body}
   
+
+  :javascript
+    $(document).ready(function(){
+      var bulletin = $("#widget_#{@bulletin.id}");
+      setWidget(bulletin);
+    });

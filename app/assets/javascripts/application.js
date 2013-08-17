@@ -44,15 +44,7 @@ $(document).ready(function(){
 		$("#spinner").hide();
 	});
 
-	$(document).ajaxComplete(function(){
-		$(".widget").each(function(){
-			setWidget($(this));
-		});
-	});
-
-	$(".widget").each(function(){
-		setWidget($(this));
-	});
+	
 
 	$(".my-community").click(function(){
 	   window.location=$(this).find("a").attr("href"); 
@@ -136,36 +128,7 @@ $(document).ready(function(){
 
 });
 
-function setWidget(widget){
-	widget.find('.edit').hide();
-	widget.find('.widget-setting').hide();
 
-	widget.hover(function() {
-		if( $(this).find('.widget-setting').is(':hidden') ) {
-			$(this).find('.edit').toggle();
-		}	     
-	},function(){
-		if( $(this).find('.widget-setting').is(':hidden') ) {
-	  		$(this).find('.edit').toggle();
-		}
-	}); 
-	
-	widget.find('.widget-setting-link').click(function(e) {
-		e.preventDefault();
-		widget.find('.widget-setting').toggle();
-		if(widget.find('.widget-setting').is(':visible')) {
-			widget.find('.widget-setting-link span').text('关闭设置');
-		} else {
-			widget.find('.widget-setting-link span').text('设置');
-		}
-	});
-
-	widget.find('.cancel').click(function(e) {
-		e.preventDefault();
-		widget.find('.widget-setting').hide();
-		widget.find('.widget-setting-link span').text('设置');
-	});	
-}
 
 
 

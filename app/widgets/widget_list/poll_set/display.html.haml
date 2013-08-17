@@ -1,5 +1,5 @@
 / %li{:id => dom_id(@poll_set)}
-%li.widget{:id => "widget_#{@poll_set.id}"}
+.widget{:id => "widget_#{@poll_set.id}"}
   .introduction.panel.margin-b30
     .body
       .cell
@@ -13,7 +13,8 @@
                 #{link_to '添加', new_community_poll_set_poll_path(@poll_set.community, @poll_set), :class =>'color-orange'} 
               )
           .edit.color-grey
-            = link_to raw("<span class = 'icon icon-16 icon-cog'>设置</span>"), '#', :id => "#{@poll_set.id}-settings", :class => 'widget-setting-link' if can? :update, @poll_set.community 
+            %span.icon.icon-16.icon-cog 设置
+            / = link_to raw("<span class = 'icon icon-16 icon-cog'>设置</span>"), '#', :id => "#{@poll_set.id}-settings", :class => 'widget-setting-link' if can? :update, @poll_set.community 
             
 
         .widget-setting{"data-id" => "#{@poll_set.id}"}
@@ -40,7 +41,7 @@
 
                 
   :javascript
-  //  $(document).ready(function(){
-  //    var poll_set = $("#widget_#{@poll_set.id}");
-  //    setWidget(poll_set);
-  //  }); 
+    $(document).ready(function(){
+      var poll_set = $("#widget_#{@poll_set.id}");
+      setWidget(poll_set);
+    }); 

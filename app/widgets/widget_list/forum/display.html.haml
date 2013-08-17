@@ -1,5 +1,5 @@
 / %li{:id => dom_id(@forum)}
-%li.widget{:id => "widget_#{@forum.id}"}
+.widget{:id => "widget_#{@forum.id}"}
   .introduction.panel.margin-b30
     .body
       .cell
@@ -12,7 +12,8 @@
                 #{link_to '发言', new_community_forum_topic_path(@forum.community, @forum), :class =>'color-orange'} 
                 )
           .edit.color-grey
-            = link_to raw("<span class = 'icon icon-16 icon-cog'>设置</span>"), '#', :id => "#{@forum.id}-settings", :class => 'widget-setting-link' if can? :update, @forum.community 
+            %span.icon.icon-16.icon-cog 设置
+            / = link_to raw("<span class = 'icon icon-16 icon-cog'>设置</span>"), '#', :id => "#{@forum.id}-settings", :class => 'widget-setting-link' if can? :update, @forum.community 
        
 
         .widget-setting{"data-id" => "#{@forum.id}"}
@@ -50,9 +51,9 @@
                   %td #{t.created_at.strftime("%Y-%m-%d %H:%M:%S")}
 
   :javascript
-  //  $(document).ready(function(){
-  //    var forum = $("#widget_#{@forum.id}");
-  //    setWidget(forum);
-  //  });            
+    $(document).ready(function(){
+      var forum = $("#widget_#{@forum.id}");
+      setWidget(forum);
+    });            
 
         

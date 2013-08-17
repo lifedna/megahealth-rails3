@@ -1,3 +1,10 @@
-.handle {
+.handle,
+.edit {
 	cursor: pointer;
 }
+
+.widget-setting,
+.edit {
+	display:none;
+}
+

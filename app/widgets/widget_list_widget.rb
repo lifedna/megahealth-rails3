@@ -24,7 +24,7 @@ class WidgetListWidget < AuthorizableWidget
     w = evt[:widget]
     self << widget("widget_list/#{w.class.to_s.underscore}", "#{w.class.to_s.underscore}-#{w.id}", :widget => w)
 
-    replace "##{widget_id} ul", {:state => :list}, w.section.widgets 
+    replace "##{widget_id} #sortable", {:state => :list}, w.section.widgets 
   end  
 
   def process_delete(evt)
@@ -32,7 +32,7 @@ class WidgetListWidget < AuthorizableWidget
     @section = evt[:section]
     @section.reload
 
-    replace "##{widget_id} ul", {:state => :list}, @section.widgets
+    replace "##{widget_id} #sortable", {:state => :list}, @section.widgets
   end
 
   def list(widgets)

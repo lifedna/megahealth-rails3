@@ -1,4 +1,4 @@
-%li.widget{:id => "widget_#{@column.id}"}
+.widget{:id => "widget_#{@column.id}"}
   .introduction.panel.margin-b30
     .body
       .cell
@@ -12,7 +12,8 @@
                 #{link_to '添加', new_community_column_article_path(@column.community, @column), :class =>'color-orange'} 
               )
           .edit.color-grey
-            = link_to raw("<span class = 'icon icon-16 icon-cog'>设置</span>"), '#', :id => "#{@column.id}-settings", :class => 'widget-setting-link' if can? :update, @column.community  
+            %span.icon.icon-16.icon-cog 设置
+            / = link_to raw("<span class = 'icon icon-16 icon-cog'>设置</span>"), '#', :id => "#{@column.id}-settings", :class => 'widget-setting-link' if can? :update, @column.community  
 
         .widget-setting{"data-id" => "#{@column.id}"}
           = form_for @column, :url => community_column_url(@column.community, @column)  do |f| 
@@ -52,7 +53,7 @@
    
 
   :javascript
-  //  $(document).ready(function(){
-  //    var column = $("#widget_#{@column.id}");
-  //    setWidget(column);
-  //  });
+    $(document).ready(function(){
+      var column = $("#widget_#{@column.id}");
+      setWidget(column);
+    });
