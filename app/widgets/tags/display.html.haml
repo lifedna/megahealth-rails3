@@ -1,0 +1,17 @@
+= widget_div do
+  .col{:style => "text-align:right;"}
+    = render({:state => :list}, @tags)
+
+    - if signed_in?
+      .add_tag{:style => "display:inline-block;"}
+        .col.sizefit
+          = form_tag url_for_event(:new_tag, :content_id => @content.id), :remote => true do
+            = text_field_tag :tag
+          %span.icon.icon-16.icon-plus-sign
+
+:javascript
+  $(document).ready(function(){
+    $('.icon-plus-sign').click(function(){
+      $('#tag').toggle();
+    });
+  });

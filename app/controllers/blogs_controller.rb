@@ -1,4 +1,4 @@
-class BlogsController < ApplicationController
+class BlogsController < ContentController
   before_filter :authenticate_user!, :except => [:show]
   
   has_widgets do |root|

@@ -8,12 +8,6 @@
       = image_tag item.thumb_url, :class=> "thumb"
       .play_video
 
-  - unless item.tags.nil?
-    .tags
-      %ul.nav.blocks
-        - item.tags.each do |tag|
-          %li
-            %a #{tag}
   .source #{presenter.stats} 
   
    

@@ -1,0 +1,14 @@
+- tags.each do |tag|
+  - if tag.tagged_by_user(current_user.id)
+    .tag{:style => "display:inline-block;"}
+      .col.sizefit.tag_name
+        #{tag.name}
+      .col.sizefit.tag_count
+        (#{tag.taggings_count})
+
+  - else
+    .foreign_tag{:style => "display:inline-block;"}
+      .col.sizefit.tag_name
+        #{tag.name}
+      .col.sizefit.tag_count
+        (#{tag.taggings_count})

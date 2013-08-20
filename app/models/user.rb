@@ -1,10 +1,13 @@
 # coding: utf-8
+require 'tagger'
+
 class User
   include Mongoid::Document
   include Mongoid::Timestamps
   include Mongoid::Commenter
   include Streama::Actor
   include Mongoid::Liker
+  include Mongoid::Tagger
 
   # Include default devise modules. Others available are:
   # :token_authenticatable, :confirmable,

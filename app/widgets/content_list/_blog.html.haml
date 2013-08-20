@@ -1,22 +1,16 @@
 - present item, BlogPresenter do |presenter|
   %h4 #{presenter.title}   
+  %p{:style => "color: #999;"} 
+    %small #{presenter.metadata}
   - if presenter.image
     .col.sizefit.float-right
       #{presenter.image}
     .col.sizefill
-      %p{:style => "color: #999;"} 
-        %small #{presenter.metadata}
-      .margin-r20
+      .margin-r10
         %p #{presenter.text} 
   - else
-    %p{:style => "color: #999;"} 
-      %small #{presenter.metadata}
     %p #{presenter.text}  
 
-  - unless item.tags.nil?
-    .tags
-      %ul.nav.blocks
-        - item.tags.each do |tag|
-          %li
-            %a #{tag}
+  .tags
+    = render :partial => "tags", :locals => {:tags => item.model_tags}
   .source #{presenter.stats} 

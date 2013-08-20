@@ -1,14 +1,16 @@
 # coding: utf-8
+require 'taggable'
+
 class Content
   include Mongoid::Document	
   include Mongoid::Timestamps	
   include Mongoid::Commentable
-  include Mongoid::TaggableWithContext
+  # include Mongoid::TaggableWithContext
   # include Mongoid::TaggableWithContext::AggregationStrategy::MapReduce
-  include Mongoid::TaggableWithContext::AggregationStrategy::RealTime
+  # include Mongoid::TaggableWithContext::AggregationStrategy::RealTime
   include Mongoid::Likeable
-  # include Mongoid::Sharable
   include Mongoid::Search
+  include Mongoid::Taggable
 
   paginates_per 8
   
@@ -18,7 +20,9 @@ class Content
   field :locked, type: Boolean, :default => false
   field :impressions_count, type: Integer, :default => 0
 
-  taggable
+  has_many :model_tags
+
+  # taggable
   # impressionist gem
   is_impressionable :column_name => :impressions_count, :unique => :session_hash, :counter_cache => true
 
@@ -34,6 +38,7 @@ class Content
   scope :newest, desc(:created_at)
   scope :hot, desc(:likers_count)
   scope :popular, desc(:impressions_count)
+
 
   def presenter_klass
     klass = "#{self.class.to_s}Presenter"

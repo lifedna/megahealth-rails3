@@ -6,6 +6,7 @@
     %h2 #{@blog.title}
     %small 
       #{@blog.created_at.strftime("%Y-%m-%d %H:%M:%S")} 
+    = render_widget :tags, :display, :content => @blog  
     .margin-t10  
       %p #{raw @blog.body}
       %span.float-right #{@blog.impressionist_count}人阅读

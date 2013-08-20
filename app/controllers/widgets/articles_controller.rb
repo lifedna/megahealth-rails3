@@ -1,8 +1,6 @@
 # 
-class Widgets::ArticlesController < ApplicationController
-  has_widgets do |root|
-    root << widget(:like)
-  end
+class Widgets::ArticlesController < ContentController
+
 
   def new
     @column = Column.find params[:column_id]

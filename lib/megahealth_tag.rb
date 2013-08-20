@@ -1,0 +1,2 @@
+require 'taggable'
+require 'tagger'
