@@ -14,6 +14,7 @@
     %p #{presenter.text}  
 
   .tags
-    标签： = render :partial => "tags", :locals => {:tags => item.model_tags}  
+    标签： 
+    = render :partial => "tags", :locals => {:tags => item.model_tags}  
   .source #{presenter.stats} 
       
