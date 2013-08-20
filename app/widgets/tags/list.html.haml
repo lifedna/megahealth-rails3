@@ -7,7 +7,7 @@
         (#{tag.taggings_count})
       .col.sizefit.tag_action 
         - if signed_in?
-          = link_to raw("<span class='icon icon-16 icon-minus'></span>"), url_for_event(:remove_tag, :content_id => tag.content.id, :tag => tag.name), :remote => true
+          = link_to raw("<span class='icon icon-16 icon-minus color-black'></span>"), url_for_event(:remove_tag, :content_id => tag.content.id, :tag => tag.name), :remote => true
 
   - else
     .foreign_tag{:style => "display:inline-block;"}
@@ -17,6 +17,6 @@
         (#{tag.taggings_count})
       .col.sizefit.tag_action 
         - if signed_in?
-          = link_to raw("<span class='icon icon-16 icon-plus'></span>"), url_for_event(:add_tag, :content_id => tag.content.id, :tag => tag.name), :remote => true
+          = link_to raw("<span class='icon icon-16 icon-plus color-black'></span>"), url_for_event(:add_tag, :content_id => tag.content.id, :tag => tag.name), :remote => true
 
 
