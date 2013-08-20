@@ -1,9 +1,9 @@
 class BlogsController < ContentController
   before_filter :authenticate_user!, :except => [:show]
   
-  has_widgets do |root|
-    root << widget(:like)
-  end
+  # has_widgets do |root|
+  #   root << widget(:like)
+  # end
   
   def index
     # @user = User.find params[:id]
