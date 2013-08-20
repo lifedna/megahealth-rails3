@@ -4,7 +4,7 @@ class Tag
 
   field :name, type: String
   field :taggings_count, type: Integer, default: 0
-  validates :name, presence: true
+  validates :name, presence: true, length: { maximum: 10 }, uniqueness: true
 
   has_many :taggings
 

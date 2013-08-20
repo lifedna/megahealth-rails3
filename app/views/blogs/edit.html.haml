@@ -17,7 +17,7 @@
   .col.size2of3
     .cell 
       %h2 新加日记
-      = simple_form_for @blog do |f|
+      = simple_form_for @blog, :url => {:action => "update"} do |f|
         / = f.error_messages
         %p
           = f.hidden_field :user_id, :value => current_user.id
@@ -30,8 +30,7 @@
         %p
           = f.label '正文:'  
         %p
-          = f.text_area :body, :size => "60x12", :class => "redactor"
-          
+          = f.text_area :body, :size => "60x12", :class => "redactor" 
         %p
           = f.label '设置可见:' 
           = f.collection_radio_buttons :public, [[true, '对所有人可见'] ,[false, '仅对自己可见']], :first, :last  

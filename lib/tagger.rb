@@ -25,6 +25,8 @@ module Mongoid
 
         if tagging = self.taggings.create(tag: tag, taggable: model)
           tag.inc(:taggings_count, 1)
+        else
+          return
         end
 
         taggings << tagging

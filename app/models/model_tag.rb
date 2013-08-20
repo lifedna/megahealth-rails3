@@ -6,7 +6,8 @@ class ModelTag
   field :taggings_count, type: Integer, default: 0
   field :user_ids, type: Array, default: []
 
-  validates :name, presence: true
+  validates :name, presence: true, length: { maximum: 10 }
+  # validates_uniqueness_of :name, :scope => :content_id
 
   belongs_to :content
 

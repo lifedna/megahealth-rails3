@@ -7,8 +7,11 @@
     %small 
       #{@blog.created_at.strftime("%Y-%m-%d %H:%M:%S")} 
     = render_widget :tags, :display, :content => @blog  
-    .margin-t10  
-      %p #{raw @blog.body}
+    %p #{raw @blog.body}
+    .margin-t20
+      - if @blog.user == current_user
+        %span{:style => "padding-right: 4px;"} #{link_to '> 修改', edit_blog_path(@blog)}
+        %span{:style => "padding-right: 4px;"} #{link_to '> 删除', blog_path(@blog), :method => "delete"}
       %span.float-right #{@blog.impressionist_count}人阅读
     .margin-t20  
       .col.sizefit.float-right

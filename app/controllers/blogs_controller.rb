@@ -6,8 +6,6 @@ class BlogsController < ContentController
   # end
   
   def index
-    # @user = User.find params[:id]
-    # @blogs = @user.blogs
     @blogs = current_user.blogs
   end
 
@@ -35,6 +33,27 @@ class BlogsController < ContentController
     impressionist @blog, nil, :unique => [:session_hash]
   end
 
+  def edit
+    @blog = Blog.find params[:id]
+  end
+
+  def update
+    @blog = Blog.find params[:id]
+
+    if @blog.update_attributes(params[:blog]) 
+      flash[:notice] = "Topic has been updated."  
+      redirect_to action => :show
+    else
+      flash[:notice] = "Failed to save blog."    
+    end 
+  end
+
+  def destroy
+    @blog = Blog.find params[:id]
+    @blog.destroy
+    redirect_to blogs_path
+  end
+
   def comment
     @blog = Blog.find params[:id]
     if current_user.comment_on(@blog, params[:comment])
@@ -48,11 +67,5 @@ class BlogsController < ContentController
     if current_user.delete_comment(params[:comment_id])
       redirect_to :action => "show"
     end
-  end
-
-  def update
-  end
-
-  def destroy
   end
 end
