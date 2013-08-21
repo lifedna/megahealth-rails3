@@ -3,7 +3,7 @@ module Mongoid
     extend ActiveSupport::Concern
 
     included do |base|
-      base.has_many :model_tags, :class_name => 'ModelTag', :as => :taggable, :dependent => :destroy
+      base.has_many :taggings, :class_name => 'Tagging', :as => :taggable, :dependent => :destroy
     end
 
   end

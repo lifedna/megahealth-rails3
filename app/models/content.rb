@@ -20,9 +20,8 @@ class Content
   field :locked, type: Boolean, :default => false
   field :impressions_count, type: Integer, :default => 0
 
-  has_many :model_tags
+  embeds_many :model_tags
 
-  # taggable
   # impressionist gem
   is_impressionable :column_name => :impressions_count, :unique => :session_hash, :counter_cache => true
 
@@ -33,11 +32,15 @@ class Content
 
   accepts_nested_attributes_for :comments, :reject_if => lambda { |a| a[:body].blank? }, :allow_destroy => true
 
+  # accepts_nested_attributes_for :model_tags, :reject_if => lambda { |a| a[:name].blank? }, :allow_destroy => true
+
   belongs_to :user
 
   scope :newest, desc(:created_at)
   scope :hot, desc(:likers_count)
   scope :popular, desc(:impressions_count)
+
+  scope :with_tag, ->(phrase){where('model_tags.name' => phrase)}
 
 
   def presenter_klass

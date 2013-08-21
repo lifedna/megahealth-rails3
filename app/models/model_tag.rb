@@ -9,7 +9,7 @@ class ModelTag
   validates :name, presence: true, length: { maximum: 10 }
   # validates_uniqueness_of :name, :scope => :content_id
 
-  belongs_to :content
+  embedded_in :content
 
   def tagged_by_user(user_id)
   	return self.user_ids.include?(user_id)
