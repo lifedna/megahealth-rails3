@@ -16,6 +16,7 @@
   - unless item.model_tags.empty?
     .tags 
       .col.sizefit
+        %span.icon.icon-tags.color-black
         标签:&nbsp;
       = render :partial => "tags", :locals => {:tags => item.model_tags}  
   .source #{presenter.stats} 
