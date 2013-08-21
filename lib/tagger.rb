@@ -101,11 +101,20 @@ module Mongoid
     #
     # Example:
     # => @john.find_objs_with_tag('vampires')
-    def find_objs_with_tag(phrase)
+    def find_tagged_objs_with(phrase)
       tag = Tag.find_by(name: phrase)
       return if tag.nil?
 
       Tagging.where(tagger: self, tag: tag).map{|tagging| tagging.tagged_obj}
     end 
+
+    # return all user tagged objects
+    #
+    # Example:
+    # => @john.find_all_tagged_objs
+    def find_all_tagged_objs
+      Tagging.where(tagger: self).map{|tagging| tagging.tagged_obj}.uniq
+    end
+
   end
 end

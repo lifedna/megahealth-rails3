@@ -12,14 +12,19 @@ class DashboardController < ApplicationController
   end
 
   def stars
-    @contents = current_user.liked_objects - current_user.liked_blogs
+    # @contents = current_user.liked_objects - current_user.liked_blogs
 
-    if params[:category]      
-      @stared = @contents.select {|i| i.category == params[:category]}
+    # if params[:category]      
+    #   @stared = @contents.select {|i| i.category == params[:category]}
+    # else
+    #   @stared = @contents
+    # end
+    # return @stared
+    if params[:tag]
+      @tagged = current_user.find_tagged_objs_with(params[:tag])
     else
-      @stared = @contents
+      @tagged = current_user.find_all_tagged_objs
     end
-    return @stared
   end
 
   def blogs

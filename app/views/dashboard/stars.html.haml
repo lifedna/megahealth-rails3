@@ -10,85 +10,72 @@
       %li 
         %a{:href => "/dashboard/phrs", :class => "#{@phrs}"} 健康记录
       %li
-        %a{:href => "/dashboard/stars", :class => "#{@stars}"} 收藏夹
+        %a{:href => "/dashboard/stars", :class => "#{@stars}"} 标签夹
       %li 
         %a{:href => "/dashboard/blogs", :class => "#{@blogs}"} 日记
 
   .col.size1of4
-    .list
-      .menu
-        %ul.stat.left.nav
-          %li
-            %a{:href => stars_path(:category => "健康知识")} 
-              %span.data #{@contents.select {|i| i.category == "健康知识"}.nil? ? "0" : @contents.select {|i| i.category == "健康知识"}.size}
-              健康知识 
-          %li 
-            %a{:href => stars_path(:category => "就医指南")} 
-              %span.data #{@contents.select {|i| i.category == "就医指南"}.nil? ? "0" : @contents.select {|i| i.category == "就医指南"}.size}
-              就医指南  
-          %li 
-            %a{:href => stars_path(:category => "治疗交流")}  
-              %span.data #{@contents.select {|i| i.category == "治疗交流"}.nil? ? "0" : @contents.select {|i| i.category == "治疗交流"}.size}
-              治疗交流 
-          %li 
-            %a{:href => stars_path(:category => "护理园地")}  
-              %span.data #{@contents.select {|i| i.category == "护理园地"}.nil? ? "0" : @contents.select {|i| i.category == "护理园地"}.size} 
-              护理园地
-          %li 
-            %a{:href => stars_path(:category => "用药常识")}  
-              %span.data #{@contents.select {|i| i.category == "用药常识"}.nil? ? "0" : @contents.select {|i| i.category == "用药常识"}.size} 
-              用药常识    
+    / .list
+    /   .menu
+    /     %ul.stat.left.nav
+    /       %li
+    /         %a{:href => stars_path(:category => "健康知识")} 
+    /           %span.data #{@contents.select {|i| i.category == "健康知识"}.nil? ? "0" : @contents.select {|i| i.category == "健康知识"}.size}
+    /           健康知识 
+    /       %li 
+    /         %a{:href => stars_path(:category => "就医指南")} 
+    /           %span.data #{@contents.select {|i| i.category == "就医指南"}.nil? ? "0" : @contents.select {|i| i.category == "就医指南"}.size}
+    /           就医指南  
+    /       %li 
+    /         %a{:href => stars_path(:category => "治疗交流")}  
+    /           %span.data #{@contents.select {|i| i.category == "治疗交流"}.nil? ? "0" : @contents.select {|i| i.category == "治疗交流"}.size}
+    /           治疗交流 
+    /       %li 
+    /         %a{:href => stars_path(:category => "护理园地")}  
+    /           %span.data #{@contents.select {|i| i.category == "护理园地"}.nil? ? "0" : @contents.select {|i| i.category == "护理园地"}.size} 
+    /           护理园地
+    /       %li 
+    /         %a{:href => stars_path(:category => "用药常识")}  
+    /           %span.data #{@contents.select {|i| i.category == "用药常识"}.nil? ? "0" : @contents.select {|i| i.category == "用药常识"}.size} 
+    /           用药常识    
 
 
     .my-tags
       %h3 我的标签......
-      %span
-        %a 中文(1)
-      %span
-        %a 网络(1)
-      %span
-        %a 中文(1)
-      %span
-        %a 网络(1)          
-  .col.size3of4  
+      - current_user.all_tags_with_count.each do |k,v|
+        %span
+          = link_to "#{k}(#{v})", stars_path(:tag => k)
+          
+  .col.size3of4 
+    .margin-l30 
+      - if params[:tag]
+        %h2 标签：#{params[:tag]}
     .panel.margin-l30
-      - @stared.each do |item|
+      - @tagged.each do |item|
         .body{:style => "padding:20px;"}
           %h4
             #{link_to item.title}
           %p{:style => "color: #999;"} 
             %span #{item.created_at.strftime("%Y-%m-%d %H:%M:%S")}  
           %span #{truncate strip_tags(item.body), length: 140, omission: '.....'}
+          %p
+          - item.model_tags.each do |tag|
+            - if tag.tagged_by_user(current_user.id)
+              .tag{:style => "display:inline-block;"}
+                .col.sizefit.tag_name
+                  #{tag.name}
+                .col.sizefit.tag_count
+                  (#{tag.taggings_count})
+            - else
+              .foreign_tag{:style => "display:inline-block;"}
+                .col.sizefit.tag_name
+                  #{tag.name}
+                .col.sizefit.tag_count
+                  (#{tag.taggings_count})
+
           - case item.class.to_s
           - when "Video"
             .clickable.video{:src => "#{item.src}"}
               = link_to image_tag(item.thumb_url, :class=> "thumb"), show_community_video_url(item.community, item)
               .play_video
           
-      / .body{:style => "padding:20px;"}
-      /   %h4
-      /     %a 关于贝贝的发病经历和治疗交流
-      /   %p{:style => "color: #999;"} 
-      /     %span 昨天
-      /     %span.icon.icon-comments.no-margin
-      /     2人回复  
-      /   %span
-      /     最近一年来我经受着一种奇怪的压力：越来越多的人问我“你有没有微博？”，然后便是诧异的追问：“你为什么不用？”这其实是个毫无道理的问题，也没什么好解释的，但直接反问“我为什么一定要用？”似乎显得很无礼，所以我通常总是另外找个理由来推脱...
-      / .body{:style => "padding:20px;"}
-      /   %h4
-      /     %a 关于贝贝的发病经历和治疗交流
-      /   %p{:style => "color: #999;"} 
-      /     %span 昨天
-      /     %span.icon.icon-comments.no-margin
-      /     2人回复  
-      /   %span
-      /     最近一年来我经受着一种奇怪的压力：越来越多的人问我“你有没有微博？”，然后便是诧异的追问：“你为什么不用？”这其实是个毫无道理的问题，也没什么好解释的，但直接反问“我为什么一定要用？”似乎显得很无礼，所以我通常总是另外找个理由来推脱...
-      / .body{:style => "padding:20px;"}
-      /   %h4
-      /     %a 关于贝贝的发病经历和治疗交流
-      /   %p{:style => "color: #999;"} 
-      /     %span 昨天
-      /     %span.icon.icon-comments.no-margin
-      /     2人回复  
-      /   %span
-      /     最近一年来我经受着一种奇怪的压力：越来越多的人问我“你有没有微博？”，然后便是诧异的追问：“你为什么不用？”这其实是个毫无道理的问题，也没什么好解释的，但直接反问“我为什么一定要用？”似乎显得很无礼，所以我通常总是另外找个理由来推脱...
