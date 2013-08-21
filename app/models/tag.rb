@@ -8,4 +8,5 @@ class Tag
 
   has_many :taggings
 
+  default_scope desc(:taggings_count)
 end
