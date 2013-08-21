@@ -5,7 +5,8 @@
 .site-center.center-page
   .page-head.text-center
     .category-bar.middot
-      .top-nav{:style => "background: #e5ebe4; display: inline-block;padding: 10px 20px;border-radius: 5px;"}
+      / .top-nav{:style => "background: #e5ebe4; display: inline-block;padding: 10px 20px;border-radius: 5px;"}
+      .top-nav.alert.alert-info
         %ul
           %li{:class => "#{params[:category].nil?? 'current' : nil }"} 
             = link_to '所有', explore_path
