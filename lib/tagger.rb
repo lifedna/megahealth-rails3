@@ -83,14 +83,29 @@ module Mongoid
       Tag.destroy_all(taggings_count: 0)
     end
 
-    # return all tag_ids of user
+    # return user's tags with count
     #
     # Example:
-    # => @john.all_tag_ids
-    # => ["521300d1f9dffba3e1000001", "521307d2f9dffb13b3000001"] 
-    def all_tag_ids
-      tag_ids = self.taggings.map(&:tag_id).join(' ').split(' ').uniq
+    # => @john.all_tags_with_count
+    # => {'history' => 2, 'science => 4'}
+    def all_tags_with_count
+      tag_ids = self.taggings.map(&:tag_id).join(' ').split(' ')
+      tags_with_count = Hash.new(0)
+      tag_ids.each do |v|
+        tags_with_count["#{Tag.find(v).name}"] +=1
+      end  
+      tags_with_count
     end
 
+    # return all user tagged objects by tag name
+    #
+    # Example:
+    # => @john.find_objs_with_tag('vampires')
+    def find_objs_with_tag(phrase)
+      tag = Tag.find_by(name: phrase)
+      return if tag.nil?
+
+      Tagging.where(tagger: self, tag: tag).map{|tagging| tagging.tagged_obj}
+    end 
   end
 end

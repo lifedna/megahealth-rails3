@@ -39,6 +39,17 @@
               %span.data #{@contents.select {|i| i.category == "用药常识"}.nil? ? "0" : @contents.select {|i| i.category == "用药常识"}.size} 
               用药常识    
 
+
+    .my-tags
+      %h3 我的标签......
+      %span
+        %a 中文(1)
+      %span
+        %a 网络(1)
+      %span
+        %a 中文(1)
+      %span
+        %a 网络(1)          
   .col.size3of4  
     .panel.margin-l30
       - @stared.each do |item|
