@@ -12,7 +12,7 @@ class ContentList::LoadMoreWidget  < AuthorizableWidget
   	@page_num = options[:page_num]
     @category = options[:category]
     @total_pages = options[:total_pages]
-    @tag = options[:tag]
+
   	render unless @page_num.nil?    
   end
 

@@ -17,16 +17,31 @@
 .site-center  
   .content-search-head
     .container
-      .col.size1of4
-        %h2 查询
-      .col.size3of4  
-        #content_search.float-right
-          = form_tag "/search", :method => "get" do          
-            = text_field_tag :q, nil, :value => params[:q], :size => 70, :required => true
-            / = hidden_field_tag :category, nil, :value => params[:category]
-            = submit_tag "查询", :class => "search-button gradient"
+      - if params[:tag]
+        .col.sizefit
+          %h2 热门标签：
+        .col.sizefill
+          %ul.nav
+            - Tag.all.limit(25).each do |tag|
+              %li
+                = link_to "#{tag.name}", search_path(:tag => tag.name)   
+      - else
+        .col.size1of4
+          / %h2 查询
+        .col.size3of4  
+          #content_search
+            .col.float-right
+              = form_tag "/search", :method => "get" do          
+                = text_field_tag :q, nil, :value => params[:q], :size => 70, :required => true
+                / = hidden_field_tag :category, nil, :value => params[:category]
+                = submit_tag "查询", :class => "search-button gradient"
 
   .page-content
+    .col.breadcrumb.margin-b10
+      - if params[:tag]
+        %h3 标签: #{breadcrumb(:q => params[:q], :tag => params[:tag], :category => params[:category], :type => params[:type])}
+      - else
+        %h3 查询：#{breadcrumb(:q => params[:q], :tag => params[:tag], :category => params[:category], :type => params[:type])}
     .col.size1of4
       .padding-r20
         %h4 类别
@@ -34,7 +49,7 @@
           %ul.stat.left.nav
             - @stats.each do |v|
               %li{:class => (params[:category] == v[0] ? "active" : "")}
-                %a{:href => "#{search_path :q => params[:q], :category => v[0], :type => params[:type]}"}
+                %a{:href => "#{search_path :q => params[:q], :category => v[0], :tag => params[:tag]}"}
                   %span.data #{v[1]}
                   #{v[0]}
             / %li{:class => (params[:category] == "健康知识" ? "active" : "")}
@@ -47,32 +62,32 @@
           %ul.stat.left.nav
             - if @articles_count > 0
               %li{:class => (params[:type] == "Article" ? "active" : "")} 
-                %a{:href => "#{search_path :q => params[:q], :category => params[:category], :type => "Article"}"}
+                %a{:href => "#{search_path :q => params[:q], :category => params[:category], :type => "Article", :tag => params[:tag]}"}
                   %span.data #{@articles_count}
                   文章    
             - if @blogs_count > 0      
               %li{:class => (params[:type] == "Blog" ? "active" : "")}  
-                %a{:href => "#{search_path :q => params[:q], :category => params[:category], :type => "Blog"}"}
+                %a{:href => "#{search_path :q => params[:q], :category => params[:category], :type => "Blog", :tag => params[:tag]}"}
                   %span.data #{@blogs_count}
                   日记    
             - if @topics_count > 0        
               %li{:class => (params[:type] == "Topic" ? "active" : "")}  
-                %a{:href => "#{search_path :q => params[:q], :category => params[:category], :type => "Topic"}"}
+                %a{:href => "#{search_path :q => params[:q], :category => params[:category], :type => "Topic", :tag => params[:tag]}"}
                   %span.data #{@topics_count}
                   话题  
             - if @questions_count > 0         
               %li{:class => (params[:type] == "Question" ? "active" : "")}  
-                %a{:href => "#{search_path :q => params[:q], :category => params[:category], :type => "Question"}"} 
+                %a{:href => "#{search_path :q => params[:q], :category => params[:category], :type => "Question", :tag => params[:tag]}"} 
                   %span.data #{@questions_count} 
                   问题 
             - if @videos_count > 0       
               %li{:class => (params[:type] == "Video" ? "active" : "")}  
-                %a{:href => "#{search_path :q => params[:q], :category => params[:category], :type => "Video"}"} 
+                %a{:href => "#{search_path :q => params[:q], :category => params[:category], :type => "Video", :tag => params[:tag]}"} 
                   %span.data #{@videos_count} 
                   视频 
             - if @polls_count > 0        
               %li{:class => (params[:type] == "Poll" ? "active" : "")}  
-                %a{:href => "#{search_path :q => params[:q], :category => params[:category], :type => "Poll"}"} 
+                %a{:href => "#{search_path :q => params[:q], :category => params[:category], :type => "Poll", :tag => params[:tag]}"} 
                   %span.data #{@polls_count} 
                   投票       
 
@@ -81,22 +96,45 @@
         .contentlist
           .content-source
             - if @results.size == 0
-              我们没有找到有关 "#{params[:q]}" 在 #{params[:category]} 类别中的任何内容
+              - if params[:tag]
+                没有在"#{params[:category]}"类别中找到标签了"#{params[:tag]}"的任何内容
+              - else
+                没有在"#{params[:category]}"类别中找到有关"#{params[:q]}"的任何内容
             - else
               找到#{@results.size}条结果
-          - @results.each do |e|
-            - present e, e.presenter_klass do |presenter|
+          - @results.each do |item|
+            - present item, item.presenter_klass do |presenter|
               .content-source
                 %ul.nav.content-stats
                   %li 
-                    .label.background-grey #{e.content_type}                 
-                  %li 浏览 #{e.impressionist_count}
-                  %li 收藏 #{e.likers_count}
+                    .label.background-grey #{item.content_type}                 
+                  %li 浏览 #{item.impressionist_count}
+                  %li 收藏 #{item.likers_count}
                 %h3.content-title 
                   %a #{presenter.title}    
+                  / %p{:style => "color:#999"} #{time_ago_in_words(item.created_at)}前
                 .body 
-                  %span #{presenter.text}   
-                  %p{:style => "color:#999"} #{time_ago_in_words(e.created_at)}前
+                  %p #{presenter.text}      
+                  - unless item.model_tags.empty?               
+                    .tags 
+                      .col.sizefit
+                        %span.icon.icon-tags.color-black
+                        标签:&nbsp;
+                      .col.sizefill
+                        - item.model_tags.each do |tag|
+                          - if tag.tagged_by_user(current_user.id)
+                            .tag{:style => "display:inline-block;"}
+                              .col.sizefit.tag_name
+                                #{tag.name}
+                              .col.sizefit.tag_count
+                                (#{tag.taggings_count})
+
+                          - else
+                            .foreign_tag{:style => "display:inline-block;"}
+                              .col.sizefit.tag_name
+                                #{tag.name}
+                              .col.sizefit.tag_count
+                                (#{tag.taggings_count})  
 
 
 :javascript

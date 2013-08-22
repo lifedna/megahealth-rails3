@@ -31,25 +31,48 @@ class HomeController < ApplicationController
   end
 
   def search
-    keywords ||= []
-    keywords << params[:q]
-    @entries = Content.all.full_text_search(keywords)
+    if params[:q]
+      keywords ||= []
+      keywords << params[:q]
+      @entries = Content.all.full_text_search(keywords)
 
-    if params[:category]
-      if params[:type]
-        @results = Content.where(_type: params[:type], category: params[:category]).full_text_search(keywords)
+      if params[:category]
+        if params[:type]
+          @results = Content.where(_type: params[:type], category: params[:category]).full_text_search(keywords)
+        else
+          @results = Content.where(category: params[:category]).full_text_search(keywords)
+        end
       else
-        @results = Content.where(category: params[:category]).full_text_search(keywords)
-      end
-    else
-      if params[:type]
-        @results = Content.where(_type: params[:type]).full_text_search(keywords)
-      else
-        @results = Content.all.full_text_search(keywords)
-      end
-    end   
+        if params[:type]
+          @results = Content.where(_type: params[:type]).full_text_search(keywords)
+        else
+          @results = Content.all.full_text_search(keywords)
+        end
+      end   
 
-    @category_entries = Content.where(category: params[:category]).full_text_search(keywords)
+      @category_entries = Content.where(category: params[:category]).full_text_search(keywords)
+
+    end
     
+    if params[:tag]
+      @entries = Content.with_tag(params[:tag])
+
+      if params[:category]
+        if params[:type]
+          @results = Content.with_tag(params[:tag]).where(_type: params[:type], category: params[:category])
+        else
+          @results = Content.with_tag(params[:tag]).where(category: params[:category])
+        end
+      else
+        if params[:type]
+          @results = Content.with_tag(params[:tag]).where(_type: params[:type])
+        else
+          @results = Content.with_tag(params[:tag])
+        end
+      end   
+
+      @category_entries = Content.with_tag(params[:tag]).where(category: params[:category])
+
+    end
   end
 end

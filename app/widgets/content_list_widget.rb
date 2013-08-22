@@ -18,44 +18,23 @@ class ContentListWidget < AuthorizableWidget
   def display(*args)
   	options = args.extract_options!
   	@category = options[:category]
-    @tag = options[:tag]
 
-    # if @category
-    #   if @keywords.nil? or @keywords.empty?
-    #     @items = Content.in(_type: @klass).send("#{@scope}").where(category: @category).page(1)
-    #   else
-    #     @items = Content.in(_type: @klass).send("#{@scope}").where(category: @category).full_text_search(@keywords).page(1)
-    #   end  
-    # else
-    #   if @keywords.nil? or @keywords.empty?
-    #     @items = Content.in(_type: @klass).send("#{@scope}").all.page(1)
-    #   else
-    #     @items = Content.in(_type: @klass).send("#{@scope}").all.full_text_search(@keywords).page(1)
-    #   end 
-    # end 
+    @items = search(:klass => @klass, 
+                    :keywords => @keywords, 
+                    :scope => @scope, 
+                    :category => @category, 
+                    :page_num => 1)
 
-    @items = search(:klass => @klass, :keywords => @keywords, :scope => @scope, :category => @category, :tag => @tag, :num => 1)
-    @last_page = @items.last_page? 
     render
   end
 
   def process_more(evt)
-    # if evt[:content_category]
-    #   if @keywords.nil? or @keywords.empty?
-    #     @items = Content.in(_type: @klass).send("#{@scope}").where(category: evt[:content_category]).page evt[:page]
-    #   else
-    #     @items = Content.in(_type: @klass).send("#{@scope}").where(category: evt[:content_category]).full_text_search(@keywords).page evt[:page]
-    #   end  
-    # else
-    #   if @keywords.nil? or @keywords.empty?
-    #     @items = Content.in(_type: @klass).send("#{@scope}").all.page evt[:page]
-    #   else
-    #     @items = Content.in(_type: @klass).send("#{@scope}").all.full_text_search(@keywords).page evt[:page]
-    #   end 
-    # end
-
-    @items = search(:klass => @klass, :keywords => @keywords, :scope => @scope, :category => evt[:content_category], :tag => evt[:tag], :num => evt[:page])
-    @last_page = @items.last_page? 
+    @items = search(:klass => @klass, 
+                    :keywords => @keywords, 
+                    :scope => @scope, 
+                    :category => evt[:content_category], 
+                    :page_num => evt[:page])
+    
     render :text => "$(\"##{widget_id}\").append(\"#{escape_javascript render({:state => :list}, @items)}\");"
   end
 
@@ -71,42 +50,22 @@ class ContentListWidget < AuthorizableWidget
     category = options[:category]
     scope = options[:scope]
     klass = options[:klass]
-    tag = options[:tag]
     keywords = options[:keywords]
-    num = options[:page_num]
+    page_num = options[:page_num]
 
-    if tag
 
-      if category
-        if keywords.nil? or keywords.empty?
-          items = Content.in(_type: klass).with_tag(tag).send("#{scope}").where(category: category).page num
-        else
-          items = Content.in(_type: klass).with_tag(tag).send("#{scope}").where(category: category).full_text_search(keywords).page num
-        end  
+    if category
+      if keywords.nil? or keywords.empty?
+        items = Content.in(_type: klass).send("#{scope}").where(category: category).page page_num
       else
-        if keywords.nil? or keywords.empty?
-          items = Content.in(_type: klass).with_tag(tag).send("#{scope}").all.page num
-        else
-          items = Content.in(_type: klass).with_tag(tag).send("#{scope}").all.full_text_search(keywords).page num
-        end 
-      end
-
+        items = Content.in(_type: klass).send("#{scope}").where(category: category).full_text_search(keywords).page page_num
+      end  
     else
-
-      if category
-        if keywords.nil? or keywords.empty?
-          items = Content.in(_type: klass).send("#{scope}").where(category: category).page num
-        else
-          items = Content.in(_type: klass).send("#{scope}").where(category: category).full_text_search(keywords).page num
-        end  
+      if keywords.nil? or keywords.empty?
+        items = Content.in(_type: klass).send("#{scope}").all.page page_num
       else
-        if keywords.nil? or keywords.empty?
-          items = Content.in(_type: klass).send("#{scope}").all.page num
-        else
-          items = Content.in(_type: klass).send("#{scope}").all.full_text_search(keywords).page num
-        end 
-      end
-
+        items = Content.in(_type: klass).send("#{scope}").all.full_text_search(keywords).page page_num
+      end 
     end
 
   end  
