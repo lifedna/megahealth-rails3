@@ -132,16 +132,21 @@
               - Community.newest.limit(5).each do |c|
                 %li #{link_to c.name, community_path(c)}
               %li
-                #{link_to '更多...', communities_path}   
+                #{link_to '更多...', communities_path}    
 
-
+        %dl.highlight.orange
+          %dt 我的社群
+          %dd
+            %ul.links
+              - current_user.communities.each do |c|
+                %li #{link_to c.name, community_path(c)}
+          
         %dl.highlight
           %dt 热门标签
           %ul.popular-tags
             - Tag.all.limit(25).each do |tag|
               %li
-                = link_to "#{tag.name}", search_path(:tag => tag.name)  
-            
+                = link_to "#{tag.name}", search_path(:tag => tag.name)       
 
 
 
