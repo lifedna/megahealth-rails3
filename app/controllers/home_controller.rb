@@ -8,16 +8,22 @@ class HomeController < ApplicationController
   end
 
   def explore   
-    @content_filter = current_user.content_filter  
-    @hot_articles = Article.hot.limit(5)
-    @hot_topics = Topic.hot.limit(5)
-    @hot_blogs = Blog.hot.limit(5)
-
-    if session[:first_visit]
-      session[:first_visit] = "false"
+    # redirect_to guide_path
+    if current_user.last_sign_in_at.nil?
+      redirect_to guide_path
     else
-      session[:first_visit] = "true"
+      @content_filter = current_user.content_filter  
+
+      if session[:first_visit]
+        session[:first_visit] = "false"
+      else
+        session[:first_visit] = "true"
+      end
     end
+  end
+
+  def guide
+    @content_filter = current_user.content_filter 
   end
 
   def dashboard

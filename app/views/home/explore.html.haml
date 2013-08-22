@@ -54,13 +54,21 @@
                           = c.check_box k, checked: (v == "1" ? "checked" : ""), :class =>"checkbox"
                           = c.label k
 
+                / .col.margin-t20     
+                /   %h4 只看与你关心的人健康相关的内容？
+                /   - @content_filter.phrs.each do |k, v|
+                /     .col.size1of3
+                /       = f.fields_for :phrs do |c|
+                /         = c.check_box k, checked: (v == "1" ? "checked" : ""), :class =>"checkbox"
+                /         = c.label k    
+
                 .col.margin-t20     
-                  %h4 只看与你关心的人健康相关的内容？
-                  - @content_filter.phrs.each do |k, v|
-                    .col.size1of3
-                      = f.fields_for :phrs do |c|
-                        = c.check_box k, checked: (v == "1" ? "checked" : ""), :class =>"checkbox"
-                        = c.label k    
+                  %h4 
+                    关心的主题
+                    %small{:style =>'font-size:80%;color:#999'} (多个主题用逗号分隔)
+                  = f.text_field :interests, :autocomplete => "off", :maxlength => "30"
+                  %small{:style =>'font-size:80%'} #{link_to '清空', '#', :id => 'clear_all'}
+      
 
                 .col
                   .cell.slidediv-ft
@@ -110,7 +118,7 @@
         .section.margin-b20
           / %form.community-search{:style => "width: 100%;"}
           = form_tag "/search", :method => "get" do
-            = text_field_tag :q, nil, :type => "search", :placeholder => "搜索", :required => true
+            = text_field_tag :q, nil, :type => "search", :placeholder => "搜索", :required => true, :autocomplete => "off"
             / = hidden_field_tag :category, nil, :value => '健康知识'
             / %input{:type => "search", :width => "100%", :placeholder => "搜索"}
 
@@ -166,6 +174,11 @@
       });
     });
 
+    $('#clear_all').click(function(e){
+      e.preventDefault();
+      $("input[id^=content_filter_interests]").val('');
+    });
+
     $(window).scroll(function() {
       if($(this).scrollTop() != 0) {
         $('.back-to-top').fadeIn(); 
@@ -187,5 +200,13 @@
     if("#{session[:first_visit]}" == "true") {
       $(".slidediv").slideToggle();
     }
+
+    $('.settings-block input').keydown(function (e) {
+      var code = e.keyCode || e.which; 
+      if (code  == 13) {               
+        e.preventDefault();
+        return false;
+      }
+    });  
       
   });        

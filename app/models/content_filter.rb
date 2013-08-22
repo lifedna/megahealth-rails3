@@ -5,6 +5,7 @@ class ContentFilter
   field :content, type: Hash, default: {"文章" => "1", "日记" => "1", "视频" => "1", "话题" => "1", "问题" => "1", "投票" => "1"}
   field :phrs, type: Hash
   field :scope, type: String, default: "newest"
+  field :interests, type: String, default: ""
 
   belongs_to :user	
 
@@ -38,6 +39,10 @@ class ContentFilter
   	  phr = self.user.phrs.find_by(name: k)
   	  keywords.concat(phr.merged_keywords)	
   	end		
+
+    unless interests.split(',').empty?
+      keywords.concat(interests.split(','))
+    end
   	return keywords.uniq
   end
 end

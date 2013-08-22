@@ -27,6 +27,7 @@ MegahealthRails3::Application.routes.draw do
   match '/profile' => 'home#profile', :as => :profile
   match '/account' => 'home#account', :as => :account
   match '/search' => 'home#search', :as => :search
+  match '/guide' => 'home#guide', :as => :guide
 
 
   match '/dashboard/stars' => 'dashboard#stars', :as => :stars
