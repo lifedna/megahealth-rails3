@@ -1,16 +1,190 @@
 / Page
 .site-center.center-page
-  .col
-    = image_tag(asset_path('logo-megahealth.png'))
-  .col.margin-t30{:style => "text-align:center;"}
-    %h3{:style => "color:#072"} #{current_user.name}， 从填写你关心的健康问题开始吧!  
-  .col.margin-t20{:style => "text-align:center;"}  
-    = form_for @content_filter, :url => content_filter_url do |f|
-      .col.sizefit
-        %h4{:style => "display:inline-block;padding-right:10px;"} 
-          关心的主题
-          %small{:style =>'font-size:80%;color:#999;'} (多个主题用逗号分隔)
-        = f.text_field :interests, :autocomplete => "off", :maxlength => "30"
-      .col.sizefit
-        .margin-l20
-          = f.submit '提交', :class => "button" 
+  = image_tag(asset_path('logo-megahealth.png'))
+.middle 
+  .site-center.content    
+    .col.size1of2
+      .left
+        %h1.title 欢迎，#{current_user.name}
+        .textarea
+          %p 有研究表明，跟踪其良好的生活习惯的人更容易使他们能跟上，并与他人分享这些信息为我们提供了一种自豪感的提升 - 即使是简单的任务
+      
+        %span 你关心的健康问题
+        = form_for @content_filter, :url => content_filter_url do |f|
+          .col
+            = f.text_field :interests, :autocomplete => "off", :maxlength => "50", :class => "float-left", :autofocus => true, :placeholder => "用逗号分隔多个健康问题，如血压高，盗汗..."
+    .col.size1of2  
+      .right
+        %h4{:style => "color:#999"} 常见健康问题
+        .popular-issues
+          %span 
+            %a 胃病
+          %span 
+            %a 发高烧
+          %span 
+            %a 肥胖
+          %span 
+            %a 血压
+          %span 
+            %a 胃病
+          %span 
+            %a 小腿粗肿
+          %span 
+            %a 胃病
+          %span 
+            %a 血糖高
+          %span 
+            %a 胃病        
+          %span 
+            %a 胃病
+          %span 
+            %a 胃病
+          %span 
+            %a 胃病
+          %span 
+            %a 小腿粗肿
+          %span 
+            %a 胃病          
+          %span 
+            %a 胃病
+          %span 
+            %a 胃病
+          %span 
+            %a 胃病      
+          %span 
+            %a 胃病 
+          %span 
+            %a 胃病
+          %span 
+            %a 胃病
+          %span 
+            %a 胃病
+          %span 
+            %a 小腿粗肿
+          %span 
+            %a 胃病
+          %span 
+            %a 胃病
+          %span 
+            %a 胃病
+          %span 
+            %a 胃病
+          %span 
+            %a 胃病        
+          %span 
+            %a 胃病
+          %span 
+            %a 小腿粗肿
+          %span 
+            %a 胃病
+          %span 
+            %a 胃病
+          %span 
+            %a 胃病          
+          %span 
+            %a 胃病
+          %span 
+            %a 小腿粗肿
+          %span 
+            %a 胃病      
+          %span 
+            %a 胃病 
+          %span 
+            %a 胃病
+          %span 
+            %a 胃病
+          %span 
+            %a 胃病
+          %span 
+            %a 胃病
+          %span 
+            %a 胃病
+          %span 
+            %a 胃病
+          %span 
+            %a 胃病
+          %span 
+            %a 胃病
+          %span 
+            %a 胃病        
+          %span 
+            %a 胃病
+          %span 
+            %a 胃病
+          %span 
+            %a 胃病
+          %span 
+            %a 胃病
+          %span 
+            %a 胃病          
+          %span 
+            %a 胃病
+          %span 
+            %a 胃病
+          %span 
+            %a 胃病      
+          %span 
+            %a 胃病     
+          %span 
+            %a 胃病
+          %span 
+            %a 胃病
+          %span 
+            %a 胃病
+          %span 
+            %a 胃病
+          %span 
+            %a 胃病
+          %span 
+            %a 胃病
+          %span 
+            %a 胃病
+          %span 
+            %a 胃病
+          %span 
+            %a 胃病        
+          %span 
+            %a 胃病
+          %span 
+            %a 胃病
+          %span 
+            %a 胃病
+          %span 
+            %a 胃病
+          %span 
+            %a 胃病          
+          %span 
+            %a 胃病
+          %span 
+            %a 胃病
+          %span 
+            %a 胃病      
+          %span 
+            %a 胃病  
+
+
+:javascript
+  $(document).ready(function(){
+    // $('input[id=content_filter_interests]').focus();
+
+    $('span a').click(function(){
+      var str = $('input[id=content_filter_interests]').val();
+    
+      if(str.length == 0){
+        var issues = [];
+      } else {
+        str = str.replace(/，|、/g, ', ')
+        issues = str.split(', ');
+      }
+        
+      issues.push($(this).text());
+
+      var uniqueIssues = [];      
+      $.each(issues, function(i, el){
+       if($.inArray(el, uniqueIssues) === -1) uniqueIssues.push(el);
+      });
+
+      $('input[id=content_filter_interests]').val(uniqueIssues.join(', ')) ;
+      $('input[id=content_filter_interests]').focus();
+    });
+  });  
