@@ -1,0 +1,39 @@
+- @page = "dashboard"
+
+/ Page
+.site-center.center-page
+  = render :partial => "dashboard/top_menu", :locals => {:selected => "issues"}
+
+  .col.size2of3
+    .issue
+      .col.sizefit.number
+        %span #{raw "#"}
+        1
+      .col.sizefill.subject
+        %a 糖尿病
+        %p 
+          %a 我的经历
+          &middot;
+          %a 治愈分享
+    .issue
+      .col.sizefit.number
+        %span #{raw "#"}
+        2
+      .col.sizefill.subject
+        %a 血压高
+        %p
+          %a 我的经历
+          &middot;
+          %a 治愈分享
+    .issue
+      .col.sizefit.number
+        %span #{raw "#"}
+        3
+      .col.sizefill.subject
+        %a 弱视
+        %p 
+          %a 我的经历 
+          &middot;
+          %a 治愈分享       
+
+  .col.size1of3

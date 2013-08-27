@@ -21,7 +21,7 @@ MegahealthRails3::Application.routes.draw do
 
   mount RedactorRails::Engine => '/redactor_rails'
 
-  # match '/update' => 'home#update', :as => :update
+  match '/experiences' => 'home#experiences', :as => :experiences
   match '/explore' => 'home#explore', :as => :explore
   match '/dashboard' => 'home#dashboard', :as => :dashboard
   match '/profile' => 'home#profile', :as => :profile
@@ -31,6 +31,7 @@ MegahealthRails3::Application.routes.draw do
 
 
   match '/dashboard/stars' => 'dashboard#stars', :as => :stars
+  match '/dashboard/issues' => 'dashboard#issues', :as => :issues
 
 
   scope 'communities' do

@@ -46,8 +46,8 @@
             /   %a.border-left{:href => "/update"} 动态
             %li{:class => (@page == "communities" ? "active" : "")}
               %a.border-left{:href => "/communities"} 社群  
-            / %li{:class => (@page == "blogs" ? "active" : "")}
-            /   %a{:href => "/blogs"} 祈福墙  
+            %li{:class => (@page == "experiences" ? "active" : "")}
+              %a{:href => "/experiences"} 经历  
             
             %li{:class => (@page == "dashboard" ? "active" : "")}
               #{link_to '我的健康', dashboard_url}    

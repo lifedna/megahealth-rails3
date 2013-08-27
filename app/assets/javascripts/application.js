@@ -19,6 +19,7 @@
 //= require jquery-plugins
 //= require redactor-rails
 //= require social-share-button
+//= require masonry
 //= require_tree .
 
 

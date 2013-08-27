@@ -2,7 +2,10 @@
 class DashboardController < ApplicationController
   before_filter :authenticate_user!
 
-  def index
+  def index    
+  end
+
+  def issues
     
   end
 
