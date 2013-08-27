@@ -10,41 +10,79 @@
  	background-color: #fff;
  }
 
- .cloud li {
- 	padding: 10px;
- }
-
-.issue {
-	border-bottom: 1px solid #e0e0e0;
-	padding: 10px 0;
+.health-issue-list .entry {
+	/*margin: 0 0 15px 0;*/
 }
 
-.issue .number {
-	color: #5b5a5e;
+.health-issue-list .entry .title {
+	margin: 0;
+	word-wrap: break-word;
+	font-size: 1.4em;
+	line-height: 1.2em;
+}
+
+.health-issue-list .entry .title a {
+	/*background: #f6f6f6;*/
+	display: block;
+	color: #333;
+	padding: 16px;
+	border: 1px solid #dbdbdb;
+	border-top-right-radius: 5px;
+	-moz-border-radius-topright: 5px;
+	-webkit-border-radius-topright: 5px;
+	border-top-left-radius: 5px;
+	-moz-border-radius-topleft: 5px;
+	-webkit-border-radius-topleft: 5px;
+	width: auto;
+}
+
+.health-issue-list .entry .action-bar{
+	background: #e1e1e1;
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#e1e1e1',endColorstr='#b7b7b7');
+	background: -webkit-gradient(linear,left top,left bottom,from(#e1e1e1),to(#b7b7b7));
+	background: -moz-linear-gradient(top,#e1e1e1,#b7b7b7);
+	border-top: 1px solid white;
+	padding: 0 10px 0 16px;
+	border-bottom-right-radius: 5px;
+	-moz-border-radius-bottomright: 5px;
+	-webkit-border-radius-bottomright: 5px;
+	border-bottom-left-radius: 5px;
+	-moz-border-radius-bottomleft: 5px;
+	-webkit-border-radius-bottomleft: 5px;
+	text-shadow: 0 1px 0 white;
+}
+
+.health-issue-list .entry .num-sig {
+	/*width: 100px;*/
+	float: left;
+	padding: 5px 10px 0 0;
+	font-size: 0.6em;
+}
+
+.health-issue-list .entry .num {
+	font-family: Arial,sans-serif;
+	font-size: 1.8em;
 	font-weight: bold;
-	padding-right: 10px;
-	padding-left: 10px;
-	text-align: right;
-	vertical-align: top;
-	width: 4%;
-	line-height: 1.4;
+	font-family: Arial,sans-serif;
+	letter-spacing: 0.05em;
 }
 
-.issue .number span {
-	color: #bbb;
-	font-size: 85%;
-	font-weight: normal;
+.health-issue-list .entry .find-out {
+	width: 140px;
+	float: right;
+	/*text-indent: -9000px;*/
 }
 
-.issue .subject {
-	font-weight: bold;
-	line-height: 1.4;
+.health-issue-list .entry .find-out a {
+	/*background: url(/profiles/petitions/themes/petitions44/img/button-find-out-more.png) no-repeat 0 0;*/
+	width: 149px;
+	height: 37px;
+	display: block;
 }
 
-.issue .subject a {
-	color: #5e9a0a;
+.add-margin {
+margin-right: 17px;
 }
-
 
 .bg-white {
 	background: #fff;
