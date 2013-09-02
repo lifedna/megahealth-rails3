@@ -1,0 +1,42 @@
+/ Page
+.site-center.center-page
+  .col.size2of3
+    .col.issue-title
+      %span #{@issue.name}
+    .col.margin-t30  
+      %h2 我的经历
+      = simple_form_for @story do |f|
+        / = f.error_messages
+        %p
+          = f.hidden_field :user_id, :value => current_user.id
+        %p
+          = f.hidden_field :issue_id
+        %p
+          = f.input :category, label:'类别:', collection: ['就医经历', '治疗经历', '治愈心得']
+        %p
+          = f.label '题目:'  
+        %p
+          = f.text_field :title
+        %p
+          = f.label '正文:'  
+        %p
+          = f.text_area :body, :size => "60x12", :class => "redactor"
+          
+        %p
+          = f.label '设置可见:' 
+          = f.collection_radio_buttons :public, [[true, '对所有人可见'] ,[false, '仅对自己可见']], :first, :last  
+        %p
+          = f.label '权限设置:' 
+          = f.input :locked, label:'不允许回应', as: :boolean
+        %p   
+          = f.submit "发表", :class => "background-blue"
+          %a{:href => "#{blogs_path}"}
+            .button.background-gray 取消
+
+  .col.size1of3
+    .cell.story-left{:style => "margin: 30px 0 0 30px;"}
+      %p.color-pink 
+        %i 健康的决定是很难的，并寻找合适的医疗保健提供者显然是费劲。医疗治病经验应该是透明的，它可以（而且应该）通过与其他有相同境地的人分享被加强了。
+      %p.color-pink
+        %i 讲述您的经历，让其他人可以向他们学习，是更明智的决策。
+      = link_to '>> 返回', issue_stories_path(@issue.id)      

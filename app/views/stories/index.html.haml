@@ -1,0 +1,41 @@
+.site-center.center-page
+  .col.size2of3
+    .col.issue-title
+      %span #{@issue.name}
+    .col.margin-t20
+      = link_to '全部', issue_stories_path(@issue.id), :class => "label #{params[:category] ? 'background-grey' : 'background-green'}"
+      = link_to '就医经历', issue_stories_path(@issue.id, :category => '就医经历'), :class => "label #{params[:category] == '就医经历' ? 'background-green' : 'background-grey'}"
+      = link_to '就医经历', issue_stories_path(@issue.id, :category => '治疗经历'), :class => "label #{params[:category] == '治疗经历' ? 'background-green' : 'background-grey'}"
+      = link_to '就医经历', issue_stories_path(@issue.id, :category => '治愈心得'), :class => "label #{params[:category] == '治愈心得' ? 'background-green' : 'background-grey'}"
+      / %a.label.background-green{:href => "#{issue_stories_path(@issue.id)}"} 全部
+      / %a.label.background-grey{:href => "#{issue_stories_path(@issue.id, :category => '就医经历')}"} 就医经历
+      / %a.label.background-grey{:href => "#{issue_stories_path(@issue.id, :category => '治疗经历')}"} 治疗经历
+      / %a.label.background-grey{:href => "#{issue_stories_path(@issue.id, :category => '治愈心得')}"} 治愈心得 
+      %select{:onChange => "if(this.selectedIndex!=0) self.location=this.options[this.selectedIndex].value"}
+        %option{:value => "/experiences"} 最新
+        %option{:value =>"/"} 最多浏览
+        %option{:value =>"/"} 最多回复
+    .col.stories-list.margin-t20
+      - @stories.each do |story|
+        .story.margin-b30.border-bottom  
+          .col.sizefit
+            = image_tag story.user.avatar_url(:thumb), :size => "50x50"
+            %br
+            %span{:style => "color:#999;font-size:80%;"} #{story.user.name}
+          .col.sizefill
+            .story-title.margin-l20
+              %p
+                %a #{story.title}
+                %br
+                %span{:style => "color:#999;font-size:80%;"} 
+                  2013-06-14 &middot; 1鼓励 &middot; 4评论
+            .story-content.margin-l20    
+              %p{:style => "margin-bottom: 20px;"} #{story.body}
+
+  .col.size1of3
+    .cell.story-left{:style => "margin: 30px 0 0 30px;"}
+      %p.color-pink
+        %i 健康的决定是很难的，并寻找合适的医疗保健提供者显然是费劲。医疗治病经验应该是透明的，它可以（而且应该）通过与其他有相同境地的人分享被加强了。
+      %p.color-pink
+        %i 讲述您的经历，让其他人可以向他们学习，是更明智的决策。
+      = link_to '分享我的经历', new_story_path(:issue => @issue), :class => "button background-green"       

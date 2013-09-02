@@ -1,12 +1,12 @@
-.page-head{:style => "margin-bottom:30px;"}
+.page-head{:style => "margin-bottom:10px;"}
   %ul.dashboard-tabs
     %li 
-      %a{:href => "/dashboard", :class => "#{selected == 'feeds' ? 'selected' : ''}"} 动态
+      %a{:href => "/dashboard", :class => "#{selected == 'feeds' ? 'selected' : ''}"} 我的社群
     %li 
-      %a{:href => "/dashboard/issues", :class => "#{selected == 'issues' ? 'selected' : ''}"} 经历分享  
-    %li 
-      %a{:href => "/dashboard/phrs", :class => "#{selected == 'phrs' ? 'selected' : ''}"} 健康记录
+      %a{:href => "/dashboard/issues", :class => "#{selected == 'issues' ? 'selected' : ''}"} 我的健康问题
+    / %li 
+    /   %a{:href => "/dashboard/phrs", :class => "#{selected == 'phrs' ? 'selected' : ''}"} 健康记录
     %li
-      %a{:href => "/dashboard/stars", :class => "#{selected == 'stars' ? 'selected' : ''}"} 标签夹
-    %li 
-      %a{:href => "/dashboard/blogs", :class => "#{selected == 'blogs' ? 'selected' : ''}"} 日记
+      %a{:href => "/dashboard/stars", :class => "#{selected == 'stars' ? 'selected' : ''}"} 我的收藏
+    / %li 
+    /   %a{:href => "/dashboard/blogs", :class => "#{selected == 'blogs' ? 'selected' : ''}"} 日记

@@ -17,7 +17,7 @@
   .col.size2of3
     .cell 
       %h2 新加日记
-      = simple_form_for @blog do |f|
+      = simple_form_for @story do |f|
         / = f.error_messages
         %p
           = f.hidden_field :user_id, :value => current_user.id

@@ -1,17 +1,22 @@
 # coding: utf-8
 class Issue
   include Mongoid::Document	
-  include Mongoid::Timestamps
 
   field :name, type: String
-  field :symptoms, type: String
-  field :body, type: String
-  field :status, type: String
-  field :started_at, type: Time
-  field :ended_at, type: Time 
-  field :assignee, type: String
+  field :pinyin, type: String
+  field :notes_count, type: Integer, default: 0
+  field :heal_notes_count, type: Integer, default: 0
 
-  validates :assignee, :inclusion => {:in => %w(自己 父亲 母亲 配偶 儿子 女儿 姊妹 兄弟 亲戚), :message => "%{value} is not a valid assignee" }, :allow_nil => true	
+  has_and_belongs_to_many :user
+  has_many :stories
 
-  belongs_to :user
+  before_create :set_pinyin
+
+  scope :alphabet, ->(alpha) {where(pinyin: /^#{alpha}/)} 
+
+  protected
+
+  def set_pinyin
+    self.pinyin = Pinyin.t(self.name, splitter: '').capitalize
+  end
 end

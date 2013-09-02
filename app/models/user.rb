@@ -64,6 +64,9 @@ class User
                   :remember_me, :created_at, :updated_at
 
   has_and_belongs_to_many :communities
+  has_and_belongs_to_many :issues
+  has_many :stories
+  has_many :heal_stories
   has_many :blogs
   has_many :phrs
   has_many :questions

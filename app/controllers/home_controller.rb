@@ -22,6 +22,14 @@ class HomeController < ApplicationController
     end
   end
 
+  def experiences
+    if params[:alphabet]
+      @issues = Issue.alphabet(params[:alphabet]).all
+    else
+      @issues = Issue.all
+    end
+  end
+
   def guide
     @content_filter = current_user.content_filter 
   end

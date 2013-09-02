@@ -13,7 +13,7 @@ gem 'jquery-ui-rails'
 gem 'devise'
 gem 'figaro'
 gem 'haml-rails'
-gem 'mongoid'
+gem 'mongoid', '~> 3.1.4'
 gem 'bson_ext'
 gem 'simple_form'
 gem 'nested_form'
@@ -41,7 +41,7 @@ gem 'cancan'
 
 # embeded video thumbnails and videos
 gem 'nokogiri'
-gem 'getvideo', :git => 'git://github.com/yeeli/getvideo.git'
+gem 'getvideo', :git => 'git://github.com/regdog/getvideo.git'
 
 # file upload with carrierwave and GridFS
 gem 'mini_magick'
@@ -62,6 +62,9 @@ gem 'social-share-button'
 
 # tracks impressions and page views
 gem 'impressionist'
+
+# translate chinese hanzi to pinyin
+gem 'chinese_pinyin'
 
 group :development do
   gem 'better_errors'

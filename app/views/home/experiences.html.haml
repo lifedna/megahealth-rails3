@@ -1,229 +1,236 @@
 - @page = 'experiences'
+- @bg_color =['background-orange', 'background-blue', 'background-yellow', 'background-grey', 'background-green', 'background-red', 'background-purple' ]
 .site-center.center-page
   .col
     .cell
       .alphabet-filter     
         %ul.nav
+          / %li
+          /   #{link_to '所有', '/experiences'}
           %li
-            %a A
+            #{link_to 'A', '/experiences?alphabet=A'}
           %li
-            %a B
+            #{link_to 'B', '/experiences?alphabet=B'}
           %li
-            %a C
+            #{link_to 'C', '/experiences?alphabet=C'}
           %li
-            %a D
+            #{link_to 'D', '/experiences?alphabet=D'}
           %li
-            %a E
+            #{link_to 'E', '/experiences?alphabet=E'}
           %li
-            %a F
+            #{link_to 'F', '/experiences?alphabet=F'}
           %li
-            %a G
+            #{link_to 'G', '/experiences?alphabet=G'}
           %li
-            %a H
+            #{link_to 'H', '/experiences?alphabet=H'}
           %li
-            %a I
+            #{link_to 'I', '/experiences?alphabet=I'}
           %li
-            %a J
+            #{link_to 'J', '/experiences?alphabet=J'}
           %li
-            %a K
+            #{link_to 'K', '/experiences?alphabet=K'}
           %li
-            %a L
+            #{link_to 'L', '/experiences?alphabet=L'}
           %li
-            %a M
+            #{link_to 'M', '/experiences?alphabet=M'}
           %li
-            %a N
+            #{link_to 'N', '/experiences?alphabet=N'}
           %li
-            %a O                            
+            #{link_to 'O', '/experiences?alphabet=O'}                            
           %li
-            %a P
+            #{link_to 'P', '/experiences?alphabet=P'}
           %li
-            %a Q
+            #{link_to 'Q', '/experiences?alphabet=Q'}
           %li
-            %a R
+            #{link_to 'R', '/experiences?alphabet=R'}
           %li
-            %a S 
+            #{link_to 'S', '/experiences?alphabet=S'} 
           %li
-            %a T
+            #{link_to 'T', '/experiences?alphabet=T'}
           %li
-            %a U
+            #{link_to 'U', '/experiences?alphabet=U'}
           %li
-            %a V
+            #{link_to 'V', '/experiences?alphabet=V'}
           %li
-            %a W
+            #{link_to 'W', '/experiences?alphabet=W'}
           %li
-            %a X
+            #{link_to 'X', '/experiences?alphabet=X'}
           %li
-            %a Y
+            #{link_to 'Y', '/experiences?alphabet=Y'}
           %li
-            %a Z                     
+            #{link_to 'Z', '/experiences?alphabet=Z'}                     
 
   .col
     .health-issue-list
-      .col.size1of4
-        .entry.cell
-          .title 
-            %a.background-orange{:href => '/fat'} 肥胖
-          .action-bar
-            .num-sig
-              %span.num 509
-              经历
-            .num-sig
-              %span.num 309
-              治愈分享  
-      .col.size1of4  
-        .entry.cell
-          .title 
-            %a.background-purple 血压高
-          .action-bar
-            .num-sig
-              %span.num 509
-              经历
-            .num-sig
-              %span.num 309
-              治愈分享  
-      .col.size1of4         
-        .entry.cell
-          .title 
-            %a.background-blue 糖尿病
-          .action-bar
-            .num-sig
-              %span.num 509
-              经历
-            .num-sig
-              %span.num 309
-              治愈分享  
-      .col.size1of4        
-        .entry.cell
-          .title 
-            %a.background-grey 高血压
-          .action-bar
-            .num-sig
-              %span.num 509
-              经历
-            .num-sig
-              %span.num 309
-              治愈分享  
-      .col.size1of4
-        .entry.cell
-          .title 
-            %a.background-green 肥胖
-          .action-bar
-            .num-sig
-              %span.num 509
-              经历
-            .num-sig
-              %span.num 309
-              治愈分享  
-      .col.size1of4  
-        .entry.cell
-          .title 
-            %a.background-orange 血压高
-          .action-bar
-            .num-sig
-              %span.num 509
-              经历
-            .num-sig
-              %span.num 309
-              治愈分享  
-      .col.size1of4         
-        .entry.cell
-          .title 
-            %a.background-yellow 糖尿病
-          .action-bar
-            .num-sig
-              %span.num 509
-              经历
-            .num-sig
-              %span.num 309
-              治愈分享  
-      .col.size1of4        
-        .entry.cell
-          .title 
-            %a.background-grey 高血压
-          .action-bar
-            .num-sig
-              %span.num 509
-              经历
-            .num-sig
-              %span.num 309
-              治愈分享  
-      .col.size1of4
-        .entry.cell
-          .title 
-            %a.background-grey 肥胖
-          .action-bar
-            .num-sig
-              %span.num 509
-              经历
-            .num-sig
-              %span.num 309
-              治愈分享  
-      .col.size1of4  
-        .entry.cell
-          .title 
-            %a.background-orange 血压高
-          .action-bar
-            .num-sig
-              %span.num 509
-              经历
-            .num-sig
-              %span.num 309
-              治愈分享  
-      .col.size1of4         
-        .entry.cell
-          .title 
-            %a.background-red 糖尿病
-          .action-bar
-            .num-sig
-              %span.num 509
-              经历
-            .num-sig
-              %span.num 309
-              治愈分享  
-      .col.size1of4        
-        .entry.cell
-          .title 
-            %a.background-grey 高血压
-          .action-bar
-            .num-sig
-              %span.num 509
-              经历
-            .num-sig
-              %span.num 309
-              治愈分享  
-      .col.size1of4         
-        .entry.cell
-          .title 
-            %a.background-yellow 糖尿病
-          .action-bar
-            .num-sig
-              %span.num 509
-              经历
-            .num-sig
-              %span.num 309
-              治愈分享          
-      .col.size1of4  
-        .entry.cell
-          .title 
-            %a.background-orange 血压高
-          .action-bar
-            .num-sig
-              %span.num 509
-              经历
-            .num-sig
-              %span.num 309
-              治愈分享        
-      .col.size1of4        
-        .entry.cell
-          .title 
-            %a.background-grey 高血压
-          .action-bar
-            .num-sig
-              %span.num 509
-              经历
-            .num-sig
-              %span.num 309
-              治愈分享          
+      - @issues.each do |issue|
+        .col.size1of4
+          .entry.cell
+            .title 
+              = link_to issue.name, issue_stories_path(issue.id), :class => "#{@bg_color.sample}"
+              / %a{:href => '/fat', :class => "#{@bg_color.sample}"} #{issue.name}
+            .action-bar
+              .num-sig
+                %span.num 509
+                经历
+              .num-sig
+                %span.num 309
+                治愈分享  
+      / .col.size1of4  
+      /   .entry.cell
+      /     .title 
+      /       %a.background-purple 血压高
+      /     .action-bar
+      /       .num-sig
+      /         %span.num 509
+      /         经历
+      /       .num-sig
+      /         %span.num 309
+      /         治愈分享  
+      / .col.size1of4         
+      /   .entry.cell
+      /     .title 
+      /       %a.background-blue 糖尿病
+      /     .action-bar
+      /       .num-sig
+      /         %span.num 509
+      /         经历
+      /       .num-sig
+      /         %span.num 309
+      /         治愈分享  
+      / .col.size1of4        
+      /   .entry.cell
+      /     .title 
+      /       %a.background-grey 高血压
+      /     .action-bar
+      /       .num-sig
+      /         %span.num 509
+      /         经历
+      /       .num-sig
+      /         %span.num 309
+      /         治愈分享  
+      / .col.size1of4
+      /   .entry.cell
+      /     .title 
+      /       %a.background-green 肥胖
+      /     .action-bar
+      /       .num-sig
+      /         %span.num 509
+      /         经历
+      /       .num-sig
+      /         %span.num 309
+      /         治愈分享  
+      / .col.size1of4  
+      /   .entry.cell
+      /     .title 
+      /       %a.background-orange 血压高
+      /     .action-bar
+      /       .num-sig
+      /         %span.num 509
+      /         经历
+      /       .num-sig
+      /         %span.num 309
+      /         治愈分享  
+      / .col.size1of4         
+      /   .entry.cell
+      /     .title 
+      /       %a.background-yellow 糖尿病
+      /     .action-bar
+      /       .num-sig
+      /         %span.num 509
+      /         经历
+      /       .num-sig
+      /         %span.num 309
+      /         治愈分享  
+      / .col.size1of4        
+      /   .entry.cell
+      /     .title 
+      /       %a.background-grey 高血压
+      /     .action-bar
+      /       .num-sig
+      /         %span.num 509
+      /         经历
+      /       .num-sig
+      /         %span.num 309
+      /         治愈分享  
+      / .col.size1of4
+      /   .entry.cell
+      /     .title 
+      /       %a.background-grey 肥胖
+      /     .action-bar
+      /       .num-sig
+      /         %span.num 509
+      /         经历
+      /       .num-sig
+      /         %span.num 309
+      /         治愈分享  
+      / .col.size1of4  
+      /   .entry.cell
+      /     .title 
+      /       %a.background-orange 血压高
+      /     .action-bar
+      /       .num-sig
+      /         %span.num 509
+      /         经历
+      /       .num-sig
+      /         %span.num 309
+      /         治愈分享  
+      / .col.size1of4         
+      /   .entry.cell
+      /     .title 
+      /       %a.background-red 糖尿病
+      /     .action-bar
+      /       .num-sig
+      /         %span.num 509
+      /         经历
+      /       .num-sig
+      /         %span.num 309
+      /         治愈分享  
+      / .col.size1of4        
+      /   .entry.cell
+      /     .title 
+      /       %a.background-grey 高血压
+      /     .action-bar
+      /       .num-sig
+      /         %span.num 509
+      /         经历
+      /       .num-sig
+      /         %span.num 309
+      /         治愈分享  
+      / .col.size1of4         
+      /   .entry.cell
+      /     .title 
+      /       %a.background-yellow 糖尿病
+      /     .action-bar
+      /       .num-sig
+      /         %span.num 509
+      /         经历
+      /       .num-sig
+      /         %span.num 309
+      /         治愈分享          
+      / .col.size1of4  
+      /   .entry.cell
+      /     .title 
+      /       %a.background-orange 血压高
+      /     .action-bar
+      /       .num-sig
+      /         %span.num 509
+      /         经历
+      /       .num-sig
+      /         %span.num 309
+      /         治愈分享        
+      / .col.size1of4        
+      /   .entry.cell
+      /     .title 
+      /       %a.background-grey 高血压
+      /     .action-bar
+      /       .num-sig
+      /         %span.num 509
+      /         经历
+      /       .num-sig
+      /         %span.num 309
+      /         治愈分享          
+
+      
   / .col.size2of3
   /   .health-issue-list.padding-r20
   /     .entry

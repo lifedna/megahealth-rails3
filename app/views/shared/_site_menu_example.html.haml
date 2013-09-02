@@ -26,7 +26,7 @@
                     .popup-content
                       %ul.left.dropdown
                         %li
-                          %a{:href => "/profile"} 关于我  
+                          %a{:href => "/dashboard"} 我的健康  
                         %li
                           %a{:href => "/account"} 帐号设置
                         %li 
@@ -47,10 +47,10 @@
             %li{:class => (@page == "communities" ? "active" : "")}
               %a.border-left{:href => "/communities"} 社群  
             %li{:class => (@page == "experiences" ? "active" : "")}
-              %a{:href => "/experiences"} 健康问题  
+              %a{:href => "/experiences"} 经历分享  
             
-            %li{:class => (@page == "dashboard" ? "active" : "")}
-              #{link_to '我的健康', dashboard_url}    
+            / %li{:class => (@page == "dashboard" ? "active" : "")}
+            /   #{link_to '我的健康', dashboard_url}    
              
 :javascript
   $(document).ready(function(){
