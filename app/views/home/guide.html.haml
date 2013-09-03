@@ -10,9 +10,9 @@
           %p 有研究表明，跟踪其良好的生活习惯的人更容易使他们能跟上，并与他人分享这些信息为我们提供了一种自豪感的提升 - 即使是简单的任务
       
         %span 你关心的健康问题
-        = form_for @content_filter, :url => content_filter_url do |f|
+        = form_tag('/post-registration', method: :get)  do
           .col
-            = f.text_field :interests, :autocomplete => "off", :maxlength => "50", :class => "float-left", :autofocus => true, :placeholder => "用逗号分隔多个健康问题，如血压高，盗汗..."
+            = text_field_tag :issues, nil, :autocomplete => "off", :maxlength => "50", :size => 40, :class => "float-left", :autofocus => true, :placeholder => "用逗号分隔多个健康问题，如血压高，盗汗..."
     .col.size1of2  
       .right
         %h4{:style => "color:#999"} 常见健康问题
@@ -168,7 +168,7 @@
     // $('input[id=content_filter_interests]').focus();
 
     $('span a').click(function(){
-      var str = $('input[id=content_filter_interests]').val();
+      var str = $('input[name=issues]').val();
     
       if(str.length == 0){
         var issues = [];
@@ -184,7 +184,7 @@
        if($.inArray(el, uniqueIssues) === -1) uniqueIssues.push(el);
       });
 
-      $('input[id=content_filter_interests]').val(uniqueIssues.join(', ')) ;
-      $('input[id=content_filter_interests]').focus();
+      $('input[name=issues]').val(uniqueIssues.join(', ')) ;
+      $('input[name=issues').focus();
     });
   });  

@@ -15,4 +15,6 @@ class Story
 
   belongs_to :user
   belongs_to :issue, counter_cache: true
+  
+  default_scope desc(:created_at)
 end

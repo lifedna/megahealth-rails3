@@ -1,0 +1,21 @@
+- @page = 'experiences'
+
+.site-center.center-page
+  .col.size2of3
+    .col.issue-title
+      %span #{@issue.name}
+    .col.margin-t20
+      %h2 
+        #{@story.title}
+        .background-green.label{:style => "font-size: 70%;"} #{@story.category}
+      %small #{@story.created_at.strftime("%Y-%m-%d %H:%M:%S")}  
+      %p #{raw @story.body}
+      
+
+  .col.size1of3
+    .cell.story-left{:style => "margin: 30px 0 0 30px;"}
+      %p.color-pink
+        %i 健康的决定是很难的，并寻找合适的医疗保健提供者显然是费劲。医疗治病经验应该是透明的，它可以（而且应该）通过与其他有相同境地的人分享被加强了。
+      %p.color-pink
+        %i 讲述您的经历，让其他人可以向他们学习，是更明智的决策。
+      = link_to '分享我的经历', new_issue_story_path(@issue), :class => "button background-green"   

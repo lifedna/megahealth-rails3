@@ -1,4 +1,4 @@
-- @features = "active"
+- @page = 'explore'
 .back-to-top 
   %a ↑回顶部
 / Page
@@ -66,8 +66,8 @@
                   %h4 
                     关心的主题
                     %small{:style =>'font-size:80%;color:#999'} (多个主题用逗号分隔)
-                  = f.text_field :interests, :autocomplete => "off", :maxlength => "30"
-                  %small{:style =>'font-size:80%'} #{link_to '清空', '#', :id => 'clear_all'}
+                  = f.text_field :phis, :autocomplete => "off", :maxlength => "30"
+                  %small{:style =>'font-size:80%'} #{link_to '清空', '#', :id => 'clear_all'}  
       
 
                 .col
@@ -176,7 +176,7 @@
 
     $('#clear_all').click(function(e){
       e.preventDefault();
-      $("input[id^=content_filter_interests]").val('');
+      $("input[id^=content_filter_phis]").val('');
     });
 
     $(window).scroll(function() {

@@ -6,7 +6,7 @@ class DashboardController < ApplicationController
   end
 
   def issues
-    
+    @phis = current_user.phis
   end
 
   def phrs

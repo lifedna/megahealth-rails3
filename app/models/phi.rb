@@ -8,4 +8,6 @@ class Phi
   field :started_at, type: Time
   field :ended_at, type: Time
 
+  belongs_to :user
+  belongs_to :issue
 end  

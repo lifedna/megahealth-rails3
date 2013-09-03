@@ -59,177 +59,27 @@
             #{link_to 'Y', '/experiences?alphabet=Y'}
           %li
             #{link_to 'Z', '/experiences?alphabet=Z'}                     
-
-  .col
-    .health-issue-list
-      - @issues.each do |issue|
-        .col.size1of4
-          .entry.cell
-            .title 
-              = link_to issue.name, issue_stories_path(issue.id), :class => "#{@bg_color.sample}"
-              / %a{:href => '/fat', :class => "#{@bg_color.sample}"} #{issue.name}
-            .action-bar
-              .num-sig
-                %span.num 509
-                经历
-              .num-sig
-                %span.num 309
-                治愈分享  
-      / .col.size1of4  
-      /   .entry.cell
-      /     .title 
-      /       %a.background-purple 血压高
-      /     .action-bar
-      /       .num-sig
-      /         %span.num 509
-      /         经历
-      /       .num-sig
-      /         %span.num 309
-      /         治愈分享  
-      / .col.size1of4         
-      /   .entry.cell
-      /     .title 
-      /       %a.background-blue 糖尿病
-      /     .action-bar
-      /       .num-sig
-      /         %span.num 509
-      /         经历
-      /       .num-sig
-      /         %span.num 309
-      /         治愈分享  
-      / .col.size1of4        
-      /   .entry.cell
-      /     .title 
-      /       %a.background-grey 高血压
-      /     .action-bar
-      /       .num-sig
-      /         %span.num 509
-      /         经历
-      /       .num-sig
-      /         %span.num 309
-      /         治愈分享  
-      / .col.size1of4
-      /   .entry.cell
-      /     .title 
-      /       %a.background-green 肥胖
-      /     .action-bar
-      /       .num-sig
-      /         %span.num 509
-      /         经历
-      /       .num-sig
-      /         %span.num 309
-      /         治愈分享  
-      / .col.size1of4  
-      /   .entry.cell
-      /     .title 
-      /       %a.background-orange 血压高
-      /     .action-bar
-      /       .num-sig
-      /         %span.num 509
-      /         经历
-      /       .num-sig
-      /         %span.num 309
-      /         治愈分享  
-      / .col.size1of4         
-      /   .entry.cell
-      /     .title 
-      /       %a.background-yellow 糖尿病
-      /     .action-bar
-      /       .num-sig
-      /         %span.num 509
-      /         经历
-      /       .num-sig
-      /         %span.num 309
-      /         治愈分享  
-      / .col.size1of4        
-      /   .entry.cell
-      /     .title 
-      /       %a.background-grey 高血压
-      /     .action-bar
-      /       .num-sig
-      /         %span.num 509
-      /         经历
-      /       .num-sig
-      /         %span.num 309
-      /         治愈分享  
-      / .col.size1of4
-      /   .entry.cell
-      /     .title 
-      /       %a.background-grey 肥胖
-      /     .action-bar
-      /       .num-sig
-      /         %span.num 509
-      /         经历
-      /       .num-sig
-      /         %span.num 309
-      /         治愈分享  
-      / .col.size1of4  
-      /   .entry.cell
-      /     .title 
-      /       %a.background-orange 血压高
-      /     .action-bar
-      /       .num-sig
-      /         %span.num 509
-      /         经历
-      /       .num-sig
-      /         %span.num 309
-      /         治愈分享  
-      / .col.size1of4         
-      /   .entry.cell
-      /     .title 
-      /       %a.background-red 糖尿病
-      /     .action-bar
-      /       .num-sig
-      /         %span.num 509
-      /         经历
-      /       .num-sig
-      /         %span.num 309
-      /         治愈分享  
-      / .col.size1of4        
-      /   .entry.cell
-      /     .title 
-      /       %a.background-grey 高血压
-      /     .action-bar
-      /       .num-sig
-      /         %span.num 509
-      /         经历
-      /       .num-sig
-      /         %span.num 309
-      /         治愈分享  
-      / .col.size1of4         
-      /   .entry.cell
-      /     .title 
-      /       %a.background-yellow 糖尿病
-      /     .action-bar
-      /       .num-sig
-      /         %span.num 509
-      /         经历
-      /       .num-sig
-      /         %span.num 309
-      /         治愈分享          
-      / .col.size1of4  
-      /   .entry.cell
-      /     .title 
-      /       %a.background-orange 血压高
-      /     .action-bar
-      /       .num-sig
-      /         %span.num 509
-      /         经历
-      /       .num-sig
-      /         %span.num 309
-      /         治愈分享        
-      / .col.size1of4        
-      /   .entry.cell
-      /     .title 
-      /       %a.background-grey 高血压
-      /     .action-bar
-      /       .num-sig
-      /         %span.num 509
-      /         经历
-      /       .num-sig
-      /         %span.num 309
-      /         治愈分享          
-
+    .cell
+      .health-issue-list
+        - @issues.each do |issue|
+          .col.size1of4
+            .entry.cell
+              .title 
+                = link_to issue.name, issue_stories_path(issue.id), :class => "#{@bg_color.sample}"
+              .action-bar
+                .num-sig
+                  %span.num 509
+                  经历
+                .num-sig
+                  %span.num 309
+                  治愈分享
+  / .col 
+  /   %dl.highlight.green
+  /     %dt 最新分享
+  /     %dd
+  /       %ul.links
+  /         - Story.limit(8).each do |s|
+  /           %li #{link_to s.title, issue_story_path(s.issue, s)}           
       
   / .col.size2of3
   /   .health-issue-list.padding-r20

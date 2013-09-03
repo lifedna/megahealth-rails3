@@ -64,11 +64,11 @@ class User
                   :remember_me, :created_at, :updated_at
 
   has_and_belongs_to_many :communities
-  has_and_belongs_to_many :issues
+  # has_and_belongs_to_many :issues
   has_many :stories
-  has_many :heal_stories
-  has_many :blogs
-  has_many :phrs
+  # has_many :heal_stories
+  # has_many :blogs
+  has_many :phis
   has_many :questions
   has_many :answers
   has_many :poll_answers
@@ -78,7 +78,7 @@ class User
   mount_uploader :avatar, AvatarUploader
 
   # Callbacks
-  after_create :create_initial_filter, :create_initial_phr
+  after_create :create_initial_filter
 
   # features filter
   def conditions_keywords
@@ -100,16 +100,16 @@ class User
 
   private
   
-  def create_initial_phr
-    self.phrs.build(:name => self.name, :relationship => '自己').tap do |phr|
-      phr.user = self
-      phr.save
-    end
-  end
+  # def create_initial_phr
+  #   self.phrs.build(:name => self.name, :relationship => '自己').tap do |phr|
+  #     phr.user = self
+  #     phr.save
+  #   end
+  # end
 
   def create_initial_filter
     self.build_content_filter.tap do |f|
-      f.phrs = Hash.new
+      f.phis = Hash.new
       f.user = self
       f.save
     end

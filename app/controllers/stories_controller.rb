@@ -15,7 +15,7 @@ class StoriesController < ContentController
   end
 
   def new
-  	@issue = Issue.find params[:issue]
+  	@issue = Issue.find params[:issue_id]
   	@story = @issue.stories.new
   end
 
@@ -28,5 +28,10 @@ class StoriesController < ContentController
       flash[:notice] = @story.errors.to_s
       render :action => "new"  
     end 
+  end
+
+  def show
+    @story = Story.find params[:id]
+    @issue = Issue.find params[:issue_id]
   end
 end

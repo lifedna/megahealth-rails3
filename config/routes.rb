@@ -70,9 +70,13 @@ MegahealthRails3::Application.routes.draw do
 
   match '/blogs/:id' => 'blogs#show', :as => :blog, :via => :get
 
-  match '/stories/issue/:issue_id' => 'stories#index', :as => :issue_stories
-  resources :stories
+  # match '/stories/issue/:issue_id' => 'stories#index', :as => :issue_stories
+  resources :issues do 
+    resources :stories
+  end
   
+  resources :phis 
+  match '/post-registration' => 'phis#initial', :via => :get
 
   # resource :feature_filter
   resource :content_filter

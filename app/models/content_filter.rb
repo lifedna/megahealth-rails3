@@ -2,10 +2,10 @@
 class ContentFilter
   include Mongoid::Document
 
-  field :content, type: Hash, default: {"文章" => "1", "日记" => "1", "视频" => "1", "话题" => "1", "问题" => "1", "投票" => "1"}
-  field :phrs, type: Hash
+  field :content, type: Hash, default: {"文章" => "1", "话题" => "1", "问题" => "1", "视频" => "1", "投票" => "1"}
+  # field :phrs, type: Hash
   field :scope, type: String, default: "newest"
-  field :interests, type: String, default: ""
+  field :phis, type: String
 
   belongs_to :user	
 
@@ -16,8 +16,8 @@ class ContentFilter
       case key
         when '文章'
           klass << 'Article'
-        when '日记'  
-          klass << 'Blog'  
+        # when '日记'  
+        #   klass << 'Blog'  
         when '投票'  
           klass << 'Poll'
         when '视频'  
@@ -34,15 +34,16 @@ class ContentFilter
 
   def merged_keywords
   	keywords ||= []
-  	phrsArray = phrs.select {|k,v| v == "1"}
-  	phrsArray.each do |k, v|
-  	  phr = self.user.phrs.find_by(name: k)
-  	  keywords.concat(phr.merged_keywords)	
-  	end		
+  	# phrsArray = phrs.select {|k,v| v == "1"}
+  	# phrsArray.each do |k, v|
+  	#   phr = self.user.phrs.find_by(name: k)
+  	#   keywords.concat(phr.merged_keywords)	
+  	# end		
 
-    unless interests.split(',').empty?
-      keywords.concat(interests.split(','))
+    unless phis.split(',').empty?
+      keywords.concat(phis.split(','))
     end
+
   	return keywords.uniq
   end
 end
