@@ -6,9 +6,9 @@
       %span #{@issue.name}
     .col.margin-t20
       = link_to '全部', issue_stories_path(@issue.id), :class => "label #{params[:category] ? 'background-grey' : 'background-green'}"
-      = link_to '就医', issue_stories_path(@issue.id, :category => '就医经历'), :class => "label #{params[:category] == '就医' ? 'background-green' : 'background-grey'}"
-      = link_to '治疗', issue_stories_path(@issue.id, :category => '治疗经历'), :class => "label #{params[:category] == '治疗' ? 'background-green' : 'background-grey'}"
-      = link_to '治愈', issue_stories_path(@issue.id, :category => '治愈心得'), :class => "label #{params[:category] == '治愈' ? 'background-green' : 'background-grey'}"
+      = link_to '就医', issue_stories_path(@issue.id, :category => '就医'), :class => "label #{params[:category] == '就医' ? 'background-green' : 'background-grey'}"
+      = link_to '治疗', issue_stories_path(@issue.id, :category => '治疗'), :class => "label #{params[:category] == '治疗' ? 'background-green' : 'background-grey'}"
+      = link_to '治愈', issue_stories_path(@issue.id, :category => '治愈'), :class => "label #{params[:category] == '治愈' ? 'background-green' : 'background-grey'}"
       / %a.label.background-green{:href => "#{issue_stories_path(@issue.id)}"} 全部
       / %a.label.background-grey{:href => "#{issue_stories_path(@issue.id, :category => '就医经历')}"} 就医经历
       / %a.label.background-grey{:href => "#{issue_stories_path(@issue.id, :category => '治疗经历')}"} 治疗经历
@@ -33,6 +33,8 @@
                   2013-06-14 &middot; 1鼓励 &middot; 4评论
             .story-content.margin-l20    
               %p{:style => "margin-bottom: 20px;"} #{truncate(strip_tags(story.body), length: 140, omission: '.....')}
+    .col
+      = paginate @stories          
 
   .col.size1of3
     .cell.story-left{:style => "margin: 30px 0 0 30px;"}

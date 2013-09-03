@@ -17,4 +17,6 @@ class Story
   belongs_to :issue, counter_cache: true
   
   default_scope desc(:created_at)
+
+  paginates_per 6
 end
