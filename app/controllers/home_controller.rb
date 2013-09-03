@@ -31,12 +31,13 @@ class HomeController < ApplicationController
   end
 
   def guide
-    unless cookies[:first_login]
-      @content_filter = current_user.content_filter 
-      cookies.permanent[:first_login] = "x"
-    else
-      redirect_to explore_path
-    end  
+    @content_filter = current_user.content_filter 
+    # unless cookies[:first_login]
+    #   @content_filter = current_user.content_filter 
+    #   cookies.permanent[:first_login] = "x"
+    # else
+    #   redirect_to explore_path
+    # end  
   end
 
   def dashboard
