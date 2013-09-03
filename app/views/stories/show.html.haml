@@ -3,13 +3,16 @@
 .site-center.center-page
   .col.size2of3
     .col.issue-title
-      %span #{@issue.name}
+      %span #{link_to @issue.name, issue_stories_path(@issue)}
     .col.margin-t20
       %h2 
         #{@story.title}
         .background-green.label{:style => "font-size: 70%;"} #{@story.category}
       %small #{@story.created_at.strftime("%Y-%m-%d %H:%M:%S")}  
       %p #{raw @story.body}
+
+      .margin-t30
+        %p{:style => "font-size:90%;color:#999"} 经验内容仅供参考，如果您需要解决具体问题，建议您详细咨询相关领域专业人士。
       
 
   .col.size1of3
@@ -18,4 +21,16 @@
         %i 健康的决定是很难的，并寻找合适的医疗保健提供者显然是费劲。医疗治病经验应该是透明的，它可以（而且应该）通过与其他有相同境地的人分享被加强了。
       %p.color-pink
         %i 讲述您的经历，让其他人可以向他们学习，是更明智的决策。
-      = link_to '我来分享', new_issue_story_path(@issue), :class => "button background-green"   
+      = link_to '我来分享', new_issue_story_path(@issue), :class => "button background-green" 
+
+    .cell.story-left{:style => "margin: 30px 0 0 30px;"}
+      .author{:style => "padding-bottom: 20px"}
+        %p{:style => "font-size: 110%;font-weight:bold;"} 作者
+        .col
+          = image_tag @story.user.avatar_url(:thumb), :size => "120x120"
+          %p #{@story.user.name}
+          %p 
+            %a 给他留言
+      .author-experiences{:style => "padding-top: 20px;border-top: solid 1px #ccc"}  
+        .col
+          %p{:style => "font-size: 110%;font-weight:bold;"} 该作者的其他分享

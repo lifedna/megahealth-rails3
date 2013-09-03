@@ -32,7 +32,7 @@
           = f.input :locked, label:'不允许回应', as: :boolean
         %p   
           = f.submit "发表", :class => "background-blue"
-          %a{:href => "#{blogs_path}"}
+          %a{:href => "#{issue_stories_path(@issue)}"}
             .button.background-gray 取消
 
   .col.size1of3
@@ -41,4 +41,4 @@
         %i 健康的决定是很难的，并寻找合适的医疗保健提供者显然是费劲。医疗治病经验应该是透明的，它可以（而且应该）通过与其他有相同境地的人分享被加强了。
       %p.color-pink
         %i 讲述您的经历，让其他人可以向他们学习，是更明智的决策。
-      = link_to '>> 返回', issue_stories_path(@issue)      
+      / = link_to '>> 返回', issue_stories_path(@issue)      
