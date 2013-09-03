@@ -1,6 +1,0 @@
-= widget_div do
-  #{@instance.shares_count}人收藏
-  - if @instance.sharers.include?(current_user)
-    = link_to "取消收藏", url_for_event(:unrecommend, :id =>@instance.id, :klass => @instance.class.to_s), :remote => true
-  - else
-    = link_to "收藏", url_for_event(:recommend, :id =>@instance.id, :klass => @instance.class.to_s), :remote => true
