@@ -6,9 +6,9 @@
       %span #{@issue.name}
     .col.margin-t20
       = link_to '全部', issue_stories_path(@issue.id), :class => "label #{params[:category] ? 'background-grey' : 'background-green'}"
-      = link_to '就医经历', issue_stories_path(@issue.id, :category => '就医经历'), :class => "label #{params[:category] == '就医经历' ? 'background-green' : 'background-grey'}"
-      = link_to '就医经历', issue_stories_path(@issue.id, :category => '治疗经历'), :class => "label #{params[:category] == '治疗经历' ? 'background-green' : 'background-grey'}"
-      = link_to '就医经历', issue_stories_path(@issue.id, :category => '治愈心得'), :class => "label #{params[:category] == '治愈心得' ? 'background-green' : 'background-grey'}"
+      = link_to '就医', issue_stories_path(@issue.id, :category => '就医经历'), :class => "label #{params[:category] == '就医' ? 'background-green' : 'background-grey'}"
+      = link_to '治疗', issue_stories_path(@issue.id, :category => '治疗经历'), :class => "label #{params[:category] == '治疗' ? 'background-green' : 'background-grey'}"
+      = link_to '治愈', issue_stories_path(@issue.id, :category => '治愈心得'), :class => "label #{params[:category] == '治愈' ? 'background-green' : 'background-grey'}"
       / %a.label.background-green{:href => "#{issue_stories_path(@issue.id)}"} 全部
       / %a.label.background-grey{:href => "#{issue_stories_path(@issue.id, :category => '就医经历')}"} 就医经历
       / %a.label.background-grey{:href => "#{issue_stories_path(@issue.id, :category => '治疗经历')}"} 治疗经历
@@ -32,7 +32,7 @@
                 %span{:style => "color:#999;font-size:80%;"} 
                   2013-06-14 &middot; 1鼓励 &middot; 4评论
             .story-content.margin-l20    
-              %p{:style => "margin-bottom: 20px;"} #{story.body}
+              %p{:style => "margin-bottom: 20px;"} #{truncate(strip_tags(story.body), length: 140, omission: '.....')}
 
   .col.size1of3
     .cell.story-left{:style => "margin: 30px 0 0 30px;"}
@@ -40,4 +40,4 @@
         %i 健康的决定是很难的，并寻找合适的医疗保健提供者显然是费劲。医疗治病经验应该是透明的，它可以（而且应该）通过与其他有相同境地的人分享被加强了。
       %p.color-pink
         %i 讲述您的经历，让其他人可以向他们学习，是更明智的决策。
-      = link_to '分享我的经历', new_issue_story_path(@issue), :class => "button background-green"       
+      = link_to '我来分享', new_issue_story_path(@issue), :class => "button background-green"       
