@@ -19,6 +19,6 @@ class Issue
   protected
 
   def set_pinyin
-    self.pinyin = Pinyin.t(self.name, splitter: '').capitalize
+    self.pinyin = Pinyin.t(self.name.gsub(/\s+/, ""), splitter: '').capitalize
   end
 end

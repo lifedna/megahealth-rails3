@@ -9,8 +9,8 @@ class PhisController < ApplicationController
 
       strs = params[:issues].split(',')
       strs.each do |s|
-        issue = Issue.find_or_create_by(name: s.to_s)
-        phi = Phi.create(name: s.to_s, issue_id: issue.id, user_id: current_user.id)
+        issue = Issue.find_or_create_by(name: s.to_s.gsub(/\s+/, ""))
+        phi = Phi.create(name: s.to_s.gsub(/\s+/, ""), issue_id: issue.id, user_id: current_user.id)
       end
     end
 
