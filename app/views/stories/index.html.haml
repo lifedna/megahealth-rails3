@@ -1,22 +1,47 @@
 - @page = 'experiences'
+- @category = params[:category]
+- @scope = params[:scope]
 
 .site-center.center-page
   .col.size2of3
     .col.issue-title
       %span #{@issue.name}
-    .col.margin-t20
-      = link_to '全部', issue_stories_path(@issue.id), :class => "label #{params[:category] ? 'background-grey' : 'background-green'}"
-      = link_to '就医', issue_stories_path(@issue.id, :category => '就医'), :class => "label #{params[:category] == '就医' ? 'background-green' : 'background-grey'}"
-      = link_to '治疗', issue_stories_path(@issue.id, :category => '治疗'), :class => "label #{params[:category] == '治疗' ? 'background-green' : 'background-grey'}"
-      = link_to '治愈', issue_stories_path(@issue.id, :category => '治愈'), :class => "label #{params[:category] == '治愈' ? 'background-green' : 'background-grey'}"
-      / %a.label.background-green{:href => "#{issue_stories_path(@issue.id)}"} 全部
-      / %a.label.background-grey{:href => "#{issue_stories_path(@issue.id, :category => '就医经历')}"} 就医经历
-      / %a.label.background-grey{:href => "#{issue_stories_path(@issue.id, :category => '治疗经历')}"} 治疗经历
-      / %a.label.background-grey{:href => "#{issue_stories_path(@issue.id, :category => '治愈心得')}"} 治愈心得 
-      %select{:onChange => "if(this.selectedIndex!=0) self.location=this.options[this.selectedIndex].value"}
-        %option{:value => "/experiences"} 最新
-        %option{:value =>"/"} 最多浏览
-        %option{:value =>"/"} 最多回复
+    .col.margin-t20  
+      .col.sizefit.float-right 
+        %dl.dropdown
+          %dt 
+            %a 
+              排序
+              %span.icon.icon-collapse{:style => "margin-right:0;"}
+          %dd
+            %ul
+              %li{:class => "#{params[:scope].nil? ? 'selected' : ""}"} 
+                %a{:href => "#{issue_stories_path(@issue, :category => @category)}"} 
+                  %span{:class => "#{params[:scope].nil? ? 'icon icon-ok' : ""}"} 
+                  最新  
+              %li{:class => "#{params[:scope] == 'most_viewed' ? 'selected' : ""}"}  
+                %a{:href => "#{issue_stories_path(@issue, :category => @category, :scope => 'most_viewed')}"}  
+                  %span{:class => "#{params[:scope] == 'most_viewed' ? 'icon icon-ok' : ""}"} 
+                  浏览
+              %li{:class => "#{params[:scope] == 'most_commented' ? 'selected' : ""}"}  
+                %a{:href => "#{issue_stories_path(@issue, :category => @category, :scope => 'most_commented')}"}  
+                  %span{:class => "#{params[:scope] == 'most_commented' ? 'icon icon-ok' : ""}"} 
+                  评论
+              %li{:class => "#{params[:scope] == 'most_useful' ? 'selected' : ""}"}  
+                %a{:href => "#{issue_stories_path(@issue, :category => @category, :scope => 'most_useful')}"} 
+                  %span{:class => "#{params[:scope] == 'most_useful' ? 'icon icon-ok' : ""}"}  
+                  有用  
+              %li{:class => "#{params[:scope] == 'most_cheered' ? 'selected' : ""}"}  
+                %a{:href => "#{issue_stories_path(@issue, :category => @category, :scope => 'most_cheered')}"} 
+                  %span{:class => "#{params[:scope] == 'most_cheered' ? 'icon icon-ok' : ""}"} 
+                  鼓励   
+
+      .col.sizefill
+        = link_to '全部', issue_stories_path(@issue.id, :scope => @scope), :class => "label #{params[:category] ? 'background-grey' : 'background-green'}"
+        = link_to '就医', issue_stories_path(@issue.id, :category => '就医', :scope => @scope), :class => "label #{params[:category] == '就医' ? 'background-green' : 'background-grey'}"
+        = link_to '治疗', issue_stories_path(@issue.id, :category => '治疗', :scope => @scope), :class => "label #{params[:category] == '治疗' ? 'background-green' : 'background-grey'}"
+        = link_to '治愈', issue_stories_path(@issue.id, :category => '治愈', :scope => @scope), :class => "label #{params[:category] == '治愈' ? 'background-green' : 'background-grey'}"
+       
     .col.stories-list.margin-t20
       - @stories.each do |story|
         .story.margin-b30.border-bottom  
@@ -43,3 +68,15 @@
       %p.color-pink
         %i 讲述您的经历，让其他人可以向他们学习，是更明智的决策。
       = link_to '我来分享', new_issue_story_path(@issue), :class => "button background-green"       
+
+:javascript
+  $(document).ready(function() {
+    $(".dropdown dt a").click(function() {
+      $(".dropdown dd ul").toggle();
+    });
+
+    $(".dropdown li").click(function(){
+       window.location=$(this).find("a").attr("href"); 
+       return false;
+    });
+  });      

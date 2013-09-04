@@ -18,8 +18,12 @@ class Story
   belongs_to :user
   belongs_to :issue, counter_cache: true
   belongs_to :issue, :inverse_of => :heal_stories, counter_cache: true
-  
-  default_scope desc(:created_at)
+
+  scope :newest, desc(:created_at) 
+  scope :most_viewed, desc(:impressions_count)
+  scope :most_commented, desc(:comments_count)
+  scope :most_useful, desc(:likers_count)
+  scope :most_cheered, desc(:shares_count)
 
   paginates_per 6
 

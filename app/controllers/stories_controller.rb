@@ -6,15 +6,21 @@ class StoriesController < ContentController
 
   def index
   	@issue = Issue.find params[:issue_id]
+    if params[:scope].nil?
+      scope = :newest 
+    else
+      scope = params[:scope]
+    end
+
   	case params[:category]
   	when nil
-  	  @stories = @issue.stories.page params[:page]
+      @stories = Story.where(issue_id: @issue.id).send("#{scope}").page params[:page]
   	when '就医'	
-  	  @stories = @issue.stories.where(category: '就医').page params[:page]
+      @stories = Story.where(issue_id: @issue.id, category: '就医').send("#{scope}").page params[:page]
   	when '治疗'
-  	  @stories = @issue.stories.where(category: '治疗').page params[:page]
+      @stories = Story.where(issue_id: @issue.id, category: '治疗').send("#{scope}").page params[:page]
   	when '治愈'
-  	  @stories = @issue.stories.where(category: '治愈').page params[:page]
+      @stories = Story.where(issue_id: @issue.id, category: '治愈').send("#{scope}").page params[:page]
   	end	
   end
 
