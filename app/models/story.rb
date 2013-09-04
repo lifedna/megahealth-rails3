@@ -17,6 +17,7 @@ class Story
 
   belongs_to :user
   belongs_to :issue, counter_cache: true
+  belongs_to :issue, :inverse_of => :heal_stories, counter_cache: true
   
   default_scope desc(:created_at)
 

@@ -5,7 +5,7 @@ class Issue
   field :name, type: String
   field :pinyin, type: String
   field :stories_count, type: Integer, default: 0
-  # field :heal_notes_count, type: Integer, default: 0
+  # field :heal_stories_count, type: Integer, default: 0
 
   validates :name, :uniqueness => true
 
@@ -15,6 +15,10 @@ class Issue
   before_create :set_pinyin
 
   scope :alphabet, ->(alpha) {where(pinyin: /^#{alpha}/)} 
+
+  def healed_stories_count
+    self.stories.where(category: '治愈').count
+  end
 
   protected
 
