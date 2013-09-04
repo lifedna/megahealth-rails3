@@ -11,8 +11,8 @@ class ContentListWidget < AuthorizableWidget
 
   after_initialize do
     @klass = current_user.content_filter.merged_klass
-    # @keywords = current_user.content_filter.merged_keywords
-    @keywords = []
+    @keywords = current_user.content_filter.merged_keywords
+    # @keywords = []
     @scope = current_user.content_filter.scope
   end 
 
