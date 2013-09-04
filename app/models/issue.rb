@@ -4,8 +4,8 @@ class Issue
 
   field :name, type: String
   field :pinyin, type: String
-  field :notes_count, type: Integer, default: 0
-  field :heal_notes_count, type: Integer, default: 0
+  field :stories_count, type: Integer, default: 0
+  # field :heal_notes_count, type: Integer, default: 0
 
   validates :name, :uniqueness => true
 
