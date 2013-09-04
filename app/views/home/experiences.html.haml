@@ -68,11 +68,11 @@
                 = link_to issue.name, issue_stories_path(issue.id), :class => "#{@bg_color.sample}"
               .action-bar
                 .num-sig
-                  %span.num 509
+                  %span.num #{issue.stories_count}
                   经历
-                .num-sig
-                  %span.num 309
-                  治愈分享
+                / .num-sig
+                /   %span.num 309
+                /   治愈分享
   / .col 
   /   %dl.highlight.green
   /     %dt 最新分享
