@@ -13,6 +13,7 @@ class Story
   field :public, type: Boolean, :default => true
   field :locked, type: Boolean, :default => false
   field :anonymous, type: Boolean, :default => false
+  field :impressions_count, type: Integer, :default => 0
 
   belongs_to :user
   belongs_to :issue, counter_cache: true
@@ -20,4 +21,7 @@ class Story
   default_scope desc(:created_at)
 
   paginates_per 6
+
+  # impressionist gem
+  is_impressionable :column_name => :impressions_count, :unique => :session_hash, :counter_cache => true
 end

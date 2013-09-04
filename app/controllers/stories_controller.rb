@@ -38,4 +38,20 @@ class StoriesController < ContentController
     @story = Story.find params[:id]
     @issue = Issue.find params[:issue_id]
   end
+
+  def comment
+    @story = Story.find params[:id]
+    if current_user.comment_on(@story, params[:comment])
+      redirect_to :action => "show"
+    else
+      flash[:notice] = "Comment save failed!"
+      redirect_to :action => "show"
+    end     
+  end
+
+  def remove_comment
+    if current_user.delete_comment(params[:comment_id])
+      redirect_to :action => "show"
+    end
+  end
 end

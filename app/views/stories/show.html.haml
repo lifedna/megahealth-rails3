@@ -10,17 +10,43 @@
         %h2 
           #{@story.title}
           .background-green.label{:style => "font-size: 70%;"} #{@story.category}
-        %small #{@story.created_at.strftime("%Y-%m-%d %H:%M:%S")}  
+        %small #{@story.created_at.strftime("%Y-%m-%d %H:%M:%S")} &nbsp;&nbsp; #{@story.impressionist_count}浏览 &middot; #{@story.comments.size}评论
 
         = render_widget :experience_feedback, :display, :instance => @story
         
-
-
     .col  
       %p.margin-t20 #{raw @story.body}
 
       .margin-t30
-        %p{:style => "font-size:90%;color:#999"} 经验内容仅供参考，如果您需要解决具体问题，建议您详细咨询相关领域专业人士。
+        %p 
+          %span.label{:style => "font-size:90%;"} 提示
+          经验内容仅供参考，如果您需要解决具体问题，建议您详细咨询相关领域专业人士。
+
+    #comments.margin-t30.col
+      - @story.comments.each do |c|
+        - if c.persisted?
+          .comment
+            .col.sizefit.float-left
+              = image_tag c.commenter.avatar_url(:thumb)
+            .col.sizefill
+              .margin-l20 
+                .author 
+                  #{c.created_at.strftime("%Y-%m-%d %H:%M:%S")}&nbsp;&nbsp;&nbsp;来自: #{c.commenter.name}
+                  - if c.commenter.id == current_user.id 
+                    .op-links
+                      #{link_to '删除', remove_comment_issue_story_path(@issue, @story,  :comment_id => c.id)}
+                .comment-body
+                  #{simple_format c.body} 
+                       
+
+      - if user_signed_in?        
+        %p
+          = form_tag comment_issue_story_path(@issue, @story), :method => :get do
+            %p 你的评论
+            %p  
+              = text_area_tag :comment, '', :size => "75x6" 
+            %p
+              = submit_tag '加上去'                  
       
 
   .col.size1of3

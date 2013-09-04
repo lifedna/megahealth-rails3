@@ -72,7 +72,10 @@ MegahealthRails3::Application.routes.draw do
 
   # match '/stories/issue/:issue_id' => 'stories#index', :as => :issue_stories
   resources :issues do 
-    resources :stories
+    resources :stories do
+      get 'comment', :on => :member
+      get 'remove_comment', :on => :member
+    end
   end
   
   resources :phis 
