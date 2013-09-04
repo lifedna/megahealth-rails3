@@ -9,7 +9,7 @@
           - else
             .num.tip.color-orange #{raw "+1"}
           %span.data 有用
-      %li 
+      %li{:style => "margin-right:0;padding-right:0"} 
         %a.color-green{"data-remote" => "true", :href => "#{@instance.sharers.include?(current_user)? url_for_event(:unshare, :id =>@instance.id) : url_for_event(:share, :id =>@instance.id)}" }   
           .num.default #{@instance.shares_count}
           - if @instance.sharers.include?(current_user)

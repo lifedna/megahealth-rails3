@@ -7,6 +7,8 @@ class Issue
   field :notes_count, type: Integer, default: 0
   field :heal_notes_count, type: Integer, default: 0
 
+  validates :name, :uniqueness => true
+
   has_and_belongs_to_many :user
   has_many :stories
 
