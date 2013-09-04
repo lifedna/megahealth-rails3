@@ -1,0 +1,33 @@
+= widget_div do
+  .experience-feedback.pipes
+    %ul.stat.nav
+      %li 
+        %a.color-green{"data-remote" => "true", :href => "#{@instance.likers.include?(current_user)? url_for_event(:unlike, :id =>@instance.id) : url_for_event(:like, :id =>@instance.id)}"}
+          .num.default #{@instance.likers_count}
+          - if @instance.likers.include?(current_user)
+            .num.tip.color-orange #{raw "-1"}
+          - else
+            .num.tip.color-orange #{raw "+1"}
+          %span.data 有用
+      %li 
+        %a.color-green{"data-remote" => "true", :href => "#{@instance.sharers.include?(current_user)? url_for_event(:unshare, :id =>@instance.id) : url_for_event(:share, :id =>@instance.id)}" }   
+          .num.default #{@instance.shares_count}
+          - if @instance.sharers.include?(current_user)
+            .num.tip.color-orange #{raw "-1"}   
+          - else
+            .num.tip.color-orange #{raw "+1"} 
+          %span.data 鼓励 
+
+  :javascript
+    $(document).ready(function(){
+      $('.stat li').hover(
+        function(){
+          $(this).find('.default').css({"color":"#fff"});
+          $(this).find('.tip').css({"display":"block", "top":"0", "left":"0"});
+        },
+        function(){
+          $(this).find('.default').css({"color":"#46a546"});
+          $(this).find('.tip').css({"display":"none"});
+        }
+        );
+    });

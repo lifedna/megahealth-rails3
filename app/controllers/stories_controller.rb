@@ -1,5 +1,9 @@
 # encoding: UTF-8
 class StoriesController < ContentController
+  has_widgets do |root|
+    root << widget(:experience_feedback)
+  end
+
   def index
   	@issue = Issue.find params[:issue_id]
   	case params[:category]

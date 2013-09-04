@@ -4,6 +4,7 @@ class Story
   include Mongoid::Timestamps
   include Mongoid::Commentable
   include Mongoid::Likeable
+  include Mongoid::Sharable
   include Mongoid::Search
 
   field :title, type: String

@@ -7,6 +7,7 @@ class User
   include Mongoid::Commenter
   include Streama::Actor
   include Mongoid::Liker
+  include Mongoid::Sharer
   include Mongoid::Tagger
 
   # Include default devise modules. Others available are:

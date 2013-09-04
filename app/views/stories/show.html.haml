@@ -2,14 +2,22 @@
 
 .site-center.center-page
   .col.size2of3
-    .col.issue-title
-      %span #{link_to @issue.name, issue_stories_path(@issue)}
-    .col.margin-t20
-      %h2 
-        #{@story.title}
-        .background-green.label{:style => "font-size: 70%;"} #{@story.category}
-      %small #{@story.created_at.strftime("%Y-%m-%d %H:%M:%S")}  
-      %p #{raw @story.body}
+    .col
+      .issue-title
+        %span #{link_to @issue.name, issue_stories_path(@issue)}
+    .col    
+      .experience-title.margin-t20
+        %h2 
+          #{@story.title}
+          .background-green.label{:style => "font-size: 70%;"} #{@story.category}
+        %small #{@story.created_at.strftime("%Y-%m-%d %H:%M:%S")}  
+
+        = render_widget :experience_feedback, :display, :instance => @story
+        
+
+
+    .col  
+      %p.margin-t20 #{raw @story.body}
 
       .margin-t30
         %p{:style => "font-size:90%;color:#999"} 经验内容仅供参考，如果您需要解决具体问题，建议您详细咨询相关领域专业人士。
