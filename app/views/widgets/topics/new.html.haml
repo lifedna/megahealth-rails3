@@ -23,12 +23,7 @@
         %p
           = f.label '正文:'  
         %p
-          = f.text_area :body, :size => "60x12"
-        %p
-          = f.label '主题:'  
-          = f.hint '主题之间以空格分隔'
-        %p
-          = f.text_field :tags  
+          = f.text_area :body, :size => "60x12" 
         %p
           = f.hidden_field :community_id, :value => @forum.community.id
         %p
