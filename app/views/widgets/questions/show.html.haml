@@ -23,7 +23,7 @@
         - @question.answers.each do |a|
           #{a.content} &middot; #{a.user.name}
 
-    - if user_signed_in?        
+    - if user_signed_in? && @community.users.include?(current_user)       
       %p
         = form_tag answer_community_question_path(@community, @question), :method => :get do
           %p

@@ -26,6 +26,8 @@
             #{option.name}
         
       %p
-        = submit_tag "投票"  
+        - if poll.community.users.include?(current_user)
+          = submit_tag "投票"  
         = link_to '查看结果', show_community_poll_path(poll.community, poll)
-        = link_to '回应', show_community_poll_path(poll.community, poll)
+        - if poll.community.users.include?(current_user)
+          = link_to '回应', show_community_poll_path(poll.community, poll)

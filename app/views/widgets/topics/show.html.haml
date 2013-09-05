@@ -46,7 +46,7 @@
                             .col.sizefit.float-right
                               #{link_to '删除', remove_comment_community_topic_path(@topic.community, @topic, c.id)}
 
-            - if user_signed_in?        
+            - if user_signed_in? && @community.users.include?(current_user)        
               %p
                 = form_tag comment_community_topic_url(@community, @topic), :method => :get do
                   %p
