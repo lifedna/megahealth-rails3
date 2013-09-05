@@ -74,3 +74,5 @@
       .author-experiences{:style => "padding-top: 20px;border-top: solid 1px #ccc"}  
         .col
           %p{:style => "font-size: 110%;font-weight:bold;"} 该作者的其他分享
+          - @story.user.stories.most_useful.newest.limit(8).each do |s|
+            %p{:style => "color:#00a0c6;"} &middot; #{link_to s.title, issue_story_path(s.issue, s)}
