@@ -45,6 +45,29 @@ class StoriesController < ContentController
     @issue = Issue.find params[:issue_id]
   end
 
+  def edit
+    @story = Story.find params[:id]
+    @issue = Issue.find params[:issue_id]
+  end
+
+  def update
+    @story = Story.find params[:id]
+
+    if @story.update_attributes(params[:story]) 
+      flash[:notice] = "Topic has been updated."  
+      redirect_to action => :show
+    else
+      flash[:notice] = "Failed to save blog."    
+    end 
+  end
+
+  def destroy
+    @story = Story.find params[:id]
+    issue = @story.issue
+    @story.destroy
+    redirect_to issue_stories_path(issue)
+  end
+
   def comment
     @story = Story.find params[:id]
     if current_user.comment_on(@story, params[:comment])

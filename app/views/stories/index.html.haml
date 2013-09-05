@@ -57,7 +57,7 @@
                 #{link_to story.title, issue_story_path(@issue, story)}
                 %br
                 %span{:style => "color:#999;font-size:80%;"} 
-                  #{story.impressionist_count}浏览 &middot; #{story.comments.size}评论 &middot; #{story.likers_count}有用 &middot; #{story.shares_count}鼓励 &middot; #{story.created_at.strftime("%Y-%m-%d %H:%M")} 
+                  #{story.impressionist_count(:filter=>:session_hash)}浏览 &middot; #{story.comments.size}评论 &middot; #{story.likers_count}有用 &middot; #{story.shares_count}鼓励 &middot; #{story.created_at.strftime("%Y-%m-%d %H:%M")} 
             .story-content.margin-l20    
               %p{:style => "margin-bottom: 20px;"} #{truncate(strip_tags(story.body), length: 140, omission: '.....')}
     .col

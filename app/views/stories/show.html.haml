@@ -10,12 +10,18 @@
         %h2 
           #{@story.title}
         .background-green.label{:style => "font-size: 70%;"} #{@story.category}分享
-        %small #{@story.created_at.strftime("%Y-%m-%d %H:%M:%S")} &nbsp;&nbsp; #{@story.impressionist_count}浏览 &middot; #{@story.comments.size}评论
+        %small 
+          #{@story.created_at.strftime("%Y-%m-%d %H:%M:%S")} &nbsp;&nbsp; #{@story.impressionist_count(:filter=>:session_hash)}浏览 &middot; #{@story.comments.size}评论
 
         = render_widget :experience_feedback, :display, :instance => @story
         
     .col  
       %p.margin-t20 #{raw @story.body}
+
+      .margin-t20
+        - if user_signed_in? && @story.user == current_user
+          %span{:style => "padding-right: 4px;"} #{link_to '> 修改', edit_issue_story_path(@issue, @story)}
+          %span{:style => "padding-right: 4px;"} #{link_to '> 删除', issue_story_path(@issue, @story), :method => "delete"}
 
       .margin-t30
         %p{:style => "color:#999;"} 
