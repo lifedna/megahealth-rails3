@@ -10,6 +10,8 @@
       #{link_to "> 回#{@current_section.name}", community_section_url(@community, @current_section)}
     .col
       %h3 #{@column.name}
+      - if (can? :update, @community)
+        %p{:style => "text-align:right;"} #{link_to '+添加文章', new_community_column_article_path(@community, @column), :class =>'color-orange'}
       - @column.articles.newest.each do |article|
         .article.margin-b10
           %h4{:style => "background:#efe;"} #{link_to article.title, show_community_article_path(article.community, article)}

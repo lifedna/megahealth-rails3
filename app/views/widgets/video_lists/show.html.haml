@@ -10,6 +10,8 @@
       #{link_to "> 回#{@current_section.name}", community_section_url(@community, @current_section)}
     .col
       %h3 #{@video_list.name}
+      - if (can? :update, @community)
+        %p{:style => "text-align:right;"} #{link_to '+添加', new_community_video_list_video_path(@community, @video_list), :class =>'color-orange'}
       - @video_list.videos.newest.each do |v|
         .col
           .col.sizefit

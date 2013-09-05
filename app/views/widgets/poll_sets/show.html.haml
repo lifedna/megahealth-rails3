@@ -10,6 +10,8 @@
       #{link_to "> 回#{@current_section.name}", community_section_url(@community, @current_section)}
     .col
       %h3 #{@poll_set.name}
+      - if (can? :update, @community)
+        %p{:style => "text-align:right;"} #{link_to '+添加', new_community_poll_set_poll_path(@community, @poll_set), :class =>'color-orange'}
       %div{:id => dom_id(@poll_set)}
         %ul
           - @poll_set.polls.newest.each do |poll|
