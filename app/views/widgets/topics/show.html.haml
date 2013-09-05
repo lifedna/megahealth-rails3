@@ -15,7 +15,7 @@
       .col.sizefill
         .margin-l20  
           .author 
-            #{@topic.created_at.strftime("%Y-%m-%d %H:%M:%S")}&nbsp;&nbsp;&nbsp;来自: #{@topic.user.name}
+            来自: #{@topic.user.name} &nbsp; #{@topic.created_at.strftime("%Y-%m-%d %H:%M:%S")} &nbsp; #{@topic.impressionist_count}浏览 &middot; #{@topic.comments_count}回应
           %p #{simple_format @topic.body}          
                     
           - if @topic.user == current_user
