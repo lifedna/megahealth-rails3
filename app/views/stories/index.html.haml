@@ -1,6 +1,7 @@
 - @page = 'experiences'
 - @category = params[:category]
 - @scope = params[:scope]
+- @sort_by = sort_by(@scope)
 
 / page
 .site-center.center-page
@@ -12,7 +13,7 @@
         %dl.dropdown
           %dt 
             %a 
-              排序
+              排序:#{@sort_by}
               %span.icon.icon-collapse{:style => "margin-right:0;"}
           %dd
             %ul
