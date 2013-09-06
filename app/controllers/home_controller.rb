@@ -57,7 +57,7 @@ class HomeController < ApplicationController
       @entries = Content.all.full_text_search(keywords)
 
       if params[:scope].nil?
-        scope = :newest 
+        scope = 'newest' 
       else
         scope = params[:scope]
       end
@@ -85,19 +85,19 @@ class HomeController < ApplicationController
 
       if params[:category]
         if params[:type]
-          @results = Content.with_tag(params[:tag]).where(_type: params[:type], category: params[:category]).send("#{scope}")
+          @results = Content.with_tag(params[:tag]).where(_type: params[:type], category: params[:category])
         else
-          @results = Content.with_tag(params[:tag]).where(category: params[:category]).send("#{scope}")
+          @results = Content.with_tag(params[:tag]).where(category: params[:category])
         end
       else
         if params[:type]
-          @results = Content.with_tag(params[:tag]).where(_type: params[:type]).send("#{scope}")
+          @results = Content.with_tag(params[:tag]).where(_type: params[:type])
         else
-          @results = Content.with_tag(params[:tag]).send("#{scope}")
+          @results = Content.with_tag(params[:tag])
         end
       end   
 
-      @category_entries = Content.with_tag(params[:tag]).where(category: params[:category]).send("#{scope}")
+      @category_entries = Content.with_tag(params[:tag]).where(category: params[:category])
 
     end
   end
