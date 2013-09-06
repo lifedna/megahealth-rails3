@@ -55,7 +55,7 @@ class StoriesController < ContentController
 
     if @story.update_attributes(params[:story]) 
       flash[:notice] = "Topic has been updated."  
-      redirect_to action => :show
+      redirect_to :action => "show"
     else
       flash[:notice] = "Failed to save blog."    
     end 

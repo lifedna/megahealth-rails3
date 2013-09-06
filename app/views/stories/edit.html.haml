@@ -7,7 +7,7 @@
       %span #{@issue.name}
     .col.margin-t30  
       %h2 我来分享
-      = simple_form_for @story, :url => issue_stories_path(@issue) do |f|
+      = simple_form_for @story, :url => issue_story_path(@issue) do |f|
         / = f.error_messages
         %p
           = f.hidden_field :user_id, :value => current_user.id
