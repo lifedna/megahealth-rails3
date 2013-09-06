@@ -1,3 +1,4 @@
+- @page = 'explore'
 - @articles_count = @category_entries.select {|i| i._type == "Article"}.nil? ? 0 : @category_entries.select {|i| i._type == "Article"}.size
 - @blogs_count = @category_entries.select {|i| i._type == "Blog"}.nil? ? 0 : @category_entries.select {|i| i._type == "Blog"}.size
 - @topics_count = @category_entries.select {|i| i._type == "Topic"}.nil? ? 0 : @category_entries.select {|i| i._type == "Topic"}.size
