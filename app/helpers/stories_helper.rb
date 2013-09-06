@@ -11,7 +11,7 @@ module StoriesHelper
   	when "most_useful"
   	  return "有用"	
   	when "most_cheered"
-  	  return "鼓励"
+  	  return "感谢"
   	else
   	  return "最新"	
   	end

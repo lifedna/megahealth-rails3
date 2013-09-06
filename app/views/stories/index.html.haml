@@ -36,7 +36,7 @@
               %li{:class => "#{params[:scope] == 'most_cheered' ? 'selected' : ""}"}  
                 %a{:href => "#{issue_stories_path(@issue, :category => @category, :scope => 'most_cheered')}"} 
                   %span{:class => "#{params[:scope] == 'most_cheered' ? 'icon icon-ok' : ""}"} 
-                  鼓励   
+                  感谢   
 
       .col.sizefill
         = link_to '全部', issue_stories_path(@issue.id, :scope => @scope), :class => "label #{params[:category] ? 'background-grey' : 'background-green'}"
