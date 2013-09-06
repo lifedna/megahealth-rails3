@@ -56,21 +56,27 @@ class HomeController < ApplicationController
       keywords << params[:q]
       @entries = Content.all.full_text_search(keywords)
 
+      if params[:scope].nil?
+        scope = :newest 
+      else
+        scope = params[:scope]
+      end
+
       if params[:category]
         if params[:type]
-          @results = Content.where(_type: params[:type], category: params[:category]).full_text_search(keywords)
+          @results = Content.where(_type: params[:type], category: params[:category]).send("#{scope}").full_text_search(keywords)
         else
-          @results = Content.where(category: params[:category]).full_text_search(keywords)
+          @results = Content.where(category: params[:category]).send("#{scope}").full_text_search(keywords)
         end
       else
         if params[:type]
-          @results = Content.where(_type: params[:type]).full_text_search(keywords)
+          @results = Content.where(_type: params[:type]).send("#{scope}").full_text_search(keywords)
         else
-          @results = Content.all.full_text_search(keywords)
+          @results = Content.all.send("#{scope}").full_text_search(keywords)
         end
       end   
 
-      @category_entries = Content.where(category: params[:category]).full_text_search(keywords)
+      @category_entries = Content.where(category: params[:category]).send("#{scope}").full_text_search(keywords)
 
     end
     
@@ -79,19 +85,19 @@ class HomeController < ApplicationController
 
       if params[:category]
         if params[:type]
-          @results = Content.with_tag(params[:tag]).where(_type: params[:type], category: params[:category])
+          @results = Content.with_tag(params[:tag]).where(_type: params[:type], category: params[:category]).send("#{scope}")
         else
-          @results = Content.with_tag(params[:tag]).where(category: params[:category])
+          @results = Content.with_tag(params[:tag]).where(category: params[:category]).send("#{scope}")
         end
       else
         if params[:type]
-          @results = Content.with_tag(params[:tag]).where(_type: params[:type])
+          @results = Content.with_tag(params[:tag]).where(_type: params[:type]).send("#{scope}")
         else
-          @results = Content.with_tag(params[:tag])
+          @results = Content.with_tag(params[:tag]).send("#{scope}")
         end
       end   
 
-      @category_entries = Content.with_tag(params[:tag]).where(category: params[:category])
+      @category_entries = Content.with_tag(params[:tag]).where(category: params[:category]).send("#{scope}")
 
     end
   end

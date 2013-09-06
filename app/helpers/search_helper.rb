@@ -1,5 +1,16 @@
 # coding: utf-8
 module SearchHelper
+  def scope_by(string)
+    case string
+    when "hot"
+      return "浏览" 
+    when "popular"
+      return "有用" 
+    else
+      return "最新" 
+    end
+  end
+
   def breadcrumb(*args)
   	options = args.extract_options!
   	out = []
