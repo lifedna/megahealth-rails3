@@ -1,7 +1,7 @@
-class Widgets::QuestionsController < ApplicationController
-  has_widgets do |root|
-    root << widget(:like)
-  end
+class Widgets::QuestionsController < ContentController
+  # has_widgets do |root|
+  #   root << widget(:like)
+  # end
   
   def new
     @qa = Qa.find params[:qa_id]
@@ -35,20 +35,37 @@ class Widgets::QuestionsController < ApplicationController
     impressionist @question, nil, :unique => [:session_hash]
   end
 
-  def answer
+  # def answer
+  #   @question = Question.find params[:id]
+  #   @answer = @question.answers.build(:content => params[:answer])
+  #   if @answer.save
+  #     current_user.answers << @answer
+  #     redirect_to :action => "show"
+  #   else
+  #     flash[:notice] = "Comment save failed!"
+  #   end  
+  # end
+
+  def update
+  end
+
+  def destroy
+  end
+
+  def comment
     @question = Question.find params[:id]
-    @answer = @question.answers.build(:content => params[:answer])
-    if @answer.save
-      current_user.answers << @answer
+    @comment = current_user.comment_on(@question, params[:comment])
+    if @comment.persisted?
+      current_user.publish_activity(:new_comment, :object => @comment, :target_object => @question.qa.community)
       redirect_to :action => "show"
     else
       flash[:notice] = "Comment save failed!"
     end  
   end
 
-  def update
-  end
-
-  def destroy
+  def remove_comment
+    if current_user.delete_comment(params[:comment_id])
+      redirect_to :action => "show"
+    end
   end
 end

@@ -59,11 +59,10 @@
                       .title
                         %h4 
                           %a #{link_to q.title, show_community_question_url(q.community, q)}
-                    .col.sizefit.float-right
+                    .col
                       .question-started
-                        #{time_ago_in_words(q.created_at).capitalize}前 &middot; #{q.user.name}
-                    .col.sizefill  
-                      .label.background-blue{:style => "font-size: 80%;"} 护理          
+                        #{q.user.name} 提问 &middot; 最后更新 #{q.created_at.strftime("%Y-%m-%d %H:%M:%S")} 
+         
   
   :javascript
     $(document).ready(function(){

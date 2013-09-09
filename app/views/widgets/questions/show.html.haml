@@ -10,27 +10,45 @@
       #{link_to "> #{@question.qa.name}", show_community_qa_url(@question.community, @question.qa)}
     .col
       %h3 #{@question.title}  
-      %small #{@question.user.name} &middot; #{time_ago_in_words(@question.created_at).capitalize}前提问
-      .col
-        %p
-          #{simple_format @question.body}
-      .col.sizefit.float-right
-        = render_widget :like, :display, :instance => @question  
-      .col.sizefill
-        = social_share_button_tag(@question.title)
+      %small 提问: #{@question.user.name} &nbsp; #{@question.created_at.strftime("%Y-%m-%d %H:%M:%S")}
+      = render_widget :tags, :display, :content => @question 
+      %p #{simple_format @question.body}
+      
+      .margin-t20
+        - if @question.user == current_user
+          %span{:style => "padding-right: 4px;"} #{link_to '> 修改', edit_community_qa_question_path(@question.community, @question.qa, @question)}
+          %span{:style => "padding-right: 4px;"} #{link_to '> 删除', community_qa_question_path(@question.community, @question.qa, @question), :method => "delete"}
 
-      #answers
-        - @question.answers.each do |a|
-          #{a.content} &middot; #{a.user.name}
+      .margin-t20
+        .col.sizefit.float-right
+          = render_widget :like, :display, :instance => @question  
+        .col.sizefill
+          = social_share_button_tag(@question.title)
 
-    - if user_signed_in? && @community.users.include?(current_user)       
-      %p
-        = form_tag answer_community_question_path(@community, @question), :method => :get do
-          %p 你的回答......
-          %p  
-            = text_area_tag :answer, '', :size => "75x6" 
-          %p
-            = submit_tag '加上去'    
+      .margin-t30
+        #comments
+          - @question.comments.each do |c|
+            - if c.persisted?
+              .comment
+                .col.sizefit
+                  = image_tag c.commenter.avatar_url(:thumb)
+                .col.sizefill
+                  .margin-l20 
+                    .author #{c.created_at.strftime("%Y-%m-%d %H:%M:%S")}&nbsp;&nbsp;&nbsp;来自: #{c.commenter.name}
+                    #{c.body}  
+                    - if c.commenter == current_user 
+                      .op-links
+                        .col.sizefit.float-right
+                          #{link_to '删除', remove_comment_community_question_path(@topic.community, @topic, c.id)}    
+
+          - if user_signed_in? && @community.users.include?(current_user)        
+            %p
+              = form_tag comment_community_question_url(@community, @question), :method => :get do
+                %p 你的回答...
+                %p  
+                  = text_area_tag :comment, '', :size => "75x6" 
+                %p
+                  = submit_tag '加上去'   
 
 
   .col.size1of3.margin-t20

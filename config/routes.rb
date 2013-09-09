@@ -47,7 +47,9 @@ MegahealthRails3::Application.routes.draw do
 
     match '/:community_id/qas/:id' => 'widgets/qas#show', :as => :show_community_qa, :via => :get
     match '/:community_id/questions/:id' => 'widgets/questions#show', :as => :show_community_question, :via => :get
-    match '/:community_id/questions/:id/answer' => 'widgets/questions#answer', :as => :answer_community_question, :via => :get
+    match '/:community_id/questions/:id/comment' => 'widgets/questions#comment', :as => :comment_community_question, :via => :get
+    match '/:community_id/questions/:id/remove_comment/:comment_id' => 'widgets/questions#remove_comment', :as => :remove_comment_community_question, :via => :get
+    # match '/:community_id/questions/:id/answer' => 'widgets/questions#answer', :as => :answer_community_question, :via => :get
 
     match '/:community_id/poll_sets/:id' => 'widgets/poll_sets#show', :as => :show_community_poll_set, :via => :get
     match '/:community_id/polls/:id' => 'widgets/polls#show', :as => :show_community_poll, :via => :get
