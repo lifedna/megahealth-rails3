@@ -15,7 +15,7 @@
       - @video_list.videos.newest.each do |v|
         .col
           .col.sizefit
-            .clickable.video
+            .video-item.margin-r20
               = link_to image_tag(v.thumb_url, :class => "thumb"), show_community_video_url(v.community, v)
               .play_video
           .col.sizefill
@@ -26,3 +26,11 @@
   .col.size1of3.margin-t20
     .margin-l20
       = render :partial => "shared/content_sidebar", :locals => {:widget => @video_list}       
+
+  :javascript
+    $(document).ready(function(){
+      $(".video-item").click(function(){
+        window.location=$(this).find("a").attr("href"); 
+        return false;
+      });
+    });      
