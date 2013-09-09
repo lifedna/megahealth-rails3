@@ -48,7 +48,7 @@
                   %td #{link_to t.title, show_community_topic_url(t.community, t)}
                   %td #{t.user.name}
                   %td #{t.comments_count}
-                  %td #{t.created_at.strftime("%Y-%m-%d %H:%M:%S")}
+                  %td #{t.last_updated_at.strftime("%Y-%m-%d %H:%M:%S")}
 
   :javascript
     $(document).ready(function(){

@@ -25,7 +25,7 @@
               %td #{t.user.name}
               %td #{t.comments_count}
               / %td #{time_ago_in_words(t.created_at).capitalize}前
-              %td #{t.created_at.strftime("%Y-%m-%d %H:%M:%S")} 
+              %td #{t.last_updated_at.strftime("%Y-%m-%d %H:%M:%S")} 
 
   .col.size1of3.margin-t20
     .margin-l20
