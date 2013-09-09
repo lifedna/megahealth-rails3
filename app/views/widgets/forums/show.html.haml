@@ -23,7 +23,7 @@
             %tr 
               %td #{link_to t.title, show_community_topic_url(t.community, t)}
               %td #{t.user.name}
-              %td 
+              %td #{t.comments_count}
               / %td #{time_ago_in_words(t.created_at).capitalize}前
               %td #{t.created_at.strftime("%Y-%m-%d %H:%M:%S")} 
 
