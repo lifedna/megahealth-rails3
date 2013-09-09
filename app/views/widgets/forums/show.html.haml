@@ -12,7 +12,7 @@
       %h3 #{@forum.name}
       - if (can? :update, @forum.community) || (can? :participate, @forum.community)
         %p{:style => "text-align:right;"} #{link_to '+发言', new_community_forum_topic_path(@forum.community, @forum), :class =>'color-orange'}
-      .cell.forum
+      .forum
         %table.horizontal-border
           %tr
             %th.size3of8 话题
