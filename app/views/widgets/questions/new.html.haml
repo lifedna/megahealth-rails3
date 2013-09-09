@@ -20,6 +20,8 @@
           = f.label '正文'
           = f.text_area :body, :size => "60x12"
         %p
+          = f.hidden_field :user_id, :value => current_user.id  
+        %p
           = f.hidden_field :community_id, :value => @qa.community.id
         %p
           = f.hidden_field :qa_id, :value => @qa.id  

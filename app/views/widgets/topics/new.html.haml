@@ -25,6 +25,8 @@
         %p
           = f.text_area :body, :size => "60x12" 
         %p
+          = f.hidden_field :user_id, :value => current_user.id  
+        %p
           = f.hidden_field :community_id, :value => @forum.community.id
         %p
           = f.hidden_field :forum_id, :value => @forum.id    
