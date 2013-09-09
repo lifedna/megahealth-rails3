@@ -134,20 +134,22 @@
                   .progress-bar{:style => "width: 25%;"} 
 
         %dl.highlight.green
-          %dt 最新社群
-          %dd
-            %ul.links
-              - Community.newest.limit(5).each do |c|
-                %li #{link_to c.name, community_path(c)}
-              %li
-                #{link_to '更多...', communities_path}    
-
-        %dl.highlight.orange
           %dt 我的社群
           %dd
             %ul.links
               - current_user.communities.each do |c|
                 %li #{link_to c.name, community_path(c)}
+
+        %dl.highlight.orange.communities
+          %dt.title 
+            最新社群
+            / #{link_to '更多', communities_path}
+          %dd
+            %ul.links
+              - Community.newest.limit(5).each do |c|
+                %li #{link_to c.name, community_path(c)}
+              %li
+                #{link_to '更多...', communities_path}            
           
         %dl.highlight
           %dt 热门标签
