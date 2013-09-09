@@ -8,11 +8,11 @@ $(document).ready(
   }
 
   $('.redactor').redactor(
-    { "imageUpload":"/redactor_rails/pictures?" + params,
+    { "lang":"zh_cn",
+      "imageUpload":"/redactor_rails/pictures?" + params,
       "imageGetJson":"/redactor_rails/pictures",
       "fileUpload":"/redactor_rails/documents?" + params,
-      "fileGetJson":"/redactor_rails/documents",
-      "lang":"zh_cn",
+      "fileGetJson":"/redactor_rails/documents",      
       "path":"/assets/redactor-rails",
       "css":"style.css"}
   );
