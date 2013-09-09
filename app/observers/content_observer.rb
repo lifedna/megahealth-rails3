@@ -8,10 +8,10 @@ class ContentObserver < Mongoid::Observer
   	  user.publish_activity(:new_article, :object => record, :target_object => record.community)
   	when 'poll'
   	  user.publish_activity(:new_poll, :object => record, :target_object => record.community)  
-  	# when 'topic'  
-  	#   user.publish_activity(:new_topic, :object => record, :target_object => record.community)	
-  	# when 'question'  
-  	#   user.publish_activity(:new_question, :object => record, :target_object => record.community)	  
+  	when 'topic'  
+  	  user.publish_activity(:new_topic, :object => record, :target_object => record.community)	
+  	when 'question'  
+  	  user.publish_activity(:new_question, :object => record, :target_object => record.community)	  
   	end  
   end
 
@@ -23,6 +23,10 @@ class ContentObserver < Mongoid::Observer
       Activity.find_by(verb: :new_article, object: {"id" => record.id, "type"=>"Article"}).destroy
     when 'poll'
       Activity.find_by(verb: :new_poll, object: {"id" => record.id, "type"=>"Poll"}).destroy 
+    when 'topic'
+      Activity.find_by(verb: :new_topic, object: {"id" => record.id, "type"=>"Topic"}).destroy
+    when 'question'  
+      Activity.find_by(verb: :new_question, object: {"id" => record.id, "type"=>"Question"}).destroy
     end  
   end
 end	
