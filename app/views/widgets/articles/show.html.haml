@@ -15,9 +15,9 @@
       %p #{raw @article.body}
       
       .margin-t20
-        - if @question.user == current_user
-          %span{:style => "padding-right: 4px;"} #{link_to '> 修改', edit_community_qa_question_path(@article.community, @article.column, @article)}
-          %span{:style => "padding-right: 4px;"} #{link_to '> 删除', community_qa_question_path(@article.community, @article.column, @article), :method => "delete"}
+        - if can? :update, @article.community
+          %span{:style => "padding-right: 4px;"} #{link_to '> 修改', edit_community_column_article_path(@article.community, @article.column, @article)}
+          %span{:style => "padding-right: 4px;"} #{link_to '> 删除', community_column_article_path(@article.community, @article.column, @article), :method => "delete"}
       
       .margin-t20
         .col.sizefit.float-right
