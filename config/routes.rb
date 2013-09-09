@@ -12,7 +12,7 @@ MegahealthRails3::Application.routes.draw do
   match '/uploads/grid/user/avatar/:id/:filename' => 'gridfs#avatar'
 
   # different uploaded versions for uploaded pictures
-  match '/uploads/grid/redactor_rails/picture/data/:id/:filename' => 'gridfs#thumb_redactor_pitcure', constraints: { filename: /thumb.*/ }
+  match '/uploads/grid/redactor_rails/picture/data/:id/:filename' => 'gridfs#thumb_redactor_picture', constraints: { filename: /thumb.*/ }
   # route configuration for the uploaded image
   match '/uploads/grid/redactor_rails/picture/data/:id/:filename' => 'gridfs#redactor_pitcure'
 
