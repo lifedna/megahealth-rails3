@@ -23,13 +23,14 @@ module Mongoid
           return
         end
 
-        if tagging = self.taggings.create(tag: tag, taggable: model)
+        tagging = self.taggings.create(tag: tag, taggable: model)
+        if tagging
           tag.inc(:taggings_count, 1)
         else
           return
         end
 
-        taggings << tagging
+        # taggings << tagging
 
         model_tag = model.model_tags.find_or_create_by(name: word)
         model_tag.user_ids << self.id unless model_tag.user_ids.include?(self.id)
@@ -38,7 +39,7 @@ module Mongoid
         model.reload
       end
 
-      taggings
+      # taggings
 
       # return if (text.length == 0)
 

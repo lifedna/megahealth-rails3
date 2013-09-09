@@ -1,7 +1,6 @@
 # 
 class Widgets::ArticlesController < ContentController
 
-
   def new
     @column = Column.find params[:column_id]
     @article = Article.new
