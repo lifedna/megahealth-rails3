@@ -29,7 +29,6 @@
             .col.sizefill
               = social_share_button_tag(@topic.title)
 
-
           .margin-t30
             #comments
               - @topic.comments.each do |c|
@@ -48,13 +47,12 @@
                         .comment-body
                           #{simple_format c.body}
 
-
-            - if user_signed_in? && @community.users.include?(current_user)        
-              %p
+            #add_comment
+              - if user_signed_in? && @community.users.include?(current_user)        
                 = form_tag comment_community_topic_url(@community, @topic), :method => :get do
                   %p 你的回应...
                   %p  
-                    = text_area_tag :comment, '', :size => "75x6" 
+                    = text_area_tag :comment, '', :size => "66x6" 
                   %p
                     = submit_tag '加上去' 
 
