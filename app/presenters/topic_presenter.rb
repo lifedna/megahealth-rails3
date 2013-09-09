@@ -14,7 +14,7 @@ class TopicPresenter < BasePresenter
   end
 
   def metadata
-  	raw "<span class ='icon icon-16 icon-user'></span>#{topic.user.name} 提问 &middot; #{time_ago_in_words(topic.last_updated_at).capitalize}前最新更新" 
+  	raw "<span class ='icon icon-16 icon-user'></span>#{topic.user.name} 提问 &middot; #{time_ago_in_words(topic.last_updated_at).capitalize}前更新" 
   end
 
   def stats
@@ -26,11 +26,4 @@ class TopicPresenter < BasePresenter
     return raw out.join(" &middot; ")
   end
 
-  # def last_udpated_at
-  #   if topic.comments_count > 0
-  #     topic.comments.last.created_at.strftime("%Y-%m-%d %H:%M:%S")
-  #   else
-  #     topic.created_at.strftime("%Y-%m-%d %H:%M:%S")
-  #   end
-  # end
 end  
