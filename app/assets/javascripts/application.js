@@ -17,7 +17,8 @@
 //= require reveal
 //= require bootstrap
 //= require jquery-plugins
-//= require redactor-rails
+//= require redactor-rails/redactor.min
+//= require redactor
 //= require social-share-button
 //= require masonry
 //= require_tree .
