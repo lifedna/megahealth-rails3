@@ -13,8 +13,6 @@ class Widgets::TopicsController < ApplicationController
   	@topic = Topic.new(params[:topic])
   	if @topic.save 
   	  flash[:notice] = "Topic saved successfully."
-      # current_user.topics << @topic
-  	  current_user.publish_activity(:new_topic, :object => @topic, :target_object => @forum.community)
       redirect_to community_section_path(@forum.community, @forum.section)
   	else
   	  flash[:notice] = "Failed to save topic."	  
