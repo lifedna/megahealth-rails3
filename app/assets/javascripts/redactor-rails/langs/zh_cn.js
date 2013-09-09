@@ -65,10 +65,10 @@ $.Redactor.opts.langs['zh_cn'] = {
 	fullscreen: '全屏',
 	deleted: '删除',
 	anchor: '锚点',
-	link_new_tab: 'Open link in new tab',
-	underline: 'Underline',
-	alignment: 'Alignment',
-	filename: 'Name (optional)',
-	edit: 'Edit'
+	link_new_tab: '在新标签页中打开链接',
+	underline: '下划线',
+	alignment: '对齐',
+	filename: '文件名 (可填项)',
+	edit: '编辑'
 };
 })( jQuery );

@@ -8,7 +8,11 @@ $(document).ready(
   }
 
   $('.redactor').redactor(
-    { "lang":"zh_cn",
+    { 
+      "lang":"zh_cn",
+      buttons: ['html', '|', 'formatting', '|', 'bold', 'italic', 'deleted', '|',
+                  'unorderedlist', 'orderedlist', 'outdent', 'indent', '|',
+                  'image', 'table', 'link', '|', 'fontcolor', 'backcolor', '|', 'alignment', '|', 'horizontalrule'],
       "imageUpload":"/redactor_rails/pictures?" + params,
       "imageGetJson":"/redactor_rails/pictures",
       "fileUpload":"/redactor_rails/documents?" + params,
