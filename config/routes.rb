@@ -61,6 +61,7 @@ MegahealthRails3::Application.routes.draw do
     match '/:community_id/video_lists/:id' => 'widgets/video_lists#show', :as => :show_community_video_list, :via => :get
     match '/:community_id/videos/:id' => 'widgets/videos#show', :as => :show_community_video, :via => :get
     match '/:community_id/videos/:id/comment' => 'widgets/videos#comment', :as => :comment_community_video, :via => :get
+    match '/:community_id/videos/:id/remove_comment/:comment_id' => 'widgets/videos#remove_comment', :as => :remove_comment_community_video, :via => :get
   end    
 
   scope "dashboard" do

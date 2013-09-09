@@ -62,7 +62,7 @@ class Widgets::TopicsController < ApplicationController
     @topic = Topic.find params[:id]
     @comment = current_user.comment_on(@topic, params[:comment])
     if @comment.persisted?
-      current_user.publish_activity(:new_comment, :object => @comment, :target_object => @topic.forum.community)
+      # current_user.publish_activity(:new_comment, :object => @comment, :target_object => @topic.forum.community)
       redirect_to :action => "show"
     else
       flash[:notice] = "Comment save failed!"

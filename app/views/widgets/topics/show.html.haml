@@ -39,12 +39,15 @@
                       = image_tag c.commenter.avatar_url(:thumb)
                     .col.sizefill
                       .margin-l20 
-                        .author #{c.created_at.strftime("%Y-%m-%d %H:%M:%S")}&nbsp;&nbsp;&nbsp;来自: #{c.commenter.name}
-                        #{c.body}  
-                        - if c.commenter == current_user 
-                          .op-links
-                            .col.sizefit.float-right
-                              #{link_to '删除', remove_comment_community_topic_path(@topic.community, @topic, c.id)}
+                        .author 
+                          #{c.created_at.strftime("%Y-%m-%d %H:%M:%S")}&nbsp;&nbsp;&nbsp;来自: #{c.commenter.name}
+                          - if c.commenter.id == current_user.id
+                            .op-links
+                              .col.sizefit.float-right
+                                #{link_to '删除', remove_comment_community_topic_path(@topic.community, @topic, c.id)}
+                        .comment-body
+                          #{simple_format c.body}
+
 
             - if user_signed_in? && @community.users.include?(current_user)        
               %p

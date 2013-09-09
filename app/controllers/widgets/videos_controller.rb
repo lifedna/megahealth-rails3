@@ -51,10 +51,16 @@ class Widgets::VideosController < ApplicationController
     @video = Video.find params[:id]
     @comment = current_user.comment_on(@video, params[:comment])
     if @comment.persisted?
-      current_user.publish_activity(:new_comment, :object => @comment, :target_object => @video.video_list.community)
+      # current_user.publish_activity(:new_comment, :object => @comment, :target_object => @video.video_list.community)
       redirect_to :action => "show"
     else
       flash[:notice] = "Comment save failed!"
     end  
+  end
+
+  def remove_comment
+    if current_user.delete_comment(params[:comment_id])
+      redirect_to :action => "show"
+    end 
   end
 end
