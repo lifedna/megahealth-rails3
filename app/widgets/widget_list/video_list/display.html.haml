@@ -35,7 +35,7 @@
                 .cell
                   %p #{v.title}
                   .stream
-                    .clickable.video{:src => "#{v.src}"}
+                    .video-item{:src => "#{v.src}"}
                       = link_to image_tag(v.thumb_url, :class=> "thumb"), show_community_video_url(v.community, v)
                       .play_video
                
@@ -44,4 +44,9 @@
     $(document).ready(function(){
       var video_list = $("#widget_#{@video_list.id}");
       setWidget(video_list);
+
+      $(".video-item").click(function(){
+        window.location=$(this).find("a").attr("href"); 
+        return false;
+      });
     });         

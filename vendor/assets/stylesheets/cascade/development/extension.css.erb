@@ -922,11 +922,13 @@ padding: 8px 9px;
 	margin-left: -16px;
 }
 
+.video-item,
 .clickable.video {
 	position: relative;
 	cursor: pointer;
 }
 
+.video-item .play_video,
 .clickable.video .play_video {
 	background: url(<%= asset_path 'play-video.png' %>) no-repeat;
 	position: absolute;
@@ -939,6 +941,7 @@ padding: 8px 9px;
 	opacity: 0.75;
 }
 
+.video-item .thumb,
 .clickable.video .thumb {
 	width: 130px; 
 	height: 98px;
