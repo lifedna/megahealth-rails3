@@ -26,8 +26,20 @@
     %dd
       %ul.links
         - widget.videos.limit(5).each do |v|
-          %li #{link_to v.title, show_community_video_path(v.community, v)}           
+          %li #{link_to v.title, show_community_video_path(v.community, v)}      
+- when 'questions', 'qas'
+  %dl.highlight.orange
+    %dt 热点问题
+    %dd
+      %ul.links
+        - widget.questions.limit(5).each do |q|
+          %li #{link_to q.title, show_community_question_path(q.community, q)}                
 
+.guide.panel.margin-b30
+  .body
+    .cell
+      %span.icon.icon-tags 
+      创建你的标签, 用来收藏你喜欢的内容
 /   - unless community.articles.empty?
 /   .panel.guide.margin-b20
 /     .header

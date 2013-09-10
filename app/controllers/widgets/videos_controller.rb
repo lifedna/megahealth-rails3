@@ -1,7 +1,4 @@
-class Widgets::VideosController < ApplicationController
-  has_widgets do |root|
-    root << widget(:like)
-  end
+class Widgets::VideosController < ContentController
   
   def index
     @videos = VideoList.find(params[:video_list_id]).videos 

@@ -9,6 +9,7 @@
     .float-right #{link_to "> #{@video.video_list.name}", show_community_video_list_url(@video.community, @video.video_list)} 
     .col
       %h3 #{@video.title}
+      = render_widget :tags, :display, :content => @video 
       %p
         %iframe{:width=>620, :height=>460, :src=>@video.src, :frameborder=>0} 
       %p #{@video.url}
