@@ -106,14 +106,14 @@
                       %a{:href => "#{search_path :q => params[:q], :category => params[:category], :type => params[:type], :tag => params[:tag]}"} 
                         %span{:class => "#{params[:scope].nil? ? 'icon icon-ok' : ""}"} 
                         最新  
-                    %li{:class => "#{params[:scope] == 'hot' ? 'selected' : ""}"}  
-                      %a{:href => "#{search_path :q => params[:q], :scope => 'hot', :category => params[:category], :type => params[:type], :tag => params[:tag]}"}  
-                        %span{:class => "#{params[:scope] == 'hot' ? 'icon icon-ok' : ""}"} 
-                        浏览
-                    %li{:class => "#{params[:scope] == 'popular' ? 'selected' : ""}"}  
-                      %a{:href => "#{search_path :q => params[:q], :scope => 'popular', :category => params[:category], :type => params[:type], :tag => params[:tag]}"}  
-                        %span{:class => "#{params[:scope] == 'popular' ? 'icon icon-ok' : ""}"} 
-                        有用
+                    %li{:class => "#{params[:scope] == 'most_liked' ? 'selected' : ""}"}  
+                      %a{:href => "#{search_path :q => params[:q], :scope => 'most_liked', :category => params[:category], :type => params[:type], :tag => params[:tag]}"}  
+                        %span{:class => "#{params[:scope] == 'most_liked' ? 'icon icon-ok' : ""}"} 
+                        最多喜欢
+                    %li{:class => "#{params[:scope] == 'most_commented' ? 'selected' : ""}"}  
+                      %a{:href => "#{search_path :q => params[:q], :scope => 'most_commented', :category => params[:category], :type => params[:type], :tag => params[:tag]}"}  
+                        %span{:class => "#{params[:scope] == 'most_commented' ? 'icon icon-ok' : ""}"} 
+                        最多评论
             .col.sizefill
               - if @results.size == 0
                 - if params[:tag]

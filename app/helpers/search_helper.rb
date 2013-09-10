@@ -2,10 +2,10 @@
 module SearchHelper
   def scope_by(string)
     case string
-    when "hot"
-      return "浏览" 
-    when "popular"
-      return "有用" 
+    when "most_liked"
+      return "最多喜欢" 
+    when "most_commented"
+      return "最多评论" 
     else
       return "最新" 
     end
