@@ -37,8 +37,8 @@ class Content
   belongs_to :user
 
   scope :newest, desc(:created_at)
-  scope :hot, desc(:likers_count)
-  scope :popular, desc(:impressions_count)
+  scope :most_liked, desc(:likers_count)
+  scope :most_commented, desc(:comments_count)
 
   scope :with_tag, ->(phrase){where('model_tags.name' => phrase)}
 

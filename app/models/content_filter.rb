@@ -15,16 +15,14 @@ class ContentFilter
   	classes.keys.each do |key|
       case key
         when '文章'
-          klass << 'Article'
-        # when '日记'  
-        #   klass << 'Blog'  
+          klass << 'Article'  
         when '投票'  
           klass << 'Poll'
         when '视频'  
           klass << 'Video'
         when '话题'  
           klass << 'Topic'
-        when '问答'  
+        when '问题'  
           klass << 'Question'    
         else   
       end

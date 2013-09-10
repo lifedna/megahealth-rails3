@@ -20,8 +20,9 @@ class QuestionPresenter < BasePresenter
   def stats
     out ||= []
     out << "#{question.impressionist_count(:filter=>:session_hash)}次浏览"
-    out << "#{question.comments.size}条回复"
-    out << "#{question.likers_count}人关注"
+    out << "#{question.likers_count}人喜欢"
+    out << "#{question.comments_count}条回答"
+    
 
     return raw out.join(" &middot; ")
   end

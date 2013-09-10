@@ -20,8 +20,8 @@ class VideoPresenter < BasePresenter
   def stats
   	out ||= []
   	out << "#{video.impressionist_count(:filter=>:session_hash)}次浏览"
-    out << "#{video.comments.size}条回复"
-  	out << "#{video.likers_count}人收藏"
+    out << "#{video.likers_count}人喜欢"
+    out << "#{video.comments_count}条评论"  	
 
   	return raw out.join(" &middot; ")
   end

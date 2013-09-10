@@ -28,8 +28,8 @@ class PollPresenter < BasePresenter
   def stats
   	out ||= []
   	out << "#{poll.impressionist_count(:filter=>:session_hash)}次浏览"
-    out << "#{poll.comments.size}条回复"
-  	out << "#{poll.likers_count}人关注"
+    out << "#{poll.comments.size}条评论"
+  	# out << "#{poll.likers_count}人关注"
 
   	return raw out.join(" &middot; ")
   end

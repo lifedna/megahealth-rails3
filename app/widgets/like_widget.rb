@@ -31,13 +31,14 @@ class LikeWidget < AuthorizableWidget
   private
 
   def text(instance)
-    case instance.class.to_s
-    when "Blog"
-      @text  = "喜欢"
-    when "Topic"
-      @text  = "关注"  
-    else
-      @text = "收藏"
-    end
+    @text  = "喜欢"
+    # case instance.class.to_s
+    # when "Blog"
+    #   @text  = "喜欢"
+    # when "Topic"
+    #   @text  = "关注"  
+    # else
+    #   @text = "收藏"
+    # end
   end
 end
