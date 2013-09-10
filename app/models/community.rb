@@ -30,7 +30,7 @@ class Community
   has_many :questions  
   has_many :polls
   has_many :topics
-  has_many :posts 
+  has_many :videos
 
   # default_scope desc(:created_at)
   scope :newest, desc(:created_at)
