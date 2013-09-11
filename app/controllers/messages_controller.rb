@@ -1,3 +1,4 @@
+# encoding: UTF-8
 class MessagesController < ApplicationController
   before_filter :authenticate_user!
 
@@ -11,6 +12,9 @@ class MessagesController < ApplicationController
     message = params[:message][:body]
     if current_user.send_message(receiver, message)
       redirect_to "/mailbox"
+    else
+      flash[:notice] = "邮件字数不得小于10"
+      redirect_to :action => "new", :receiver_id => receiver.id
     end
   end
 end

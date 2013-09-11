@@ -17,8 +17,12 @@
                 %a{:href => "#"} 
                   %span.icon.icon-bell 
               %li
-                %a{:href => "/mailbox"}
-                  %span.icon.icon-envelope   
+                - if current_user.messages_received.unread.empty?
+                  %a{:href => "/mailbox"}
+                    %span.icon.icon-envelope   
+                - else
+                  %a{:href => "/mailbox", :title => "你有新邮件了！"}
+                    %span.icon.icon-signin   
               %li.user-nav
                 %a{:href => "javascript:;"} 
                   %span.icon.icon-user

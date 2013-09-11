@@ -15,6 +15,8 @@ class Message
   # has_many :replies,  :class_name => 'Message', :foreign_key => 'thread_id'
   # scope :in_reply_to, lambda { |message| where({:thread => message}).asc('created_at') }
  
+  scope :unread, where(has_been_read:"unread")
+
   #validations
   validates_presence_of :body, :sender, :receiver
   # validates_length_of :subject, :within => 10..70

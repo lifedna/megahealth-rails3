@@ -8,6 +8,7 @@ class ConversationsController < ApplicationController
   	unreads = c.unread(current_user)
   	unreads.each do |m|
   	  m.read_message	
+      m.save
   	end
   end
 end
