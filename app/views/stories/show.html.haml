@@ -12,7 +12,7 @@
         .background-green.label{:style => "font-size: 70%;"} #{@story.category}分享
         %small 
           #{@story.created_at.strftime("%Y-%m-%d %H:%M:%S")} &nbsp;&nbsp; #{@story.impressionist_count(:filter=>:session_hash)}浏览 &middot; #{@story.comments.size}评论
-
+        / = render_widget :story_tags, :display, :story => @story
         = render_widget :experience_feedback, :display, :instance => @story
         
     .col  
@@ -69,10 +69,38 @@
         .col
           = image_tag @story.user.avatar_url(:thumb), :size => "120x120"
           %p #{@story.user.name}
-          %p 
-            %a 给他留言
+          - unless @story.user == current_user
+            %p 
+              %a{:href => "#{new_message_path(:receiver_id => @story.user.id )}"} 给他留言
       .author-experiences{:style => "padding-top: 20px;border-top: solid 1px #ccc"}  
         .col
           %p{:style => "font-size: 110%;font-weight:bold;"} 该作者的其他分享
           - @story.user.stories.most_useful.newest.excludes(:id => @story.id).limit(6).each do |s|
             %p{:style => "color:#00a0c6;"} &middot; #{link_to s.title, issue_story_path(s.issue, s)}
+
+.reveal-modal#send_message
+  %h2
+    发消息  
+  .col.margin-b20
+    = form_for :message, :url => messages_path do |f|
+      .margin-b20
+        .col
+          %label 发送给:
+          &nbsp;#{@story.user.name}
+
+      .margin-b20     
+        .col
+          %label 标题
+          = f.text_field :subject
+
+      .margin-b20
+        .col
+          %label 内容
+          = f.text_area :body, :size => "54x8"
+
+      = f.hidden_field :receiver_id, :value => @story.user.id
+      = f.hidden_field :sender_id, :value => current_user.id  
+      .col
+        = f.submit "好了，发出去"
+    
+  %a.close-reveal-modal &#215;            

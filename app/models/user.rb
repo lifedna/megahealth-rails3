@@ -73,6 +73,11 @@ class User
   has_many :topics
   has_one :content_filter
 
+  # user messaging
+  has_and_belongs_to_many :conversations, :class_name => "Conversation", :inverse_of => :participants
+  has_many :messages_sent, :class_name => 'Message', :inverse_of => :sender
+  has_many :messages_received, :class_name => 'Message', :inverse_of => :receiver
+
   mount_uploader :avatar, AvatarUploader
 
   # Callbacks
@@ -96,14 +101,15 @@ class User
     User.excludes(:id => self.id).all
   end
 
+  # user messaging
+  def send_message(receiver, message)
+    conversation = Conversation.find_or_create_by(:participant_ids.in => [self.id, receiver.id])
+    new_message = conversation.messages.build(sender: self, receiver: receiver)
+    new_message.body = message
+    new_message.save
+  end
+    
   private
-  
-  # def create_initial_phr
-  #   self.phrs.build(:name => self.name, :relationship => '自己').tap do |phr|
-  #     phr.user = self
-  #     phr.save
-  #   end
-  # end
 
   def create_initial_filter
     self.build_content_filter.tap do |f|

@@ -2,6 +2,7 @@
 class StoriesController < ContentController
   has_widgets do |root|
     root << widget(:experience_feedback)
+    # root << widget(:story_tags)
   end
 
   def index

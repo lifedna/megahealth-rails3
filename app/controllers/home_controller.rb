@@ -7,6 +7,10 @@ class HomeController < ApplicationController
     root << widget(:content_list)
   end
 
+  def mailbox
+    @conversations = current_user.conversations
+  end
+
   def explore   
     # redirect_to guide_path
     if current_user.last_sign_in_at.nil?

@@ -1,0 +1,13 @@
+/ Page
+.site-center.center-page  
+  .cell
+    %h2 我的邮件
+    .col.size2of3
+      - @conversations.each do |c|
+        .col.message.margin-t20
+          .col.sizefit
+            = image_tag c.dialoger(current_user).avatar_url(:thumb), :size => "50x50" 
+          .col.sizefill
+            .conversation.margin-l10
+              %p #{c.dialoger(current_user).name}#{c.unread(current_user).empty? ? "" : " (#{c.unread(current_user).count})"}
+              %p #{link_to c.messages.last.body, conversation_path(c)}

@@ -1,0 +1,24 @@
+/ Page
+.site-center.center-page  
+  .cell
+    %h2 与#{@dialoger.name}的邮件
+    .col.size2of3
+      - @messages.each do |m|
+        .col.message.margin-t20
+          - if m.receiver == current_user
+            .col.sizefit
+              = image_tag m.sender.avatar_url(:thumb), :size => "50x50" 
+            .col.sizefill
+              .margin-l20
+                %p #{m.sender.name}
+                %p #{m.body}
+          - else
+            .col.sizefit.float-right
+              = image_tag m.sender.avatar_url(:thumb), :size => "50x50" 
+            .col.sizefill
+              .margin-r20
+                %p{:style => "text-align:right"} #{m.sender.name}
+                %p{:style => "text-align:right"} #{m.body}
+    .col.size1of3
+      .margin-l20
+        #{link_to "> 返回我的邮箱", "/mailbox"}            

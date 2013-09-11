@@ -75,6 +75,11 @@ $(document).ready(function(){
 	  $('#how-it-works').reveal();
     });
 
+    $('.send-message').click(function(e) {
+          e.preventDefault();
+	  $('#send_message').reveal();
+    });
+
     $('.add-conditions').click(function(e) {
           e.preventDefault();
 	  $('#add-conditions').reveal();

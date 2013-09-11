@@ -28,7 +28,10 @@ MegahealthRails3::Application.routes.draw do
   match '/account' => 'home#account', :as => :account
   match '/search' => 'home#search', :as => :search
   match '/guide' => 'home#guide', :as => :guide
-  match '/fat' => 'home#fat'
+
+  match '/mailbox' => 'home#mailbox'
+  match '/mailbox/:id' => "conversations#show", :as => :conversation
+  resources :messages
 
   match '/dashboard/stars' => 'dashboard#stars', :as => :stars
   match '/dashboard/issues' => 'dashboard#issues', :as => :issues
@@ -82,9 +85,8 @@ MegahealthRails3::Application.routes.draw do
   end
   
   resources :phis 
-  match '/post-registration' => 'phis#initial', :via => :get
+  match '/post-registration' => 'phis#initial', :via => :get 
 
-  # resource :feature_filter
   resource :content_filter
 
   resources :communities do

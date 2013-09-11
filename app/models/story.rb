@@ -1,4 +1,6 @@
 # coding: utf-8
+require 'taggable'
+
 class Story
   include Mongoid::Document	
   include Mongoid::Timestamps
@@ -6,6 +8,7 @@ class Story
   include Mongoid::Likeable
   include Mongoid::Sharable
   include Mongoid::Search
+  include Mongoid::Taggable
 
   field :title, type: String
   field :body, type: String
@@ -14,6 +17,8 @@ class Story
   field :locked, type: Boolean, :default => false
   field :anonymous, type: Boolean, :default => false
   field :impressions_count, type: Integer, :default => 0
+
+  # embeds_many :model_tags
 
   belongs_to :user
   belongs_to :issue, counter_cache: true

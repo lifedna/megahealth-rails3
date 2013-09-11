@@ -1,0 +1,20 @@
+- @page = 'experiences'
+
+/ Page
+.site-center.center-page  
+  .cell
+    %h2 给#{@receiver.name}发消息
+    = simple_form_for @message do |f|
+      / = f.error_messages
+      %p
+        = f.hidden_field :receiver_id, :value => @receiver.id
+        = f.hidden_field :sender_id, :value => current_user.id
+      .col.sizefit 
+        = image_tag @receiver.avatar_url(:thumb), :size => "50x50"  
+      .col.sizefill
+        %p  
+          = f.text_area :body, :size => "80x16"
+        %p   
+          = f.submit "好了，发出去", :class => "background-blue"
+          %a{:href => "#"}
+            .button.background-gray 取消

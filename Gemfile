@@ -66,6 +66,9 @@ gem 'impressionist'
 # translate chinese hanzi to pinyin
 gem 'chinese_pinyin'
 
+# state machine
+gem 'state_machine'
+
 group :development do
   gem 'better_errors'
   gem 'binding_of_caller', :platforms=>[:mri_19, :rbx]
