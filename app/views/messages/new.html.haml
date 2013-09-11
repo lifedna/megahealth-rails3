@@ -3,7 +3,7 @@
 / Page
 .site-center.center-page  
   .cell
-    %h2 给#{@receiver.name}发消息
+    %h2 给#{@receiver.name}发邮件
     = simple_form_for @message do |f|
       / = f.error_messages
       %p
@@ -16,5 +16,5 @@
           = f.text_area :body, :size => "80x16"
         %p   
           = f.submit "好了，发出去", :class => "background-blue"
-          %a{:href => "#"}
+          %a{:href => "/mailbox"}
             .button.background-gray 取消
