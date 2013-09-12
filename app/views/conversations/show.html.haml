@@ -5,20 +5,20 @@
     .col.size2of3
       - @messages.each do |m|
         .col.message.margin-t20
-          - if m.receiver == current_user
-            .col.sizefit
-              = image_tag m.sender.avatar_url(:thumb), :size => "50x50" 
-            .col.sizefill
-              .margin-l20
-                %p #{m.sender.name}
-                %p #{m.body}
-          - else
-            .col.sizefit.float-right
-              = image_tag m.sender.avatar_url(:thumb), :size => "50x50" 
-            .col.sizefill
-              .margin-r20
-                %p{:style => "text-align:right"} #{m.sender.name}
-                %p{:style => "text-align:right"} #{m.body}
+          / - if m.receiver == current_user
+          .col.sizefit
+            = image_tag m.sender.avatar_url(:thumb), :size => "50x50" 
+          .col.sizefill
+            .margin-l20
+              %p #{m.sender.name}
+              %p #{truncate strip_tags(m.body), length: 20, omission: '.....'}
+          / - else
+          /   .col.sizefit.float-right
+          /     = image_tag m.sender.avatar_url(:thumb), :size => "50x50" 
+          /   .col.sizefill
+          /     .margin-r20
+          /       %p{:style => "text-align:right"} #{m.sender.name}
+          /       %p{:style => "text-align:right"} #{truncate strip_tags(m.body), length: 20, omission: '.....'}
       .margin-t20
         = form_tag reply_conversation_path(@c), :method => :get do
           / = f.error_messages
