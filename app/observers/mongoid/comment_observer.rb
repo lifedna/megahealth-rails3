@@ -1,10 +1,12 @@
 class Mongoid::CommentObserver < Mongoid::Observer
   def after_create(record)
-  	author = record.commentabled_obj.user
-  	author_hash = Hash.new
-  	author_hash[:id] = author.id
-  	author_hash[:type] = "User"
-  	record.receivers << author_hash
-  	record.save
+  	if record.commenter != record.commentabled_obj.user
+	  	notification = Notification.new
+	  	notification.verb = "new_comment"
+	  	notification.sender = record.commenter
+	  	notification.receiver = record.commentabled_obj.user
+	  	notification.notifiable = record.commentabled_obj
+	  	notification.save
+	end
   end
 end

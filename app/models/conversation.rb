@@ -4,7 +4,7 @@ class Conversation
   has_many :messages, :dependent => :destroy
   has_and_belongs_to_many :participants, :class_name => "User"
 
-  # validates :participants, :presence => true
+  validates :participants, :presence => true
   # validates :participants, :uniqueness => true
 
   def dialoger(user)

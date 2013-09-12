@@ -79,6 +79,11 @@ class User
   has_many :messages_sent, :class_name => 'Message', :inverse_of => :sender
   has_many :messages_received, :class_name => 'Message', :inverse_of => :receiver
 
+  # user notification
+  has_many :notifications_sent, :class_name => 'Notification', :inverse_of => :sender
+  has_many :notifications_received, :class_name => 'Notification', :inverse_of => :receiver
+
+
   mount_uploader :avatar, AvatarUploader
 
   # Callbacks
@@ -104,7 +109,7 @@ class User
 
   # user messaging
   def send_message(receiver, message)
-    conversation = Conversation.find_or_create_by(:participant_ids.in => [self.id, receiver.id])
+    conversation = Conversation.find_or_create_by(:participant_ids.all => [self.id, receiver.id])
     new_message = conversation.messages.build(sender: self, receiver: receiver)
     new_message.body = message
     new_message.save
