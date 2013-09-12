@@ -20,7 +20,7 @@ class Message
   #validations
   validates_presence_of :body, :sender, :receiver
   # validates_length_of :subject, :within => 10..70
-  validates_length_of :body, :within => 10..1000
+  validates_length_of :body, :within => 8..1000
  
   #state machine has been read message?
   state_machine :has_been_read, :initial => :unread do
