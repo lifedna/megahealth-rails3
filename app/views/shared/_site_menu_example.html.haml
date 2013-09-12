@@ -13,16 +13,17 @@
         .col.sizefit          
           .site-menu         
             %ul.nav
-              %li
+              %li#notifications
                 %a{:href => "#"} 
                   %span.icon.icon-bell 
-              %li
+                        
+              %li#mailbox
                 - if current_user.messages_received.unread.empty?
                   %a{:href => "/mailbox"}
                     %span.icon.icon-envelope   
                 - else
                   %a{:href => "/mailbox", :title => "你有新邮件了！"}
-                    %span.icon.icon-signin   
+                    %span.icon.icon-envelope-alt   
               %li.user-nav
                 %a{:href => "javascript:;"} 
                   %span.icon.icon-user

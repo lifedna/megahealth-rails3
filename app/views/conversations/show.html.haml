@@ -19,6 +19,16 @@
               .margin-r20
                 %p{:style => "text-align:right"} #{m.sender.name}
                 %p{:style => "text-align:right"} #{m.body}
+      .margin-t20
+        = form_tag reply_conversation_path(@c), :method => :get do
+          / = f.error_messages
+          %p
+            = hidden_field_tag :receiver_id, '', :value => @dialoger.id
+          %p  
+            = text_area_tag :body, '', :size => "74x6"
+          .col
+            .float-right 
+              = submit_tag "回应", :class => "background-blue"          
     .col.size1of3
       .margin-l20
         #{link_to "> 返回我的邮箱", "/mailbox"}            

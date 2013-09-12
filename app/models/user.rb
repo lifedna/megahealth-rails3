@@ -66,6 +66,7 @@ class User
 
   has_and_belongs_to_many :communities
 
+  has_many :contents
   has_many :stories
   has_many :phis
   has_many :questions

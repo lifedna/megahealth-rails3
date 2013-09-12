@@ -59,6 +59,12 @@ $(document).ready(function(){
 		
 	});	
 
+	$("#notifications").click(function(e){
+		e.stopPropagation();
+		$(this).find(".user-nav-popup").toggle();
+		
+	});
+
 	$('body').click(function() {
 		$('.user-nav-popup:visible').fadeOut();
 

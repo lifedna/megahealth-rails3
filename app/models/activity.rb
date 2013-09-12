@@ -33,8 +33,6 @@ class Activity
     target_object :community
   end
 
-
-
   activity :new_comment do 
     actor :user
     object :'mongoid/comment'

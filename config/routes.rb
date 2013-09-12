@@ -31,7 +31,9 @@ MegahealthRails3::Application.routes.draw do
 
   match '/mailbox' => 'home#mailbox'
   match '/mailbox/:id' => "conversations#show", :as => :conversation
+  match 'mailbox/:id/reply' => "conversations#reply", :as => :reply_conversation, :via => :get
   resources :messages
+
 
   match '/dashboard/stars' => 'dashboard#stars', :as => :stars
   match '/dashboard/issues' => 'dashboard#issues', :as => :issues
