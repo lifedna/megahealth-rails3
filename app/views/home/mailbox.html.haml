@@ -10,4 +10,4 @@
           .col.sizefill
             .conversation.margin-l10
               %p #{c.dialoger(current_user).name}#{c.unread(current_user).empty? ? "" : " (#{c.unread(current_user).count})"}
-              %p #{link_to c.messages.last.body, conversation_path(c)}
+              %p #{link_to truncate(c.messages.last.body, length: 40, omission: '.....'), conversation_path(c)}

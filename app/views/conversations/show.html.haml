@@ -11,7 +11,7 @@
           .col.sizefill
             .margin-l20
               %p #{m.sender.name}
-              %p #{truncate strip_tags(m.body), length: 20, omission: '.....'}
+              %p #{strip_tags(m.body)}
           / - else
           /   .col.sizefit.float-right
           /     = image_tag m.sender.avatar_url(:thumb), :size => "50x50" 
