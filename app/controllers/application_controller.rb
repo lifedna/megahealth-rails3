@@ -2,6 +2,10 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
 
   before_filter :set_cache_buster
+
+  has_widgets do |root|
+    root << widget(:notification)
+  end
   
   def set_cache_buster
     response.headers["Cache-Control"] = "no-cache, no-store, max-age=0, must-revalidate"

@@ -1,3 +1,7 @@
+- @unread_notifs_count = current_user.notifications_received.unread.count.to_i if user_signed_in?
+- @unread_mails_count = current_user.messages_received.unread.count.to_i if user_signed_in?
+
+
 .site-header.background-white.site-header-border
   .site-center
     .col.sizefit
@@ -11,20 +15,39 @@
               .button.gradient
                 %b 创建社群  
         .col.sizefit          
-          .site-menu         
+          .site-menu   
             %ul.nav
-              %li#notifications
-                %a{:href => "#"} 
-                  %span.icon.icon-bell 
+              %li#user-notifications
+                - if @unread_notifs_count > 0
+                  %a{"data-remote" => "true", :href => "#{url_for_event(:read, :source => :notification)}", :title => "你有新提醒了！"} 
+                    %span.icon.icon-bell-alt
+                    - if @unread_notifs_count > 0
+                      %span.unread-count #{@unread_notifs_count} 
+                  .user-notify-popup  
+                    .arrow_box_top
+                      %h6 你的提醒  
+                      .popup-content
+                        = render_widget :notification  
+                - else   
+                  %a{"data-remote" => "true", :href => "#{url_for_event(:read, :source => :notification)}"} 
+                    %span.icon.icon-bell
+                    - if @unread_notifs_count> 0
+                      %span.unread-count #{@unread_notifs_count} 
+                  .user-notify-popup  
+                    .arrow_box_top
+                      %h6 你的提醒  
+                      .popup-content
+                        = render_widget :notification                   
                         
               %li#mailbox
-                - if current_user.messages_received.unread.empty?
+                - if @unread_mails_count == 0
                   %a{:href => "/mailbox"}
                     %span.icon.icon-envelope   
                 - else
                   %a{:href => "/mailbox", :title => "你有新邮件了！"}
-                    %span.icon.icon-envelope-alt   
-              %li.user-nav
+                    %span.icon.icon-envelope-alt
+                    %span.unread-count #{@unread_mails_count}    
+              %li#user-nav
                 %a{:href => "javascript:;"} 
                   %span.icon.icon-user
                   %span.icon.icon-caret-down

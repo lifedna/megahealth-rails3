@@ -53,22 +53,18 @@ $(document).ready(function(){
 	   return false;
 	});
 
-	$(".user-nav").click(function(e){
-		e.stopPropagation();
+	$("#user-nav").click(function(e){
+		$(".user-notify-popup").hide();
 		$(this).find(".user-nav-popup").toggle();
 		
 	});	
 
-	$("#notifications").click(function(e){
-		e.stopPropagation();
-		$(this).find(".user-nav-popup").toggle();
+	$("#user-notifications").click(function(e){
+		$(".user-nav-popup").hide();
+		$(this).find(".user-notify-popup").toggle();
 		
 	});
 
-	$('body').click(function() {
-		$('.user-nav-popup:visible').fadeOut();
-
-	});
 
 	$('.switch-record').click(function() {
 		$(this).next().toggle();

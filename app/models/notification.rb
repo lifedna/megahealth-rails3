@@ -5,6 +5,7 @@ class Notification
   include Mongoid::Timestamps::Created
  
   field :verb, type:String
+  field :count, type:Integer, default:0
 
   # Relationships
   belongs_to :receiver, :class_name => 'User', :inverse_of => :notifications_received
@@ -14,7 +15,7 @@ class Notification
   scope :unread, where(has_been_read:"unread")
 
   #validations
-  validates_presence_of :verb, :sender, :receiver, :notifiable
+  validates_presence_of :verb, :receiver, :notifiable
  
   #state machine has been read message?
   state_machine :has_been_read, :initial => :unread do

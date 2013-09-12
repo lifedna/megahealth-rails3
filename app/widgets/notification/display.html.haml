@@ -1,0 +1,8 @@
+= widget_div do
+  - @notifications.each do |n|
+    .item
+      %p #{link_to n.notifiabled_obj.title, issue_story_path(n.notifiabled_obj.issue, n.notifiabled_obj)}
+      %p 有了#{n.count}条新回复
+  - if @notifications.nil? || @notifications.empty?
+    %p 还有没有相关的提醒
+
