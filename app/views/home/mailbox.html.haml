@@ -8,6 +8,9 @@
           .col.sizefit
             = image_tag c.dialoger(current_user).avatar_url(:thumb), :size => "50x50" 
           .col.sizefill
-            .conversation.margin-l10
-              %p #{c.dialoger(current_user).name}#{c.unread(current_user).empty? ? "" : " (#{c.unread(current_user).count})"}
-              %p #{link_to truncate(c.messages.last.body, length: 40, omission: '.....'), conversation_path(c)}
+            .conversation-row
+              .col
+                %b #{c.dialoger(current_user).name} 
+                #{c.unread(current_user).empty? ? "" : " (#{c.unread(current_user).count})"}
+              .col
+                #{link_to truncate(strip_tags(c.messages.last.body), length: 40, omission: '.....'), conversation_path(c)}
