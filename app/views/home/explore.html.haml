@@ -9,7 +9,7 @@
       .top-nav.alert.alert-info
         %ul
           %li{:class => "#{params[:category].nil?? 'current' : nil }"} 
-            = link_to '所有', explore_path 
+            = link_to '全部', explore_path 
           %li{:class => "#{params[:category] == '健康知识'? 'current' : nil }"} 
             = link_to '健康知识', explore_path(:category => '健康知识')
           %li{:class => "#{params[:category] == '就医指南'? 'current' : nil }"}
