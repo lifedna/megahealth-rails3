@@ -56,7 +56,8 @@ $(document).ready(function(){
 	$("#user-nav").click(function(e){
 		$(".user-notify-popup").hide();
 		$(this).find(".user-nav-popup").toggle();
-		
+		$(this).find(".icon-caret-down").toggleClass('caret-hide');
+		$(this).find(".icon-caret-up").toggleClass('caret-hide');		
 	});	
 
 	$("#user-notifications").click(function(e){
