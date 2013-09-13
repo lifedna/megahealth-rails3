@@ -53,9 +53,11 @@
                   %span.icon.icon-caret-down
                 .user-nav-popup  
                   .arrow_box_top
-                    %h6 #{current_user.name}  
+                    %h6 
                     .popup-content
                       %ul.left.dropdown
+                        %li.user-name
+                          = link_to current_user.name, profile_path(current_user)
                         %li
                           %a{:href => "/dashboard"} 我的健康    
                         %li

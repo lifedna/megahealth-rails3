@@ -1,0 +1,46 @@
+/ Page
+.site-center.center-page  
+  .col.sizefit
+    .portlet
+      .portlet-content
+        #profile-card
+          .img-wrapper
+            = image_tag @user.avatar_url(:thumb)
+          %h2 #{@user.name}  
+          %p.location 成都
+          - if @user != current_user
+            %p.leave-message
+              = link_to '给他留言', new_message_path(:receiver_id => @user.id )
+  .col.sizefill
+    .margin-l30
+      .profile-section.experiences-section
+        %h3 经历分享
+        .section-content.white-content-container
+          - @stories.limit(3).each do |story|
+            .story.border-bottom.section-row  
+              .col
+                .story-title
+                  %p
+                    #{link_to story.title, issue_story_path(story.issue, story)}
+                    %br
+                    %span{:style => "color:#999;font-size:80%;"} 
+                      #{story.impressionist_count(:filter=>:session_hash)}浏览 &middot; #{story.comments.size}评论 &middot; #{story.likers_count}有用 &middot; #{story.shares_count}鼓励 &middot; #{story.created_at.strftime("%Y-%m-%d %H:%M")} 
+                .story-content   
+                  %p{:style => "margin-bottom: 20px;"} #{truncate(strip_tags(story.body), length: 140, omission: '.....')}
+
+      .profile-section.communities-section
+        %h3 参与社群
+        .section-content.white-content-container
+          - @communities.limit(3).each do |c|
+            .body.community-row
+              .col.sizefit
+                .community-img-45
+                  = image_tag c.logo_url(:thumb)
+              .col.sizefill
+                .col.size3of5
+                  .community-info
+                    %h3 #{link_to c.name, community_path(c)}  
+                    %p.owner-info 儿科 &middot; 主治医师
+                    %p.addtl-info 呼吸道疾病, 小儿麻痹
+                .col.size2of5  
+                  %p #{truncate strip_tags(c.brief), length: 54, omission: '.....'}  

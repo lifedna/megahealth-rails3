@@ -49,6 +49,9 @@ class HomeController < ApplicationController
   end	
 
   def profile
+    @user = User.find params[:id]
+    @stories = @user.stories
+    @communities = @user.communities
   end
 
   def account

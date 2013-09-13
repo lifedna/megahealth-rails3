@@ -24,7 +24,7 @@ MegahealthRails3::Application.routes.draw do
   match '/experiences' => 'home#experiences', :as => :experiences
   match '/explore' => 'home#explore', :as => :explore
   match '/dashboard' => 'home#dashboard', :as => :dashboard
-  match '/profile' => 'home#profile', :as => :profile
+  match '/profile/user/:id' => 'home#profile', :as => :profile
   match '/account' => 'home#account', :as => :account
   match '/search' => 'home#search', :as => :search
   match '/guide' => 'home#guide', :as => :guide
@@ -78,7 +78,6 @@ MegahealthRails3::Application.routes.draw do
 
   match '/blogs/:id' => 'blogs#show', :as => :blog, :via => :get
 
-  # match '/stories/issue/:issue_id' => 'stories#index', :as => :issue_stories
   resources :issues do 
     resources :stories do
       get 'comment', :on => :member
