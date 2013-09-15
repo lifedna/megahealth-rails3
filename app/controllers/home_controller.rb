@@ -45,7 +45,11 @@ class HomeController < ApplicationController
   end
 
   def autocomplete
-    list = Issue.where(pinyin:/#{params[:term]}/).asc(:pinyin).limit(10)
+    if params[:term] =~ /^[\w\s!@#\$%\^\\&*()\]\[,.?]*$/                        # all english alphabets
+      list = Issue.where(pinyin:/#{params[:term]}/).asc(:pinyin).limit(10)
+    else                                                                        # include non-english character
+      list = Issue.where(name:/#{params[:term]}/).asc(:pinyin).limit(10)
+    end
     list = list.map do |i|
       {label: i.name, value: i.name}
     end
