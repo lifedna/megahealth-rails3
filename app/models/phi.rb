@@ -8,6 +8,9 @@ class Phi
   field :started_at, type: Time
   field :ended_at, type: Time
 
+  validates :name, presence: true
+  validates :name, uniqueness: true
+
   belongs_to :user
   belongs_to :issue
 end  

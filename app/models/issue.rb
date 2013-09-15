@@ -7,7 +7,8 @@ class Issue
   field :stories_count, type: Integer, default: 0
   # field :heal_stories_count, type: Integer, default: 0
 
-  validates :name, :uniqueness => true
+  validates :name, presence: true
+  validates :name, uniqueness: true
 
   has_and_belongs_to_many :user
   has_many :stories
