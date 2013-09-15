@@ -48,7 +48,7 @@
       - @stories.each do |story|
         .story.margin-b30.border-bottom  
           .col.sizefit
-            = image_tag story.user.avatar_url(:thumb), :size => "50x50"
+            = link_to image_tag(story.user.avatar_url(:thumb), :size => "50x50"), profile_path(story.user)
             %br
             %span{:style => "color:#999;font-size:80%;"} #{story.user.name}
           .col.sizefill
