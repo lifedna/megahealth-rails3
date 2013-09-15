@@ -36,12 +36,11 @@ class HomeController < ApplicationController
 
   def guide
     @content_filter = current_user.content_filter 
-    # unless cookies[:first_login]
-    #   @content_filter = current_user.content_filter 
-    #   cookies.permanent[:first_login] = "x"
-    # else
-    #   redirect_to explore_path
-    # end  
+    if current_user.first_visit == "true"
+      current_user.logged
+    else
+      redirect_to explore_path
+    end
   end
 
   def autocomplete

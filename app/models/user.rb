@@ -1,4 +1,5 @@
 # coding: utf-8
+require 'state_machine'
 require 'tagger'
 
 class User
@@ -63,6 +64,13 @@ class User
   validates_presence_of :name
   attr_accessible :name, :email, :avatar,:age, :resident, :zipcode, :gender, :current_password, :password, :password_confirmation, 
                   :remember_me, :created_at, :updated_at
+
+  #state machine first visited?
+  state_machine :first_visit, :initial => :true do
+     event :logged do
+        transition :from => :true, :to => :false
+     end
+  end                
 
   has_and_belongs_to_many :communities
 
