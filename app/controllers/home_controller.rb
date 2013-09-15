@@ -44,6 +44,14 @@ class HomeController < ApplicationController
     # end  
   end
 
+  def autocomplete
+    list = Issue.where(pinyin:/#{params[:term]}/).asc(:pinyin).limit(10)
+    list = list.map do |i|
+      {label: i.name, value: i.name}
+    end
+    render json: list
+  end
+
   def dashboard
     @communities = current_user.communities
   end	

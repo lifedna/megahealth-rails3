@@ -13,6 +13,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require jquery.ui.sortable
+//= require jquery.ui.autocomplete
 //= require jquery_nested_form
 //= require reveal
 //= require bootstrap

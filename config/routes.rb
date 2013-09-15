@@ -28,6 +28,7 @@ MegahealthRails3::Application.routes.draw do
   match '/account' => 'home#account', :as => :account
   match '/search' => 'home#search', :as => :search
   match '/guide' => 'home#guide', :as => :guide
+  match '/issues/autocomplete' => 'home#autocomplete'
 
   match '/mailbox' => 'home#mailbox'
   match '/mailbox/:id' => "conversations#show", :as => :conversation

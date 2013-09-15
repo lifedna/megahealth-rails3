@@ -11,8 +11,9 @@
       
         %span 你关心的健康问题
         = form_tag('/post-registration', method: :get)  do
-          .col
+          .ui-widget
             = text_field_tag :issues, nil, :autocomplete => "off", :maxlength => "50", :size => 40, :class => "float-left", :autofocus => true, :placeholder => "用逗号分隔多个健康问题，如血压高，盗汗..."
+            %span.icon.icon-32.icon-ok.background-grey{:style => "margin: 2px 0 0 6px;cursor: pointer;"}  
     .col.size1of2  
       .right
         %h4{:style => "color:#999"} 常见健康问题
@@ -187,4 +188,61 @@
       $('input[name=issues]').val(uniqueIssues.join(', ')) ;
       $('input[name=issues').focus();
     });
+
+    $('.ui-widget input').keydown(function (e) {
+      var code = e.keyCode || e.which; 
+      if (code  == 13) {               
+        e.preventDefault();
+        return false;
+      }
+    });
+
+    $('.icon-ok').click(function(){
+      $('form').submit();
+    });
+
+    function split( val ) {
+      return val.split( /,\s*/ );
+    }
+    function extractLast( term ) {
+      return split( term ).pop();
+    }
+ 
+    $( "#issues" )
+      // don't navigate away from the field on tab when selecting an item
+      .bind( "keydown", function( event ) {
+        if ( event.keyCode === $.ui.keyCode.TAB &&
+            $( this ).data( "ui-autocomplete" ).menu.active ) {
+          event.preventDefault();
+        }
+      })
+      .autocomplete({
+        source: function( request, response ) {
+          $.getJSON( "/issues/autocomplete", {
+            term: extractLast( request.term )
+          }, response );
+        },
+        search: function() {
+          // custom minLength
+          var term = extractLast( this.value );
+          if ( term.length < 2 ) {
+            return false;
+          }
+        },
+        focus: function() {
+          // prevent value inserted on focus
+          return false;
+        },
+        select: function( event, ui ) {
+          var terms = split( this.value );
+          // remove the current input
+          terms.pop();
+          // add the selected item
+          terms.push( ui.item.value );
+          // add placeholder to get the comma-and-space at the end
+          terms.push( "" );
+          this.value = terms.join( ", " );
+          return false;
+        }
+      });
   });  
