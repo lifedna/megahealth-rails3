@@ -18,11 +18,15 @@ class Story
   field :anonymous, type: Boolean, :default => false
   field :impressions_count, type: Integer, :default => 0
 
-  # embeds_many :model_tags
+  paginates_per 6
+
+  # impressionist gem
+  is_impressionable :column_name => :impressions_count, :unique => :session_hash, :counter_cache => true
 
   belongs_to :user
+  belongs_to :phi
   belongs_to :issue, counter_cache: true
-  belongs_to :issue, :inverse_of => :heal_stories, counter_cache: true
+  # belongs_to :issue, :inverse_of => :heal_stories, counter_cache: true
 
   scope :newest, desc(:created_at) 
   scope :most_viewed, desc(:impressions_count)
@@ -30,8 +34,7 @@ class Story
   scope :most_useful, desc(:likers_count)
   scope :most_cheered, desc(:shares_count)
 
-  paginates_per 6
-
-  # impressionist gem
-  is_impressionable :column_name => :impressions_count, :unique => :session_hash, :counter_cache => true
+  def self.commented_by_user(user)
+    stories = Mongoid::Comment.where(commenter: user, commentable_type: "Story").map{|comment| comment.commentabled_obj}.uniq
+  end
 end

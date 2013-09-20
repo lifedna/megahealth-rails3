@@ -13,4 +13,5 @@ class Phi
 
   belongs_to :user
   belongs_to :issue
+  has_many :stories
 end  

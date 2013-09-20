@@ -7,6 +7,26 @@ class DashboardController < ApplicationController
 
   def issues
     @phis = current_user.phis
+    @stories = Story.all
+    @stories.each do |s|
+      issue = s.issue
+      user = s.user
+      phi = Phi.where(issue: issue, user: user).first
+      s.phi = phi
+      s.save
+    end
+
+    params[:name] ||= @phis.first.name
+    @phi = Phi.find_by(name: params[:name])
+
+    if params[:name]
+      @phi = current_user.phis.where(name: params[:name]).first
+      @stories = @phi.stories
+    else
+      @stories = current_user.stories
+    end
+
+    @commented_stories = Story.commented_by_user(current_user).select! {|s| s.issue == @phi.issue}
   end
 
   def phrs
