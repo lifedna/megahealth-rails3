@@ -42,31 +42,14 @@
           .tabs        
             %ul.nav
               %li.active
-                = link_to '大家的分享', '#tabcontent1'
+                = link_to '我的分享', '#tabcontent1'
               %li
-                = link_to '我的分享', '#tabcontent2'
+                = link_to '大家的分享', '#tabcontent2'  
               %li 
-                = link_to '我回应的分享', '#tabcontent3'
+                = link_to '我回应的分享', '#tabcontent3'  
                           
           .tab-content
             #tabcontent1.cell
-              %table.horizontal-border
-                %tbody
-                  - if @phi.issue.stories.empty?
-                    %p
-                      %b 目前还没有经历分享！
-                    %p.color-pink
-                      健康的决定是很难的，并寻找合适的医疗保健提供者显然是费劲。医疗治病经验应该是透明的，它可以（而且应该）通过与其他有相同境地的人分享被加强了。讲述您的经历，让其他人可以向他们学习，是更明智的决策。
-                    = link_to '我来分享', new_issue_story_path(@phi.issue), :class => "button background-orange" 
-
-                  - @phi.issue.stories.each do |s|
-                    %tr 
-                      %td #{link_to s.title, issue_story_path(s.issue, s)}
-                      %td #{s.comments_count}回应
-                      %td 一天前
-                      / %td #{s.last_updated_at.strftime("%Y-%m-%d %H:%M:%S")}
-                      %td #{s.user.name}
-            #tabcontent2.cell.hidden-tab
               %table.horizontal-border
                 %tbody
                   - if @phi.stories.empty?
@@ -83,6 +66,25 @@
                       %td 一天前
                       / %td #{s.last_updated_at.strftime("%Y-%m-%d %H:%M:%S")}
                       %td #{s.user.name}
+                      
+            #tabcontent2.cell.hidden-tab
+              %table.horizontal-border
+                %tbody
+                  - if @phi.issue.stories.empty?
+                    %p
+                      %b 目前还没有经历分享！
+                    %p.color-pink
+                      健康的决定是很难的，并寻找合适的医疗保健提供者显然是费劲。医疗治病经验应该是透明的，它可以（而且应该）通过与其他有相同境地的人分享被加强了。讲述您的经历，让其他人可以向他们学习，是更明智的决策。
+                    = link_to '我来分享', new_issue_story_path(@phi.issue), :class => "button background-orange" 
+
+                  - @phi.issue.stories.each do |s|
+                    %tr 
+                      %td #{link_to s.title, issue_story_path(s.issue, s)}
+                      %td #{s.comments_count}回应
+                      %td 一天前
+                      / %td #{s.last_updated_at.strftime("%Y-%m-%d %H:%M:%S")}
+                      %td #{s.user.name}
+            
             #tabcontent3.cell.hidden-tab
               %table.horizontal-border
                 %tbody
