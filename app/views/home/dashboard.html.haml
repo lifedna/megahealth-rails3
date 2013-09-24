@@ -6,9 +6,13 @@
 
   .col.size2of3
     .margin-r30 
-      %h3 我的社群动态
-      %br
-      = render_widget :update_list  
+      - if params[:tag]
+        %h3 标签：#{params[:tag]} (#{@items.count})
+        = render :partial => "item", :collection => @items
+      - else      
+        %h3 我的社群动态
+        %br
+        = render_widget :update_list  
   .col.size1of3
     .margin-l20
       %dl.highlight.green
@@ -17,3 +21,16 @@
           %ul.links
             - @communities.each do |c|
               %li #{link_to c.name, community_path(c)}
+
+      .my-tags
+        %h3 我的收藏
+        - current_user.all_tags_with_count.each do |k,v|
+          %span
+            = link_to "#{k}(#{v})", dashboard_path(:tag => k)
+      / %dl.highlight.orange
+      /   %dt 我的标签
+      /   %dd.my-tags
+      /     - current_user.all_tags_with_count.each do |k,v|
+      /       %span
+      /         = link_to "#{k}(#{v})", dashboard_path(:tag => k) 
+  

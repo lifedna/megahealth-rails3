@@ -57,6 +57,9 @@ class HomeController < ApplicationController
 
   def dashboard
     @communities = current_user.communities
+    if params[:tag]
+      @items = current_user.find_tagged_objs_with(params[:tag])
+    end
   end	
 
   def profile

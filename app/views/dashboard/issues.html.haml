@@ -27,9 +27,9 @@
           %li{:class => "#{params[:scope] == 'bookmarked' ? 'active' : ''}"}
             = link_to '我收藏的分享', issues_path(:scope => 'bookmarked')
 
-    .margin-t20.margin-l20.float-right
-      = link_to '我来分享', '#'
-      / = link_to '我来分享', new_issue_story_path(@phi.issue)
+    / .margin-t20.margin-l20.float-right
+    /   = link_to '我来分享', '#'
+    / = link_to '我来分享', new_issue_story_path(@phi.issue)
 
 
 

@@ -1,0 +1,26 @@
+.body{:style => "padding:20px 0; border-bottom:solid 1px #ccc;"}
+  %h4
+    #{link_to item.title}
+  %p{:style => "color: #999;"} 
+    %span #{item.created_at.strftime("%Y-%m-%d %H:%M:%S")}  
+  %span #{truncate strip_tags(item.body), length: 140, omission: '.....'}
+  %p
+  - item.model_tags.each do |tag|
+    - if tag.tagged_by_user(current_user.id)
+      .tag{:style => "display:inline-block;"}
+        .col.sizefit.tag_name
+          #{tag.name}
+        .col.sizefit.tag_count
+          (#{tag.taggings_count})
+    - else
+      .foreign_tag{:style => "display:inline-block;"}
+        .col.sizefit.tag_name
+          #{tag.name}
+        .col.sizefit.tag_count
+          (#{tag.taggings_count})
+
+  - case item.class.to_s
+  - when "Video"
+    .clickable.video{:src => "#{item.src}"}
+      = link_to image_tag(item.thumb_url, :class=> "thumb"), show_community_video_url(item.community, item)
+      .play_video
