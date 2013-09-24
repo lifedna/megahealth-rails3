@@ -7,7 +7,7 @@
   .col.size2of3
     .margin-r30 
       - if params[:tag]
-        %h3 标签：#{params[:tag]} (#{@items.count})
+        %h3 我的收藏：#{params[:tag]} (#{@items.count})
         = render :partial => "item", :collection => @items
       - else      
         %h3 我的社群动态
