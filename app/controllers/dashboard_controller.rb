@@ -6,27 +6,31 @@ class DashboardController < ApplicationController
   end
 
   def issues
-    @phis = current_user.phis
-    # @stories = Story.all
-    # @stories.each do |s|
-    #   issue = s.issue
-    #   user = s.user
-    #   phi = Phi.where(issue: issue, user: user).first
-    #   s.phi = phi
-    #   s.save
-    # end
+    params[:scope] ||= 'mine'
 
-    params[:name] ||= @phis.first.name
-    @phi = Phi.find_by(name: params[:name])
-
-    if params[:name]
-      @phi = current_user.phis.where(name: params[:name]).first
-      @stories = @phi.stories
-    else
+    case params[:scope]
+    when 'mine'
       @stories = current_user.stories
+    when 'commented'
+      @stories = Story.commented_by_user(current_user)
+    when 'bookmarked'
+      @stories = current_user.stories
+    else
+      @stories = current_user.stories  
     end
 
-    @commented_stories = Story.commented_by_user(current_user).select! {|s| s.issue == @phi.issue}
+    # @phis = current_user.phis
+    # params[:name] ||= @phis.first.name
+    # @phi = Phi.find_by(name: params[:name])
+
+    # if params[:name]
+    #   @phi = current_user.phis.where(name: params[:name]).first
+    #   @stories = @phi.stories
+    # else
+    #   @stories = current_user.stories
+    # end
+
+    # @commented_stories = Story.commented_by_user(current_user).select! {|s| s.issue == @phi.issue}
   end
 
   def phrs

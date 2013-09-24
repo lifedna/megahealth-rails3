@@ -8,7 +8,7 @@ class Story
   include Mongoid::Likeable
   include Mongoid::Sharable
   include Mongoid::Search
-  include Mongoid::Taggable
+  # include Mongoid::Taggable
 
   field :title, type: String
   field :body, type: String
