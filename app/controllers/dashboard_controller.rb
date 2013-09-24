@@ -14,21 +14,10 @@ class DashboardController < ApplicationController
     when 'commented'
       @stories = Story.commented_by_user(current_user)
     when 'bookmarked'
-      @stories = current_user.stories
+      @stories = current_user.get_shared_objects_of_kind('Story')
     else
       @stories = current_user.stories  
     end
-
-    # @phis = current_user.phis
-    # params[:name] ||= @phis.first.name
-    # @phi = Phi.find_by(name: params[:name])
-
-    # if params[:name]
-    #   @phi = current_user.phis.where(name: params[:name]).first
-    #   @stories = @phi.stories
-    # else
-    #   @stories = current_user.stories
-    # end
 
     # @commented_stories = Story.commented_by_user(current_user).select! {|s| s.issue == @phi.issue}
   end
