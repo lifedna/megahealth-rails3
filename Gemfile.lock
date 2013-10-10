@@ -284,6 +284,7 @@ GEM
       rack (>= 1.0.0)
     thor (0.18.1)
     tilt (1.4.1)
+    tracer_bullets (0.0.5)
     treetop (1.4.15)
       polyglot
       polyglot (>= 0.3.1)
@@ -345,4 +346,5 @@ DEPENDENCIES
   state_machine
   streama
   thin
+  tracer_bullets
   uglifier (>= 1.0.3)

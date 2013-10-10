@@ -9,5 +9,4 @@ class Forum < Widget
   end
 
   has_many :topics
-  has_many :posts
 end	

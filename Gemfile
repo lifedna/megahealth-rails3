@@ -69,6 +69,9 @@ gem 'chinese_pinyin'
 # state machine
 gem 'state_machine'
 
+# tools
+gem "tracer_bullets", :group => "development"
+
 group :development do
   gem 'better_errors'
   gem 'binding_of_caller', :platforms=>[:mri_19, :rbx]
